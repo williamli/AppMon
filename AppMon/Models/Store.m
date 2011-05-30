@@ -30,12 +30,15 @@
     return self;
 }
 
-
 - (void)dealloc
 {
     self.name = nil;
     self.storefront = nil;
     [super dealloc];
+}
+
+-(NSString*) description {
+    return [NSString stringWithFormat:@"<Store#%ld, name=%@>", self.storefront, self.name];
 }
 
 @end

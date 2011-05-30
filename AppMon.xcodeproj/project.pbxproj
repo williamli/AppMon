@@ -53,6 +53,8 @@
 		54B7C6FE1393A8A300AE8EDD /* angry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C6FD1393A8A300AE8EDD /* angry.plist */; };
 		54B7C7161393B75B00AE8EDD /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */; };
 		54B7C7181393B7D600AE8EDD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B7C7171393B7D600AE8EDD /* libicucore.dylib */; };
+		54CC03451393DCCE00F6DA6B /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 54CC03441393DCCE00F6DA6B /* XPathQuery.m */; };
+		54CC03551393DEC800F6DA6B /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54CC03541393DEC800F6DA6B /* libxml2.2.dylib */; };
 		54F6505F1393CFA3005FF9B7 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F6505E1393CFA3005FF9B7 /* Store.m */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +161,9 @@
 		54B7C70A1393B75B00AE8EDD /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		54B7C7171393B7D600AE8EDD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		54CC03431393DCCE00F6DA6B /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		54CC03441393DCCE00F6DA6B /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
+		54CC03541393DEC800F6DA6B /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		54F6505D1393CFA3005FF9B7 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Store.h; path = Models/Store.h; sourceTree = "<group>"; };
 		54F6505E1393CFA3005FF9B7 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Store.m; path = Models/Store.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54CC03551393DEC800F6DA6B /* libxml2.2.dylib in Frameworks */,
 				54B7C7181393B7D600AE8EDD /* libicucore.dylib in Frameworks */,
 				54645BB21393992A0096466C /* libz.dylib in Frameworks */,
 				54645BAF139399210096466C /* Quartz.framework in Frameworks */,
@@ -215,6 +221,7 @@
 		546458B9139391C20096466C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54CC03541393DEC800F6DA6B /* libxml2.2.dylib */,
 				54B7C7171393B7D600AE8EDD /* libicucore.dylib */,
 				54645BC913939EFA0096466C /* libz.dylib */,
 				54645BB11393992A0096466C /* libz.dylib */,
@@ -290,6 +297,7 @@
 		546458EE1393932F0096466C /* External */ = {
 			isa = PBXGroup;
 			children = (
+				54CC03421393DCCE00F6DA6B /* XPathQuery */,
 				54B7C6FF1393B75B00AE8EDD /* RegexKitLite */,
 				54645B8B139398B00096466C /* ASIHttpRequest */,
 				546458EF139393440096466C /* BCCollectionView */,
@@ -424,6 +432,16 @@
 			);
 			name = RegexKitLite;
 			path = External/RegexKitLite;
+			sourceTree = "<group>";
+		};
+		54CC03421393DCCE00F6DA6B /* XPathQuery */ = {
+			isa = PBXGroup;
+			children = (
+				54CC03431393DCCE00F6DA6B /* XPathQuery.h */,
+				54CC03441393DCCE00F6DA6B /* XPathQuery.m */,
+			);
+			name = XPathQuery;
+			path = External/XPathQuery;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -564,6 +582,7 @@
 				54645BA7139398C70096466C /* ASINetworkQueue.m in Sources */,
 				54B7C7161393B75B00AE8EDD /* RegexKitLite.m in Sources */,
 				54F6505F1393CFA3005FF9B7 /* Store.m in Sources */,
+				54CC03451393DCCE00F6DA6B /* XPathQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +681,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppMon/AppMon-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "AppMon/AppMon-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -677,6 +697,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppMon/AppMon-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = "AppMon/AppMon-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

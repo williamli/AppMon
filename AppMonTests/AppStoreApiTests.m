@@ -56,22 +56,30 @@
 //    STAssertTrue([apps2 count] > 5, @"should have at least 5 result items");
 //}
 //
+//
+//- (void)testReviews {
+//    NSError* error = nil;
+//    NSInteger total = 0;
+//    NSArray* reviews = [self.appStore reviews:@"343200656" page:0 total:&total error:&error];
+//    STAssertNil(error, @"should have no error");
+//    
+//    STAssertNotNil(reviews, @"should not nil");
+//    STAssertTrue([reviews count] > 0, @"should have at least 1 comments");
+//    
+//    Review* rev = [reviews objectAtIndex:0];
+//    STAssertNotNil(rev.title, @"should have title");
+//    STAssertNotNil(rev.text, @"should have text");
+//    STAssertTrue(rev.rating > 0, @"should have rating");
+//    
+//    NSLog(@"rev: %@", [rev description]);
+//}
 
-- (void)testReviews {
+- (void)testCountry {
     NSError* error = nil;
-    NSInteger total = 0;
-    NSArray* reviews = [self.appStore reviews:@"343200656" page:0 total:&total error:&error];
+    NSArray* stores = [self.appStore stores:&error];
     STAssertNil(error, @"should have no error");
-    
-    STAssertNotNil(reviews, @"should not nil");
-    STAssertTrue([reviews count] > 0, @"should have at least 1 comments");
-    
-    Review* rev = [reviews objectAtIndex:0];
-    STAssertNotNil(rev.title, @"should have title");
-    STAssertNotNil(rev.text, @"should have text");
-    STAssertTrue(rev.rating > 0, @"should have rating");
-    
-    NSLog(@"rev: %@", [rev description]);
+  
+    STAssertNotNil(stores, @"should not nil");
+    STAssertTrue([stores count] > 0, @"should have at least 1 comments");
 }
-
 @end

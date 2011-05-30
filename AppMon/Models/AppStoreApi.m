@@ -6,11 +6,17 @@
 //  Copyright 2011年 Ignition Soft Limited. All rights reserved.
 //
 
-#import "AppStoreApi.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
+#import "XPathQuery.h"
+#import "RegexKitLite.h"
+
+#import "AppStoreApi.h"
 #import "Review.h"
+#import "Store.h"
+
 #define kSearchResultPerPage 24
+#define kStoreFrontRegexp @"storeFrontId=([0-9]+)"
 
 NSString * const kAppStoreSearchUrl     = @"http://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search";
 NSString * const kAppStoreSoftwareUrl   = @"http://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware";
@@ -21,6 +27,7 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 @interface AppStoreApi (Private)
 -(ASIHTTPRequest*) request:(NSString*)urlStr;
 -(ASIFormDataRequest*) postRequest:(NSString*)urlStr;
+-(NSArray*) storesUrlFromNodes:(NSArray*)nodes;
 @end
 
 @implementation AppStoreApi
@@ -78,7 +85,7 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 -(NSArray*) search:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error {
     NSMutableArray* searchResult = [NSMutableArray array];
     ASIFormDataRequest* req = [self postRequest:kAppStoreSearchUrl];
-    [req setRequestMethod:@"POST"];    
+    [req setRequestMethod:@"POST"];
     [req setPostValue:[NSString stringWithFormat:@"%ld", page*kSearchResultPerPage] forKey:@"startIndex"];
     [req setPostValue:[NSString stringWithFormat:@"%ld", page*kSearchResultPerPage] forKey:@"displayIndex"];
     [req setPostValue:@"software" forKey:@"media"];
@@ -125,7 +132,20 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 }  
 
 -(NSArray*) stores:(NSError**)error {
-    return nil;
+    NSArray* countries;
+    ASIHTTPRequest* req = [self request:kAppStoreCountryUrl];
+    [req startSynchronous];
+    
+    if ([req responseStatusCode] == 200) {
+        NSArray* countryTags    = PerformXMLXPathQuery([req responseData], @"//itms:GotoURL");
+        countries      = [self storesUrlFromNodes:countryTags];
+
+    } else {
+        *error = [req error];
+        
+    }
+
+    return countries;
 }  
 
 -(NSArray*) reviews:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error{
@@ -190,4 +210,44 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
     [request setUserAgent:@"iTunes-iPhone/3.0"];
     return request;
 }
+
+// parse the nodes return by XPath and return Array of Stores
+-(NSArray*) storesUrlFromNodes:(NSArray*)nodes {
+    NSMutableArray* result = [NSMutableArray array];
+
+    for (NSDictionary* dict in nodes) {
+        NSArray* nodeAttributeArray = [dict objectForKey:@"nodeAttributeArray"];
+        NSString* storefront = nil;
+        NSString* country = nil;
+        for (NSDictionary* attr in nodeAttributeArray) {
+            if ([[attr objectForKey:@"attributeName"] isEqualToString:@"url"]) {
+                NSString* url = [attr objectForKey:@"nodeContent"];
+                NSArray* array = [url captureComponentsMatchedByRegex:kStoreFrontRegexp];
+                if ([array count] == 2) {
+                    storefront = [array objectAtIndex:1];
+                    break;
+                }
+            }
+        }
+        
+        NSArray* nodeChildArray = [dict objectForKey:@"nodeChildArray"];
+        for (NSDictionary* children in nodeChildArray) {
+            NSArray* nodeChildArray2 = [children objectForKey:@"nodeChildArray"];
+            for (NSDictionary* children2 in nodeChildArray2) {
+                if ([[children2 objectForKey:@"nodeName"] isEqualToString:@"SetFontStyle"]) {
+                    country = [children2 objectForKey:@"nodeContent"];
+                    break;
+                }
+            }
+        }
+
+        if (country && storefront) {
+            [result addObject:[[[Store alloc] initWithName:country 
+                                                storefront:storefront] autorelease]];
+        }
+    }
+
+    return result;
+}
+
 @end
