@@ -32,6 +32,9 @@
 		54645B6F139393450096466C /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A7A139393440096466C /* PXListView+UserInteraction.m */; };
 		54645B70139393450096466C /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A7C139393440096466C /* PXListView.m */; };
 		54645B71139393450096466C /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A7F139393440096466C /* PXListViewCell.m */; };
+		54645B84139394A00096466C /* AppStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B83139394A00096466C /* AppStore.m */; };
+		54645B87139394AF0096466C /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B86139394AF0096466C /* App.m */; };
+		54645B8A139394B80096466C /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B89139394B80096466C /* Review.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +103,12 @@
 		54645A7F139393440096466C /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListViewCell.m; path = Classes/PXListViewCell.m; sourceTree = "<group>"; };
 		54645A80139393440096466C /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDelegate.h; path = Classes/PXListViewDelegate.h; sourceTree = "<group>"; };
 		54645A81139393440096466C /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDropHighlight.h; path = Classes/PXListViewDropHighlight.h; sourceTree = "<group>"; };
+		54645B82139394A00096466C /* AppStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppStore.h; path = Models/AppStore.h; sourceTree = "<group>"; };
+		54645B83139394A00096466C /* AppStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppStore.m; path = Models/AppStore.m; sourceTree = "<group>"; };
+		54645B85139394AF0096466C /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = App.h; path = Models/App.h; sourceTree = "<group>"; };
+		54645B86139394AF0096466C /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = App.m; path = Models/App.m; sourceTree = "<group>"; };
+		54645B88139394B80096466C /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Review.h; path = Models/Review.h; sourceTree = "<group>"; };
+		54645B89139394B80096466C /* Review.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Review.m; path = Models/Review.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +172,7 @@
 		546458C0139391C30096466C /* AppMon */ = {
 			isa = PBXGroup;
 			children = (
+				54645B81139394800096466C /* Models */,
 				546458EE1393932F0096466C /* External */,
 				546458CC139391C30096466C /* AppMonAppDelegate.h */,
 				546458CD139391C30096466C /* AppMonAppDelegate.m */,
@@ -281,6 +291,19 @@
 			);
 			name = PXListView;
 			path = External/PXListView;
+			sourceTree = "<group>";
+		};
+		54645B81139394800096466C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				54645B82139394A00096466C /* AppStore.h */,
+				54645B83139394A00096466C /* AppStore.m */,
+				54645B85139394AF0096466C /* App.h */,
+				54645B86139394AF0096466C /* App.m */,
+				54645B88139394B80096466C /* Review.h */,
+				54645B89139394B80096466C /* Review.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,6 +432,9 @@
 				54645B6F139393450096466C /* PXListView+UserInteraction.m in Sources */,
 				54645B70139393450096466C /* PXListView.m in Sources */,
 				54645B71139393450096466C /* PXListViewCell.m in Sources */,
+				54645B84139394A00096466C /* AppStore.m in Sources */,
+				54645B87139394AF0096466C /* App.m in Sources */,
+				54645B8A139394B80096466C /* Review.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
