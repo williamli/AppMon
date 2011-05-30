@@ -7,7 +7,7 @@
 //
 
 #import "Review.h"
-
+#import "RegexKitLite.h"
 
 @implementation Review
 
@@ -27,8 +27,8 @@
     if (self) {
         self.rating     = [[plist objectForKey:@"average-user-rating"] doubleValue];
         self.text       = [plist objectForKey:@"text"];
-        self.title      = [plist objectForKey:@"title"];        //  "6. Boring (v1.5.3)";
-        self.username   = [plist objectForKey:@"user-name"];    //  "crudbuttonsman on May 30, 2011"
+        self.title      = [plist objectForKey:@"title"];        //  "6. Boring (v1.5.3)";               /^([0-9]+)\. (.*) \(v(.*)\)$/
+        self.username   = [plist objectForKey:@"user-name"];    //  "crudbuttonsman on May 30, 2011"    /^(.+) on (.+)$/
     }
     return self;
 }
