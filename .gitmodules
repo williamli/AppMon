@@ -10,3 +10,6 @@
 [submodule "AppMon/External/BCCollectionView"]
 	path = AppMon/External/BCCollectionView
 	url = https://github.com/aaronbrethorst/BCCollectionView.git
+[submodule "AppMon/External/ASIHttpRequest"]
+	path = AppMon/External/ASIHttpRequest
+	url = https://github.com/pokeb/asi-http-request.git
