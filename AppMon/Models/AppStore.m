@@ -9,7 +9,7 @@
 #import "AppStore.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
-
+#import "Review.h"
 #define kSearchResultPerPage 24
 
 NSString * const kAppStoreSearchUrl     = @"http://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search";
@@ -77,20 +77,22 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 
 // search a specific quert on App Store
 // Parameters: 
-//  query - terms to search
-//  error - if error occurred, error is set non nil
+//  query   - terms to search
+//  total   - if succeed, will set the total number of search result on servers
+//  error   - if error occurred, error is set non nil
 // Return: Array of Apps
--(NSArray*) search:(NSString*)query resultCount:(NSInteger*)resultCount error:(NSError**)error {    
-    return [self search:query page:0 resultCount:resultCount error:error];
+-(NSArray*) search:(NSString*)query total:(NSInteger*)total error:(NSError**)error {    
+    return [self search:query page:0 total:total error:error];
 }
 
 // search a specific quert on App Store
 // Parameters: 
-//  query - terms to search
-//  page - number of page
-//  error - if error occurred, error is set non nil
+//  query   - terms to search
+//  page    - number of page, 0 based
+//  total   - if succeed, will set the total number of search result on servers
+//  error   - if error occurred, error is set non nil
 // Return: Array of Apps
--(NSArray*) search:(NSString*)query page:(NSInteger)page resultCount:(NSInteger*)resultCount error:(NSError**)error {
+-(NSArray*) search:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error {
     NSMutableArray* searchResult = [NSMutableArray array];
     ASIFormDataRequest* req = [self postRequest:kAppStoreSearchUrl];
     [req setRequestMethod:@"POST"];    
@@ -122,10 +124,10 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
                     [searchResult addObject:app];
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {
-                    *resultCount = [[itemDict objectForKey:@"total-items"] intValue];
+                    *total = [[itemDict objectForKey:@"total-items"] intValue];
 
                     NSString* moreUrl = [itemDict objectForKey:@"url"];
-                    NSLog(@"Total Result: %ld, More: %@", *resultCount, moreUrl);
+                    NSLog(@"Total Result: %ld, More: %@", *total, moreUrl);
                     
                 }
             }
@@ -143,8 +145,49 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
     return nil;
 }  
 
--(NSArray*) reviews:(NSString*)app_id page:(NSInteger)page store:(NSString*)store error:(NSError**)error{
-    return nil;
+-(NSArray*) reviews:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error{
+    NSMutableArray* reviews = [NSMutableArray array];
+    ASIHTTPRequest* req = [self request:[NSString stringWithFormat:@"%@?id=%@&type=Purple+Software&displayable-kind=11&pageNumber=%ld", 
+                                         kAppStoreReviewUrl, appid, page]];
+    [req setRequestMethod:@"GET"];
+    [req startSynchronous];
+    
+    if ([req responseStatusCode] == 200) {
+        NSPropertyListFormat format;
+        NSString *errorDesc;
+        
+        NSDictionary* dictionary = [NSPropertyListSerialization propertyListFromData:[req responseData]
+                                                                    mutabilityOption:NSPropertyListImmutable
+                                                                              format:&format
+                                                                    errorDescription:&errorDesc];
+        
+        if (errorDesc) {
+            *error = [NSError errorWithDomain:@"PlistSerializationError" 
+                                         code:1 
+                                     userInfo:[NSDictionary dictionaryWithObject:errorDesc 
+                                                                          forKey:@"Description"]];
+        } else {
+            NSArray* items = [dictionary objectForKey:@"items"];
+            for (NSDictionary* itemDict in items) {
+                if ([[itemDict objectForKey:@"type"] isEqualToString:@"review"]) {
+                    Review* review = [[[Review alloc] initWithPlist:itemDict] autorelease];
+                    [reviews addObject:review];
+                    
+                } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {
+                    *total = [[itemDict objectForKey:@"total-items"] intValue];
+                    NSString* moreUrl = [itemDict objectForKey:@"url"];
+                    NSLog(@"Total Result: %ld, More: %@", *total, moreUrl);
+                    
+                }
+            }
+        }
+        
+    } else {
+        *error = [req error];
+        
+    }
+    
+    return reviews;
 } 
 
 #pragma mark - Private

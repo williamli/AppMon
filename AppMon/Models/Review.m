@@ -23,9 +23,22 @@
     return self;
 }
 
+-(id) initWithPlist:(NSDictionary*)plist {
+    self = [super init];
+    if (self) {
+        self.rating     = [[plist objectForKey:@"average-user-rating"] doubleValue];
+        self.text       = [plist objectForKey:@"text"];
+        self.title      = [plist objectForKey:@"title"];
+        self.username      = [plist objectForKey:@"user-name"];
+           
+    }
+    return self;
+}
+
+
 - (void)dealloc
 {
-    self.rating = nil;
+    
     self.text = nil;
     self.title = nil;
     self.username = nil;

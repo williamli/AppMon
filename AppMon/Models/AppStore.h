@@ -24,13 +24,12 @@ extern NSString * const kAppStoreReviewUrl;
 
 -(App*) fetchAppById:(NSString*)appid error:(NSError**)error;
 
--(NSArray*) search:(NSString*)query resultCount:(NSInteger*)resultCount error:(NSError**)error;
+-(NSArray*) search:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error;
 
--(NSArray*) search:(NSString*)query page:(NSInteger)page resultCount:(NSInteger*)resultCount error:(NSError**)error;
+-(NSArray*) reviews:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error;
 
 -(NSArray*) stores:(NSError**)error;
 
--(NSArray*) reviews:(NSString*)app_id page:(NSInteger)page store:(NSString*)store error:(NSError**)error;
 
 
 @end

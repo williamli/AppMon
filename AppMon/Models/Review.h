@@ -14,7 +14,7 @@
     
 }
 
-@property (nonatomic, retain) NSString* rating;
+@property (nonatomic, assign) CGFloat rating;
 @property (nonatomic, retain) NSString* text;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* username;
