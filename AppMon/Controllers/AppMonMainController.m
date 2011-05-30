@@ -13,6 +13,7 @@
 
 @synthesize titleBar, searchField;
 @synthesize searchView, splitView;
+@synthesize searchController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,17 +37,20 @@
     if ([query isEqualToString:@""]) {
         NSLog(@"Clear Text");
         [self setSearchModeEnabled:NO];
-        
+
     } else {
         NSLog(@"Perform Search");
         [self setSearchModeEnabled:YES];
-
     }
 }
 
 -(void) setSearchModeEnabled:(BOOL)searchViewEnabled {
     [self.searchView setHidden:!searchViewEnabled];
     [self.splitView setHidden:searchViewEnabled];
+    
+    if (searchViewEnabled) {
+        [self.searchController setLoading:YES];
+    }
 }
 
 #pragma mark - NSSplitViewDelegate

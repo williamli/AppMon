@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "SearchViewController.h"
 
 @interface AppMonMainController : NSViewController <NSSplitViewDelegate> {
 @private
@@ -19,6 +20,8 @@
 
 @property (nonatomic, retain) IBOutlet NSView* searchView;
 @property (nonatomic, retain) IBOutlet NSSplitView* splitView;
+
+@property (nonatomic, retain) IBOutlet SearchViewController* searchController;
 
 // begin search app store using text in searchField
 -(IBAction) performSearch:(id)sender;
