@@ -244,8 +244,8 @@
 		546458C0139391C30096466C /* AppMon */ = {
 			isa = PBXGroup;
 			children = (
-				54645B81139394800096466C /* Models */,
 				546458EE1393932F0096466C /* External */,
+				54645B81139394800096466C /* Models */,
 				546458CC139391C30096466C /* AppMonAppDelegate.h */,
 				546458CD139391C30096466C /* AppMonAppDelegate.m */,
 				546458CF139391C30096466C /* MainMenu.xib */,
@@ -269,10 +269,10 @@
 		546458DB139391C40096466C /* AppMonTests */ = {
 			isa = PBXGroup;
 			children = (
+				546458DC139391C40096466C /* Supporting Files */,
 				54B7C6FB1393A87800AE8EDD /* Fixtures */,
 				54645BBF13939AFD0096466C /* AppStoreApiTests.h */,
 				54645BC013939AFD0096466C /* AppStoreApiTests.m */,
-				546458DC139391C40096466C /* Supporting Files */,
 			);
 			path = AppMonTests;
 			sourceTree = "<group>";

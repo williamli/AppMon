@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSString* text;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* username;
-@property (nonatomic, retain) NSDate* date;
+@property (nonatomic, retain) NSString* date;
 @property (nonatomic, assign) NSUInteger position;
 @property (nonatomic, retain) NSString* on_version;
 
