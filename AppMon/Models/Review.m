@@ -17,7 +17,6 @@
 {
     self = [super init];
     if (self) {
-        // Initialization code here.
     }
     
     return self;
@@ -28,9 +27,8 @@
     if (self) {
         self.rating     = [[plist objectForKey:@"average-user-rating"] doubleValue];
         self.text       = [plist objectForKey:@"text"];
-        self.title      = [plist objectForKey:@"title"];
-        self.username      = [plist objectForKey:@"user-name"];
-           
+        self.title      = [plist objectForKey:@"title"];        //  "6. Boring (v1.5.3)";
+        self.username   = [plist objectForKey:@"user-name"];    //  "crudbuttonsman on May 30, 2011"
     }
     return self;
 }
