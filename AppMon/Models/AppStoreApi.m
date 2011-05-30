@@ -70,7 +70,8 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
                                      userInfo:[NSDictionary dictionaryWithObject:errorDesc 
                                                                           forKey:@"Description"]];
         } else {
-            app = [[[App alloc] initWithPlist:dictionary] autorelease];
+            NSDictionary* metadata = [dictionary objectForKey:@"item-metadata"];
+            app = [[[App alloc] initWithPlist:metadata] autorelease];
 
         }
 

@@ -26,20 +26,29 @@
 -(id) initWithPlist:(NSDictionary*)plist {
     self = [super init];
     if (self) {
-        NSDictionary* metadata = [plist objectForKey:@"item-metadata"];
-        self.itemId = [metadata objectForKey:@"item-id"];
-        self.title = [metadata objectForKey:@"title"];
-        self.url = [metadata objectForKey:@"url"];
-        self.releaseDate = [metadata objectForKey:@"release-date"];
+        NSLog(@"plist: %@", plist);
         
-        NSArray* artworkUrls = [metadata objectForKey:@"artwork-urls"];
+        self.itemId = [plist objectForKey:@"item-id"];
+        self.title = [plist objectForKey:@"title"];
+        self.url = [plist objectForKey:@"url"];
+        self.releaseDate = [plist objectForKey:@"release-date"];
+        
+        NSArray* artworkUrls = [plist objectForKey:@"artwork-urls"];
         for (NSDictionary* imageDict in artworkUrls) {
             if ([[imageDict objectForKey:@"image-type"] isEqualToString:@"software-icon"]) {
                 self.iconUrl = [[imageDict objectForKey:@"default"] objectForKey:@"url"];
+                break;
+            }
+            
+            NSNumber* height = [imageDict objectForKey:@"box-height"];
+            NSNumber* width = [imageDict objectForKey:@"box-width"];
+            if (height && width && [width intValue] >= 57 && [height intValue] >= 57) {
+                self.iconUrl = [imageDict objectForKey:@"url"];
+                break;
             }
         }
         
-        NSDictionary* offers = [metadata objectForKey:@"store-offers"];
+        NSDictionary* offers = [plist objectForKey:@"store-offers"];
         NSDictionary* stdq = [offers objectForKey:@"STDQ"];
         self.price = [stdq objectForKey:@"price-display"];
     }
@@ -55,6 +64,10 @@
     self.price = nil;
     self.releaseDate = nil;
     [super dealloc];
+}
+
+-(NSString*) description {
+    return [NSString stringWithFormat:@"<App:%@, title=%@>", self.itemId, self.title];
 }
 
 @end
