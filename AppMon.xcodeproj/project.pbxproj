@@ -53,6 +53,7 @@
 		54B7C6FE1393A8A300AE8EDD /* angry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C6FD1393A8A300AE8EDD /* angry.plist */; };
 		54B7C7161393B75B00AE8EDD /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */; };
 		54B7C7181393B7D600AE8EDD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B7C7171393B7D600AE8EDD /* libicucore.dylib */; };
+		54F6505F1393CFA3005FF9B7 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F6505E1393CFA3005FF9B7 /* Store.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,7 +120,7 @@
 		54645A7F139393440096466C /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListViewCell.m; path = Classes/PXListViewCell.m; sourceTree = "<group>"; };
 		54645A80139393440096466C /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDelegate.h; path = Classes/PXListViewDelegate.h; sourceTree = "<group>"; };
 		54645A81139393440096466C /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDropHighlight.h; path = Classes/PXListViewDropHighlight.h; sourceTree = "<group>"; };
-		54645B82139394A00096466C /* AppStoreApi.h */ = {isa = PBXFileReference; fileEncoding = 4; name = AppStoreApi.h; path = Models/AppStoreApi.h; sourceTree = "<group>"; };
+		54645B82139394A00096466C /* AppStoreApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppStoreApi.h; path = Models/AppStoreApi.h; sourceTree = "<group>"; };
 		54645B83139394A00096466C /* AppStoreApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppStoreApi.m; path = Models/AppStoreApi.m; sourceTree = "<group>"; };
 		54645B85139394AF0096466C /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = App.h; path = Models/App.h; sourceTree = "<group>"; };
 		54645B86139394AF0096466C /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = App.m; path = Models/App.m; sourceTree = "<group>"; };
@@ -148,7 +149,7 @@
 		54645BAE139399210096466C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		54645BB11393992A0096466C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		54645BB3139399540096466C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
-		54645BBF13939AFD0096466C /* AppStoreApiTests.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AppStoreApiTests.h; sourceTree = "<group>"; };
+		54645BBF13939AFD0096466C /* AppStoreApiTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreApiTests.h; sourceTree = "<group>"; };
 		54645BC013939AFD0096466C /* AppStoreApiTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreApiTests.m; sourceTree = "<group>"; };
 		54645BC313939EBB0096466C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		54645BC513939EC40096466C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
@@ -158,6 +159,8 @@
 		54B7C70A1393B75B00AE8EDD /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		54B7C7171393B7D600AE8EDD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		54F6505D1393CFA3005FF9B7 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Store.h; path = Models/Store.h; sourceTree = "<group>"; };
+		54F6505E1393CFA3005FF9B7 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Store.m; path = Models/Store.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,6 +377,8 @@
 				54645B86139394AF0096466C /* App.m */,
 				54645B88139394B80096466C /* Review.h */,
 				54645B89139394B80096466C /* Review.m */,
+				54F6505D1393CFA3005FF9B7 /* Store.h */,
+				54F6505E1393CFA3005FF9B7 /* Store.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -558,6 +563,7 @@
 				54645BA6139398C70096466C /* ASIInputStream.m in Sources */,
 				54645BA7139398C70096466C /* ASINetworkQueue.m in Sources */,
 				54B7C7161393B75B00AE8EDD /* RegexKitLite.m in Sources */,
+				54F6505F1393CFA3005FF9B7 /* Store.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
