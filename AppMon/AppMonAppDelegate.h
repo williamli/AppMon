@@ -7,12 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AppMonMainController.h"
+#import "INAppStoreWindow.h"
 
 @interface AppMonAppDelegate : NSObject <NSApplicationDelegate> {
 @private
-    NSWindow *window;
+    INAppStoreWindow *window;
 }
 
-@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet INAppStoreWindow *window;
+@property (retain) IBOutlet AppMonMainController* mainController;
 
 @end

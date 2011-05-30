@@ -10,11 +10,11 @@
 
 @implementation AppMonAppDelegate
 
-@synthesize window;
+@synthesize window, mainController;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    // Insert code here to initialize your application
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    window.titleBarHeight = 45.0;
+    [window.titleBarView addSubview:mainController.titleBar];
 }
 
 @end

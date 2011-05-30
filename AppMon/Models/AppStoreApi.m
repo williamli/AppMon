@@ -27,7 +27,7 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 @interface AppStoreApi (Private)
 -(ASIHTTPRequest*) request:(NSString*)urlStr;
 -(ASIFormDataRequest*) postRequest:(NSString*)urlStr;
--(NSArray*) storesUrlFromNodes:(NSArray*)nodes;
+-(NSArray*) storesFromNodes:(NSArray*)nodes;
 @end
 
 @implementation AppStoreApi
@@ -138,7 +138,7 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
     
     if ([req responseStatusCode] == 200) {
         NSArray* countryTags    = PerformXMLXPathQuery([req responseData], @"//itms:GotoURL");
-        countries      = [self storesUrlFromNodes:countryTags];
+        countries      = [self storesFromNodes:countryTags];
 
     } else {
         *error = [req error];
@@ -212,7 +212,7 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 }
 
 // parse the nodes return by XPath and return Array of Stores
--(NSArray*) storesUrlFromNodes:(NSArray*)nodes {
+-(NSArray*) storesFromNodes:(NSArray*)nodes {
     NSMutableArray* result = [NSMutableArray array];
 
     for (NSDictionary* dict in nodes) {
