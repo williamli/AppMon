@@ -8,13 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "AppStoreApi.h"
 
 @interface SearchViewController : NSViewController {
-@private
+    AppStoreApi* api;
 }
 
 @property (nonatomic, retain) IBOutlet NSProgressIndicator* progressIndicator;
+@property (nonatomic, retain) IBOutlet NSTextField* txtProgress;
+@property (nonatomic, retain) AppStoreApi* api;
 
 -(void) setLoading:(BOOL)isLoading;
+
+-(void) search:(NSString*)query;
 
 @end

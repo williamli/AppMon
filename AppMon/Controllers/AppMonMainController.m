@@ -41,6 +41,7 @@
     } else {
         NSLog(@"Perform Search");
         [self setSearchModeEnabled:YES];
+        [self.searchController search:query];
     }
 }
 
