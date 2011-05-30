@@ -13,11 +13,13 @@
 @private
 }
 
-@property (nonatomic, retain) NSString* item_id;
+@property (nonatomic, retain) NSString* itemId;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* url;
-@property (nonatomic, retain) NSString* icon_url;
+@property (nonatomic, retain) NSString* iconUrl;
 @property (nonatomic, retain) NSString* price;
-@property (nonatomic, retain) NSDate* release_date;
+@property (nonatomic, retain) NSDate* releaseDate;
+
+-(id) initWithPlist:(NSDictionary*)plist;
 
 @end

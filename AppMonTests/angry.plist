@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>item-metadata</key>
+	<dict>
+		<key>artwork-urls</key>
+		<array>
+			<dict>
+				<key>default</key>
+				<dict>
+					<key>box-height</key>
+					<integer>57</integer>
+					<key>box-width</key>
+					<integer>57</integer>
+					<key>needs-shine</key>
+					<false/>
+					<key>url</key>
+					<string>http://a5.mzstatic.com/us/r1000/039/Purple/f9/f5/bc/mzi.ekpcnacu.png</string>
+				</dict>
+				<key>default@2x</key>
+				<dict>
+					<key>box-height</key>
+					<integer>114</integer>
+					<key>box-width</key>
+					<integer>114</integer>
+					<key>needs-shine</key>
+					<false/>
+					<key>url</key>
+					<string>http://a5.mzstatic.com/us/r1000/014/Purple/13/ac/79/mzl.onglzeme.114x114-75.jpg</string>
+				</dict>
+				<key>image-type</key>
+				<string>software-icon</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>default</key>
+				<dict>
+					<key>box-height</key>
+					<integer>320</integer>
+					<key>box-width</key>
+					<integer>480</integer>
+					<key>needs-shine</key>
+					<false/>
+					<key>url</key>
+					<string>http://a5.mzstatic.com/us/r1000/030/Purple/45/28/f7/mzl.yagtukvx.320x480-75.jpg</string>
+				</dict>
+				<key>image-type</key>
+				<string>screenshot</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>default</key>
+				<dict>
+					<key>box-height</key>
+					<integer>320</integer>
+					<key>box-width</key>
+					<integer>480</integer>
+					<key>needs-shine</key>
+					<false/>
+					<key>url</key>
+					<string>http://a2.mzstatic.com/us/r1000/004/Purple/c6/d9/da/mzl.mwqzyfgz.320x480-75.jpg</string>
+				</dict>
+				<key>image-type</key>
+				<string>screenshot</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>default</key>
+				<dict>
+					<key>box-height</key>
+					<integer>320</integer>
+					<key>box-width</key>
+					<integer>480</integer>
+					<key>needs-shine</key>
+					<false/>
+					<key>url</key>
+					<string>http://a5.mzstatic.com/us/r1000/058/Purple/c1/3a/b1/mzl.erlcadqr.320x480-75.jpg</string>
+				</dict>
+				<key>image-type</key>
+				<string>screenshot</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>default</key>
+				<dict>
+					<key>box-height</key>
+					<integer>320</integer>
+					<key>box-width</key>
+					<integer>480</integer>
+					<key>needs-shine</key>
+					<false/>
+					<key>url</key>
+					<string>http://a1.mzstatic.com/us/r1000/055/Purple/34/84/c5/mzl.ntjloyvu.320x480-75.jpg</string>
+				</dict>
+				<key>image-type</key>
+				<string>screenshot</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>default</key>
+				<dict>
+					<key>box-height</key>
+					<integer>320</integer>
+					<key>box-width</key>
+					<integer>480</integer>
+					<key>needs-shine</key>
+					<false/>
+					<key>url</key>
+					<string>http://a1.mzstatic.com/us/r1000/057/Purple/a7/ad/0e/mzl.rlbkujxk.320x480-75.jpg</string>
+				</dict>
+				<key>image-type</key>
+				<string>screenshot</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>average-user-rating</key>
+		<real>0.9399999999999999</real>
+		<key>bundle-id</key>
+		<string>com.clickgamer.AngryBirds</string>
+		<key>company</key>
+		<dict>
+			<key>title</key>
+			<string>Clickgamer Technologies Ltd</string>
+			<key>url</key>
+			<string>http://www.clickgamer.com</string>
+		</dict>
+		<key>description</key>
+		<string>The survival of the Angry Birds is at stake. Dish out revenge on the green pigs who stole the Birds’ eggs. Use the unique destructive powers of the Angry Birds to lay waste to the pigs’ fortified castles. Angry Birds features hours of gameplay, challenging physics-based castle demolition, and lots of replay value. Each of the 240 levels requires logic, skill, and brute force to crush the enemy.
+
+#1 IPHONE PAID APP in US, UK, Canada, Italy, Germany, Russia, Sweden, Denmark, Finland, Singapore, Poland, France, Netherlands, Malta, Greece, Austria, Australia, Turkey, UAE, Saudi Arabia, Israel, Belgium, Norway, Hungary, Malaysia, Luxembourg, Portugal, Czech Republic, Spain, Ireland, Romania, New Zealand, Latvia, Lithuania, Estonia, Nicaragua, Kazakhstan, Argentina, Bulgaria, Slovakia, Slovenia, Mauritius, Chile, Hong Kong, Pakistan, Taiwan, Colombia, Indonesia, Thailand, India, Kenya, Macedonia, Croatia, Macau, Paraguay, Peru, Armenia, Philippines, Vietnam, Jordan, Kuwait and Malta.
+
+#1 IPHONE PAID GAME in more countries than we can count!
+
+AVERAGE REVIEW SCORE for version 1.4.0 = 4.78 / 5.
+
+“Lemme tell ya, these ain’t no ordinary finches we’re talkin’ about. These here are the Angry Birds, the ones that’s gonna kick you in the ‘nads. And they’re the ones on your side. They must be from Galapadapados, or sumptin’.” – Col. Angus, Bird Expert.
+
+Protect wildlife or play Angry Birds!
+
+Features 240 levels,  leaderboards, achievements, Facebook and Twitter integration, and lots and lots of Angry Birds!</string>
+		<key>description-title</key>
+		<string>Description</string>
+		<key>domains</key>
+		<array/>
+		<key>game-center-enabled</key>
+		<true/>
+		<key>gifting-button</key>
+		<dict>
+			<key>title</key>
+			<string>Gift This App</string>
+			<key>type</key>
+			<string>button-link</string>
+			<key>url</key>
+			<string>https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/giftSongsWizard?gift=1&amp;price=990&amp;salableAdamId=343200656&amp;productType=C&amp;pricingParameters=STDQ</string>
+			<key>url-page-type</key>
+			<string>html</string>
+		</dict>
+		<key>item-id</key>
+		<integer>343200656</integer>
+		<key>rating</key>
+		<dict>
+			<key>advisory-array</key>
+			<array/>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>4+</string>
+			<key>rank</key>
+			<integer>100</integer>
+			<key>system</key>
+			<string>itunes-games</string>
+		</dict>
+		<key>release-date</key>
+		<date>2011-03-17T21:07:43Z</date>
+		<key>store-offers</key>
+		<dict>
+			<key>STDQ</key>
+			<dict>
+				<key>action-display-name</key>
+				<string>Buy Software</string>
+				<key>action-params</key>
+				<string>productType=C&amp;salableAdamId=343200656&amp;pricingParameters=STDQ&amp;price=990&amp;ct-id=14</string>
+				<key>confirmation-dialog</key>
+				<dict>
+					<key>defaultButton</key>
+					<string>OK</string>
+					<key>explanation</key>
+					<string>Do you want Angry Birds for $0.99?</string>
+					<key>message</key>
+					<string>Confirm Purchase</string>
+					<key>okButton</key>
+					<string>OK</string>
+				</dict>
+				<key>price</key>
+				<real>0.99</real>
+				<key>price-display</key>
+				<string>$0.99</string>
+				<key>size</key>
+				<integer>19677232</integer>
+				<key>success-dialog</key>
+				<dict>
+					<key>defaultButton</key>
+					<string>OK</string>
+					<key>explanation</key>
+					<string>Your purchase was successful.</string>
+					<key>message</key>
+					<string>Thank You</string>
+					<key>okButton</key>
+					<string>OK</string>
+				</dict>
+				<key>supported-device-types</key>
+				<array>
+					<dict>
+						<key>device-type-id</key>
+						<integer>1</integer>
+						<key>minimum-product-version</key>
+						<string>3.0</string>
+						<key>minimum-product-version-description</key>
+						<string>This application requires the iPhone 3.0 Software Update</string>
+						<key>minimum-product-version-title</key>
+						<string>Application Not Compatible</string>
+					</dict>
+				</array>
+				<key>supported-devices</key>
+				<array>
+					<integer>1</integer>
+				</array>
+			</dict>
+		</dict>
+		<key>tell-a-friend</key>
+		<dict>
+			<key>body-url</key>
+			<string>https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/tellAFriendBody?type=14&amp;id=343200656&amp;displayable-kind=11</string>
+		</dict>
+		<key>title</key>
+		<string>Angry Birds</string>
+		<key>title2</key>
+		<string>63794 Ratings</string>
+		<key>type</key>
+		<string>software</string>
+		<key>url</key>
+		<string>http://itunes.apple.com/us/app/angry-birds/id343200656?mt=8</string>
+		<key>url-page-type</key>
+		<string>software</string>
+		<key>user-rating-count</key>
+		<integer>63794</integer>
+		<key>user-rating-count-string</key>
+		<string>63794 Ratings</string>
+		<key>version</key>
+		<string>1.5.3</string>
+		<key>version-external-identifier</key>
+		<integer>3510342</integer>
+		<key>version-external-identifiers</key>
+		<array>
+			<integer>2166661</integer>
+			<integer>2348692</integer>
+			<integer>2453765</integer>
+			<integer>2571635</integer>
+			<integer>2587020</integer>
+			<integer>2630681</integer>
+			<integer>2729667</integer>
+			<integer>2763551</integer>
+			<integer>2803451</integer>
+			<integer>2916590</integer>
+			<integer>3031172</integer>
+			<integer>3034980</integer>
+			<integer>3038826</integer>
+			<integer>3134705</integer>
+			<integer>3391639</integer>
+			<integer>3471514</integer>
+			<integer>3510342</integer>
+		</array>
+		<key>view-more-info-button</key>
+		<dict>
+			<key>title</key>
+			<string>Top In-App Purchases
+</string>
+			<key>type</key>
+			<string>link</string>
+			<key>url</key>
+			<string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftwareAddOns?id=343200656</string>
+		</dict>
+		<key>view-user-reviews-url</key>
+		<string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&amp;id=343200656&amp;displayable-kind=11</string>
+	</dict>
+	<key>page-type</key>
+	<dict>
+		<key>template-name</key>
+		<string>software</string>
+		<key>template-parameters</key>
+		<dict/>
+	</dict>
+	<key>pings</key>
+	<array>
+		<string>http://metrics.apple.com/b/ss/applesuperglobal/1/G.6--NS?h5=appleitmsnaapmb%2Cappleitmsusapmb&amp;pccr=true&amp;pageName=App%20Store-SoftwarePage-US-Angry%20Birds-343200656-Clickgamer.com&amp;ch=App%20Store-Software%20Page&amp;g=http%3A%2F%2Fitunes.apple.com%2FWebObjects%2FMZStore.woa%2Fwa%2FviewSoftware%3Fmt%3D8%26id%3D343200656</string>
+	</array>
+	<key>store-client-application</key>
+	<string>Software</string>
+	<key>store-version</key>
+	<string>1.0</string>
+	<key>title</key>
+	<string>Info</string>
+</dict>
+</plist>

@@ -11,7 +11,7 @@
 
 @implementation App
 
-@synthesize item_id=_item_id, title=_title, url=_url, icon_url=_icon_url, price=_price, release_date=_release_date;
+@synthesize itemId=_itemId, title=_title, url=_url, iconUrl=_iconUrl, price=_price, releaseDate=_releaseDate;
 
 - (id)init
 {
@@ -23,14 +23,37 @@
     return self;
 }
 
+-(id) initWithPlist:(NSDictionary*)plist {
+    self = [super init];
+    if (self) {
+        NSDictionary* metadata = [plist objectForKey:@"item-metadata"];
+        self.itemId = [metadata objectForKey:@"item-id"];
+        self.title = [metadata objectForKey:@"title"];
+        self.url = [metadata objectForKey:@"url"];
+        self.releaseDate = [metadata objectForKey:@"release-date"];
+        
+        NSArray* artworkUrls = [metadata objectForKey:@"artwork-urls"];
+        for (NSDictionary* imageDict in artworkUrls) {
+            if ([[imageDict objectForKey:@"image-type"] isEqualToString:@"software-icon"]) {
+                self.iconUrl = [[imageDict objectForKey:@"default"] objectForKey:@"url"];
+            }
+        }
+        
+        NSDictionary* offers = [metadata objectForKey:@"store-offers"];
+        NSDictionary* stdq = [offers objectForKey:@"STDQ"];
+        self.price = [stdq objectForKey:@"price-display"];
+    }
+    return self;
+}
+
 - (void)dealloc
 {
-    self.item_id = nil;
+    self.itemId = nil;
     self.title = nil;
     self.url = nil;
-    self.icon_url = nil;
+    self.iconUrl = nil;
     self.price = nil;
-    self.release_date = nil;
+    self.releaseDate = nil;
     [super dealloc];
 }
 

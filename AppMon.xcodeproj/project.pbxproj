@@ -15,8 +15,6 @@
 		546458D1139391C30096466C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546458CF139391C30096466C /* MainMenu.xib */; };
 		546458D8139391C40096466C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546458BA139391C20096466C /* Cocoa.framework */; };
 		546458E0139391C40096466C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 546458DE139391C40096466C /* InfoPlist.strings */; };
-		546458E3139391C40096466C /* AppMonTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 546458E2139391C40096466C /* AppMonTests.h */; };
-		546458E5139391C40096466C /* AppMonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 546458E4139391C40096466C /* AppMonTests.m */; };
 		54645AB2139393450096466C /* BCCollectionView+Dragging.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645916139393440096466C /* BCCollectionView+Dragging.m */; };
 		54645AB3139393450096466C /* BCCollectionView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645918139393440096466C /* BCCollectionView+Keyboard.m */; };
 		54645AB4139393450096466C /* BCCollectionView+Mouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5464591A139393440096466C /* BCCollectionView+Mouse.m */; };
@@ -47,6 +45,12 @@
 		54645BB0139399210096466C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BAE139399210096466C /* QuartzCore.framework */; };
 		54645BB21393992A0096466C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BB11393992A0096466C /* libz.dylib */; };
 		54645BB4139399540096466C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BB3139399540096466C /* CoreServices.framework */; };
+		54645BC213939D2A0096466C /* AppStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645BC013939AFD0096466C /* AppStoreTests.m */; };
+		54645BC413939EBC0096466C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC313939EBB0096466C /* SystemConfiguration.framework */; };
+		54645BC713939EC40096466C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC513939EC40096466C /* Quartz.framework */; };
+		54645BC813939EC40096466C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC613939EC40096466C /* QuartzCore.framework */; };
+		54645BCA13939EFA0096466C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC913939EFA0096466C /* libz.dylib */; };
+		54B7C6FE1393A8A300AE8EDD /* angry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C6FD1393A8A300AE8EDD /* angry.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,8 +81,6 @@
 		546458DD139391C40096466C /* AppMonTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppMonTests-Info.plist"; sourceTree = "<group>"; };
 		546458DF139391C40096466C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		546458E1139391C40096466C /* AppMonTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppMonTests-Prefix.pch"; sourceTree = "<group>"; };
-		546458E2139391C40096466C /* AppMonTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMonTests.h; sourceTree = "<group>"; };
-		546458E4139391C40096466C /* AppMonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppMonTests.m; sourceTree = "<group>"; };
 		54645915139393440096466C /* BCCollectionView+Dragging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCCollectionView+Dragging.h"; sourceTree = "<group>"; };
 		54645916139393440096466C /* BCCollectionView+Dragging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCCollectionView+Dragging.m"; sourceTree = "<group>"; };
 		54645917139393440096466C /* BCCollectionView+Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCCollectionView+Keyboard.h"; sourceTree = "<group>"; };
@@ -144,6 +146,13 @@
 		54645BAE139399210096466C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		54645BB11393992A0096466C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		54645BB3139399540096466C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		54645BBF13939AFD0096466C /* AppStoreTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreTests.h; sourceTree = "<group>"; };
+		54645BC013939AFD0096466C /* AppStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreTests.m; sourceTree = "<group>"; };
+		54645BC313939EBB0096466C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		54645BC513939EC40096466C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		54645BC613939EC40096466C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		54645BC913939EFA0096466C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		54B7C6FD1393A8A300AE8EDD /* angry.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = angry.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,9 +160,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54645BB4139399540096466C /* CoreServices.framework in Frameworks */,
 				54645BB21393992A0096466C /* libz.dylib in Frameworks */,
 				54645BAF139399210096466C /* Quartz.framework in Frameworks */,
+				54645BB4139399540096466C /* CoreServices.framework in Frameworks */,
 				54645BB0139399210096466C /* QuartzCore.framework in Frameworks */,
 				54645BAC139399150096466C /* SystemConfiguration.framework in Frameworks */,
 				546458BB139391C20096466C /* Cocoa.framework in Frameworks */,
@@ -164,6 +173,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54645BCA13939EFA0096466C /* libz.dylib in Frameworks */,
+				54645BC713939EC40096466C /* Quartz.framework in Frameworks */,
+				54645BC813939EC40096466C /* QuartzCore.framework in Frameworks */,
+				54645BC413939EBC0096466C /* SystemConfiguration.framework in Frameworks */,
 				546458D8139391C40096466C /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,7 +206,11 @@
 		546458B9139391C20096466C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54645BC913939EFA0096466C /* libz.dylib */,
 				54645BB11393992A0096466C /* libz.dylib */,
+				54645BC513939EC40096466C /* Quartz.framework */,
+				54645BC613939EC40096466C /* QuartzCore.framework */,
+				54645BC313939EBB0096466C /* SystemConfiguration.framework */,
 				54645BB3139399540096466C /* CoreServices.framework */,
 				54645BAD139399210096466C /* Quartz.framework */,
 				54645BAE139399210096466C /* QuartzCore.framework */,
@@ -242,8 +259,9 @@
 		546458DB139391C40096466C /* AppMonTests */ = {
 			isa = PBXGroup;
 			children = (
-				546458E2139391C40096466C /* AppMonTests.h */,
-				546458E4139391C40096466C /* AppMonTests.m */,
+				54B7C6FB1393A87800AE8EDD /* Fixtures */,
+				54645BBF13939AFD0096466C /* AppStoreTests.h */,
+				54645BC013939AFD0096466C /* AppStoreTests.m */,
 				546458DC139391C40096466C /* Supporting Files */,
 			);
 			path = AppMonTests;
@@ -377,6 +395,14 @@
 			name = ASIHttpRequest;
 			sourceTree = "<group>";
 		};
+		54B7C6FB1393A87800AE8EDD /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				54B7C6FD1393A8A300AE8EDD /* angry.plist */,
+			);
+			name = Fixtures;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -451,6 +477,7 @@
 				546458C5139391C30096466C /* InfoPlist.strings in Resources */,
 				546458CB139391C30096466C /* Credits.rtf in Resources */,
 				546458D1139391C30096466C /* MainMenu.xib in Resources */,
+				54B7C6FE1393A8A300AE8EDD /* angry.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,7 +486,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				546458E0139391C40096466C /* InfoPlist.strings in Resources */,
-				546458E3139391C40096466C /* AppMonTests.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,7 +546,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				546458E5139391C40096466C /* AppMonTests.m in Sources */,
+				54645BC213939D2A0096466C /* AppStoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,6 +721,7 @@
 				546458EA139391C40096466C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		546458EB139391C50096466C /* Build configuration list for PBXNativeTarget "AppMonTests" */ = {
 			isa = XCConfigurationList;
@@ -703,6 +730,7 @@
 				546458ED139391C50096466C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

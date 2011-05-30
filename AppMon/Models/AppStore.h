@@ -15,17 +15,22 @@ extern NSString * const kAppStoreCountryUrl;
 extern NSString * const kAppStoreReviewUrl;
 
 @interface AppStore : NSObject {
+    
 @private
     
 }
 
--(App*) fetchAppById:(NSString*)appid;
+@property (nonatomic, retain) NSString* storeFront;
 
--(NSArray*) search:(NSString*)query;
+-(App*) fetchAppById:(NSString*)appid error:(NSError**)error;
 
--(NSArray*) stores;
+-(NSArray*) search:(NSString*)query resultCount:(NSInteger*)resultCount error:(NSError**)error;
 
--(NSArray*) reviews:(NSString*)app_id page:(NSInteger)page store:(NSString*)store;
+-(NSArray*) search:(NSString*)query page:(NSInteger)page resultCount:(NSInteger*)resultCount error:(NSError**)error;
+
+-(NSArray*) stores:(NSError**)error;
+
+-(NSArray*) reviews:(NSString*)app_id page:(NSInteger)page store:(NSString*)store error:(NSError**)error;
 
 
 @end
