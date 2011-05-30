@@ -75,13 +75,6 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
     return app;
 } 
 
-// search a specific quert on App Store
-// Parameters: 
-//  query   - terms to search
-//  page    - number of page, 0 based
-//  total   - if succeed, will set the total number of search result on servers
-//  error   - if error occurred, error is set non nil
-// Return: Array of Apps
 -(NSArray*) search:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error {
     NSMutableArray* searchResult = [NSMutableArray array];
     ASIFormDataRequest* req = [self postRequest:kAppStoreSearchUrl];
