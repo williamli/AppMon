@@ -10,6 +10,8 @@
 
 #import "SearchViewController.h"
 
+//  Top level controller that handle main window logic, it delegate jobs to underlying 
+//  controllers (SearchViewController, AppListViewController)
 @interface AppMonMainController : NSViewController <NSSplitViewDelegate> {
 @private
     

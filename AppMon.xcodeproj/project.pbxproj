@@ -260,13 +260,10 @@
 				546458C1139391C30096466C /* Supporting Files */,
 				546458EE1393932F0096466C /* External */,
 				54645B81139394800096466C /* Models */,
+				54F7E48513940335007C8CCD /* Controllers */,
 				546458CC139391C30096466C /* AppMonAppDelegate.h */,
 				546458CD139391C30096466C /* AppMonAppDelegate.m */,
 				546458CF139391C30096466C /* MainMenu.xib */,
-				54F7E47A1393F076007C8CCD /* AppMonMainController.h */,
-				54F7E47B1393F076007C8CCD /* AppMonMainController.m */,
-				54F7E4801393F6E9007C8CCD /* SearchViewController.h */,
-				54F7E4811393F6E9007C8CCD /* SearchViewController.m */,
 			);
 			path = AppMon;
 			sourceTree = "<group>";
@@ -452,6 +449,17 @@
 			);
 			name = XPathQuery;
 			path = External/XPathQuery;
+			sourceTree = "<group>";
+		};
+		54F7E48513940335007C8CCD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				54F7E47A1393F076007C8CCD /* AppMonMainController.h */,
+				54F7E47B1393F076007C8CCD /* AppMonMainController.m */,
+				54F7E4801393F6E9007C8CCD /* SearchViewController.h */,
+				54F7E4811393F6E9007C8CCD /* SearchViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -10,6 +10,7 @@
 
 #import "AppStoreApi.h"
 
+//  Handle search actions and response
 @interface SearchViewController : NSViewController {
     AppStoreApi* api;
 }
