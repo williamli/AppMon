@@ -9,12 +9,21 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface AppMonMainController : NSViewController {
+@interface AppMonMainController : NSViewController <NSSplitViewDelegate> {
 @private
     
 }
 
 @property (nonatomic, retain) IBOutlet NSView* titleBar;
 @property (nonatomic, retain) IBOutlet NSSearchField* searchField;
+
+@property (nonatomic, retain) IBOutlet NSView* searchView;
+@property (nonatomic, retain) IBOutlet NSSplitView* splitView;
+
+// begin search app store using text in searchField
+-(IBAction) performSearch:(id)sender;
+
+// Set if search mode enabled
+-(void) setSearchModeEnabled:(BOOL)searchViewEnabled;
 
 @end
