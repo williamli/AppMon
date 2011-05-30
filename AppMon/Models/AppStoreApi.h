@@ -14,7 +14,7 @@ extern NSString * const kAppStoreSearchUrl;
 extern NSString * const kAppStoreCountryUrl;
 extern NSString * const kAppStoreReviewUrl;
 
-@interface AppStore : NSObject {
+@interface AppStoreApi : NSObject {
     
 @private
     

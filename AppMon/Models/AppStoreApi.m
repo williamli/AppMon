@@ -6,7 +6,7 @@
 //  Copyright 2011年 Ignition Soft Limited. All rights reserved.
 //
 
-#import "AppStore.h"
+#import "AppStoreApi.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "Review.h"
@@ -18,12 +18,12 @@ NSString * const kAppStoreCountryUrl    = @"http://ax.itunes.apple.com/WebObject
 NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews";
 
 
-@interface AppStore (Private)
+@interface AppStoreApi (Private)
 -(ASIHTTPRequest*) request:(NSString*)urlStr;
 -(ASIFormDataRequest*) postRequest:(NSString*)urlStr;
 @end
 
-@implementation AppStore
+@implementation AppStoreApi
 
 @synthesize storeFront=_storeFront;
 

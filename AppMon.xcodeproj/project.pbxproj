@@ -30,7 +30,7 @@
 		54645B6F139393450096466C /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A7A139393440096466C /* PXListView+UserInteraction.m */; };
 		54645B70139393450096466C /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A7C139393440096466C /* PXListView.m */; };
 		54645B71139393450096466C /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A7F139393440096466C /* PXListViewCell.m */; };
-		54645B84139394A00096466C /* AppStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B83139394A00096466C /* AppStore.m */; };
+		54645B84139394A00096466C /* AppStoreApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B83139394A00096466C /* AppStoreApi.m */; };
 		54645B87139394AF0096466C /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B86139394AF0096466C /* App.m */; };
 		54645B8A139394B80096466C /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B89139394B80096466C /* Review.m */; };
 		54645BA1139398C70096466C /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B90139398C70096466C /* ASIDataCompressor.m */; };
@@ -45,7 +45,7 @@
 		54645BB0139399210096466C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BAE139399210096466C /* QuartzCore.framework */; };
 		54645BB21393992A0096466C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BB11393992A0096466C /* libz.dylib */; };
 		54645BB4139399540096466C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BB3139399540096466C /* CoreServices.framework */; };
-		54645BC213939D2A0096466C /* AppStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645BC013939AFD0096466C /* AppStoreTests.m */; };
+		54645BC213939D2A0096466C /* AppStoreApiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645BC013939AFD0096466C /* AppStoreApiTests.m */; };
 		54645BC413939EBC0096466C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC313939EBB0096466C /* SystemConfiguration.framework */; };
 		54645BC713939EC40096466C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC513939EC40096466C /* Quartz.framework */; };
 		54645BC813939EC40096466C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC613939EC40096466C /* QuartzCore.framework */; };
@@ -119,8 +119,8 @@
 		54645A7F139393440096466C /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListViewCell.m; path = Classes/PXListViewCell.m; sourceTree = "<group>"; };
 		54645A80139393440096466C /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDelegate.h; path = Classes/PXListViewDelegate.h; sourceTree = "<group>"; };
 		54645A81139393440096466C /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDropHighlight.h; path = Classes/PXListViewDropHighlight.h; sourceTree = "<group>"; };
-		54645B82139394A00096466C /* AppStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppStore.h; path = Models/AppStore.h; sourceTree = "<group>"; };
-		54645B83139394A00096466C /* AppStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppStore.m; path = Models/AppStore.m; sourceTree = "<group>"; };
+		54645B82139394A00096466C /* AppStoreApi.h */ = {isa = PBXFileReference; fileEncoding = 4; name = AppStoreApi.h; path = Models/AppStoreApi.h; sourceTree = "<group>"; };
+		54645B83139394A00096466C /* AppStoreApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppStoreApi.m; path = Models/AppStoreApi.m; sourceTree = "<group>"; };
 		54645B85139394AF0096466C /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = App.h; path = Models/App.h; sourceTree = "<group>"; };
 		54645B86139394AF0096466C /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = App.m; path = Models/App.m; sourceTree = "<group>"; };
 		54645B88139394B80096466C /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Review.h; path = Models/Review.h; sourceTree = "<group>"; };
@@ -148,8 +148,8 @@
 		54645BAE139399210096466C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		54645BB11393992A0096466C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		54645BB3139399540096466C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
-		54645BBF13939AFD0096466C /* AppStoreTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreTests.h; sourceTree = "<group>"; };
-		54645BC013939AFD0096466C /* AppStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreTests.m; sourceTree = "<group>"; };
+		54645BBF13939AFD0096466C /* AppStoreApiTests.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AppStoreApiTests.h; sourceTree = "<group>"; };
+		54645BC013939AFD0096466C /* AppStoreApiTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreApiTests.m; sourceTree = "<group>"; };
 		54645BC313939EBB0096466C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		54645BC513939EC40096466C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		54645BC613939EC40096466C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -267,8 +267,8 @@
 			isa = PBXGroup;
 			children = (
 				54B7C6FB1393A87800AE8EDD /* Fixtures */,
-				54645BBF13939AFD0096466C /* AppStoreTests.h */,
-				54645BC013939AFD0096466C /* AppStoreTests.m */,
+				54645BBF13939AFD0096466C /* AppStoreApiTests.h */,
+				54645BC013939AFD0096466C /* AppStoreApiTests.m */,
 				546458DC139391C40096466C /* Supporting Files */,
 			);
 			path = AppMonTests;
@@ -368,8 +368,8 @@
 		54645B81139394800096466C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				54645B82139394A00096466C /* AppStore.h */,
-				54645B83139394A00096466C /* AppStore.m */,
+				54645B82139394A00096466C /* AppStoreApi.h */,
+				54645B83139394A00096466C /* AppStoreApi.m */,
 				54645B85139394AF0096466C /* App.h */,
 				54645B86139394AF0096466C /* App.m */,
 				54645B88139394B80096466C /* Review.h */,
@@ -547,7 +547,7 @@
 				54645B6F139393450096466C /* PXListView+UserInteraction.m in Sources */,
 				54645B70139393450096466C /* PXListView.m in Sources */,
 				54645B71139393450096466C /* PXListViewCell.m in Sources */,
-				54645B84139394A00096466C /* AppStore.m in Sources */,
+				54645B84139394A00096466C /* AppStoreApi.m in Sources */,
 				54645B87139394AF0096466C /* App.m in Sources */,
 				54645B8A139394B80096466C /* Review.m in Sources */,
 				54645BA1139398C70096466C /* ASIDataCompressor.m in Sources */,
@@ -565,7 +565,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54645BC213939D2A0096466C /* AppStoreTests.m in Sources */,
+				54645BC213939D2A0096466C /* AppStoreApiTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

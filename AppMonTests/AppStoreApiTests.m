@@ -6,18 +6,18 @@
 //  Copyright 2011年 Ignition Soft Limited. All rights reserved.
 //
 
-#import "AppStoreTests.h"
+#import "AppStoreApiTests.h"
 #import "App.h"
 #import "Review.h"
-#import "AppStore.h"
+#import "AppStoreApi.h"
 
-@implementation AppStoreTests
+@implementation AppStoreApiTests
 
 @synthesize appStore=_appStore;
 
 - (void)setUp {
     [super setUp];
-    self.appStore = [[[AppStore alloc] init] autorelease];
+    self.appStore = [[[AppStoreApi alloc] init] autorelease];
 }
 
 - (void)tearDown {
@@ -43,7 +43,7 @@
 - (void)testSearchApp {
     NSError* error = nil;
     NSInteger count = 0;
-    NSArray* apps = [self.appStore search:@"Camera" total:&count error:&error];
+    NSArray* apps = [self.appStore search:@"Camera" page:0 total:&count error:&error];
 
     STAssertNil(error, @"should have no error");
     STAssertNotNil(apps, @"should not nil");

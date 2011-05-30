@@ -8,13 +8,13 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-#import "AppStore.h"
+#import "AppStoreApi.h"
 
-@interface AppStoreTests : SenTestCase {
+@interface AppStoreApiTests : SenTestCase {
 @private
     
 }
 
-@property (nonatomic, retain) AppStore* appStore;
+@property (nonatomic, retain) AppStoreApi* appStore;
 
 @end
