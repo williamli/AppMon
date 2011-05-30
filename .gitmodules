@@ -1,0 +1,12 @@
+[submodule "AppMon/External/PXListView"]
+	path = AppMon/External/PXListView
+	url = https://github.com/Perspx/PXListView.git
+[submodule "AppMon/External/INAppStoreWindow"]
+	path = AppMon/External/INAppStoreWindow
+	url = https://github.com/indragiek/INAppStoreWindow.git
+[submodule "AppMon/External/ESScrollView"]
+	path = AppMon/External/ESScrollView
+	url = https://github.com/incbee/ESScrollView.git
+[submodule "AppMon/External/BCCollectionView"]
+	path = AppMon/External/BCCollectionView
+	url = https://github.com/aaronbrethorst/BCCollectionView.git
