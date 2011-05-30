@@ -25,9 +25,7 @@
 
 -(id) initWithPlist:(NSDictionary*)plist {
     self = [super init];
-    if (self) {
-        NSLog(@"plist: %@", plist);
-        
+    if (self) {        
         self.itemId = [plist objectForKey:@"item-id"];
         self.title = [plist objectForKey:@"title"];
         self.url = [plist objectForKey:@"url"];
