@@ -19,9 +19,11 @@
 @property (nonatomic, retain) IBOutlet NSTextField*     lblTitle;
 @property (nonatomic, retain) IBOutlet NSTextField*     lblMessage;
 @property (nonatomic, retain) IBOutlet NSTextField*     lblExtra;
+@property (nonatomic, retain) IBOutlet Review*          review;
 
 + (AppReviewViewCell *) item;
 
 -(void) setReview:(Review*)aReview;
+-(void) sizeToFit;
 
 @end

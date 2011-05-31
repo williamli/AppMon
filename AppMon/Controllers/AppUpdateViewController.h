@@ -14,7 +14,7 @@
 #import "App.h"
 #import "LoadingViewItem.h"
 
-@interface AppUpdateViewController : NSViewController <JASectionedListViewDataSource, JAListViewDelegate> {
+@interface AppUpdateViewController : NSViewController <JAListViewDataSource, JAListViewDelegate> {
 @private
     AppStoreApi* _api;
     NSArray* _reviews;

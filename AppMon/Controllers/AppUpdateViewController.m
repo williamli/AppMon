@@ -99,13 +99,9 @@
     [self setLoaded:NO];
 }
 
-#pragma mark - JASectionedListViewDataSource
+#pragma mark - JAListViewDataSource
 
-- (NSUInteger)numberOfSectionsInListView:(JASectionedListView *)listView {
-    return 1;
-}
-
-- (NSUInteger)listView:(JASectionedListView *)listView numberOfViewsInSection:(NSUInteger)section {
+- (NSUInteger)numberOfItemsInListView:(JAListView *)listView {
     if (_loaded) {
         return [_reviews count];
     } else {
@@ -113,22 +109,12 @@
     }
 }
 
-- (JAListViewItem *)listView:(JAListView *)listView sectionHeaderViewForSection:(NSUInteger)section {
-    LoadingViewItem* item = [LoadingViewItem item];
-    [item.progressView startAnimation:self];
-    [item setHidden:!_loading];
-
-    if (!_loading) {
-        item.frame = CGRectZero;
-    }
-
-    return item;
-}
-
-- (JAListViewItem *)listView:(JAListView *)listView viewForSection:(NSUInteger)section index:(NSUInteger)index {
+- (JAListViewItem *)listView:(JAListView *)listView viewAtIndex:(NSUInteger)index {
     Review* review = [_reviews objectAtIndex:index];
     AppReviewViewCell* item = [AppReviewViewCell item];
     [item setReview:review];
+    [item sizeToFit];
+    NSLog(@"item size: %f,%f", item.frame.size.width, item.frame.size.height);
     return item;
 }
 

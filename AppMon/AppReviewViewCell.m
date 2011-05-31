@@ -6,6 +6,8 @@
 //  Copyright 2011年 Ignition Soft Limited. All rights reserved.
 //
 
+#import "NS(Attributed)String+Geometrics.h"
+
 #import "AppReviewViewCell.h"
 #import "Review.h"
 
@@ -16,6 +18,7 @@
 @implementation AppReviewViewCell
 
 @synthesize lblTitle=_lblTitle, lblMessage = _lblMessage, lblExtra = _lblExtra;
+@synthesize review=_review;
 
 + (AppReviewViewCell *) item {
     static NSNib *nib = nil;
@@ -56,12 +59,15 @@
 -(void) setReview:(Review*)aReview {
     if (![_review isEqual:aReview]) {
         [self.lblTitle setStringValue:aReview.title];        
-        [self.lblExtra setStringValue:[NSString stringWithFormat:@"by %@ - version %@ - %@", aReview.username, aReview.on_version, aReview.date]];
+        [self.lblExtra setStringValue:[NSString stringWithFormat:@"by %@ - version %@ - %@", 
+                                        aReview.username, aReview.on_version, aReview.date]];
         [self.lblMessage setStringValue:aReview.text];
+
     } else {
         [self.lblTitle setStringValue:@""];        
         [self.lblExtra setStringValue:@""];
-        [self.lblMessage setStringValue:@""];        
+        [self.lblMessage setStringValue:@""];
+
     }
 
     [_review release];
@@ -72,6 +78,23 @@
 - (void)drawRect:(NSRect)rect {
     [self drawBackground];
     [super drawRect:rect];
+}
+
+-(void) sizeToFit {
+    
+    CGFloat padding         = self.frame.size.height - self.lblTitle.frame.size.height - self.lblExtra.frame.size.height - self.lblTitle.frame.size.height;    
+    CGRect msgFrame         = [self.lblMessage frame];
+    CGFloat msgHeight       = [self.lblMessage.stringValue heightForWidth:msgFrame.size.width
+                                                                     font:[self.lblMessage font]];
+
+    msgFrame.size.height    = msgHeight;    
+    self.lblMessage.frame   = msgFrame;
+    
+    CGFloat cellHeight      = self.lblTitle.frame.size.height + self.lblExtra.frame.size.height + self.lblTitle.frame.size.height + padding;
+    self.frame              = CGRectMake(self.frame.origin.x, self.frame.origin.y, 
+                                         self.frame.size.width, cellHeight);
+
+
 }
 
 

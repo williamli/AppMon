@@ -71,6 +71,7 @@
 		54F6505F1393CFA3005FF9B7 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F6505E1393CFA3005FF9B7 /* Store.m */; };
 		54F7E47D1393F077007C8CCD /* AppMonMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F7E47B1393F076007C8CCD /* AppMonMainController.m */; };
 		54F7E4831393F6EA007C8CCD /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F7E4811393F6E9007C8CCD /* SearchViewController.m */; };
+		54FBE27D139523520069A2C0 /* NS(Attributed)String+Geometrics.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FBE26C139523520069A2C0 /* NS(Attributed)String+Geometrics.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +206,8 @@
 		54F7E47B1393F076007C8CCD /* AppMonMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppMonMainController.m; path = Controllers/AppMonMainController.m; sourceTree = "<group>"; };
 		54F7E4801393F6E9007C8CCD /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = Controllers/SearchViewController.h; sourceTree = "<group>"; };
 		54F7E4811393F6E9007C8CCD /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = Controllers/SearchViewController.m; sourceTree = "<group>"; };
+		54FBE26B139523520069A2C0 /* NS(Attributed)String+Geometrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NS(Attributed)String+Geometrics.h"; sourceTree = "<group>"; };
+		54FBE26C139523520069A2C0 /* NS(Attributed)String+Geometrics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NS(Attributed)String+Geometrics.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,6 +416,7 @@
 		546458EE1393932F0096466C /* External */ = {
 			isa = PBXGroup;
 			children = (
+				54FBE264139523520069A2C0 /* NS(Attributed)String+Geometrics */,
 				5422F21B1394E39C0044E982 /* JAListView */,
 				542698FF13948CDE0052EE8E /* SDWebImage */,
 				54CC03421393DCCE00F6DA6B /* XPathQuery */,
@@ -529,6 +533,16 @@
 				549FFC161394F849003321C5 /* AppUpdateViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		54FBE264139523520069A2C0 /* NS(Attributed)String+Geometrics */ = {
+			isa = PBXGroup;
+			children = (
+				54FBE26B139523520069A2C0 /* NS(Attributed)String+Geometrics.h */,
+				54FBE26C139523520069A2C0 /* NS(Attributed)String+Geometrics.m */,
+			);
+			name = "NS(Attributed)String+Geometrics";
+			path = "External/NS(Attributed)String+Geometrics";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -684,6 +698,7 @@
 				549FFC171394F849003321C5 /* AppUpdateViewController.m in Sources */,
 				549FFC1C1394FAFB003321C5 /* LoadingViewItem.m in Sources */,
 				549FFC211394FF99003321C5 /* AppReviewViewCell.m in Sources */,
+				54FBE27D139523520069A2C0 /* NS(Attributed)String+Geometrics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

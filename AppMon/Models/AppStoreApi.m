@@ -159,8 +159,7 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
     if ([req responseStatusCode] == 200) {
         NSPropertyListFormat format;
         NSString *errorDesc;
-        
-        NSLog(@"plist results: %@", [req responseString]);
+
         NSDictionary* dictionary = [NSPropertyListSerialization propertyListFromData:[req responseData]
                                                                     mutabilityOption:NSPropertyListImmutable
                                                                               format:&format
