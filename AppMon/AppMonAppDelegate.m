@@ -11,10 +11,21 @@
 @implementation AppMonAppDelegate
 
 @synthesize window, mainController;
+@synthesize appService;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    self.appService = [[[AppService alloc] init] autorelease];
+    
     window.titleBarHeight = 45.0;
     [window.titleBarView addSubview:mainController.titleBar];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification {
+    self.appService = nil;
+}
+
++(AppMonAppDelegate*) instance {
+    return (AppMonAppDelegate*) [NSApplication sharedApplication].delegate;
 }
 
 @end

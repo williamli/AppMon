@@ -17,6 +17,8 @@
 
 -(void) unfollow:(App*)app;
 
+-(BOOL) isFollowed:(App*)app;
+
 -(NSArray*) followedApps;
 
 @end

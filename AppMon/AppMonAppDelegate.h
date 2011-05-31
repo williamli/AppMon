@@ -9,13 +9,18 @@
 #import <Cocoa/Cocoa.h>
 #import "AppMonMainController.h"
 #import "INAppStoreWindow.h"
+#import "AppService.h"
 
 @interface AppMonAppDelegate : NSObject <NSApplicationDelegate> {
 @private
     INAppStoreWindow *window;
 }
 
+@property (nonatomic, retain) AppService* appService;
+
 @property (assign) IBOutlet INAppStoreWindow *window;
 @property (retain) IBOutlet AppMonMainController* mainController;
+
++(AppMonAppDelegate*) instance;
 
 @end

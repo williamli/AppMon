@@ -8,6 +8,7 @@
 
 #import "AppViewController.h"
 #import "UIImageView+WebCache.h"
+#import "AppMonAppDelegate.h"
 
 @implementation AppViewController
 
@@ -33,10 +34,17 @@
 
 -(IBAction) followApp:(id)sender {
     NSLog(@"Follow The App: %@", self.app);
+
+    AppService* appService = [AppMonAppDelegate instance].appService;
+    [appService follow:self.app];
+    [self setFollowed:YES];
 }
 
 -(IBAction) unfollowApp:(id)sender {
     NSLog(@"Unfollow The App: %@", self.app);
+    AppService* appService = [AppMonAppDelegate instance].appService;
+    [appService unfollow:self.app];
+    [self setFollowed:NO];
 }
 
 -(void) setApp:(App*)newApp {
@@ -53,8 +61,13 @@
     [self.lblDate setStringValue:[dateFormatter stringFromDate:self.app.releaseDate]];
     [dateFormatter release];
     
-    // TODO Update Follow/Unfollow button
+    AppService* appService = [AppMonAppDelegate instance].appService;
+    [self setFollowed:[appService isFollowed:newApp]];
 }
 
+-(void) setFollowed:(BOOL)isFollowed {
+    [self.btnFollow setHidden:isFollowed];
+    [self.btnUnfollow setHidden:!isFollowed];
+}
 
 @end

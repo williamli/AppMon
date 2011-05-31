@@ -42,6 +42,10 @@
     return _apps;
 }
 
+-(BOOL) isFollowed:(App*)app {
+    return [_apps containsObject:app];
+}
+
 @end
 
 @implementation AppService (Persistence)

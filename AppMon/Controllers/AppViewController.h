@@ -28,5 +28,6 @@
 -(IBAction) unfollowApp:(id)sender;
 
 -(void) setApp:(App*)app;
+-(void) setFollowed:(BOOL)isFollowed;
 
 @end
