@@ -15,7 +15,6 @@
 
 @interface AppSearchResultItem (Private)
 - (void)drawBackground;
--(void) setFollowed:(BOOL)isFollowed;
 @property (nonatomic, readonly) NSGradient *gradient;
 @end
 

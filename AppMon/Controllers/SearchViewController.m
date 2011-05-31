@@ -10,6 +10,8 @@
 #import "AppViewController.h"
 #import "AppSearchResultItem.h"
 #import "AppSearchHeaderItem.h"
+#import "AppMonAppDelegate.h"
+#import "AppService.h"
 
 @interface SearchViewController (Private)
 -(void) searchDidFinished:(NSArray*)results;
@@ -102,6 +104,29 @@
     NSLog(@"search failed: %@", error);
 }
 
+#pragma mark - Actions
+
+-(void) follow:(id)sender {
+    AppSearchResultItem* item = (AppSearchResultItem*) [sender superview];
+    AppService* appService = [AppMonAppDelegate instance].appService;
+    
+    NSLog(@"Follow App: %@", item.app);
+    [appService follow:item.app];
+    [item setFollowed:YES];
+    [item setNeedsDisplay:YES];
+}
+
+-(void) unfollow:(id)sender {
+    AppSearchResultItem* item = (AppSearchResultItem*)  [sender superview];
+
+    AppService* appService = [AppMonAppDelegate instance].appService;
+
+    NSLog(@"Unfollow App: %@", item.app);
+    [appService unfollow:item.app];
+    [item setFollowed:NO];
+    [item setNeedsDisplay:YES];
+}
+
 #pragma mark - JASectionedListViewDataSource
 
 - (NSUInteger)numberOfSectionsInListView:(JASectionedListView *)listView {
@@ -123,6 +148,11 @@
     AppSearchResultItem* item = [AppSearchResultItem item];
     App* app = [results objectAtIndex:index];
     [item setApp:app];
+    [item.btnFollow setTarget:self];
+    [item.btnFollow setAction:@selector(follow:)];    
+    [item.btnUnfollow setTarget:self];
+    [item.btnUnfollow setAction:@selector(unfollow:)];
+    
     return item;
 }
 

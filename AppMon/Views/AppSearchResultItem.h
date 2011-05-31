@@ -25,4 +25,6 @@
 
 + (AppSearchResultItem *) item;
 
+-(void) setFollowed:(BOOL)isFollowed;
+
 @end

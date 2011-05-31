@@ -76,7 +76,7 @@
 								<int key="NSfFlags">1044</int>
 							</object>
 							<int key="NSAlign">0</int>
-							<int key="NSScale">0</int>
+							<int key="NSScale">2</int>
 							<int key="NSStyle">0</int>
 							<bool key="NSAnimates">NO</bool>
 						</object>
@@ -88,7 +88,6 @@
 						<string key="NSFrame">{{75, 34}, {120, 13}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="685832267">
