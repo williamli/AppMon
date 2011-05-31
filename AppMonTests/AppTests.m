@@ -33,9 +33,9 @@
     app2.itemId = @"12346";    
     
     STAssertFalse([app1 isEqual:app2], @"should not be equal");
-    
-    
     app2.itemId = @"12345";
     STAssertTrue([app1 isEqual:app2], @"should be equal");
+    
+    STAssertFalse([app1 isEqual:@"AAA"], @"should not be equal");
 }
 @end
