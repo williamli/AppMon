@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "SearchViewController.h"
+#import "AppListViewController.h"
 
 //  Top level controller that handle main window logic, it delegate jobs to underlying 
 //  controllers (SearchViewController, AppListViewController)
@@ -24,6 +25,7 @@
 @property (nonatomic, retain) IBOutlet NSSplitView* splitView;
 
 @property (nonatomic, retain) IBOutlet SearchViewController* searchController;
+@property (nonatomic, retain) IBOutlet AppListViewController* appListViewController;
 
 // begin search app store using text in searchField
 -(IBAction) performSearch:(id)sender;

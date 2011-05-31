@@ -15,7 +15,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     self.appService = [[[AppService alloc] init] autorelease];
-    
+    [self.appService load];
+    [self.mainController.appListViewController.listApps reloadData];
+
     window.titleBarHeight = 45.0;
     [window.titleBarView addSubview:mainController.titleBar];
 }

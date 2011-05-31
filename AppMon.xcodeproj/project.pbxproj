@@ -16,6 +16,9 @@
 		5426995013948E670052EE8E /* app_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5426994F13948E670052EE8E /* app_default.png */; };
 		54269953139496110052EE8E /* AppService.m in Sources */ = {isa = PBXBuildFile; fileRef = 54269952139496110052EE8E /* AppService.m */; };
 		5426995A139497ED0052EE8E /* AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54269959139497ED0052EE8E /* AppTests.m */; };
+		5426995E1394C2280052EE8E /* AppListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5426995C1394C2270052EE8E /* AppListViewController.m */; };
+		542699621394C5930052EE8E /* AppListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 542699611394C5930052EE8E /* AppListViewCell.m */; };
+		542699641394C5A80052EE8E /* AppListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542699631394C5A80052EE8E /* AppListViewCell.xib */; };
 		546458BB139391C20096466C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546458BA139391C20096466C /* Cocoa.framework */; };
 		546458C5139391C30096466C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 546458C3139391C30096466C /* InfoPlist.strings */; };
 		546458C8139391C30096466C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 546458C7139391C30096466C /* main.m */; };
@@ -100,6 +103,11 @@
 		54269952139496110052EE8E /* AppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppService.m; path = Models/AppService.m; sourceTree = "<group>"; };
 		54269958139497ED0052EE8E /* AppTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppTests.h; sourceTree = "<group>"; };
 		54269959139497ED0052EE8E /* AppTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppTests.m; sourceTree = "<group>"; };
+		5426995B1394C2270052EE8E /* AppListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppListViewController.h; path = Controllers/AppListViewController.h; sourceTree = "<group>"; };
+		5426995C1394C2270052EE8E /* AppListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppListViewController.m; path = Controllers/AppListViewController.m; sourceTree = "<group>"; };
+		542699601394C5930052EE8E /* AppListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppListViewCell.h; path = Views/AppListViewCell.h; sourceTree = "<group>"; };
+		542699611394C5930052EE8E /* AppListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppListViewCell.m; path = Views/AppListViewCell.m; sourceTree = "<group>"; };
+		542699631394C5A80052EE8E /* AppListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppListViewCell.xib; path = Views/AppListViewCell.xib; sourceTree = "<group>"; };
 		546458B6139391C20096466C /* AppMon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		546458BA139391C20096466C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		546458BD139391C30096466C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -238,6 +246,9 @@
 			isa = PBXGroup;
 			children = (
 				546458CF139391C30096466C /* MainMenu.xib */,
+				542699601394C5930052EE8E /* AppListViewCell.h */,
+				542699611394C5930052EE8E /* AppListViewCell.m */,
+				542699631394C5A80052EE8E /* AppListViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -529,6 +540,8 @@
 				54F7E47B1393F076007C8CCD /* AppMonMainController.m */,
 				54F7E4801393F6E9007C8CCD /* SearchViewController.h */,
 				54F7E4811393F6E9007C8CCD /* SearchViewController.m */,
+				5426995B1394C2270052EE8E /* AppListViewController.h */,
+				5426995C1394C2270052EE8E /* AppListViewController.m */,
 				542698FA1394882E0052EE8E /* AppViewController.h */,
 				542698FB1394882E0052EE8E /* AppViewController.m */,
 				542698FC1394882E0052EE8E /* AppViewController.xib */,
@@ -613,6 +626,7 @@
 				54B7C6FE1393A8A300AE8EDD /* angry.plist in Resources */,
 				542698FE1394882E0052EE8E /* AppViewController.xib in Resources */,
 				5426995013948E670052EE8E /* app_default.png in Resources */,
+				542699641394C5A80052EE8E /* AppListViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,6 +699,8 @@
 				5426994C13948CDE0052EE8E /* SDWebImageManager.m in Sources */,
 				5426994D13948CDE0052EE8E /* UIImageView+WebCache.m in Sources */,
 				54269953139496110052EE8E /* AppService.m in Sources */,
+				5426995E1394C2280052EE8E /* AppListViewController.m in Sources */,
+				542699621394C5930052EE8E /* AppListViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

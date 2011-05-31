@@ -14,6 +14,7 @@
 @synthesize titleBar, searchField;
 @synthesize searchView, splitView;
 @synthesize searchController;
+@synthesize appListViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
