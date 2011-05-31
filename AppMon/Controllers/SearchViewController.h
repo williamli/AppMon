@@ -8,15 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "BCCollectionView.h"
 #import "AppStoreApi.h"
 
 //  Handle search actions and response
-@interface SearchViewController : NSViewController {
+@interface SearchViewController : NSViewController <BCCollectionViewDelegate> {
     AppStoreApi* api;
 }
 
+@property (nonatomic, retain) IBOutlet NSScrollView* searchScrollView;
 @property (nonatomic, retain) IBOutlet NSProgressIndicator* progressIndicator;
 @property (nonatomic, retain) IBOutlet NSTextField* txtProgress;
+@property (nonatomic, retain) IBOutlet BCCollectionView* searchResultCollectionView;
+
 @property (nonatomic, retain) AppStoreApi* api;
 
 -(void) setLoading:(BOOL)isLoading;

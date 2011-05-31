@@ -7,6 +7,7 @@
 //
 
 #import "SearchViewController.h"
+#import "AppViewController.h"
 
 @interface SearchViewController (Private)
 -(void) searchDidFinished:(NSArray*)results;
@@ -15,7 +16,7 @@
 
 @implementation SearchViewController
 
-@synthesize progressIndicator, txtProgress, api;
+@synthesize searchScrollView, progressIndicator, txtProgress, searchResultCollectionView, api;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +35,9 @@
 
 -(void) awakeFromNib {
     [super awakeFromNib];
+    
     self.api = [[[AppStoreApi alloc] init] autorelease];
+    [self.searchScrollView setDocumentView:self.searchResultCollectionView];
 }
 
 #pragma mark - Public
@@ -48,6 +51,7 @@
     
     [self.progressIndicator setHidden:!isLoading];
     [self.txtProgress setHidden:!isLoading];
+    [self.searchResultCollectionView setHidden:isLoading];
 }
 
 -(void) search:(NSString*)query {
@@ -77,10 +81,42 @@
 
 -(void) searchDidFinished:(NSArray*)results {
     NSLog(@"search finished: %@", results);
+    [self.searchResultCollectionView reloadDataWithItems:results emptyCaches:YES];
 }
 
 -(void) searchDidFailed:(NSError*)error {
     NSLog(@"search failed: %@", error);
+}
+
+#pragma mark - BCCollectionViewDelegate
+
+//CollectionView assumes all cells aer the same size and will resize its subviews to this size.
+- (NSSize)cellSizeForCollectionView:(BCCollectionView *)collectionView {
+    return NSMakeSize(220, 80);
+}
+
+//Return an empty ViewController, this might not be visible to the user immediately
+- (NSViewController *)reusableViewControllerForCollectionView:(BCCollectionView *)collectionView {
+    return [[[AppViewController alloc] initWithNibName:@"AppViewController" bundle:nil] autorelease];
+}
+
+//The CollectionView is about to display the ViewController. Use this method to populate the ViewController with data
+- (void)collectionView:(BCCollectionView *)collectionView willShowViewController:(NSViewController *)viewController forItem:(id)anItem {
+    App* app = (App*) anItem;
+    AppViewController* appController = (AppViewController*) viewController;
+    [appController setApp:app];
+}
+
+- (NSSize)insetMarginForSelectingItemsInCollectionView:(BCCollectionView *)collectionView {
+    return NSMakeSize(0, 0);
+}
+
+- (BOOL)collectionViewShouldDrawSelections:(BCCollectionView *)collectionView {
+    return NO;
+}
+
+- (BOOL)collectionViewShouldDrawHover:(BCCollectionView *)collectionView {
+    return YES;
 }
 
 @end

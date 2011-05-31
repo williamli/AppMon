@@ -231,6 +231,7 @@
 		542698F8139487FD0052EE8E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				546458CF139391C30096466C /* MainMenu.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -323,7 +324,6 @@
 				542698F8139487FD0052EE8E /* Views */,
 				546458CC139391C30096466C /* AppMonAppDelegate.h */,
 				546458CD139391C30096466C /* AppMonAppDelegate.m */,
-				546458CF139391C30096466C /* MainMenu.xib */,
 			);
 			path = AppMon;
 			sourceTree = "<group>";
