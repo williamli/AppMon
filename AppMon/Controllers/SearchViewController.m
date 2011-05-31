@@ -17,6 +17,7 @@
 @implementation SearchViewController
 
 @synthesize searchScrollView, progressIndicator, txtProgress, searchResultCollectionView, api;
+@synthesize searchNotFoundView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,13 +43,17 @@
 
 #pragma mark - Public
 
+-(void) setNotFound:(BOOL)isNotFound {
+    [self.searchNotFoundView setHidden:!isNotFound];
+    [self.searchScrollView setHidden:isNotFound];
+}
+
 -(void) setLoading:(BOOL)isLoading {
     if (isLoading) {
         [self.progressIndicator startAnimation:self];
     } else {
         [self.progressIndicator stopAnimation:self];
     }
-    
     [self.progressIndicator setHidden:!isLoading];
     [self.txtProgress setHidden:!isLoading];
     [self.searchResultCollectionView setHidden:isLoading];
@@ -80,8 +85,14 @@
 #pragma mark - Private
 
 -(void) searchDidFinished:(NSArray*)results {
-    NSLog(@"search finished: %@", results);
-    [self.searchResultCollectionView reloadDataWithItems:results emptyCaches:YES];
+    if ([results count] == 0) {
+        NSLog(@"no search result");
+        [self setNotFound:YES];
+    } else {
+        NSLog(@"search finished: %@", results);
+        [self setNotFound:NO];
+        [self.searchResultCollectionView reloadDataWithItems:results emptyCaches:YES];
+    }
 }
 
 -(void) searchDidFailed:(NSError*)error {

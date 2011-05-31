@@ -16,12 +16,15 @@
     AppStoreApi* api;
 }
 
+@property (nonatomic, retain) IBOutlet NSView* searchNotFoundView;
 @property (nonatomic, retain) IBOutlet NSScrollView* searchScrollView;
 @property (nonatomic, retain) IBOutlet NSProgressIndicator* progressIndicator;
 @property (nonatomic, retain) IBOutlet NSTextField* txtProgress;
 @property (nonatomic, retain) IBOutlet BCCollectionView* searchResultCollectionView;
 
 @property (nonatomic, retain) AppStoreApi* api;
+
+-(void) setNotFound:(BOOL)isNotFound;
 
 -(void) setLoading:(BOOL)isLoading;
 
