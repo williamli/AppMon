@@ -91,7 +91,7 @@
 
 -(BOOL) isEqual:(id)object {
     if ([object respondsToSelector:@selector(itemId)] && self.itemId) {
-        return [self itemId] == [object itemId];        
+        return [[self itemId] isEqual:[object itemId]];        
     } else {
         return NO;
     }
