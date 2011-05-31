@@ -58,6 +58,7 @@
 		549FFC0F1394EC89003321C5 /* AppSearchResultItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FFC0E1394EC89003321C5 /* AppSearchResultItem.m */; };
 		549FFC111394EE20003321C5 /* AppSearchHeaderItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549FFC101394EE1F003321C5 /* AppSearchHeaderItem.xib */; };
 		549FFC141394EE30003321C5 /* AppSearchHeaderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FFC131394EE30003321C5 /* AppSearchHeaderItem.m */; };
+		549FFC171394F849003321C5 /* AppUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FFC161394F849003321C5 /* AppUpdateViewController.m */; };
 		54B7C6FE1393A8A300AE8EDD /* angry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C6FD1393A8A300AE8EDD /* angry.plist */; };
 		54B7C7161393B75B00AE8EDD /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */; };
 		54B7C7181393B7D600AE8EDD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B7C7171393B7D600AE8EDD /* libicucore.dylib */; };
@@ -179,6 +180,8 @@
 		549FFC101394EE1F003321C5 /* AppSearchHeaderItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppSearchHeaderItem.xib; sourceTree = "<group>"; };
 		549FFC121394EE30003321C5 /* AppSearchHeaderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSearchHeaderItem.h; sourceTree = "<group>"; };
 		549FFC131394EE30003321C5 /* AppSearchHeaderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSearchHeaderItem.m; sourceTree = "<group>"; };
+		549FFC151394F849003321C5 /* AppUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppUpdateViewController.h; path = Controllers/AppUpdateViewController.h; sourceTree = "<group>"; };
+		549FFC161394F849003321C5 /* AppUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppUpdateViewController.m; path = Controllers/AppUpdateViewController.m; sourceTree = "<group>"; };
 		54B7C6FD1393A8A300AE8EDD /* angry.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = angry.plist; sourceTree = "<group>"; };
 		54B7C70A1393B75B00AE8EDD /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
@@ -506,6 +509,8 @@
 				54F7E4811393F6E9007C8CCD /* SearchViewController.m */,
 				5426995B1394C2270052EE8E /* AppListViewController.h */,
 				5426995C1394C2270052EE8E /* AppListViewController.m */,
+				549FFC151394F849003321C5 /* AppUpdateViewController.h */,
+				549FFC161394F849003321C5 /* AppUpdateViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -658,6 +663,7 @@
 				5422F3721394E39D0044E982 /* NSIndexPath+JAListViewExtensions.m in Sources */,
 				549FFC0F1394EC89003321C5 /* AppSearchResultItem.m in Sources */,
 				549FFC141394EE30003321C5 /* AppSearchHeaderItem.m in Sources */,
+				549FFC171394F849003321C5 /* AppUpdateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
