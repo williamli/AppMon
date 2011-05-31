@@ -13,6 +13,7 @@
 @interface AppListViewCell : JAListViewItem {
 @private
     NSGradient *gradient;
+    NSGradient *selectedGradient;
 }
 
 @property (nonatomic, retain) App* app;

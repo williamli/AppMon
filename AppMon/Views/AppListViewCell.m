@@ -14,6 +14,7 @@
 - (void)drawBackground;
 
 @property (nonatomic, readonly) NSGradient *gradient;
+@property (nonatomic, readonly) NSGradient *selectedGradient;
 @end
 
 @implementation AppListViewCell
@@ -42,6 +43,12 @@
 
 - (void)dealloc
 {
+    [selectedGradient release];
+    selectedGradient = nil;
+
+    [gradient release];
+    gradient = nil;
+    
     self.app = nil;
     [super dealloc];
 }
@@ -91,7 +98,11 @@
 #pragma mark - Private
 
 - (void)drawBackground {
-    [self.gradient drawInRect:self.bounds angle:self.selected ? 270.0f : 90.0f];
+    if (self.selected) {
+        [self.selectedGradient drawInRect:self.bounds angle:270.0f];
+    } else {
+        [self.gradient drawInRect:self.bounds angle:90.0f];
+    }
     
     [[NSColor colorWithDeviceWhite:0.5f alpha:1.0f] set];
     NSRectFill(NSMakeRect(0.0f, 0.0f, self.bounds.size.width, 1.0f));
@@ -102,10 +113,18 @@
 
 - (NSGradient *)gradient {
     if(gradient == nil) {
-        gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.8f alpha:1.0f] endingColor:[NSColor colorWithDeviceWhite:0.85f alpha:1.0f]];
-    }
-    
+        gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.8f alpha:1.0f] 
+                                                 endingColor:[NSColor colorWithDeviceWhite:0.85f alpha:1.0f]];
+    }    
     return gradient;
+}
+
+- (NSGradient*) selectedGradient {
+    if (selectedGradient == nil) {
+        selectedGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.92f alpha:1.0f] 
+                                                 endingColor:[NSColor colorWithDeviceWhite:0.97f alpha:1.0f]];
+    }
+    return selectedGradient;
 }
 
 @end

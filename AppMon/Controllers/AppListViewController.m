@@ -47,20 +47,6 @@
     }
 }
 
-- (void)listView:(JAListView *)list didSelectView:(JAListViewItem *)view {
-    if(list == self.listApps) {
-        AppListViewCell* cell = (AppListViewCell *) view;
-        cell.selected = NO;
-    }
-}
-
-- (void)listView:(JAListView *)list didUnSelectView:(JAListViewItem *)view {
-    if(list == self.listApps) {
-        AppListViewCell* cell = (AppListViewCell *) view;
-        cell.selected = NO;
-    }
-}
-
 #pragma mark - JAListViewDataSource
 
 - (NSUInteger)numberOfItemsInListView:(JAListView *)listView {
