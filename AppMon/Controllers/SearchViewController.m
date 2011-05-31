@@ -8,6 +8,8 @@
 
 #import "SearchViewController.h"
 #import "AppViewController.h"
+#import "AppSearchResultItem.h"
+#import "AppSearchHeaderItem.h"
 
 @interface SearchViewController (Private)
 -(void) searchDidFinished:(NSArray*)results;
@@ -16,7 +18,7 @@
 
 @implementation SearchViewController
 
-@synthesize searchScrollView, progressIndicator, searchResultCollectionView, api;
+@synthesize searchScrollView, progressIndicator, searchResultList, api, results;
 @synthesize searchNotFoundView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,6 +33,7 @@
 - (void)dealloc
 {
     self.api = nil;
+    self.results = nil;
     [super dealloc];
 }
 
@@ -38,7 +41,6 @@
     [super awakeFromNib];
     
     self.api = [[[AppStoreApi alloc] init] autorelease];
-    [self.searchScrollView setDocumentView:self.searchResultCollectionView];
 }
 
 #pragma mark - Public
@@ -49,13 +51,14 @@
 }
 
 -(void) setLoading:(BOOL)isLoading {
+    _loading = isLoading;
     if (isLoading) {
         [self.progressIndicator startAnimation:self];
     } else {
         [self.progressIndicator stopAnimation:self];
     }
     [self.progressIndicator setHidden:!isLoading];
-    [self.searchResultCollectionView setHidden:isLoading];
+    [self.searchResultList setHidden:isLoading];
 }
 
 -(void) search:(NSString*)query {
@@ -83,14 +86,15 @@
 
 #pragma mark - Private
 
--(void) searchDidFinished:(NSArray*)results {
-    if ([results count] == 0) {
+-(void) searchDidFinished:(NSArray*)theResults {
+    if ([theResults count] == 0) {
         NSLog(@"no search result");
         [self setNotFound:YES];
     } else {
-        NSLog(@"search finished: %@", results);
+        NSLog(@"search finished: %@", theResults);
         [self setNotFound:NO];
-        [self.searchResultCollectionView reloadDataWithItems:results emptyCaches:YES];
+        self.results = theResults;
+        [self.searchResultList reloadDataAnimated:YES];
     }
 }
 
@@ -98,35 +102,29 @@
     NSLog(@"search failed: %@", error);
 }
 
-#pragma mark - BCCollectionViewDelegate
+#pragma mark - JASectionedListViewDataSource
 
-//CollectionView assumes all cells aer the same size and will resize its subviews to this size.
-- (NSSize)cellSizeForCollectionView:(BCCollectionView *)collectionView {
-    return NSMakeSize(220, 80);
+- (NSUInteger)numberOfSectionsInListView:(JASectionedListView *)listView {
+    return 1;
 }
 
-//Return an empty ViewController, this might not be visible to the user immediately
-- (NSViewController *)reusableViewControllerForCollectionView:(BCCollectionView *)collectionView {
-    return [[[AppViewController alloc] initWithNibName:@"AppViewController" bundle:nil] autorelease];
+- (NSUInteger)listView:(JASectionedListView *)listView numberOfViewsInSection:(NSUInteger)section {
+    return [results count];
 }
 
-//The CollectionView is about to display the ViewController. Use this method to populate the ViewController with data
-- (void)collectionView:(BCCollectionView *)collectionView willShowViewController:(NSViewController *)viewController forItem:(id)anItem {
-    App* app = (App*) anItem;
-    AppViewController* appController = (AppViewController*) viewController;
-    [appController setApp:app];
+- (JAListViewItem *)listView:(JAListView *)listView sectionHeaderViewForSection:(NSUInteger)section {
+    AppSearchHeaderItem* item = [AppSearchHeaderItem item];
+    [item.lblMessage setStringValue:[NSString stringWithFormat:@"%d search result loaded", [results count]]];
+    [item setHidden:_loading];
+    return item;
 }
 
-- (NSSize)insetMarginForSelectingItemsInCollectionView:(BCCollectionView *)collectionView {
-    return NSMakeSize(0, 0);
+- (JAListViewItem *)listView:(JAListView *)listView viewForSection:(NSUInteger)section index:(NSUInteger)index {
+    AppSearchResultItem* item = [AppSearchResultItem item];
+    App* app = [results objectAtIndex:index];
+    [item setApp:app];
+    return item;
 }
 
-- (BOOL)collectionViewShouldDrawSelections:(BCCollectionView *)collectionView {
-    return NO;
-}
-
-- (BOOL)collectionViewShouldDrawHover:(BCCollectionView *)collectionView {
-    return YES;
-}
 
 @end

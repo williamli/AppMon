@@ -1,27 +1,33 @@
 //
-//  AppListViewCell.m
+//  AppSearchResultItem.m
 //  AppMon
 //
 //  Created by Francis Chong on 11年5月31日.
 //  Copyright 2011年 Ignition Soft Limited. All rights reserved.
 //
 
-#import "AppListViewCell.h"
+#import "AppSearchResultItem.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface AppListViewCell (Private)
-- (void)drawBackground;
+#import "AppMonAppDelegate.h"
+#import "AppService.h"
 
+@interface AppSearchResultItem (Private)
+- (void)drawBackground;
+-(void) setFollowed:(BOOL)isFollowed;
 @property (nonatomic, readonly) NSGradient *gradient;
 @end
 
-@implementation AppListViewCell
 
-@synthesize lblTitle=_lblTitle, lblDate=_lblDate, imgThumbnail=_imgThumbnail, backgroundView=_backgroundView;
+@implementation AppSearchResultItem
+
 @synthesize app=_app;
 
-+ (AppListViewCell *) appListViewCell {
+@synthesize lblTitle=_lblTitle, lblDate=_lblDate, imgThumbnail=_imgThumbnail, 
+    btnFollow=_btnFollow, btnUnfollow=_btnUnfollow, backgroundView=_backgroundView;
+
++ (AppSearchResultItem *) item {
     static NSNib *nib = nil;
     if(nib == nil) {
         nib = [[NSNib alloc] initWithNibNamed:NSStringFromClass(self) bundle:nil];
@@ -39,17 +45,10 @@
     return nil;
 }
 
-
 - (void)dealloc
 {
     self.app = nil;
     [super dealloc];
-}
-
--(void) awakeFromNib {
-    [super awakeFromNib];
-    
-    [self addSubview:self.imgThumbnail positioned:NSWindowAbove relativeTo:self.backgroundView];
 }
 
 -(void) setApp:(App*)newApp {
@@ -67,6 +66,10 @@
         [dateFormatter setDateStyle:NSDateFormatterShortStyle];    
         [self.lblDate setStringValue:[dateFormatter stringFromDate:self.app.releaseDate]];
         [dateFormatter release];
+        
+        AppService* appService = [AppMonAppDelegate instance].appService;
+        [self setFollowed:[appService isFollowed:newApp]];
+
     } else if (newApp == nil) {
         [_app release];
         _app = [newApp retain];
@@ -87,12 +90,16 @@
     self.imgThumbnail.layer.cornerRadius = 10.0;
 }
 
+-(void) setFollowed:(BOOL)isFollowed {
+    [self.btnFollow setHidden:isFollowed];
+    [self.btnUnfollow setHidden:!isFollowed];
+}
 
 #pragma mark - Private
 
 - (void)drawBackground {
-    [self.gradient drawInRect:self.bounds angle:self.selected ? 270.0f : 90.0f];
-    
+    [self.gradient drawInRect:self.bounds angle:90.0f];
+
     [[NSColor colorWithDeviceWhite:0.5f alpha:1.0f] set];
     NSRectFill(NSMakeRect(0.0f, 0.0f, self.bounds.size.width, 1.0f));
     
@@ -102,7 +109,8 @@
 
 - (NSGradient *)gradient {
     if(gradient == nil) {
-        gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.8f alpha:1.0f] endingColor:[NSColor colorWithDeviceWhite:0.85f alpha:1.0f]];
+        gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.95 alpha:1.0f] 
+                                                 endingColor:[NSColor colorWithDeviceWhite:1.0f alpha:1.0f]];
     }
     
     return gradient;

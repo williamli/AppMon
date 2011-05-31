@@ -7,21 +7,24 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-#import "BCCollectionView.h"
+#import "JASectionedListView.h"
+#import "JAListView.h"
 #import "AppStoreApi.h"
 
 //  Handle search actions and response
-@interface SearchViewController : NSViewController <BCCollectionViewDelegate> {
-    AppStoreApi* api;
+@interface SearchViewController : NSViewController <JAListViewDelegate, JASectionedListViewDataSource> {
+@private
+    BOOL _loading;
+    
 }
 
 @property (nonatomic, retain) IBOutlet NSView* searchNotFoundView;
 @property (nonatomic, retain) IBOutlet NSScrollView* searchScrollView;
 @property (nonatomic, retain) IBOutlet NSProgressIndicator* progressIndicator;
-@property (nonatomic, retain) IBOutlet BCCollectionView* searchResultCollectionView;
+@property (nonatomic, retain) IBOutlet JASectionedListView* searchResultList;
 
 @property (nonatomic, retain) AppStoreApi* api;
+@property (nonatomic, retain) NSArray* results;
 
 -(void) setNotFound:(BOOL)isNotFound;
 

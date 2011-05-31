@@ -68,6 +68,10 @@
 		54645BC713939EC40096466C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC513939EC40096466C /* Quartz.framework */; };
 		54645BC813939EC40096466C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC613939EC40096466C /* QuartzCore.framework */; };
 		54645BCA13939EFA0096466C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC913939EFA0096466C /* libz.dylib */; };
+		549FFC0B1394EBE8003321C5 /* AppSearchResultItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549FFC0A1394EBE8003321C5 /* AppSearchResultItem.xib */; };
+		549FFC0F1394EC89003321C5 /* AppSearchResultItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FFC0E1394EC89003321C5 /* AppSearchResultItem.m */; };
+		549FFC111394EE20003321C5 /* AppSearchHeaderItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549FFC101394EE1F003321C5 /* AppSearchHeaderItem.xib */; };
+		549FFC141394EE30003321C5 /* AppSearchHeaderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FFC131394EE30003321C5 /* AppSearchHeaderItem.m */; };
 		54B7C6FE1393A8A300AE8EDD /* angry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C6FD1393A8A300AE8EDD /* angry.plist */; };
 		54B7C7161393B75B00AE8EDD /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */; };
 		54B7C7181393B7D600AE8EDD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B7C7171393B7D600AE8EDD /* libicucore.dylib */; };
@@ -216,6 +220,12 @@
 		54645BC513939EC40096466C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		54645BC613939EC40096466C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		54645BC913939EFA0096466C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		549FFC0A1394EBE8003321C5 /* AppSearchResultItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppSearchResultItem.xib; sourceTree = "<group>"; };
+		549FFC0D1394EC89003321C5 /* AppSearchResultItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSearchResultItem.h; path = Views/AppSearchResultItem.h; sourceTree = "<group>"; };
+		549FFC0E1394EC89003321C5 /* AppSearchResultItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSearchResultItem.m; path = Views/AppSearchResultItem.m; sourceTree = "<group>"; };
+		549FFC101394EE1F003321C5 /* AppSearchHeaderItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppSearchHeaderItem.xib; sourceTree = "<group>"; };
+		549FFC121394EE30003321C5 /* AppSearchHeaderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSearchHeaderItem.h; sourceTree = "<group>"; };
+		549FFC131394EE30003321C5 /* AppSearchHeaderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSearchHeaderItem.m; sourceTree = "<group>"; };
 		54B7C6FD1393A8A300AE8EDD /* angry.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = angry.plist; sourceTree = "<group>"; };
 		54B7C70A1393B75B00AE8EDD /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
@@ -291,6 +301,12 @@
 				542699601394C5930052EE8E /* AppListViewCell.h */,
 				542699611394C5930052EE8E /* AppListViewCell.m */,
 				542699631394C5A80052EE8E /* AppListViewCell.xib */,
+				549FFC0D1394EC89003321C5 /* AppSearchResultItem.h */,
+				549FFC0E1394EC89003321C5 /* AppSearchResultItem.m */,
+				549FFC0A1394EBE8003321C5 /* AppSearchResultItem.xib */,
+				549FFC121394EE30003321C5 /* AppSearchHeaderItem.h */,
+				549FFC131394EE30003321C5 /* AppSearchHeaderItem.m */,
+				549FFC101394EE1F003321C5 /* AppSearchHeaderItem.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -670,6 +686,8 @@
 				542698FE1394882E0052EE8E /* AppViewController.xib in Resources */,
 				5426995013948E670052EE8E /* app_default.png in Resources */,
 				542699641394C5A80052EE8E /* AppListViewCell.xib in Resources */,
+				549FFC0B1394EBE8003321C5 /* AppSearchResultItem.xib in Resources */,
+				549FFC111394EE20003321C5 /* AppSearchHeaderItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,6 +768,8 @@
 				5422F36F1394E39D0044E982 /* JAObjectListViewItem.m in Sources */,
 				5422F3701394E39D0044E982 /* JASectionedListView.m in Sources */,
 				5422F3721394E39D0044E982 /* NSIndexPath+JAListViewExtensions.m in Sources */,
+				549FFC0F1394EC89003321C5 /* AppSearchResultItem.m in Sources */,
+				549FFC141394EE30003321C5 /* AppSearchHeaderItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
