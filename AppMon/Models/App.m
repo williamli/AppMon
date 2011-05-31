@@ -33,6 +33,11 @@
         
         NSArray* artworkUrls = [plist objectForKey:@"artwork-urls"];
         for (NSDictionary* imageDict in artworkUrls) {
+            if ([[imageDict objectForKey:@"image-type"] isEqualToString:@"software-icon"]) {
+                self.iconUrl = [[imageDict objectForKey:@"default"] objectForKey:@"url"];
+                break;
+            }
+            
             NSNumber* height = [imageDict objectForKey:@"box-height"];
             NSNumber* width = [imageDict objectForKey:@"box-width"];
             if (height && width && [width intValue] >= 57 && [height intValue] >= 57) {
