@@ -16,7 +16,7 @@
 
 @implementation SearchViewController
 
-@synthesize searchScrollView, progressIndicator, txtProgress, searchResultCollectionView, api;
+@synthesize searchScrollView, progressIndicator, searchResultCollectionView, api;
 @synthesize searchNotFoundView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -55,7 +55,6 @@
         [self.progressIndicator stopAnimation:self];
     }
     [self.progressIndicator setHidden:!isLoading];
-    [self.txtProgress setHidden:!isLoading];
     [self.searchResultCollectionView setHidden:isLoading];
 }
 

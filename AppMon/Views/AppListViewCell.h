@@ -19,5 +19,6 @@
 @property (nonatomic, retain) IBOutlet NSTextField*     lblTitle;
 @property (nonatomic, retain) IBOutlet NSTextField*     lblDate;
 @property (nonatomic, retain) IBOutlet NSImageView*     imgThumbnail;
+@property (nonatomic, retain) IBOutlet NSView*          backgroundView;
 
 @end

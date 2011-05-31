@@ -8,16 +8,18 @@
 
 #import "AppListViewCell.h"
 #import "UIImageView+WebCache.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation AppListViewCell
 
-@synthesize lblTitle=_lblTitle, lblDate=_lblDate, imgThumbnail=_imgThumbnail;
+@synthesize lblTitle=_lblTitle, lblDate=_lblDate, imgThumbnail=_imgThumbnail, backgroundView=_backgroundView;
 @synthesize app=_app;
 
 - (id)initWithReusableIdentifier: (NSString*)identifier
 {
 	if((self = [super initWithReusableIdentifier:identifier]))
 	{
+        
 	}
 	
 	return self;
@@ -31,10 +33,21 @@
 
 -(void) awakeFromNib {
     [super awakeFromNib];
+    
+    self.backgroundView.layer.backgroundColor = CGColorCreateGenericRGB(1, 1, 1, 1);
+    self.backgroundView.layer.shadowRadius = 2.0;
+    self.backgroundView.layer.shadowOffset = CGSizeMake(0, -2);
+    self.backgroundView.layer.shadowOpacity = 0.5;
+    self.backgroundView.layer.cornerRadius = 10.0;
+    
+    self.imgThumbnail.layer.masksToBounds = true;
+    self.imgThumbnail.layer.cornerRadius = 10.0;
+    
+    [self addSubview:self.imgThumbnail positioned:NSWindowAbove relativeTo:self.backgroundView];
 }
 
 -(void) setApp:(App*)newApp {
-    if (![_app isEqual:newApp]) {
+    if (![_app isEqual:newApp] && newApp != nil) {
         [_app release];
         _app = [newApp retain];
         
@@ -50,7 +63,6 @@
         [dateFormatter release];
     }
 }
-
 
 #pragma mark -
 #pragma mark Reuse

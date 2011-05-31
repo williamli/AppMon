@@ -23,6 +23,7 @@
 @property (nonatomic, retain) IBOutlet NSImageView*     imgThumbnail;
 @property (nonatomic, retain) IBOutlet NSButton*        btnFollow;
 @property (nonatomic, retain) IBOutlet NSButton*        btnUnfollow;
+@property (nonatomic, retain) IBOutlet NSView*          backgroundView;
 
 -(IBAction) followApp:(id)sender;
 -(IBAction) unfollowApp:(id)sender;

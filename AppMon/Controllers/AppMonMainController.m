@@ -52,6 +52,8 @@
     
     if (searchViewEnabled) {
         [self.searchController setLoading:YES];
+    } else {
+        [self.appListViewController.listApps reloadData];
     }
 }
 
