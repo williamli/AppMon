@@ -31,7 +31,7 @@
 }
 
 - (void) windowDidResize:(NSNotification *)notification {
-    [self.mainController.appListViewController.listApps setNeedsDisplay:YES];
+    [self.mainController.appUpdateViewController.listUpdates reloadDataAnimated:YES];
 }
 
 +(AppMonAppDelegate*) instance {

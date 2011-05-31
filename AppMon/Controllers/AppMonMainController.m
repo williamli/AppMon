@@ -13,8 +13,10 @@
 
 @synthesize titleBar, searchField;
 @synthesize searchView, splitView;
+
 @synthesize searchController;
 @synthesize appListViewController;
+@synthesize appUpdateViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

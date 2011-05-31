@@ -22,6 +22,7 @@
 @property (nonatomic, retain) IBOutlet Review*          review;
 
 + (AppReviewViewCell *) item;
++ (AppReviewViewCell *) itemWithSuperView:(JAListView*)listView review:(Review*)review;
 
 -(void) setReview:(Review*)aReview;
 -(void) sizeToFit;

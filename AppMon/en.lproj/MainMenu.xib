@@ -1580,7 +1580,7 @@
 								</object>
 								<object class="NSScrollView" id="294119013">
 									<reference key="NSNextResponder" ref="462034083"/>
-									<int key="NSvFlags">268</int>
+									<int key="NSvFlags">256</int>
 									<object class="NSMutableArray" key="NSSubviews">
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<object class="NSClipView" id="44393554">
@@ -2636,6 +2636,14 @@
 						<reference key="destination" ref="965034961"/>
 					</object>
 					<int key="connectionID">617</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">appUpdateViewController</string>
+						<reference key="source" ref="890937646"/>
+						<reference key="destination" ref="965034961"/>
+					</object>
+					<int key="connectionID">618</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3863,6 +3871,7 @@
 							<reference ref="861065973"/>
 						</object>
 						<reference key="parent" ref="462034083"/>
+						<string key="objectName">Scroll View - List View</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">606</int>
@@ -4482,7 +4491,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">617</int>
+			<int key="maxID">618</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4586,6 +4595,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>appListViewController</string>
+							<string>appUpdateViewController</string>
 							<string>searchController</string>
 							<string>searchField</string>
 							<string>searchView</string>
@@ -4595,6 +4605,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>AppListViewController</string>
+							<string>AppUpdateViewController</string>
 							<string>SearchViewController</string>
 							<string>NSSearchField</string>
 							<string>NSView</string>
@@ -4607,6 +4618,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>appListViewController</string>
+							<string>appUpdateViewController</string>
 							<string>searchController</string>
 							<string>searchField</string>
 							<string>searchView</string>
@@ -4618,6 +4630,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">appListViewController</string>
 								<string key="candidateClassName">AppListViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">appUpdateViewController</string>
+								<string key="candidateClassName">AppUpdateViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">searchController</string>

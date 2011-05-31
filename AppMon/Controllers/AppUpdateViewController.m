@@ -47,6 +47,7 @@
 
 -(void) awakeFromNib {
     [super awakeFromNib];
+
     _api = [[AppStoreApi alloc] init];
 }
 
@@ -111,10 +112,7 @@
 
 - (JAListViewItem *)listView:(JAListView *)listView viewAtIndex:(NSUInteger)index {
     Review* review = [_reviews objectAtIndex:index];
-    AppReviewViewCell* item = [AppReviewViewCell item];
-    [item setReview:review];
-    [item sizeToFit];
-    NSLog(@"item size: %f,%f", item.frame.size.width, item.frame.size.height);
+    AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
     return item;
 }
 

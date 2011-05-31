@@ -10,6 +10,7 @@
 
 #import "SearchViewController.h"
 #import "AppListViewController.h"
+#import "AppUpdateViewController.h"
 
 //  Top level controller that handle main window logic, it delegate jobs to underlying 
 //  controllers (SearchViewController, AppListViewController)
@@ -26,6 +27,7 @@
 
 @property (nonatomic, retain) IBOutlet SearchViewController* searchController;
 @property (nonatomic, retain) IBOutlet AppListViewController* appListViewController;
+@property (nonatomic, retain) IBOutlet AppUpdateViewController* appUpdateViewController;
 
 // begin search app store using text in searchField
 -(IBAction) performSearch:(id)sender;

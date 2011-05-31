@@ -38,6 +38,25 @@
     return nil;
 }
 
++ (AppReviewViewCell *) itemWithSuperView:(JAListView*)listView review:(Review*)review {
+    AppReviewViewCell* cell = [self item];
+    [cell setReview:review];
+
+    CGFloat padding         = cell.frame.size.height - cell.lblTitle.frame.size.height - cell.lblExtra.frame.size.height - cell.lblMessage.frame.size.height;
+    CGRect  msgFrame        = [cell.lblMessage frame];
+
+    CGFloat msgWidth        = [listView frame].size.width - 34;
+    CGFloat msgHeight       = [cell.lblMessage.stringValue heightForWidth:msgWidth
+                                                                     font:[cell.lblMessage font]];
+    cell.lblMessage.frame   = CGRectMake(msgFrame.origin.x, msgFrame.origin.y + msgFrame.size.height - msgHeight,
+                                         msgWidth, msgHeight);
+    
+    cell.frame              = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, 
+                                         [listView frame].size.width, cell.lblTitle.frame.size.height + cell.lblExtra.frame.size.height + msgHeight + padding);
+    
+    return cell;    
+}
+
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
@@ -58,20 +77,20 @@
 
 -(void) setReview:(Review*)aReview {
     if (![_review isEqual:aReview]) {
-        [self.lblTitle setStringValue:aReview.title];        
-        [self.lblExtra setStringValue:[NSString stringWithFormat:@"by %@ - version %@ - %@", 
-                                        aReview.username, aReview.on_version, aReview.date]];
-        [self.lblMessage setStringValue:aReview.text];
+        if (aReview == nil) {
+            [self.lblTitle setStringValue:@""];        
+            [self.lblExtra setStringValue:@""];
+            [self.lblMessage setStringValue:@""];
+        } else {
+            [self.lblTitle setStringValue:aReview.title];        
+            [self.lblExtra setStringValue:[NSString stringWithFormat:@"by %@ - version %@ - %@", 
+                                           aReview.username, aReview.on_version, aReview.date]];
+            [self.lblMessage setStringValue:aReview.text];
+        }
 
-    } else {
-        [self.lblTitle setStringValue:@""];        
-        [self.lblExtra setStringValue:@""];
-        [self.lblMessage setStringValue:@""];
-
+        [_review release];
+        _review = [aReview retain];
     }
-
-    [_review release];
-    _review = [aReview retain];
 }
 
 
@@ -81,20 +100,16 @@
 }
 
 -(void) sizeToFit {
+    CGFloat padding         = self.frame.size.height - self.lblTitle.frame.size.height - self.lblExtra.frame.size.height - self.lblMessage.frame.size.height;
     
-    CGFloat padding         = self.frame.size.height - self.lblTitle.frame.size.height - self.lblExtra.frame.size.height - self.lblTitle.frame.size.height;    
     CGRect msgFrame         = [self.lblMessage frame];
     CGFloat msgHeight       = [self.lblMessage.stringValue heightForWidth:msgFrame.size.width
                                                                      font:[self.lblMessage font]];
+    self.lblMessage.frame   = CGRectMake(msgFrame.origin.x, msgFrame.origin.y + msgFrame.size.height - msgHeight,
+                                         msgFrame.size.width, msgHeight);
 
-    msgFrame.size.height    = msgHeight;    
-    self.lblMessage.frame   = msgFrame;
-    
-    CGFloat cellHeight      = self.lblTitle.frame.size.height + self.lblExtra.frame.size.height + self.lblTitle.frame.size.height + padding;
     self.frame              = CGRectMake(self.frame.origin.x, self.frame.origin.y, 
-                                         self.frame.size.width, cellHeight);
-
-
+                                         self.frame.size.width, self.lblTitle.frame.size.height + self.lblExtra.frame.size.height + msgHeight + padding);
 }
 
 

@@ -41,12 +41,12 @@
 			</object>
 			<object class="NSCustomView" id="1005">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">282</int>
+				<int key="NSvFlags">18</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSTextField" id="713607188">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">266</int>
+						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{17, 45}, {446, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
@@ -84,8 +84,8 @@
 					</object>
 					<object class="NSTextField" id="753808802">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">270</int>
-						<string key="NSFrame">{{17, 60}, {358, 17}}</string>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrame">{{17, 60}, {446, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="713607188"/>
@@ -114,7 +114,7 @@
 					</object>
 					<object class="NSTextField" id="657638133">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">274</int>
+						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{17, 20}, {446, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
@@ -230,6 +230,7 @@
 							<reference ref="54609865"/>
 						</object>
 						<reference key="parent" ref="1005"/>
+						<string key="objectName">StaticText - Title</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
