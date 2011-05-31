@@ -73,6 +73,8 @@
     });
 }
 
+#pragma mark - Private
+
 -(void) searchDidFinished:(NSArray*)results {
     NSLog(@"search finished: %@", results);
 }
