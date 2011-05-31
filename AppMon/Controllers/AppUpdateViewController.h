@@ -12,9 +12,12 @@
 
 #import "AppStoreApi.h"
 #import "App.h"
+#import "LoadingViewItem.h"
 
 @interface AppUpdateViewController : NSViewController <JASectionedListViewDataSource, JAListViewDelegate> {
 @private
+    AppStoreApi* _api;
+    NSArray* _reviews;
     App* _app;
     BOOL _loading;
     BOOL _loaded;
@@ -22,7 +25,7 @@
 
 @property (nonatomic, retain) IBOutlet JAListView* listUpdates;
 
--(void) loadApp:(App*)app;
+-(void) loadAppReviews:(App*)app;
 
 -(void) setLoading:(BOOL)newLoading;
 

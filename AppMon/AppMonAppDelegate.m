@@ -7,13 +7,16 @@
 //
 
 #import "AppMonAppDelegate.h"
+#import "AppService.h"
+#import "AppStoreApi.h"
 
 @implementation AppMonAppDelegate
 
 @synthesize window, mainController;
-@synthesize appService;
+@synthesize appService, appStoreApi;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    self.appStoreApi = [[[AppStoreApi alloc] init] autorelease];
     self.appService = [[[AppService alloc] init] autorelease];
     [self.appService load];
     [self.mainController.appListViewController.listApps reloadData];
@@ -24,6 +27,7 @@
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
     self.appService = nil;
+    self.appStoreApi = nil;
 }
 
 - (void) windowDidResize:(NSNotification *)notification {

@@ -9,11 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 #import "JAListView.h"
+#import "AppUpdateViewController.h"
 
 @interface AppListViewController : NSViewController <JAListViewDataSource> {
 @private
 }
 
+@property (assign) IBOutlet AppUpdateViewController* appUpdateViewController;
 @property (nonatomic, retain) IBOutlet JAListView* listApps;
 
 @end

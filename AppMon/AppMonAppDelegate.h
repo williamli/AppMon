@@ -9,7 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "AppMonMainController.h"
 #import "INAppStoreWindow.h"
+
 #import "AppService.h"
+#import "AppStoreApi.h"
 
 @interface AppMonAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate> {
 @private
@@ -17,6 +19,7 @@
 }
 
 @property (nonatomic, retain) AppService* appService;
+@property (nonatomic, retain) AppStoreApi* appStoreApi;
 
 @property (assign) IBOutlet INAppStoreWindow *window;
 @property (retain) IBOutlet AppMonMainController* mainController;

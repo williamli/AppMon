@@ -8,6 +8,13 @@
 
 #import "AppUpdateViewController.h"
 
+#import "AppReviewViewCell.h"
+#import "AppMonAppDelegate.h"
+
+@interface AppUpdateViewController (Private)
+-(void) loadAppReviewsDidFinished:(NSArray*)results;
+-(void) loadAppReviewsDidFailed:(NSError*)error;
+@end
 
 @implementation AppUpdateViewController
 
@@ -26,13 +33,46 @@
 
 - (void)dealloc
 {
+    [_reviews release];
+    _reviews = nil;
+
     [_app release];
     _app = nil;
+    
+    [_api release];
+    _api = nil;
+
     [super dealloc];
 }
 
--(void) loadApp:(App*)app {
-    
+-(void) awakeFromNib {
+    [super awakeFromNib];
+    _api = [[AppStoreApi alloc] init];
+}
+
+-(void) loadAppReviews:(App*)app {
+    NSLog(@"Load App Reviews: %@ (%@)", app.title, app.itemId);
+    [self setLoading:YES];
+
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        NSError* error = nil;
+        NSInteger total;
+        
+        NSArray* reviews = [_api reviews:app.itemId 
+                                    page:0 
+                                   total:&total 
+                                   error:&error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setLoading:NO];
+            if (error) {
+                [self loadAppReviewsDidFailed:error];
+            } else {
+                [self loadAppReviewsDidFinished:reviews];
+            }
+        });
+    });
 }
 
 -(void) setLoading:(BOOL)newLoading {
@@ -42,7 +82,54 @@
 
 -(void) setLoaded:(BOOL)newLoaded {
     _loaded = newLoaded;
-    _loading = !newLoaded;
+    _loading = NO;
+}
+
+-(void) loadAppReviewsDidFinished:(NSArray*)theResults {
+    NSLog(@"load reviews did finished: %@", theResults);
+    [_reviews release];
+    _reviews = [theResults retain];
+
+    [self setLoaded:YES];
+    [self.listUpdates reloadDataAnimated:YES];
+}
+
+-(void) loadAppReviewsDidFailed:(NSError*)error {
+    NSLog(@"load reviews failed: %@", error);
+    [self setLoaded:NO];
+}
+
+#pragma mark - JASectionedListViewDataSource
+
+- (NSUInteger)numberOfSectionsInListView:(JASectionedListView *)listView {
+    return 1;
+}
+
+- (NSUInteger)listView:(JASectionedListView *)listView numberOfViewsInSection:(NSUInteger)section {
+    if (_loaded) {
+        return [_reviews count];
+    } else {
+        return 0;
+    }
+}
+
+- (JAListViewItem *)listView:(JAListView *)listView sectionHeaderViewForSection:(NSUInteger)section {
+    LoadingViewItem* item = [LoadingViewItem item];
+    [item.progressView startAnimation:self];
+    [item setHidden:!_loading];
+
+    if (!_loading) {
+        item.frame = CGRectZero;
+    }
+
+    return item;
+}
+
+- (JAListViewItem *)listView:(JAListView *)listView viewForSection:(NSUInteger)section index:(NSUInteger)index {
+    Review* review = [_reviews objectAtIndex:index];
+    AppReviewViewCell* item = [AppReviewViewCell item];
+    [item setReview:review];
+    return item;
 }
 
 @end

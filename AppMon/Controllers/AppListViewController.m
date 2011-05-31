@@ -11,12 +11,13 @@
 #import "AppMonAppDelegate.h"
 #import "App.h"
 #import "AppListViewCell.h"
+#import "AppUpdateViewController.h"
 
 #define kAppListCellReuseIdentifier @"AppListViewCell"
 
 @implementation AppListViewController
 
-@synthesize listApps=_listApps;
+@synthesize listApps=_listApps, appUpdateViewController=_appUpdateViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,6 +45,7 @@
     if(list == self.listApps) {
         AppListViewCell* cell = (AppListViewCell *) view;
         cell.selected = YES;
+        [self.appUpdateViewController loadAppReviews:cell.app];
     }
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import "SearchViewController.h"
-#import "AppViewController.h"
 #import "AppSearchResultItem.h"
 #import "AppSearchHeaderItem.h"
 #import "AppMonAppDelegate.h"

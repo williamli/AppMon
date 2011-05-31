@@ -59,6 +59,10 @@
 		549FFC111394EE20003321C5 /* AppSearchHeaderItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549FFC101394EE1F003321C5 /* AppSearchHeaderItem.xib */; };
 		549FFC141394EE30003321C5 /* AppSearchHeaderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FFC131394EE30003321C5 /* AppSearchHeaderItem.m */; };
 		549FFC171394F849003321C5 /* AppUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FFC161394F849003321C5 /* AppUpdateViewController.m */; };
+		549FFC191394FAC6003321C5 /* LoadingViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549FFC181394FAC5003321C5 /* LoadingViewItem.xib */; };
+		549FFC1C1394FAFB003321C5 /* LoadingViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FFC1B1394FAFA003321C5 /* LoadingViewItem.m */; };
+		549FFC1E1394FDC3003321C5 /* AppReviewViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549FFC1D1394FDC2003321C5 /* AppReviewViewCell.xib */; };
+		549FFC211394FF99003321C5 /* AppReviewViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FFC201394FF99003321C5 /* AppReviewViewCell.m */; };
 		54B7C6FE1393A8A300AE8EDD /* angry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C6FD1393A8A300AE8EDD /* angry.plist */; };
 		54B7C7161393B75B00AE8EDD /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */; };
 		54B7C7181393B7D600AE8EDD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B7C7171393B7D600AE8EDD /* libicucore.dylib */; };
@@ -182,6 +186,12 @@
 		549FFC131394EE30003321C5 /* AppSearchHeaderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSearchHeaderItem.m; sourceTree = "<group>"; };
 		549FFC151394F849003321C5 /* AppUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppUpdateViewController.h; path = Controllers/AppUpdateViewController.h; sourceTree = "<group>"; };
 		549FFC161394F849003321C5 /* AppUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppUpdateViewController.m; path = Controllers/AppUpdateViewController.m; sourceTree = "<group>"; };
+		549FFC181394FAC5003321C5 /* LoadingViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingViewItem.xib; path = Views/LoadingViewItem.xib; sourceTree = "<group>"; };
+		549FFC1A1394FAFA003321C5 /* LoadingViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadingViewItem.h; path = Views/LoadingViewItem.h; sourceTree = "<group>"; };
+		549FFC1B1394FAFA003321C5 /* LoadingViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadingViewItem.m; path = Views/LoadingViewItem.m; sourceTree = "<group>"; };
+		549FFC1D1394FDC2003321C5 /* AppReviewViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppReviewViewCell.xib; path = Views/AppReviewViewCell.xib; sourceTree = "<group>"; };
+		549FFC1F1394FF98003321C5 /* AppReviewViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppReviewViewCell.h; sourceTree = "<group>"; };
+		549FFC201394FF99003321C5 /* AppReviewViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppReviewViewCell.m; sourceTree = "<group>"; };
 		54B7C6FD1393A8A300AE8EDD /* angry.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = angry.plist; sourceTree = "<group>"; };
 		54B7C70A1393B75B00AE8EDD /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
@@ -263,6 +273,12 @@
 				549FFC121394EE30003321C5 /* AppSearchHeaderItem.h */,
 				549FFC131394EE30003321C5 /* AppSearchHeaderItem.m */,
 				549FFC101394EE1F003321C5 /* AppSearchHeaderItem.xib */,
+				549FFC1A1394FAFA003321C5 /* LoadingViewItem.h */,
+				549FFC1B1394FAFA003321C5 /* LoadingViewItem.m */,
+				549FFC181394FAC5003321C5 /* LoadingViewItem.xib */,
+				549FFC1F1394FF98003321C5 /* AppReviewViewCell.h */,
+				549FFC201394FF99003321C5 /* AppReviewViewCell.m */,
+				549FFC1D1394FDC2003321C5 /* AppReviewViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -594,6 +610,8 @@
 				542699641394C5A80052EE8E /* AppListViewCell.xib in Resources */,
 				549FFC0B1394EBE8003321C5 /* AppSearchResultItem.xib in Resources */,
 				549FFC111394EE20003321C5 /* AppSearchHeaderItem.xib in Resources */,
+				549FFC191394FAC6003321C5 /* LoadingViewItem.xib in Resources */,
+				549FFC1E1394FDC3003321C5 /* AppReviewViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +682,8 @@
 				549FFC0F1394EC89003321C5 /* AppSearchResultItem.m in Sources */,
 				549FFC141394EE30003321C5 /* AppSearchHeaderItem.m in Sources */,
 				549FFC171394F849003321C5 /* AppUpdateViewController.m in Sources */,
+				549FFC1C1394FAFB003321C5 /* LoadingViewItem.m in Sources */,
+				549FFC211394FF99003321C5 /* AppReviewViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
