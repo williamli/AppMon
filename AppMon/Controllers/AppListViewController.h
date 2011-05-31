@@ -8,12 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "PXListView.h"
+#import "JAListView.h"
 
-@interface AppListViewController : NSViewController <PXListViewDelegate> {
+@interface AppListViewController : NSViewController <JAListViewDataSource> {
 @private
 }
 
-@property (nonatomic, retain) IBOutlet PXListView* listApps;
+@property (nonatomic, retain) IBOutlet JAListView* listApps;
 
 @end

@@ -16,3 +16,6 @@
 [submodule "AppMon/External/SDWebImage"]
 	path = AppMon/External/SDWebImage
 	url = https://github.com/rs/SDWebImage.git
+[submodule "AppMon/External/JAListView"]
+	path = AppMon/External/JAListView
+	url = https://github.com/joshaber/JAListView.git

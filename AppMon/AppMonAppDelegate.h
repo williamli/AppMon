@@ -11,7 +11,7 @@
 #import "INAppStoreWindow.h"
 #import "AppService.h"
 
-@interface AppMonAppDelegate : NSObject <NSApplicationDelegate> {
+@interface AppMonAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate> {
 @private
     INAppStoreWindow *window;
 }

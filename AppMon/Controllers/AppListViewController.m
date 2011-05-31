@@ -35,32 +35,46 @@
 
 -(void) awakeFromNib {
     [super awakeFromNib];
-    self.listApps.usesLiveResize = NO;
+    self.listApps.backgroundColor = [NSColor colorWithCalibratedRed:0.855 green:0.875 blue:0.902 alpha:1.];
 }
 
+#pragma mark JAListViewDelegate
 
-#pragma mark - PXListViewDelegate 
+- (void)listView:(JAListView *)list willSelectView:(JAListViewItem *)view {
+    if(list == self.listApps) {
+        AppListViewCell* cell = (AppListViewCell *) view;
+        cell.selected = YES;
+    }
+}
 
-- (NSUInteger)numberOfRowsInListView:(PXListView*)aListView {
+- (void)listView:(JAListView *)list didSelectView:(JAListViewItem *)view {
+    if(list == self.listApps) {
+        AppListViewCell* cell = (AppListViewCell *) view;
+        cell.selected = NO;
+    }
+}
+
+- (void)listView:(JAListView *)list didUnSelectView:(JAListViewItem *)view {
+    if(list == self.listApps) {
+        AppListViewCell* cell = (AppListViewCell *) view;
+        cell.selected = NO;
+    }
+}
+
+#pragma mark - JAListViewDataSource
+
+- (NSUInteger)numberOfItemsInListView:(JAListView *)listView {
     AppService* appService = [AppMonAppDelegate instance].appService;
     NSUInteger count = [[appService followedApps] count];
     return count;
 }
 
-- (CGFloat)listView:(PXListView*)aListView heightOfRow:(NSUInteger)row {
-    return 80.0;
-}
-
-- (PXListViewCell*)listView:(PXListView*)aListView cellForRow:(NSUInteger)row {
-    AppListViewCell *cell = (AppListViewCell*)[aListView dequeueCellWithReusableIdentifier:kAppListCellReuseIdentifier];
-	if(!cell) {
-		cell = [AppListViewCell cellLoadedFromNibNamed:@"AppListViewCell" reusableIdentifier:kAppListCellReuseIdentifier];
-	}
-
+- (JAListViewItem *)listView:(JAListView *)listView viewAtIndex:(NSUInteger)index {
     AppService* appService = [AppMonAppDelegate instance].appService;
-    App* app = [[appService followedApps] objectAtIndex:row];
+    App* app = [[appService followedApps] objectAtIndex:index];
+
+    AppListViewCell* cell = [AppListViewCell appListViewCell];
     [cell setApp:app];
-    
     return cell;
 }
 

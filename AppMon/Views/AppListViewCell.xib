@@ -43,7 +43,7 @@
 			</object>
 			<object class="NSCustomView" id="1005">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">268</int>
+				<int key="NSvFlags">266</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSImageView" id="502191321">
@@ -64,7 +64,7 @@
 						<string key="NSFrame">{{10, 10}, {57, 57}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="749650825"/>
+						<reference key="NSNextKeyView" ref="390000470"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="518207419">
@@ -84,7 +84,7 @@
 					</object>
 					<object class="NSTextField" id="991712461">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{75, 34}, {120, 13}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
@@ -114,7 +114,7 @@
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
 								<string key="NSColorName">controlTextColor</string>
-								<object class="NSColor" key="NSColor" id="239760970">
+								<object class="NSColor" key="NSColor" id="414401427">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MAA</bytes>
 								</object>
@@ -123,7 +123,7 @@
 					</object>
 					<object class="NSTextField" id="648291137">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{75, 53}, {120, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
@@ -144,7 +144,7 @@
 							<reference key="NSTextColor" ref="826307813"/>
 						</object>
 					</object>
-					<object class="NSCustomView" id="749650825">
+					<object class="NSCustomView" id="390000470">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{10, 10}, {57, 57}}</string>
@@ -195,7 +195,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">shadowView</string>
 						<reference key="source" ref="1005"/>
-						<reference key="destination" ref="749650825"/>
+						<reference key="destination" ref="390000470"/>
 					</object>
 					<int key="connectionID">13</int>
 				</object>
@@ -203,7 +203,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">backgroundView</string>
 						<reference key="source" ref="1005"/>
-						<reference key="destination" ref="749650825"/>
+						<reference key="destination" ref="390000470"/>
 					</object>
 					<int key="connectionID">14</int>
 				</object>
@@ -243,7 +243,7 @@
 							<reference ref="502191321"/>
 							<reference ref="648291137"/>
 							<reference ref="991712461"/>
-							<reference ref="749650825"/>
+							<reference ref="390000470"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">App List View Cell</string>
@@ -292,7 +292,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
-						<reference key="object" ref="749650825"/>
+						<reference key="object" ref="390000470"/>
 						<reference key="parent" ref="1005"/>
 					</object>
 				</object>
@@ -332,7 +332,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<real value="10"/>
-					<reference ref="239760970"/>
+					<reference ref="414401427"/>
 					<real value="2"/>
 					<real value="2"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -359,7 +359,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
 					<string key="className">AppListViewCell</string>
-					<string key="superclassName">PXListViewCell</string>
+					<string key="superclassName">JAListViewItem</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -412,11 +412,11 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">PXListViewCell</string>
+					<string key="className">JAListViewItem</string>
 					<string key="superclassName">NSView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PXListViewCell.h</string>
+						<string key="minorKey">./Classes/JAListViewItem.h</string>
 					</object>
 				</object>
 			</object>

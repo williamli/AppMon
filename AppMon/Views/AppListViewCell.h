@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PXListViewCell.h"
+#import "JAListViewItem.h"
 #import "App.h"
 
-@interface AppListViewCell : PXListViewCell {
+@interface AppListViewCell : JAListViewItem {
 @private
-    
+    NSGradient *gradient;
 }
 
 @property (nonatomic, retain) App* app;
@@ -20,5 +20,7 @@
 @property (nonatomic, retain) IBOutlet NSTextField*     lblDate;
 @property (nonatomic, retain) IBOutlet NSImageView*     imgThumbnail;
 @property (nonatomic, retain) IBOutlet NSView*          backgroundView;
+
++(AppListViewCell *) appListViewCell;
 
 @end

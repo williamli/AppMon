@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5422F36B1394E39D0044E982 /* JAListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5422F2E71394E39D0044E982 /* JAListView.m */; };
+		5422F36D1394E39D0044E982 /* JAListViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5422F2EF1394E39D0044E982 /* JAListViewItem.m */; };
+		5422F36E1394E39D0044E982 /* JAObjectListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5422F2F11394E39D0044E982 /* JAObjectListView.m */; };
+		5422F36F1394E39D0044E982 /* JAObjectListViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5422F2F31394E39D0044E982 /* JAObjectListViewItem.m */; };
+		5422F3701394E39D0044E982 /* JASectionedListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5422F2F51394E39D0044E982 /* JASectionedListView.m */; };
+		5422F3721394E39D0044E982 /* NSIndexPath+JAListViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5422F2F81394E39D0044E982 /* NSIndexPath+JAListViewExtensions.m */; };
 		542698FD1394882E0052EE8E /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542698FB1394882E0052EE8E /* AppViewController.m */; };
 		542698FE1394882E0052EE8E /* AppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542698FC1394882E0052EE8E /* AppViewController.xib */; };
 		5426994A13948CDE0052EE8E /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5426992713948CDE0052EE8E /* SDImageCache.m */; };
@@ -83,6 +89,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5422F2E41394E39D0044E982 /* JAEdgeInsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAEdgeInsets.h; sourceTree = "<group>"; };
+		5422F2E61394E39D0044E982 /* JAListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAListView.h; sourceTree = "<group>"; };
+		5422F2E71394E39D0044E982 /* JAListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAListView.m; sourceTree = "<group>"; };
+		5422F2EB1394E39D0044E982 /* JAListView_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAListView_Prefix.pch; sourceTree = "<group>"; };
+		5422F2EE1394E39D0044E982 /* JAListViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAListViewItem.h; sourceTree = "<group>"; };
+		5422F2EF1394E39D0044E982 /* JAListViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAListViewItem.m; sourceTree = "<group>"; };
+		5422F2F01394E39D0044E982 /* JAObjectListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAObjectListView.h; sourceTree = "<group>"; };
+		5422F2F11394E39D0044E982 /* JAObjectListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAObjectListView.m; sourceTree = "<group>"; };
+		5422F2F21394E39D0044E982 /* JAObjectListViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAObjectListViewItem.h; sourceTree = "<group>"; };
+		5422F2F31394E39D0044E982 /* JAObjectListViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAObjectListViewItem.m; sourceTree = "<group>"; };
+		5422F2F41394E39D0044E982 /* JASectionedListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASectionedListView.h; sourceTree = "<group>"; };
+		5422F2F51394E39D0044E982 /* JASectionedListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASectionedListView.m; sourceTree = "<group>"; };
+		5422F2F71394E39D0044E982 /* NSIndexPath+JAListViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+JAListViewExtensions.h"; sourceTree = "<group>"; };
+		5422F2F81394E39D0044E982 /* NSIndexPath+JAListViewExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+JAListViewExtensions.m"; sourceTree = "<group>"; };
 		542698FA1394882E0052EE8E /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = Controllers/AppViewController.h; sourceTree = "<group>"; };
 		542698FB1394882E0052EE8E /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppViewController.m; path = Controllers/AppViewController.m; sourceTree = "<group>"; };
 		542698FC1394882E0052EE8E /* AppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppViewController.xib; path = Controllers/AppViewController.xib; sourceTree = "<group>"; };
@@ -242,6 +262,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5422F21B1394E39C0044E982 /* JAListView */ = {
+			isa = PBXGroup;
+			children = (
+				5422F2E41394E39D0044E982 /* JAEdgeInsets.h */,
+				5422F2E61394E39D0044E982 /* JAListView.h */,
+				5422F2E71394E39D0044E982 /* JAListView.m */,
+				5422F2EB1394E39D0044E982 /* JAListView_Prefix.pch */,
+				5422F2EE1394E39D0044E982 /* JAListViewItem.h */,
+				5422F2EF1394E39D0044E982 /* JAListViewItem.m */,
+				5422F2F01394E39D0044E982 /* JAObjectListView.h */,
+				5422F2F11394E39D0044E982 /* JAObjectListView.m */,
+				5422F2F21394E39D0044E982 /* JAObjectListViewItem.h */,
+				5422F2F31394E39D0044E982 /* JAObjectListViewItem.m */,
+				5422F2F41394E39D0044E982 /* JASectionedListView.h */,
+				5422F2F51394E39D0044E982 /* JASectionedListView.m */,
+				5422F2F71394E39D0044E982 /* NSIndexPath+JAListViewExtensions.h */,
+				5422F2F81394E39D0044E982 /* NSIndexPath+JAListViewExtensions.m */,
+			);
+			name = JAListView;
+			path = External/JAListView;
+			sourceTree = "<group>";
+		};
 		542698F8139487FD0052EE8E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,6 +425,7 @@
 		546458EE1393932F0096466C /* External */ = {
 			isa = PBXGroup;
 			children = (
+				5422F21B1394E39C0044E982 /* JAListView */,
 				542698FF13948CDE0052EE8E /* SDWebImage */,
 				54CC03421393DCCE00F6DA6B /* XPathQuery */,
 				54B7C6FF1393B75B00AE8EDD /* RegexKitLite */,
@@ -701,6 +744,12 @@
 				54269953139496110052EE8E /* AppService.m in Sources */,
 				5426995E1394C2280052EE8E /* AppListViewController.m in Sources */,
 				542699621394C5930052EE8E /* AppListViewCell.m in Sources */,
+				5422F36B1394E39D0044E982 /* JAListView.m in Sources */,
+				5422F36D1394E39D0044E982 /* JAListViewItem.m in Sources */,
+				5422F36E1394E39D0044E982 /* JAObjectListView.m in Sources */,
+				5422F36F1394E39D0044E982 /* JAObjectListViewItem.m in Sources */,
+				5422F3701394E39D0044E982 /* JASectionedListView.m in Sources */,
+				5422F3721394E39D0044E982 /* NSIndexPath+JAListViewExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

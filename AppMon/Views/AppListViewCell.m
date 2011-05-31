@@ -10,20 +10,35 @@
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 
+@interface AppListViewCell (Private)
+- (void)drawBackground;
+
+@property (nonatomic, readonly) NSGradient *gradient;
+@end
+
 @implementation AppListViewCell
 
 @synthesize lblTitle=_lblTitle, lblDate=_lblDate, imgThumbnail=_imgThumbnail, backgroundView=_backgroundView;
 @synthesize app=_app;
 
-- (id)initWithReusableIdentifier: (NSString*)identifier
-{
-	if((self = [super initWithReusableIdentifier:identifier]))
-	{
-        
-	}
-	
-	return self;
++ (AppListViewCell *) appListViewCell {
+    static NSNib *nib = nil;
+    if(nib == nil) {
+        nib = [[NSNib alloc] initWithNibNamed:NSStringFromClass(self) bundle:nil];
+    }
+    
+    NSArray *objects = nil;
+    [nib instantiateNibWithOwner:nil topLevelObjects:&objects];
+    for(id object in objects) {
+        if([object isKindOfClass:self]) {
+            return object;
+        }
+    }
+    
+    NSAssert1(NO, @"No view of class %@ found.", NSStringFromClass(self));
+    return nil;
 }
+
 
 - (void)dealloc
 {
@@ -33,15 +48,6 @@
 
 -(void) awakeFromNib {
     [super awakeFromNib];
-    
-    self.backgroundView.layer.backgroundColor = CGColorCreateGenericRGB(1, 1, 1, 1);
-    self.backgroundView.layer.shadowRadius = 2.0;
-    self.backgroundView.layer.shadowOffset = CGSizeMake(0, -2);
-    self.backgroundView.layer.shadowOpacity = 0.5;
-    self.backgroundView.layer.cornerRadius = 10.0;
-    
-    self.imgThumbnail.layer.masksToBounds = true;
-    self.imgThumbnail.layer.cornerRadius = 10.0;
     
     [self addSubview:self.imgThumbnail positioned:NSWindowAbove relativeTo:self.backgroundView];
 }
@@ -64,17 +70,39 @@
     }
 }
 
-#pragma mark -
-#pragma mark Reuse
+- (void)drawRect:(NSRect)rect {
+    [self drawBackground];
+    [super drawRect:rect];
+    
+    self.backgroundView.layer.backgroundColor = CGColorCreateGenericRGB(1, 1, 1, 1);
+    self.backgroundView.layer.shadowRadius = 2.0;
+    self.backgroundView.layer.shadowOffset = CGSizeMake(0, -2);
+    self.backgroundView.layer.shadowOpacity = 0.5;
+    self.backgroundView.layer.cornerRadius = 10.0;
+    
+    self.imgThumbnail.layer.masksToBounds = true;
+    self.imgThumbnail.layer.cornerRadius = 10.0;
+}
 
-- (void)prepareForReuse
-{
-    [_app release];
-    _app = nil;
 
-    [self.lblDate setStringValue:@""];
-    [self.lblTitle setStringValue:@""];
-    [self.imgThumbnail setHidden:YES];
+#pragma mark - Private
+
+- (void)drawBackground {
+    [self.gradient drawInRect:self.bounds angle:self.selected ? 270.0f : 90.0f];
+    
+    [[NSColor colorWithDeviceWhite:0.5f alpha:1.0f] set];
+    NSRectFill(NSMakeRect(0.0f, 0.0f, self.bounds.size.width, 1.0f));
+    
+    [[NSColor colorWithDeviceWhite:0.93f alpha:1.0f] set];
+    NSRectFill(NSMakeRect(0.0f, self.bounds.size.height - 1.0f, self.bounds.size.width, 1.0f));
+}
+
+- (NSGradient *)gradient {
+    if(gradient == nil) {
+        gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.8f alpha:1.0f] endingColor:[NSColor colorWithDeviceWhite:0.85f alpha:1.0f]];
+    }
+    
+    return gradient;
 }
 
 @end

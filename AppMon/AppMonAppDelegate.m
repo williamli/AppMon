@@ -26,6 +26,10 @@
     self.appService = nil;
 }
 
+- (void) windowDidResize:(NSNotification *)notification {
+    [self.mainController.appListViewController.listApps setNeedsDisplay:YES];
+}
+
 +(AppMonAppDelegate*) instance {
     return (AppMonAppDelegate*) [NSApplication sharedApplication].delegate;
 }
