@@ -44,7 +44,7 @@
 				<int key="NSvFlags">18</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="NSTextField" id="883021849">
+					<object class="NSTextField" id="645920156">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{183, 294}, {79, 17}}</string>
@@ -52,7 +52,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="713607188"/>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSTextFieldCell" key="NSCell" id="331329604">
+						<object class="NSTextFieldCell" key="NSCell" id="971725871">
 							<int key="NSCellFlags">68288064</int>
 							<int key="NSCellFlags2">71304192</int>
 							<string key="NSContents">★★★★★</string>
@@ -61,7 +61,7 @@
 								<double key="NSSize">13</double>
 								<int key="NSfFlags">16</int>
 							</object>
-							<reference key="NSControlView" ref="883021849"/>
+							<reference key="NSControlView" ref="645920156"/>
 							<object class="NSColor" key="NSBackgroundColor" id="313442390">
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
@@ -75,7 +75,7 @@
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
 								<string key="NSColorName">selectedMenuItemColor</string>
-								<object class="NSColor" key="NSColor" id="351779666">
+								<object class="NSColor" key="NSColor" id="119289200">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
 								</object>
@@ -84,7 +84,7 @@
 					</object>
 					<object class="NSTextField" id="713607188">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{17, 279}, {245, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
@@ -105,7 +105,7 @@
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
 								<string key="NSColorName">controlShadowColor</string>
-								<reference key="NSColor" ref="351779666"/>
+								<reference key="NSColor" ref="119289200"/>
 							</object>
 						</object>
 					</object>
@@ -115,7 +115,7 @@
 						<string key="NSFrame">{{17, 294}, {169, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="883021849"/>
+						<reference key="NSNextKeyView" ref="645920156"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="54609865">
 							<int key="NSCellFlags">68288064</int>
@@ -200,7 +200,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">lblStar</string>
 						<reference key="source" ref="1005"/>
-						<reference key="destination" ref="883021849"/>
+						<reference key="destination" ref="645920156"/>
 					</object>
 					<int key="connectionID">34</int>
 				</object>
@@ -240,7 +240,7 @@
 							<reference ref="753808802"/>
 							<reference ref="713607188"/>
 							<reference ref="657638133"/>
-							<reference ref="883021849"/>
+							<reference ref="645920156"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -289,18 +289,18 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">32</int>
-						<reference key="object" ref="883021849"/>
+						<reference key="object" ref="645920156"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="331329604"/>
+							<reference ref="971725871"/>
 						</object>
 						<reference key="parent" ref="1005"/>
 						<string key="objectName">Star Label</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">33</int>
-						<reference key="object" ref="331329604"/>
-						<reference key="parent" ref="883021849"/>
+						<reference key="object" ref="971725871"/>
+						<reference key="parent" ref="645920156"/>
 					</object>
 				</object>
 			</object>
