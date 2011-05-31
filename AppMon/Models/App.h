@@ -21,5 +21,6 @@
 @property (nonatomic, retain) NSDate* releaseDate;
 
 -(id) initWithPlist:(NSDictionary*)plist;
+-(BOOL) isEqual:(id)object;
 
 @end

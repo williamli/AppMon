@@ -14,6 +14,8 @@
 		5426994C13948CDE0052EE8E /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5426992E13948CDE0052EE8E /* SDWebImageManager.m */; };
 		5426994D13948CDE0052EE8E /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5426993113948CDE0052EE8E /* UIImageView+WebCache.m */; };
 		5426995013948E670052EE8E /* app_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5426994F13948E670052EE8E /* app_default.png */; };
+		54269953139496110052EE8E /* AppService.m in Sources */ = {isa = PBXBuildFile; fileRef = 54269952139496110052EE8E /* AppService.m */; };
+		5426995A139497ED0052EE8E /* AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54269959139497ED0052EE8E /* AppTests.m */; };
 		546458BB139391C20096466C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546458BA139391C20096466C /* Cocoa.framework */; };
 		546458C5139391C30096466C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 546458C3139391C30096466C /* InfoPlist.strings */; };
 		546458C8139391C30096466C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 546458C7139391C30096466C /* main.m */; };
@@ -94,6 +96,10 @@
 		5426993013948CDE0052EE8E /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
 		5426993113948CDE0052EE8E /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		5426994F13948E670052EE8E /* app_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = app_default.png; path = Resources/app_default.png; sourceTree = "<group>"; };
+		54269951139496110052EE8E /* AppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppService.h; path = Models/AppService.h; sourceTree = "<group>"; };
+		54269952139496110052EE8E /* AppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppService.m; path = Models/AppService.m; sourceTree = "<group>"; };
+		54269958139497ED0052EE8E /* AppTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppTests.h; sourceTree = "<group>"; };
+		54269959139497ED0052EE8E /* AppTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppTests.m; sourceTree = "<group>"; };
 		546458B6139391C20096466C /* AppMon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		546458BA139391C20096466C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		546458BD139391C30096466C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -347,6 +353,8 @@
 				54B7C6FB1393A87800AE8EDD /* Fixtures */,
 				54645BBF13939AFD0096466C /* AppStoreApiTests.h */,
 				54645BC013939AFD0096466C /* AppStoreApiTests.m */,
+				54269958139497ED0052EE8E /* AppTests.h */,
+				54269959139497ED0052EE8E /* AppTests.m */,
 			);
 			path = AppMonTests;
 			sourceTree = "<group>";
@@ -449,6 +457,8 @@
 			children = (
 				54645B82139394A00096466C /* AppStoreApi.h */,
 				54645B83139394A00096466C /* AppStoreApi.m */,
+				54269951139496110052EE8E /* AppService.h */,
+				54269952139496110052EE8E /* AppService.m */,
 				54645B85139394AF0096466C /* App.h */,
 				54645B86139394AF0096466C /* App.m */,
 				54645B88139394B80096466C /* Review.h */,
@@ -674,6 +684,7 @@
 				5426994B13948CDE0052EE8E /* SDWebImageDownloader.m in Sources */,
 				5426994C13948CDE0052EE8E /* SDWebImageManager.m in Sources */,
 				5426994D13948CDE0052EE8E /* UIImageView+WebCache.m in Sources */,
+				54269953139496110052EE8E /* AppService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +693,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54645BC213939D2A0096466C /* AppStoreApiTests.m in Sources */,
+				5426995A139497ED0052EE8E /* AppTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

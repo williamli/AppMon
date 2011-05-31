@@ -63,4 +63,12 @@
     return [NSString stringWithFormat:@"<App:%@, title=%@>", self.itemId, self.title];
 }
 
+-(BOOL) isEqual:(id)object {
+    if ([object respondsToSelector:@selector(itemId)] && self.itemId) {
+        return [self itemId] == [object itemId];        
+    } else {
+        return NO;
+    }
+}
+
 @end
