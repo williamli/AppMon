@@ -31,21 +31,9 @@
 		546458D1139391C30096466C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546458CF139391C30096466C /* MainMenu.xib */; };
 		546458D8139391C40096466C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546458BA139391C20096466C /* Cocoa.framework */; };
 		546458E0139391C40096466C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 546458DE139391C40096466C /* InfoPlist.strings */; };
-		54645AB2139393450096466C /* BCCollectionView+Dragging.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645916139393440096466C /* BCCollectionView+Dragging.m */; };
-		54645AB3139393450096466C /* BCCollectionView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645918139393440096466C /* BCCollectionView+Keyboard.m */; };
-		54645AB4139393450096466C /* BCCollectionView+Mouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5464591A139393440096466C /* BCCollectionView+Mouse.m */; };
-		54645AB5139393450096466C /* BCCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5464591C139393440096466C /* BCCollectionView.m */; };
-		54645AB6139393450096466C /* BCCollectionViewGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 5464591F139393440096466C /* BCCollectionViewGroup.m */; };
-		54645AB7139393450096466C /* BCCollectionViewLayoutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645921139393440096466C /* BCCollectionViewLayoutItem.m */; };
-		54645AB8139393450096466C /* BCCollectionViewLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645923139393440096466C /* BCCollectionViewLayoutManager.m */; };
-		54645AB9139393450096466C /* BCCollectionViewLayoutOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645925139393440096466C /* BCCollectionViewLayoutOperation.m */; };
 		54645AE5139393450096466C /* ESiTunesScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645979139393440096466C /* ESiTunesScroller.m */; };
 		54645AE6139393450096466C /* ESScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5464597B139393440096466C /* ESScrollView.m */; };
 		54645B4A139393450096466C /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A35139393440096466C /* INAppStoreWindow.m */; };
-		54645B6E139393450096466C /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A77139393440096466C /* PXListDocumentView.m */; };
-		54645B6F139393450096466C /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A7A139393440096466C /* PXListView+UserInteraction.m */; };
-		54645B70139393450096466C /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A7C139393440096466C /* PXListView.m */; };
-		54645B71139393450096466C /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645A7F139393440096466C /* PXListViewCell.m */; };
 		54645B84139394A00096466C /* AppStoreApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B83139394A00096466C /* AppStoreApi.m */; };
 		54645B87139394AF0096466C /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B86139394AF0096466C /* App.m */; };
 		54645B8A139394B80096466C /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = 54645B89139394B80096466C /* Review.m */; };
@@ -144,42 +132,12 @@
 		546458DD139391C40096466C /* AppMonTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppMonTests-Info.plist"; sourceTree = "<group>"; };
 		546458DF139391C40096466C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		546458E1139391C40096466C /* AppMonTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppMonTests-Prefix.pch"; sourceTree = "<group>"; };
-		54645915139393440096466C /* BCCollectionView+Dragging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCCollectionView+Dragging.h"; sourceTree = "<group>"; };
-		54645916139393440096466C /* BCCollectionView+Dragging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCCollectionView+Dragging.m"; sourceTree = "<group>"; };
-		54645917139393440096466C /* BCCollectionView+Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCCollectionView+Keyboard.h"; sourceTree = "<group>"; };
-		54645918139393440096466C /* BCCollectionView+Keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCCollectionView+Keyboard.m"; sourceTree = "<group>"; };
-		54645919139393440096466C /* BCCollectionView+Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCCollectionView+Mouse.h"; sourceTree = "<group>"; };
-		5464591A139393440096466C /* BCCollectionView+Mouse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCCollectionView+Mouse.m"; sourceTree = "<group>"; };
-		5464591B139393440096466C /* BCCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollectionView.h; sourceTree = "<group>"; };
-		5464591C139393440096466C /* BCCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCollectionView.m; sourceTree = "<group>"; };
-		5464591D139393440096466C /* BCCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollectionViewDelegate.h; sourceTree = "<group>"; };
-		5464591E139393440096466C /* BCCollectionViewGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollectionViewGroup.h; sourceTree = "<group>"; };
-		5464591F139393440096466C /* BCCollectionViewGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCollectionViewGroup.m; sourceTree = "<group>"; };
-		54645920139393440096466C /* BCCollectionViewLayoutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollectionViewLayoutItem.h; sourceTree = "<group>"; };
-		54645921139393440096466C /* BCCollectionViewLayoutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCollectionViewLayoutItem.m; sourceTree = "<group>"; };
-		54645922139393440096466C /* BCCollectionViewLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollectionViewLayoutManager.h; sourceTree = "<group>"; };
-		54645923139393440096466C /* BCCollectionViewLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCollectionViewLayoutManager.m; sourceTree = "<group>"; };
-		54645924139393440096466C /* BCCollectionViewLayoutOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCollectionViewLayoutOperation.h; sourceTree = "<group>"; };
-		54645925139393440096466C /* BCCollectionViewLayoutOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCollectionViewLayoutOperation.m; sourceTree = "<group>"; };
-		54645926139393440096466C /* BCGeometryExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCGeometryExtensions.h; sourceTree = "<group>"; };
 		54645978139393440096466C /* ESiTunesScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESiTunesScroller.h; sourceTree = "<group>"; };
 		54645979139393440096466C /* ESiTunesScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESiTunesScroller.m; sourceTree = "<group>"; };
 		5464597A139393440096466C /* ESScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESScrollView.h; sourceTree = "<group>"; };
 		5464597B139393440096466C /* ESScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESScrollView.m; sourceTree = "<group>"; };
 		54645A34139393440096466C /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
 		54645A35139393440096466C /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
-		54645A76139393440096466C /* PXListDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListDocumentView.h; path = Classes/PXListDocumentView.h; sourceTree = "<group>"; };
-		54645A77139393440096466C /* PXListDocumentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListDocumentView.m; path = Classes/PXListDocumentView.m; sourceTree = "<group>"; };
-		54645A78139393440096466C /* PXListView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PXListView+Private.h"; path = "Classes/PXListView+Private.h"; sourceTree = "<group>"; };
-		54645A79139393440096466C /* PXListView+UserInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PXListView+UserInteraction.h"; path = "Classes/PXListView+UserInteraction.h"; sourceTree = "<group>"; };
-		54645A7A139393440096466C /* PXListView+UserInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PXListView+UserInteraction.m"; path = "Classes/PXListView+UserInteraction.m"; sourceTree = "<group>"; };
-		54645A7B139393440096466C /* PXListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListView.h; path = Classes/PXListView.h; sourceTree = "<group>"; };
-		54645A7C139393440096466C /* PXListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListView.m; path = Classes/PXListView.m; sourceTree = "<group>"; };
-		54645A7D139393440096466C /* PXListViewCell+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PXListViewCell+Private.h"; path = "Classes/PXListViewCell+Private.h"; sourceTree = "<group>"; };
-		54645A7E139393440096466C /* PXListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewCell.h; path = Classes/PXListViewCell.h; sourceTree = "<group>"; };
-		54645A7F139393440096466C /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListViewCell.m; path = Classes/PXListViewCell.m; sourceTree = "<group>"; };
-		54645A80139393440096466C /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDelegate.h; path = Classes/PXListViewDelegate.h; sourceTree = "<group>"; };
-		54645A81139393440096466C /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDropHighlight.h; path = Classes/PXListViewDropHighlight.h; sourceTree = "<group>"; };
 		54645B82139394A00096466C /* AppStoreApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppStoreApi.h; path = Models/AppStoreApi.h; sourceTree = "<group>"; };
 		54645B83139394A00096466C /* AppStoreApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppStoreApi.m; path = Models/AppStoreApi.m; sourceTree = "<group>"; };
 		54645B85139394AF0096466C /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = App.h; path = Models/App.h; sourceTree = "<group>"; };
@@ -441,38 +399,10 @@
 				54CC03421393DCCE00F6DA6B /* XPathQuery */,
 				54B7C6FF1393B75B00AE8EDD /* RegexKitLite */,
 				54645B8B139398B00096466C /* ASIHttpRequest */,
-				546458EF139393440096466C /* BCCollectionView */,
 				5464593B139393440096466C /* ESScrollView */,
 				5464597D139393440096466C /* INAppStoreWindow */,
-				54645A4B139393440096466C /* PXListView */,
 			);
 			name = External;
-			sourceTree = "<group>";
-		};
-		546458EF139393440096466C /* BCCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				54645915139393440096466C /* BCCollectionView+Dragging.h */,
-				54645916139393440096466C /* BCCollectionView+Dragging.m */,
-				54645917139393440096466C /* BCCollectionView+Keyboard.h */,
-				54645918139393440096466C /* BCCollectionView+Keyboard.m */,
-				54645919139393440096466C /* BCCollectionView+Mouse.h */,
-				5464591A139393440096466C /* BCCollectionView+Mouse.m */,
-				5464591B139393440096466C /* BCCollectionView.h */,
-				5464591C139393440096466C /* BCCollectionView.m */,
-				5464591D139393440096466C /* BCCollectionViewDelegate.h */,
-				5464591E139393440096466C /* BCCollectionViewGroup.h */,
-				5464591F139393440096466C /* BCCollectionViewGroup.m */,
-				54645920139393440096466C /* BCCollectionViewLayoutItem.h */,
-				54645921139393440096466C /* BCCollectionViewLayoutItem.m */,
-				54645922139393440096466C /* BCCollectionViewLayoutManager.h */,
-				54645923139393440096466C /* BCCollectionViewLayoutManager.m */,
-				54645924139393440096466C /* BCCollectionViewLayoutOperation.h */,
-				54645925139393440096466C /* BCCollectionViewLayoutOperation.m */,
-				54645926139393440096466C /* BCGeometryExtensions.h */,
-			);
-			name = BCCollectionView;
-			path = External/BCCollectionView;
 			sourceTree = "<group>";
 		};
 		5464593B139393440096466C /* ESScrollView */ = {
@@ -495,26 +425,6 @@
 			);
 			name = INAppStoreWindow;
 			path = External/INAppStoreWindow;
-			sourceTree = "<group>";
-		};
-		54645A4B139393440096466C /* PXListView */ = {
-			isa = PBXGroup;
-			children = (
-				54645A76139393440096466C /* PXListDocumentView.h */,
-				54645A77139393440096466C /* PXListDocumentView.m */,
-				54645A78139393440096466C /* PXListView+Private.h */,
-				54645A79139393440096466C /* PXListView+UserInteraction.h */,
-				54645A7A139393440096466C /* PXListView+UserInteraction.m */,
-				54645A7B139393440096466C /* PXListView.h */,
-				54645A7C139393440096466C /* PXListView.m */,
-				54645A7D139393440096466C /* PXListViewCell+Private.h */,
-				54645A7E139393440096466C /* PXListViewCell.h */,
-				54645A7F139393440096466C /* PXListViewCell.m */,
-				54645A80139393440096466C /* PXListViewDelegate.h */,
-				54645A81139393440096466C /* PXListViewDropHighlight.h */,
-			);
-			name = PXListView;
-			path = External/PXListView;
 			sourceTree = "<group>";
 		};
 		54645B81139394800096466C /* Models */ = {
@@ -715,21 +625,9 @@
 			files = (
 				546458C8139391C30096466C /* main.m in Sources */,
 				546458CE139391C30096466C /* AppMonAppDelegate.m in Sources */,
-				54645AB2139393450096466C /* BCCollectionView+Dragging.m in Sources */,
-				54645AB3139393450096466C /* BCCollectionView+Keyboard.m in Sources */,
-				54645AB4139393450096466C /* BCCollectionView+Mouse.m in Sources */,
-				54645AB5139393450096466C /* BCCollectionView.m in Sources */,
-				54645AB6139393450096466C /* BCCollectionViewGroup.m in Sources */,
-				54645AB7139393450096466C /* BCCollectionViewLayoutItem.m in Sources */,
-				54645AB8139393450096466C /* BCCollectionViewLayoutManager.m in Sources */,
-				54645AB9139393450096466C /* BCCollectionViewLayoutOperation.m in Sources */,
 				54645AE5139393450096466C /* ESiTunesScroller.m in Sources */,
 				54645AE6139393450096466C /* ESScrollView.m in Sources */,
 				54645B4A139393450096466C /* INAppStoreWindow.m in Sources */,
-				54645B6E139393450096466C /* PXListDocumentView.m in Sources */,
-				54645B6F139393450096466C /* PXListView+UserInteraction.m in Sources */,
-				54645B70139393450096466C /* PXListView.m in Sources */,
-				54645B71139393450096466C /* PXListViewCell.m in Sources */,
 				54645B84139394A00096466C /* AppStoreApi.m in Sources */,
 				54645B87139394AF0096466C /* App.m in Sources */,
 				54645B8A139394B80096466C /* Review.m in Sources */,
