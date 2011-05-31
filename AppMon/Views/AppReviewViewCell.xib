@@ -47,7 +47,7 @@
 					<object class="NSTextField" id="713607188">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{17, 45}, {446, 14}}</string>
+						<string key="NSFrame">{{17, 279}, {245, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="657638133"/>
@@ -85,7 +85,7 @@
 					<object class="NSTextField" id="753808802">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{17, 60}, {446, 17}}</string>
+						<string key="NSFrame">{{17, 294}, {245, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="713607188"/>
@@ -115,14 +115,14 @@
 					<object class="NSTextField" id="657638133">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{17, 20}, {446, 17}}</string>
+						<string key="NSFrame">{{17, 20}, {245, 251}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="350730162">
 							<int key="NSCellFlags">67239424</int>
-							<int key="NSCellFlags2">272629760</int>
+							<int key="NSCellFlags2">4202496</int>
 							<string key="NSContents">Reviews</string>
 							<object class="NSFont" key="NSSupport">
 								<string key="NSName">LucidaGrande</string>
@@ -135,7 +135,7 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{480, 97}</string>
+				<string key="NSFrameSize">{279, 331}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="753808802"/>
@@ -302,7 +302,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">29</int>
+			<int key="maxID">31</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

@@ -41,20 +41,23 @@
 + (AppReviewViewCell *) itemWithSuperView:(JAListView*)listView review:(Review*)review {
     AppReviewViewCell* cell = [self item];
     [cell setReview:review];
-
+	
     CGFloat padding         = cell.frame.size.height - cell.lblTitle.frame.size.height - cell.lblExtra.frame.size.height - cell.lblMessage.frame.size.height;
     CGRect  msgFrame        = [cell.lblMessage frame];
 
+    // This is required to properly calculate height
+    // Ref: http://lists.apple.com/archives/cocoa-dev/2006/Jan//msg00160.html
+	gNSStringGeometricsTypesetterBehavior = NSTypesetterBehavior_10_2_WithCompatibility ;
     CGFloat msgWidth        = [listView frame].size.width - 34;
     CGFloat msgHeight       = [cell.lblMessage.stringValue heightForWidth:msgWidth
                                                                      font:[cell.lblMessage font]];
     cell.lblMessage.frame   = CGRectMake(msgFrame.origin.x, msgFrame.origin.y + msgFrame.size.height - msgHeight,
                                          msgWidth, msgHeight);
-    
+
     cell.frame              = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, 
                                          [listView frame].size.width, cell.lblTitle.frame.size.height + cell.lblExtra.frame.size.height + msgHeight + padding);
     
-    return cell;    
+    return cell;
 }
 
 - (id)initWithFrame:(NSRect)frame
