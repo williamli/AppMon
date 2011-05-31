@@ -25,8 +25,10 @@
 
 @interface AppService (Persistence)
 
+// save app services
 -(void) save;
 
+// load app services
 -(void) load;
 
 @end

@@ -48,6 +48,27 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)coder {    
+    [coder encodeFloat:_rating forKey:@"rating"];
+    [coder encodeObject:_text forKey:@"text"];
+    [coder encodeObject:_title forKey:@"title"];
+    [coder encodeObject:_username forKey:@"username"];
+    [coder encodeObject:_date forKey:@"date"];
+    [coder encodeInteger:_position forKey:@"position"];
+    [coder encodeObject:_on_version forKey:@"on_version"];
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super init];
+    _rating         = [coder decodeFloatForKey:@"rating"];
+    _text           = [[coder decodeObjectForKey:@"text"] retain];
+    _title          = [[coder decodeObjectForKey:@"title"] retain];
+    _username       = [[coder decodeObjectForKey:@"username"] retain];
+    _date           = [[coder decodeObjectForKey:@"date"] retain];
+    _position       = [coder decodeIntegerForKey:@"position"];
+    _on_version     = [[coder decodeObjectForKey:@"on_version"] retain];
+    return self;
+}
 
 - (void)dealloc {   
     self.text = nil;

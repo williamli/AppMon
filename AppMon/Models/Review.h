@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Review : NSObject {
+@interface Review : NSObject <NSCoding> {
 @private
     
 }

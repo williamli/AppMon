@@ -54,6 +54,26 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)coder {    
+    [coder encodeObject:_itemId forKey:@"AppItemId"];
+    [coder encodeObject:_title forKey:@"AppTitle"];
+    [coder encodeObject:_url forKey:@"AppUrl"];
+    [coder encodeObject:_iconUrl forKey:@"AppIconUrl"];
+    [coder encodeObject:_price forKey:@"AppPrice"];
+    [coder encodeObject:_releaseDate forKey:@"AppReleaseDate"];
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super init];
+    _itemId         = [[coder decodeObjectForKey:@"AppItemId"] retain];
+    _title          = [[coder decodeObjectForKey:@"AppTitle"] retain];
+    _url            = [[coder decodeObjectForKey:@"AppUrl"] retain];
+    _iconUrl        = [[coder decodeObjectForKey:@"AppIconUrl"] retain];
+    _price          = [[coder decodeObjectForKey:@"AppPrice"] retain];
+    _releaseDate    = [[coder decodeObjectForKey:@"AppReleaseDate"] retain];
+    return self;
+}
+
 - (void)dealloc
 {
     self.itemId = nil;
