@@ -69,6 +69,9 @@
 
 - (void)prepareForReuse
 {
+    [_app release];
+    _app = nil;
+
     [self.lblDate setStringValue:@""];
     [self.lblTitle setStringValue:@""];
     [self.imgThumbnail setHidden:YES];

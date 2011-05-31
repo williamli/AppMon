@@ -78,6 +78,11 @@
         
         AppService* appService = [AppMonAppDelegate instance].appService;
         [self setFollowed:[appService isFollowed:newApp]];
+    } else {
+        [_app release];
+        _app = nil;
+        [self.lblTitle setStringValue:@""];
+        [self.lblDate setStringValue:@""];
     }
 }
 
