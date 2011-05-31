@@ -12,12 +12,13 @@
 #import "Review.h"
 
 @interface AppReviewViewCell (Private)
-- (void)drawBackground;
+-(void)drawBackground;
++(NSString*) stars:(NSUInteger)numberOfStar;
 @end
 
 @implementation AppReviewViewCell
 
-@synthesize lblTitle=_lblTitle, lblMessage = _lblMessage, lblExtra = _lblExtra;
+@synthesize lblTitle=_lblTitle, lblMessage = _lblMessage, lblExtra = _lblExtra, lblStar=_lblStar;
 @synthesize review=_review;
 
 + (AppReviewViewCell *) item {
@@ -84,11 +85,17 @@
             [self.lblTitle setStringValue:@""];        
             [self.lblExtra setStringValue:@""];
             [self.lblMessage setStringValue:@""];
+            [self.lblStar setStringValue:@""];
+            
         } else {
             [self.lblTitle setStringValue:aReview.title];        
             [self.lblExtra setStringValue:[NSString stringWithFormat:@"by %@ - version %@ - %@", 
                                            aReview.username, aReview.on_version, aReview.date]];
             [self.lblMessage setStringValue:aReview.text];
+            
+            NSUInteger ratingStar = (NSUInteger) (aReview.rating * 5.0);
+            [self.lblStar setStringValue:[AppReviewViewCell stars:ratingStar]];
+
         }
 
         [_review release];
@@ -127,6 +134,15 @@
     
     [[NSColor colorWithDeviceWhite:0.93f alpha:1.0f] set];
     NSRectFill(NSMakeRect(0.0f, self.bounds.size.height - 1.0f, self.bounds.size.width, 1.0f));
+}
+
++(NSString*) stars:(NSUInteger)numberOfStar {
+    NSMutableString* star = [NSMutableString stringWithCapacity:numberOfStar];
+    int i = 0;
+    for (i=0; i<numberOfStar; i++) {
+        [star appendString:@"★"];
+    }
+    return star;
 }
 
 @end
