@@ -10,6 +10,7 @@
 
 #import "AppReviewViewCell.h"
 #import "AppMonAppDelegate.h"
+#import <Quartz/Quartz.h>
 
 @interface AppUpdateViewController (Private)
 -(void) loadAppReviewsDidFinished:(NSArray*)results;
@@ -52,6 +53,10 @@
 }
 
 -(void) loadAppReviews:(App*)app {
+    if ([app isEqual:_app]) {
+        return;
+    }
+
     NSLog(@"Load App Reviews: %@ (%@)", app.title, app.itemId);
     [self setLoading:YES];
 
@@ -92,7 +97,9 @@
     _reviews = [theResults retain];
 
     [self setLoaded:YES];
-    [self.listUpdates reloadDataAnimated:YES];
+    [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
+        [self.listUpdates scrollPoint:NSZeroPoint];
+    }];
 }
 
 -(void) loadAppReviewsDidFailed:(NSError*)error {
