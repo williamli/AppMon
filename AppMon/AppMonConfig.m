@@ -10,7 +10,6 @@
 #import "SynthesizeSingleton.h"
 
 @interface AppMonConfig (Private)
--(NSString*) saveFilePath;
 @end
 
 @implementation AppMonConfig
@@ -36,31 +35,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 }
 
 -(AppMonConfig*) save {
-    NSString* savePath = [self saveFilePath];
-    BOOL result = [NSKeyedArchiver archiveRootObject:self 
-                                              toFile:savePath];
-    if (!result) {
-        NSLog(@"WARN: Failed saving settings file: %@", savePath);
-    }
-    
+    NSUserDefaults* setting = [NSUserDefaults standardUserDefaults];
+    [setting setObject:self.selectedCountry forKey:@"selectedCountry"];
+    [setting setObject:self.selectedCountryCode forKey:@"selectedCountryCode"];
+    [setting synchronize];
     return self;
 }
 
 -(AppMonConfig*) load {
-    NSString* savePath = [self saveFilePath];
-    NSFileManager* manager = [NSFileManager defaultManager];
-
-    if ([manager fileExistsAtPath:savePath]) {
-        NSLog(@"load settings file: %@", savePath);
-        AppMonConfig* loadedConfig = [NSKeyedUnarchiver unarchiveObjectWithFile:savePath];
-        self.selectedCountry        = (loadedConfig.selectedCountry == nil) ? @"United States" : loadedConfig.selectedCountry;
-        self.selectedCountryCode    = (loadedConfig.selectedCountryCode == nil) ? @"143441" : loadedConfig.selectedCountryCode;
-
-        NSLog(@"selectedCountry=%@, selectedCountryCode=%@", self.selectedCountry, self.selectedCountryCode);
-        return self;
-    }
-
-    return [self save];
+    NSUserDefaults* setting = [NSUserDefaults standardUserDefaults];
+    self.selectedCountry = [setting objectForKey:@"selectedCountry"];
+    self.selectedCountryCode = [setting objectForKey:@"selectedCountryCode"];
+    return self;
 }
 
 #pragma mark - NSCoder
@@ -78,28 +64,5 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 }
 
 #pragma mark - Private
-
-// save path for app mon config file
-// create intermediate directories if needed
--(NSString*) saveFilePath {
-    NSBundle* bundle = [NSBundle mainBundle];
-    NSDictionary* info = [bundle infoDictionary];
-    NSString* bundleName = [info objectForKey:@"CFBundleName"];
-
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, true);
-    NSString* path = [[paths objectAtIndex:0] stringByAppendingPathComponent:bundleName];
-    
-    NSFileManager* manager = [NSFileManager defaultManager];
-    if (![manager fileExistsAtPath:path]) {
-        NSError* error;
-        [manager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
-        if (error) {
-            NSLog(@"ERROR: cannot create config file path: %@, error=%@", path, error);
-        }
-    }
-    
-    return [path stringByAppendingFormat:@"/settings.plist"];   
-}
-
 
 @end

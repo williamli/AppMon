@@ -155,6 +155,11 @@
     NSLog(@"country selected: %@, countryCode: %@", country, countryCode);
 
     [[AppService sharedAppService] setStore:countryCode];
+    
+    AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
+    [config setSelectedCountry:country];
+    [config setSelectedCountryCode:countryCode];
+    [config save];
 }
 
 @end
