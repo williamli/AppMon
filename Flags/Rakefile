@@ -1,0 +1,34 @@
+require 'rubygems'
+require 'nokogiri'
+require 'open-uri'
+require 'table_parser'
+require 'plist'
+require 'fileutils'
+
+task :country do |t|
+  include FileUtils
+  html = open("http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2").read
+  doc = Nokogiri::HTML(html)
+  table = TableParser::Table.new doc, "/html/body/div[3]/div[3]/table[3]"
+
+  result = {}
+  table[0].children.each_index do |idx|
+    code = table[0][idx].text.downcase
+    name = table[1][idx].text
+    result[name] = code
+  end
+
+  # manual override
+  result["대한민국"] = "kr"
+  result["日本"] = "jp"    
+  result["België/Belgique"] = "be"
+  result["México"] = "mx"
+  result["Panamá"] = "pa"
+  result["Perú"] = "pe"
+  result["Schweiz/Suisse"] = "Switzerland"
+
+  mkdir_p("output")
+  File.open("output/country.plist", "w") do |f|
+    f.write(Plist::Emit.dump(result, true))
+  end
+end
