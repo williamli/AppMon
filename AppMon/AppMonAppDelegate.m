@@ -16,7 +16,6 @@
 @synthesize appStoreApi;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    self.appStoreApi = [[[AppStoreApi alloc] init] autorelease];
     [self.mainController.appListViewController.listApps reloadData];
 
     window.titleBarHeight = 45.0;

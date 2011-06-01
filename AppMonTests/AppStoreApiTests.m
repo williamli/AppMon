@@ -17,7 +17,7 @@
 
 - (void)setUp {
     [super setUp];
-    self.appStore = [[[AppStoreApi alloc] init] autorelease];
+    self.appStore = [AppStoreApi sharedAppStoreApi];
 }
 
 - (void)tearDown {

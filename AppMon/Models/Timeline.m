@@ -11,16 +11,15 @@
 
 @implementation Timeline
 
-@synthesize app, store;
+@synthesize app;
 @synthesize lastReviewDate, reviews, total, page, ended;
 @synthesize loaded, loading;
 
--(id) initWithApp:(App*)theApp store:(Store*)theStore
+-(id) initWithApp:(App*)theApp
 {
     self = [super init];
     if (self) {
         self.app = theApp;
-        self.store = theStore;
         self.reviews = [NSMutableArray array];
         self.lastReviewDate = nil;
         self.total = 0;

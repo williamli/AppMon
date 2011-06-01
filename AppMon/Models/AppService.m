@@ -22,14 +22,15 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
-@synthesize delegate;
+@synthesize delegate, store;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         [self load];
-        
+
+        self.store = @"143441";
         _queue = dispatch_queue_create("hk.ignition.appmon", NULL);
         _timelines = [[NSMutableDictionary dictionary] retain];
     }
@@ -46,7 +47,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
     [_apps release];
     _apps = nil;
-
+    
+    self.store = nil;
+    
     [super dealloc];
 }
 
@@ -96,13 +99,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         NSError* error = nil;
         NSDate* lastReviewDate = nil;
 
-        AppStoreApi* api = [AppMonAppDelegate instance].appStoreApi;
-        NSArray* reviews = [api reviewsByStore:timeline.store.storefront
-                                          appId:app.itemId 
-                                       page:(loadMore ? timeline.page+1 : 0)
-                                      total:&total
-                             lastReviewDate:&lastReviewDate
-                                      error:&error];
+        AppStoreApi* api = [AppStoreApi sharedAppStoreApi];
+        NSArray* reviews = [api reviewsByStore:self.store
+                                         appId:app.itemId 
+                                          page:(loadMore ? timeline.page+1 : 0)
+                                         total:&total
+                                lastReviewDate:&lastReviewDate
+                                         error:&error];
         
         if (error) {
             NSLog(@"timeline of (%@) encounter error: %@", app.title, error);
@@ -157,8 +160,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 -(Timeline*) timelineWithApp:(App*)app {
     Timeline* timeline = [_timelines objectForKey:app.itemId];
     if (!timeline) {        
-        Store* store = [[[Store alloc] initWithName:@"US" storefront:@"143441"] autorelease];
-        timeline = [[[Timeline alloc] initWithApp:app store:store] autorelease];
+        timeline = [[[Timeline alloc] initWithApp:app] autorelease];
         [_timelines setValue:timeline forKey:app.itemId];
     }
     return timeline;

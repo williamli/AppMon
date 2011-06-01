@@ -24,6 +24,8 @@ extern NSString * const kAppStoreReviewUrl;
     
 }
 
++ (AppStoreApi *)sharedAppStoreApi;
+
 // Find an App by store and id
 // Parameters: 
 //  store   - app store front id

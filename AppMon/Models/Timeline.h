@@ -35,9 +35,6 @@
 // app of this timeline
 @property (nonatomic, retain) App* app;
 
-// store of this timeline
-@property (nonatomic, retain) Store* store;
-
 #pragma mark - states
 
 // last review date
@@ -64,7 +61,7 @@
 #pragma mark - methods
 
 // initialize the timeline with specified app
--(id) initWithApp:(App*)theApp store:(Store*)theStore;
+-(id) initWithApp:(App*)theApp;
 
 // add reviews to this timeline
 -(void) addReviews:(NSArray*)newReviews fromHead:(BOOL)fromHead;

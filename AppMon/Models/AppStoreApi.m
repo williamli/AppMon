@@ -6,6 +6,8 @@
 //  Copyright 2011年 Ignition Soft Limited. All rights reserved.
 //
 
+#import "SynthesizeSingleton.h"
+
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "XPathQuery.h"
@@ -30,6 +32,8 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 @end
 
 @implementation AppStoreApi
+
+SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 
 - (id)init
 {

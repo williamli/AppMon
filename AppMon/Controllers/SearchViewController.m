@@ -44,7 +44,7 @@
     [super awakeFromNib];
     
     self.appService = [AppService sharedAppService];
-    self.api = [[[AppStoreApi alloc] init] autorelease];
+    self.api = [AppStoreApi sharedAppStoreApi];    
 }
 
 #pragma mark - Public
