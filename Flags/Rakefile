@@ -27,8 +27,7 @@ task :country do |t|
   result["Perú"] = "pe"
   result["Schweiz/Suisse"] = "Switzerland"
 
-  mkdir_p("output")
-  File.open("output/country.plist", "w") do |f|
+  File.open("country.plist", "w") do |f|
     f.write(Plist::Emit.dump(result, true))
   end
 end
