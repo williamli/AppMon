@@ -8,10 +8,15 @@
 
 #import "AppMonMainController.h"
 
+@interface AppMonMainController (Private)
+-(void) buildMenu;
+-(void) countryMenuClicked:(id)sender;
+@end
 
 @implementation AppMonMainController
 
 @synthesize titleBar, searchField;
+@synthesize menuCountry, btnCountry;
 @synthesize searchView, splitView;
 
 @synthesize searchController;
@@ -32,6 +37,13 @@
 {
     [super dealloc];
 }
+
+-(void) awakeFromNib {
+    [super awakeFromNib];
+    
+    [self buildMenu];   
+}
+
 
 #pragma mark - Public
 
@@ -75,6 +87,36 @@
 
 	[[[sender subviews] objectAtIndex:0] setFrame:leftRect];
 	[[[sender subviews] objectAtIndex:1] setFrame:rightRect];
+}
+
+#pragma mark - Private
+-(void) buildMenu {
+    // remove existing menu items
+    [self.menuCountry removeAllItems];
+    
+    // open country config file, read country lists
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"country" 
+                                                         ofType:@"plist"];  
+    _countries = [[NSDictionary dictionaryWithContentsOfFile:filePath] retain];
+    
+    // build menu based on country list
+    NSArray* sortedCountries = [[_countries allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    for (NSString* country in sortedCountries) {
+        NSString* iconName = [_countries objectForKey:country];
+        NSMenuItem* item = [[[NSMenuItem alloc] initWithTitle:country
+                                                       action:@selector(countryMenuClicked:) 
+                                                keyEquivalent:@""] autorelease];
+        [item setTarget:self];
+        [item setImage:[NSImage imageNamed:iconName]];
+        [item setEnabled:YES];
+        [self.menuCountry addItem:item];
+    }    
+}
+
+#pragma mark - Action
+
+-(void) countryMenuClicked:(id)sender {
+    NSLog(@"country selected: %@", [sender title]);
 }
 
 @end
