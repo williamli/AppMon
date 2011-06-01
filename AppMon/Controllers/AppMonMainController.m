@@ -126,7 +126,11 @@
 #pragma mark - Action
 
 -(void) countryMenuClicked:(id)sender {
-    NSLog(@"country selected: %@, Store: %@", [sender title], [_countries objectForKey:[sender title]]);
+    NSString* country = [sender title];
+    NSString* countryCode = [_countries objectForKey:[sender title]];
+    NSLog(@"country selected: %@, countryCode: %@", country, countryCode);
+
+    [[AppService sharedAppService] setStore:countryCode];
 }
 
 @end

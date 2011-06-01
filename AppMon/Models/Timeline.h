@@ -23,6 +23,7 @@
 
 -(void) setApp:(App*)newApp;
 -(NSArray*) reviews;
+-(void) reset;
 
 @end
 
@@ -65,6 +66,9 @@
 
 // add reviews to this timeline
 -(void) addReviews:(NSArray*)newReviews fromHead:(BOOL)fromHead;
+
+// reset the timeline to initial state (when switching channel)
+-(void) reset;
 
 // if the timeline has more reviews
 -(BOOL) hasMoreReviews;

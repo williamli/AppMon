@@ -26,6 +26,9 @@
 // invoke when timeline reach end
 -(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline;
 
+// when timelines have been reset (when switching store)
+-(void) timelinesReset;
+
 @end
 
 @interface AppService : NSObject {

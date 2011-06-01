@@ -19,6 +19,7 @@
 
 @interface AppUpdateViewController (Private)
 -(BOOL) shouldScrollToTopWhenUpdated;
+-(void) loadAppReviews:(App*)newApp force:(BOOL)forceLoad;
 @end
 
 @implementation AppUpdateViewController
@@ -63,13 +64,19 @@
 }
 
 -(void) loadAppReviews:(App*)newApp {
-    if ([newApp isEqual:self.timeline.app]) {
+    [self loadAppReviews:newApp force:NO];
+}
+
+// Save as loadAppReviews:, with additional parameter 'force'
+// loadAppReviews: will not load an app if it has already the current app
+// force will make the system load reviews again even it is current app
+-(void) loadAppReviews:(App*)newApp force:(BOOL)forceLoad {
+    if ([newApp isEqual:self.timeline.app] && !forceLoad) {
         return;
     }
     
     // set timeline
     self.timeline = [_service timelineWithApp:newApp];
-
     [self.listUpdates reloadDataAnimated:YES];
     [self setLoading:YES];
     [_service fetchTimelineWithApp:newApp];
@@ -127,7 +134,7 @@
 #pragma mark - JAListViewDataSource
 
 - (NSUInteger)numberOfItemsInListView:(JAListView *)listView {
-    if (self.timeline.loaded) {
+    if (self.timeline && self.timeline.loaded) {
         return [self.timeline.reviews count];
     } else {
         return 0;
@@ -185,6 +192,17 @@
     [self setLoading:NO];
     [self setLoaded:YES];
 }
+
+// invoked when timeline is reset - such as changing store
+// reload the selected timeline
+-(void) timelinesReset {
+    if (self.timeline) {
+        NSLog(@"timeline reset - reload app reviews");
+        [self loadAppReviews:self.timeline.app force:YES];
+    }
+}
+
+#pragma mark - Private
 
 -(BOOL) shouldScrollToTopWhenUpdated {
     return YES;

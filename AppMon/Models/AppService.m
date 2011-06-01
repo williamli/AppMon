@@ -76,8 +76,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 -(void) setStore:(NSString*)newStore {
     dispatch_sync(_queue, ^{
         [_store release];
-        _store = [newStore retain];        
-        [_timelines removeAllObjects];   
+        _store = [newStore retain];      
+
+        for (Timeline* timeline in [_timelines allValues]) {
+            [timeline reset];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if([self.delegate respondsToSelector:@selector(fetchTimelineNoMore:timeline:)]) {
+                [self.delegate timelinesReset];
+            }
+        });
     });       
 }
 
@@ -164,7 +173,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     });
 }
 
--(Timeline*) timelineWithApp:(App*)app {
+-(Timeline*) timelineWithApp:(App*)app {   
     Timeline* timeline = [_timelines objectForKey:app.itemId];
     if (!timeline) {        
         timeline = [[[Timeline alloc] initWithApp:app] autorelease];

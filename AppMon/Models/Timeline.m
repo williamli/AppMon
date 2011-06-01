@@ -55,6 +55,19 @@
     }
 }
 
+-(void) reset {
+    @synchronized(self) {
+        NSLog(@"reset timeline - %@", self.app);
+        [self.reviews removeAllObjects];
+        self.lastReviewDate = nil;
+        self.total = 0;
+        self.page = 0;
+        self.ended = NO;
+        self.loaded = NO;
+        self.loading = NO;
+    }
+}
+
 -(BOOL) hasMoreReviews {
     NSUInteger fetched = ( self.page + 1 ) * kReviewsPerPage;
     return self.ended || self.total > fetched;
