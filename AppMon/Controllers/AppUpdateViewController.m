@@ -23,14 +23,12 @@
 
 @implementation AppUpdateViewController
 
-@synthesize listUpdates=_listUpdates, progressView=_progressView, app=_app, reviews=_reviews;
+@synthesize listUpdates=_listUpdates, progressView=_progressView, timeline=_timeline;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        _loading = NO;
-        _loaded = NO;
     }
     
     return self;
@@ -42,8 +40,7 @@
                                                     name:NSViewBoundsDidChangeNotification 
                                                   object:[self.listUpdates superview]];
     
-    self.app = nil;
-    self.reviews = nil;
+    self.timeline = nil;
     
     [_service release];
     _service = nil;
@@ -66,44 +63,40 @@
 }
 
 -(void) loadAppReviews:(App*)newApp {
-    if ([newApp isEqual:self.app]) {
+    if ([newApp isEqual:self.timeline.app]) {
         return;
     }
+    
+    // set timeline
+    self.timeline = [_service timelineWithApp:newApp];
 
-    self.app = newApp;
-    self.reviews = [NSArray array];
-
-    NSLog(@"Load App Reviews: %@ (%@)", self.app.title, self.app.itemId);
     [self.listUpdates reloadDataAnimated:YES];
     [self setLoading:YES];
-    [_service fetchTimelineWithApp:self.app];
+    [_service fetchTimelineWithApp:newApp];
 }
 
 -(void) loadMoreAppReviews {
-    if (self.app == nil) {
+    if (self.timeline == nil) {
         NSLog(@"no apps selected");
         return;
     }
     
-    if (_loading) {
+    if (self.timeline.loading) {
         NSLog(@"currently loading, ignore load more");
         return;
     }
     
-    Timeline* tl = [_service timelineWithApp:self.app];
-    if (![tl hasMoreReviews]) {
+    if (![self.timeline hasMoreReviews]) {
         NSLog(@"no more reviews to be loaded");
         return;
     }
 
-    NSLog(@"Load More App Reviews: %@ (%@)", self.app.title, self.app.itemId);
     [self setLoading:YES];
-    [_service fetchTimelineWithApp:self.app more:YES];
+    [_service fetchTimelineWithApp:self.timeline.app more:YES];
 }
 
 -(void) setLoading:(BOOL)newLoading {
-    _loading = newLoading;
-    _loaded = !newLoading;
+    self.timeline.loading = newLoading;
 
     if (newLoading) {
         [self.progressView startAnimation:self];
@@ -115,8 +108,8 @@
 }
 
 -(void) setLoaded:(BOOL)newLoaded {
-    _loaded = newLoaded;
-    _loading = NO;
+    self.timeline.loaded = newLoaded;
+    self.timeline.loading = NO;
 }
 
 #pragma mark - NSViewBoundsDidChangeNotification
@@ -134,15 +127,15 @@
 #pragma mark - JAListViewDataSource
 
 - (NSUInteger)numberOfItemsInListView:(JAListView *)listView {
-    if (_loaded) {
-        return [self.reviews count];
+    if (self.timeline.loaded) {
+        return [self.timeline.reviews count];
     } else {
         return 0;
     }
 }
 
 - (JAListViewItem *)listView:(JAListView *)listView viewAtIndex:(NSUInteger)index {
-    Review* review = [self.reviews objectAtIndex:index];
+    Review* review = [self.timeline.reviews objectAtIndex:index];
     AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
     return item;
 }
@@ -154,7 +147,6 @@
     NSLog(@"load reviews: finished with %ld reviews loaded, %ld total, last review date: %@", 
             [timeline.reviews count], timeline.total, timeline.lastReviewDate);
 
-    self.reviews = timeline.reviews;
     [self setLoaded:YES];
     [self setLoading:NO];
 
@@ -169,9 +161,8 @@
 -(void) fetchTimelineNoUpdate:(App*)app timeline:(Timeline*)timeline {
     NSLog(@"load reviews: no update");
 
-    self.reviews = timeline.reviews;
-    [self setLoaded:YES];
     [self setLoading:NO];
+    [self setLoaded:YES];
 
     [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
         [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
@@ -185,16 +176,14 @@
 // invoke when timeline update has failed
 -(void) fetchTimelineFailed:(App*)app timeline:(Timeline*)timeline error:(NSError*)error {
     NSLog(@"load reviews: failed with error: %@", error);
-    
+    [self setLoading:NO];    
     [self setLoaded:NO];
-    [self setLoading:NO];
 }
 
 -(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline {
     NSLog(@"load reviews: no more!");
-
-    [self setLoaded:YES];
     [self setLoading:NO];
+    [self setLoaded:YES];
 }
 
 -(BOOL) shouldScrollToTopWhenUpdated {

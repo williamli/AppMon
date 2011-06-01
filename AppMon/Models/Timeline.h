@@ -30,6 +30,13 @@
 // if this timeline reached end
 @property (nonatomic, assign) BOOL ended;
 
+// if this timeline is loaded
+@property (nonatomic, assign) BOOL loaded;
+
+// if this timeline is being loaded
+@property (nonatomic, assign) BOOL loading;
+
+
 -(id) initWithApp:(App*)app;
 
 -(void) addReviews:(NSArray*)newReviews fromHead:(BOOL)fromHead;

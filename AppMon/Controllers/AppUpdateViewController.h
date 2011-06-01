@@ -13,24 +13,21 @@
 #import "AppService.h"
 #import "AppStoreApi.h"
 #import "App.h"
+#import "Timeline.h"
+
 #import "LoadingViewItem.h"
 
 @interface AppUpdateViewController : NSViewController <JAListViewDataSource, JAListViewDelegate, AppServiceDelegate> {
 @private
     
     AppService* _service;
-    
-    App* _app;
-    NSArray* _reviews;
-    
-    BOOL _loading;
-    BOOL _loaded;
+    Timeline* _timeline;
+
 }
 
 @property (nonatomic, retain) IBOutlet NSProgressIndicator* progressView;
 @property (nonatomic, retain) IBOutlet JAListView* listUpdates;
-@property (nonatomic, retain) App* app;
-@property (nonatomic, retain) NSArray* reviews;
+@property (nonatomic, retain) Timeline* timeline;
 
 // load app reviews from an app
 -(void) loadAppReviews:(App*)app;
