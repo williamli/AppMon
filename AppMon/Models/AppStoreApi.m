@@ -24,33 +24,29 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 
 
 @interface AppStoreApi (Private)
--(ASIHTTPRequest*) request:(NSString*)urlStr;
--(ASIFormDataRequest*) postRequest:(NSString*)urlStr;
+-(ASIHTTPRequest*) request:(NSString*)urlStr store:(NSString*)store ;
+-(ASIFormDataRequest*) postRequest:(NSString*)urlStr store:(NSString*)store;
 -(NSArray*) storesFromNodes:(NSArray*)nodes;
 @end
 
 @implementation AppStoreApi
 
-@synthesize storeFront=_storeFront;
-
 - (id)init
 {
     self = [super init];
     if (self) {
-        self.storeFront = @"143441"; // US
     }    
     return self;
 }
 
 - (void)dealloc
 {
-    self.storeFront = nil;
     [super dealloc];
 }
 
--(App*) fetchAppById:(NSString*)appid error:(NSError**)error {
+-(App*) fetchAppByStore:(NSString*)store appId:(NSString*)appid error:(NSError**)error {
     App* app = nil;
-    ASIHTTPRequest* req = [self request:[NSString stringWithFormat:@"%@?id=%@", kAppStoreSoftwareUrl, appid]];
+    ASIHTTPRequest* req = [self request:[NSString stringWithFormat:@"%@?id=%@", kAppStoreSoftwareUrl, appid] store:store];
     [req setRequestMethod:@"GET"];
     [req startSynchronous];
     
@@ -82,9 +78,9 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
     return app;
 } 
 
--(NSArray*) search:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error {
+-(NSArray*) searchByStore:(NSString*)store query:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error {
     NSMutableArray* searchResult = [NSMutableArray array];
-    ASIFormDataRequest* req = [self postRequest:kAppStoreSearchUrl];
+    ASIFormDataRequest* req = [self postRequest:kAppStoreSearchUrl store:store];
     [req setRequestMethod:@"POST"];
     [req setPostValue:[NSString stringWithFormat:@"%ld", page*kSearchResultPerPage] forKey:@"startIndex"];
     [req setPostValue:[NSString stringWithFormat:@"%ld", page*kSearchResultPerPage] forKey:@"displayIndex"];
@@ -133,7 +129,7 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 
 -(NSArray*) stores:(NSError**)error {
     NSArray* countries;
-    ASIHTTPRequest* req = [self request:kAppStoreCountryUrl];
+    ASIHTTPRequest* req = [self request:kAppStoreCountryUrl store:@"143441"];
     [req startSynchronous];
     
     if ([req responseStatusCode] == 200) {
@@ -148,11 +144,11 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
     return countries;
 }  
 
--(NSArray*) reviews:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total lastReviewDate:(NSDate**)lastReviewDate error:(NSError**)error{
+-(NSArray*) reviewsByStore:(NSString*)store appId:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total lastReviewDate:(NSDate**)lastReviewDate error:(NSError**)error{
     NSMutableArray* reviews = [NSMutableArray array];
     NSString* url = [NSString stringWithFormat:@"%@?id=%@&type=Purple+Software&displayable-kind=11&pageNumber=%ld", 
                      kAppStoreReviewUrl, appid, page];
-    ASIHTTPRequest* req = [self request:url];
+    ASIHTTPRequest* req = [self request:url store:store];
     [req setRequestMethod:@"GET"];
     [req startSynchronous];
     
@@ -198,20 +194,20 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 
 #pragma mark - Private
 
--(ASIHTTPRequest*) request:(NSString*)urlStr {    
+-(ASIHTTPRequest*) request:(NSString*)urlStr store:(NSString*)store {    
     NSLog(@"GET %@", urlStr);
 
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlStr]];
     [request addRequestHeader:@"X-Apple-Store-Front" 
-                        value:[NSString stringWithFormat:@"%@-1,2", self.storeFront]];
+                        value:[NSString stringWithFormat:@"%@-1,2", store]];
     [request setUserAgent:@"iTunes-iPhone/3.0"];
     return request;
 }
 
--(ASIFormDataRequest*) postRequest:(NSString*)urlStr {
+-(ASIFormDataRequest*) postRequest:(NSString*)urlStr store:(NSString*)store {    
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:urlStr]];
     [request addRequestHeader:@"X-Apple-Store-Front" 
-                         value:[NSString stringWithFormat:@"%@-1,2", self.storeFront]];
+                         value:[NSString stringWithFormat:@"%@-1,2", store]];
     [request setUserAgent:@"iTunes-iPhone/3.0"];
     return request;
 }

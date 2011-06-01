@@ -24,32 +24,33 @@ extern NSString * const kAppStoreReviewUrl;
     
 }
 
-@property (nonatomic, retain) NSString* storeFront;
-
-// Find an App by id
+// Find an App by store and id
 // Parameters: 
+//  store   - app store front id
 //  appid   - App Id
 //  error   - if error occurred, error is set to non nil
 // Return: App, or nil if error
--(App*) fetchAppById:(NSString*)appid error:(NSError**)error;
+-(App*) fetchAppByStore:(NSString*)store appId:(NSString*)appid error:(NSError**)error;
 
 // Search a specific quert on App Store
 // Parameters: 
+//  store   - app store front id
 //  query   - terms to search
 //  page    - number of page, 0 based
 //  total   - if succeed, return the total number of search result on servers
 //  error   - if error occurred, error is set to non nil
 // Return: Array of Apps
--(NSArray*) search:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error;
+-(NSArray*) searchByStore:(NSString*)store query:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error;
 
 // Find reviews of an app
 // Parameters: 
+//  store   - app store front id
 //  appid   - App Id
 //  page    - number of page, 0 based
 //  total   - if succeed, return the total number of search result on servers
 //  error   - if error occurred, error is set to non nil
 // Return: Array of Reviews
--(NSArray*) reviews:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total lastReviewDate:(NSDate**)lastReviewDate  error:(NSError**)error;
+-(NSArray*) reviewsByStore:(NSString*)store appId:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total lastReviewDate:(NSDate**)lastReviewDate  error:(NSError**)error;
 
 // Find list of available App Stores
 // Parameters: 

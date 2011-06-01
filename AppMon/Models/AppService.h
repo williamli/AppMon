@@ -10,6 +10,7 @@
 
 #import "App.h"
 #import "Timeline.h"
+#import "Store.h"
 
 @protocol AppServiceDelegate
 

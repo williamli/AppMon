@@ -97,11 +97,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         NSDate* lastReviewDate = nil;
 
         AppStoreApi* api = [AppMonAppDelegate instance].appStoreApi;
-        NSArray* reviews = [api reviews:app.itemId 
-                                   page:(loadMore ? timeline.page+1 : 0)
-                                  total:&total
-                         lastReviewDate:&lastReviewDate
-                                  error:&error];
+        NSArray* reviews = [api reviewsByStore:timeline.store.storefront
+                                          appId:app.itemId 
+                                       page:(loadMore ? timeline.page+1 : 0)
+                                      total:&total
+                             lastReviewDate:&lastReviewDate
+                                      error:&error];
         
         if (error) {
             NSLog(@"timeline of (%@) encounter error: %@", app.title, error);
@@ -155,8 +156,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
 -(Timeline*) timelineWithApp:(App*)app {
     Timeline* timeline = [_timelines objectForKey:app.itemId];
-    if (!timeline) {
-        timeline = [[[Timeline alloc] initWithApp:app] autorelease];
+    if (!timeline) {        
+        Store* store = [[[Store alloc] initWithName:@"US" storefront:@"143441"] autorelease];
+        timeline = [[[Timeline alloc] initWithApp:app store:store] autorelease];
         [_timelines setValue:timeline forKey:app.itemId];
     }
     return timeline;

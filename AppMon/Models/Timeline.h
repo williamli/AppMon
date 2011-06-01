@@ -8,17 +8,42 @@
 
 #import <Foundation/Foundation.h>
 #import "App.h"
+#import "Store.h"
 
 #define kReviewsPerPage         10
 
-@interface Timeline : NSObject {
+@protocol Timeline
+
+@property (nonatomic, retain) NSDate* lastReviewDate;
+@property (nonatomic, assign) NSUInteger page;
+@property (nonatomic, assign) NSUInteger total;
+@property (nonatomic, assign) BOOL ended;
+@property (nonatomic, assign) BOOL loaded;
+@property (nonatomic, assign) BOOL loading;
+
+-(void) setApp:(App*)newApp;
+-(NSArray*) reviews;
+
+@end
+
+@interface Timeline : NSObject <Timeline> {
 @private    
 }
 
+#pragma mark - parameters
+
+// app of this timeline
 @property (nonatomic, retain) App* app;
 
+// store of this timeline
+@property (nonatomic, retain) Store* store;
+
+#pragma mark - states
+
+// last review date
 @property (nonatomic, retain) NSDate* lastReviewDate;
 
+// array of reviews of this timeline
 @property (nonatomic, retain) NSMutableArray* reviews;
 
 // last fetched page number
@@ -36,11 +61,15 @@
 // if this timeline is being loaded
 @property (nonatomic, assign) BOOL loading;
 
+#pragma mark - methods
 
--(id) initWithApp:(App*)app;
+// initialize the timeline with specified app
+-(id) initWithApp:(App*)theApp store:(Store*)theStore;
 
+// add reviews to this timeline
 -(void) addReviews:(NSArray*)newReviews fromHead:(BOOL)fromHead;
 
+// if the timeline has more reviews
 -(BOOL) hasMoreReviews;
 
 @end

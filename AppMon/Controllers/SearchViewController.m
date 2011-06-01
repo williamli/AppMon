@@ -15,6 +15,7 @@
 @interface SearchViewController (Private)
 -(void) searchDidFinished:(NSArray*)results;
 -(void) searchDidFailed:(NSError*)error;
+-(NSString*) store;
 @end
 
 @implementation SearchViewController
@@ -71,10 +72,11 @@
         NSError* error = nil;
         NSInteger total;
 
-        NSArray* searchResult = [self.api search:query 
-                                            page:0 
-                                           total:&total 
-                                           error:&error];
+        NSArray* searchResult = [self.api searchByStore:[self store]
+                                                  query:query 
+                                                   page:0 
+                                                  total:&total 
+                                                  error:&error];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setLoading:NO];
@@ -99,6 +101,10 @@
         self.results = theResults;
         [self.searchResultList reloadDataAnimated:YES];
     }
+}
+
+-(NSString*) store {
+    return @"143441"; // US
 }
 
 -(void) searchDidFailed:(NSError*)error {
