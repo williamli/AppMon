@@ -15,7 +15,6 @@
 #import "Review.h"
 #import "Store.h"
 
-#define kSearchResultPerPage 24
 #define kStoreFrontRegexp @"storeFrontId=([0-9]+)"
 
 NSString * const kAppStoreSearchUrl     = @"http://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search";

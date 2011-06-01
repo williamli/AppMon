@@ -23,6 +23,7 @@
 		5426995E1394C2280052EE8E /* AppListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5426995C1394C2270052EE8E /* AppListViewController.m */; };
 		542699621394C5930052EE8E /* AppListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 542699611394C5930052EE8E /* AppListViewCell.m */; };
 		542699641394C5A80052EE8E /* AppListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542699631394C5A80052EE8E /* AppListViewCell.xib */; };
+		5426F0561395DD3100C049CF /* Timeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 5426F0551395DD3100C049CF /* Timeline.m */; };
 		546458BB139391C20096466C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546458BA139391C20096466C /* Cocoa.framework */; };
 		546458C5139391C30096466C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 546458C3139391C30096466C /* InfoPlist.strings */; };
 		546458C8139391C30096466C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 546458C7139391C30096466C /* main.m */; };
@@ -121,6 +122,8 @@
 		542699601394C5930052EE8E /* AppListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppListViewCell.h; path = Views/AppListViewCell.h; sourceTree = "<group>"; };
 		542699611394C5930052EE8E /* AppListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppListViewCell.m; path = Views/AppListViewCell.m; sourceTree = "<group>"; };
 		542699631394C5A80052EE8E /* AppListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppListViewCell.xib; path = Views/AppListViewCell.xib; sourceTree = "<group>"; };
+		5426F0541395DD3100C049CF /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timeline.h; path = Models/Timeline.h; sourceTree = "<group>"; };
+		5426F0551395DD3100C049CF /* Timeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Timeline.m; path = Models/Timeline.m; sourceTree = "<group>"; };
 		546458B6139391C20096466C /* AppMon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		546458BA139391C20096466C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		546458BD139391C30096466C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -463,6 +466,8 @@
 				54645B89139394B80096466C /* Review.m */,
 				54F6505D1393CFA3005FF9B7 /* Store.h */,
 				54F6505E1393CFA3005FF9B7 /* Store.m */,
+				5426F0541395DD3100C049CF /* Timeline.h */,
+				5426F0551395DD3100C049CF /* Timeline.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -699,6 +704,7 @@
 				549FFC1C1394FAFB003321C5 /* LoadingViewItem.m in Sources */,
 				549FFC211394FF99003321C5 /* AppReviewViewCell.m in Sources */,
 				54FBE27D139523520069A2C0 /* NS(Attributed)String+Geometrics.m in Sources */,
+				5426F0561395DD3100C049CF /* Timeline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

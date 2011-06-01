@@ -10,20 +10,26 @@
 #import "JAListView.h"
 #import "JASectionedListView.h"
 
+#import "AppService.h"
 #import "AppStoreApi.h"
 #import "App.h"
 #import "LoadingViewItem.h"
 
-@interface AppUpdateViewController : NSViewController <JAListViewDataSource, JAListViewDelegate> {
+@interface AppUpdateViewController : NSViewController <JAListViewDataSource, JAListViewDelegate, AppServiceDelegate> {
 @private
-    AppStoreApi* _api;
-    NSArray* _reviews;
+    
+    AppService* _service;
+    
     App* _app;
+    NSArray* _reviews;
+    
     BOOL _loading;
     BOOL _loaded;
 }
 
 @property (nonatomic, retain) IBOutlet JAListView* listUpdates;
+@property (nonatomic, retain) App* app;
+@property (nonatomic, retain) NSArray* reviews;
 
 -(void) loadAppReviews:(App*)app;
 

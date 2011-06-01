@@ -12,14 +12,17 @@
 #import "AppMonAppDelegate.h"
 #import <Quartz/Quartz.h>
 
+@interface JAListView ()
+- (void)standardLayoutRemoveViews:(NSArray *)viewsToRemove addViews:(NSArray *)viewsToAdd moveViews:(NSArray *)viewsToMove;
+- (void)standardLayoutAnimated:(BOOL)animated removeViews:(NSArray *)viewsToRemove addViews:(NSArray *)viewsToAdd moveViews:(NSArray *)viewsToMove;
+@end
+
 @interface AppUpdateViewController (Private)
--(void) loadAppReviewsDidFinished:(NSArray*)results;
--(void) loadAppReviewsDidFailed:(NSError*)error;
 @end
 
 @implementation AppUpdateViewController
 
-@synthesize listUpdates=_listUpdates;
+@synthesize listUpdates=_listUpdates, app=_app, reviews=_reviews;
 
 - (id)init
 {
@@ -34,14 +37,11 @@
 
 - (void)dealloc
 {
-    [_reviews release];
-    _reviews = nil;
-
-    [_app release];
-    _app = nil;
+    self.app = nil;
+    self.reviews = nil;
     
-    [_api release];
-    _api = nil;
+    [_service release];
+    _service = nil;
 
     [super dealloc];
 }
@@ -49,36 +49,20 @@
 -(void) awakeFromNib {
     [super awakeFromNib];
 
-    _api = [[AppStoreApi alloc] init];
+    _service = [[AppService alloc] init];
+    _service.delegate = self;
 }
 
--(void) loadAppReviews:(App*)app {
-    if ([app isEqual:_app]) {
+-(void) loadAppReviews:(App*)newApp {
+    if ([newApp isEqual:self.app]) {
         return;
     }
+    
+    self.app = newApp;
 
-    NSLog(@"Load App Reviews: %@ (%@)", app.title, app.itemId);
+    NSLog(@"Load App Reviews: %@ (%@)", self.app.title, self.app.itemId);
     [self setLoading:YES];
-
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        NSError* error = nil;
-        NSInteger total;
-        
-        NSArray* reviews = [_api reviews:app.itemId 
-                                    page:0 
-                                   total:&total 
-                                   error:&error];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self setLoading:NO];
-            if (error) {
-                [self loadAppReviewsDidFailed:error];
-            } else {
-                [self loadAppReviewsDidFinished:reviews];
-            }
-        });
-    });
+    [_service fetchTimelineWithApp:self.app];
 }
 
 -(void) setLoading:(BOOL)newLoading {
@@ -91,36 +75,44 @@
     _loading = NO;
 }
 
--(void) loadAppReviewsDidFinished:(NSArray*)theResults {
-    NSLog(@"load reviews did finished: %@", theResults);
-    [_reviews release];
-    _reviews = [theResults retain];
-
-    [self setLoaded:YES];
-    [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
-        [self.listUpdates scrollPoint:NSZeroPoint];
-    }];
-}
-
--(void) loadAppReviewsDidFailed:(NSError*)error {
-    NSLog(@"load reviews failed: %@", error);
-    [self setLoaded:NO];
-}
-
 #pragma mark - JAListViewDataSource
 
 - (NSUInteger)numberOfItemsInListView:(JAListView *)listView {
     if (_loaded) {
-        return [_reviews count];
+        return [self.reviews count];
     } else {
         return 0;
     }
 }
 
 - (JAListViewItem *)listView:(JAListView *)listView viewAtIndex:(NSUInteger)index {
-    Review* review = [_reviews objectAtIndex:index];
+    Review* review = [self.reviews objectAtIndex:index];
     AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
     return item;
+}
+
+#pragma mark - AppServiceDelegate
+
+// invoke when timeline is changed
+-(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline {
+    self.reviews = timeline.reviews;
+
+    NSLog(@"load reviews did finished:, %ld reviews loaded", [self.reviews count]);
+    [self setLoaded:YES];
+
+    [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
+        [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
+        [self.listUpdates scrollPoint:NSZeroPoint];
+    }];
+}
+
+// invoke when timeline update has failed
+-(void) fetchTimelineFailed:(App*)app timeline:(Timeline*)timeline error:(NSError*)error {
+    [self setLoaded:NO];
+}
+
+-(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline {
+
 }
 
 @end

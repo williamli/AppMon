@@ -7,11 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "App.h"
+#import "Timeline.h"
+
+@protocol AppServiceDelegate
+
+// invoke when timeline is changed
+-(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline;
+
+// invoke when timeline update has failed
+-(void) fetchTimelineFailed:(App*)app timeline:(Timeline*)timeline error:(NSError*)error;
+
+// invoke when timeline reach end
+-(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline;
+
+@end
 
 @interface AppService : NSObject {   
     NSMutableArray* _apps;
+    NSMutableDictionary* _timelines;
 }
+
+@property (nonatomic, assign) id<AppServiceDelegate> delegate;
 
 -(void) follow:(App*)app;
 
@@ -20,6 +38,16 @@
 -(BOOL) isFollowed:(App*)app;
 
 -(NSArray*) followedApps;
+
+@end
+
+@interface AppService (Timeline)
+
+-(void) fetchTimelineWithApp:(App*)app;
+
+-(void) fetchTimelineWithApp:(App*)app more:(BOOL)loadMore;
+
+-(Timeline*) timelineWithApp:(App*)app;
 
 @end
 

@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "App.h"
+#import "Timeline.h"
 
 extern NSString * const kAppStoreSoftwareUrl;
 extern NSString * const kAppStoreSearchUrl;
 extern NSString * const kAppStoreCountryUrl;
 extern NSString * const kAppStoreReviewUrl;
+
+#define kSearchResultPerPage    24
 
 @interface AppStoreApi : NSObject {
     

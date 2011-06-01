@@ -8,18 +8,28 @@
 
 #import "AppService.h"
 
+#import "App.h"
+#import "AppStoreApi.h"
+#import "AppMonAppDelegate.h"
+#import "Timeline.h"
+
 @interface AppService (Private)
 -(NSString*) saveFilePath;
 @end
 
 @implementation AppService
 
+@synthesize delegate;
+
 - (id)init
 {
     self = [super init];
+
+    NSLog(@"init appservice");
     if (self) {
         [self load];
-        
+
+        _timelines = [[NSMutableDictionary dictionary] retain];
         NSLog(@"apps: %@", _apps);
     }
     
@@ -28,6 +38,9 @@
 
 - (void)dealloc
 {
+    [_timelines release];
+    _timelines = nil;
+
     [_apps release];
     _apps = nil;
 
@@ -52,6 +65,75 @@
 
 -(BOOL) isFollowed:(App*)app {
     return [_apps containsObject:app];
+}
+
+@end
+
+@implementation AppService (Timeline)
+
+-(void) fetchTimelineWithApp:(App*)app {
+    [self fetchTimelineWithApp:app more:NO];
+}
+
+-(void) fetchTimelineWithApp:(App*)app more:(BOOL)loadMore {
+    Timeline* timeline = [self timelineWithApp:app];
+    
+    if (loadMore && ![timeline hasMoreReviews]) {
+        NSLog(@"timeline (%@) has no more reviews", app.title);
+        return;
+    }
+
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        NSInteger total;
+        NSError* error = nil;
+        NSDate* lastReviewDate = nil;
+        
+        AppStoreApi* api = [AppMonAppDelegate instance].appStoreApi;
+        NSArray* reviews = [api reviews:app.itemId 
+                                   page:timeline.page+1
+                                  total:&total
+                         lastReviewDate:&lastReviewDate
+                                  error:&error];
+        
+        if (error) {
+            NSLog(@"timeline of (%@) encounter error: %@", app.title, error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self.delegate) {
+                    [self.delegate fetchTimelineFailed:app timeline:timeline error:error];
+                }
+            });
+            
+        } else {
+            // updated
+            timeline.total = total;
+            timeline.page = timeline.page+1;
+            timeline.lastReviewDate = lastReviewDate;
+            
+            BOOL shouldInsertFromHead = !loadMore;
+            if (loadMore || timeline.lastReviewDate == nil || [timeline.lastReviewDate compare:lastReviewDate] == NSOrderedAscending) {
+                NSLog(@"timeline of (%@) updated", app.title);
+                [timeline addReviews:reviews fromHead:shouldInsertFromHead];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate fetchTimelineFinished:app timeline:timeline];
+                });
+                
+            } else {
+                NSLog(@"timeline of (%@) not updated", app.title);
+
+            } 
+        }
+    });
+}
+
+-(Timeline*) timelineWithApp:(App*)app {
+    Timeline* timeline = [_timelines objectForKey:app.itemId];
+    if (!timeline) {
+        timeline = [[[Timeline alloc] initWithApp:app] autorelease];
+        [_timelines setValue:timeline forKey:app.itemId];
+    }
+    return timeline;
 }
 
 @end
