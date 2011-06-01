@@ -156,7 +156,7 @@
 
     [self setLoaded:YES];
     [self setLoading:NO];
-    [self.listUpdates reloadData];
+    [self.listUpdates reloadDataAnimated:YES];
 }
 
 -(void) fetchTimelineNoUpdate:(App*)app timeline:(Timeline*)timeline {
@@ -164,7 +164,7 @@
 
     [self setLoading:NO];
     [self setLoaded:YES];
-    [self.listUpdates reloadData];
+    [self.listUpdates reloadDataAnimated:YES];
 }
 
 // invoke when timeline update has failed
