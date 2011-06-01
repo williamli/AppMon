@@ -25,56 +25,56 @@
     [super tearDown];
 }
 
-//- (void)testFetchAppById {
-//    NSError* error = nil;
-//    App* app = [self.appStore fetchAppById:@"343200656" error:&error]; // 343200656 = Angry Bird
-//
-//    STAssertNil(error, @"should have no error");
-//    STAssertNotNil(app, @"should not nil");
-//
-//    STAssertNotNil(app.title, @"title should not nil");
-//    STAssertNotNil(app.itemId, @"itemId should not nil");
-//    STAssertNotNil(app.url, @"url should not nil");
-//    STAssertNotNil(app.iconUrl, @"iconUrl should not nil");
-//    STAssertNotNil(app.price, @"price should not nil");
-//    STAssertNotNil(app.releaseDate, @"releaseDate should not nil");    
-//}
-//
-//- (void)testSearchApp {
-//    NSError* error = nil;
-//    NSInteger count = 0;
-//    NSArray* apps = [self.appStore search:@"Camera" page:0 total:&count error:&error];
-//
-//    STAssertNil(error, @"should have no error");
-//    STAssertNotNil(apps, @"should not nil");
-//    STAssertTrue([apps count] > 5, @"should have at least 5 result items");
-//    NSLog(@"result count: %ld, total result count: %ld", [apps count], count);
-//    
-//    App* app = [apps objectAtIndex:0];
-//    STAssertNotNil(app, @"should not nil");
-//    STAssertNotNil(app.title, @"title should not nil");
-//    STAssertNotNil(app.itemId, @"itemId should not nil");
-//    STAssertNotNil(app.url, @"url should not nil");
-//    STAssertNotNil(app.iconUrl, @"iconUrl should not nil");
-//    STAssertNotNil(app.price, @"price should not nil");
-//    STAssertNotNil(app.releaseDate, @"releaseDate should not nil");    
-//}
-//- (void)testSearchAppSecondPage {
-//    NSError* error = nil;
-//    NSInteger count = 0;
-//    NSArray* apps2 = [self.appStore search:@"Camera" page:1 total:&count error:&error];
-//    STAssertNil(error, @"should have no error searching second page");
-//    STAssertNotNil(apps2, @"should not nil");
-//    STAssertTrue([apps2 count] > 5, @"should have at least 5 result items");
-//}
+- (void)testFetchAppById {
+    NSError* error = nil;
+    App* app = [self.appStore fetchAppByStore:@"143441" appId:@"343200656" error:&error]; // 343200656 = Angry Bird
 
+    STAssertNil(error, @"should have no error");
+    STAssertNotNil(app, @"should not nil");
+
+    STAssertNotNil(app.title, @"title should not nil");
+    STAssertNotNil(app.itemId, @"itemId should not nil");
+    STAssertNotNil(app.url, @"url should not nil");
+    STAssertNotNil(app.iconUrl, @"iconUrl should not nil");
+    STAssertNotNil(app.price, @"price should not nil");
+    STAssertNotNil(app.releaseDate, @"releaseDate should not nil");    
+}
+
+
+- (void)testSearchApp {
+    NSError* error = nil;
+    NSInteger count = 0;
+    NSArray* apps = [self.appStore searchByStore:@"143441" query:@"Camera" page:0 total:&count error:&error];
+
+    STAssertNil(error, @"should have no error");
+    STAssertNotNil(apps, @"should not nil");
+    STAssertTrue([apps count] > 5, @"should have at least 5 result items");
+    NSLog(@"result count: %ld, total result count: %ld", [apps count], count);
+    
+    App* app = [apps objectAtIndex:0];
+    STAssertNotNil(app, @"should not nil");
+    STAssertNotNil(app.title, @"title should not nil");
+    STAssertNotNil(app.itemId, @"itemId should not nil");
+    STAssertNotNil(app.url, @"url should not nil");
+    STAssertNotNil(app.iconUrl, @"iconUrl should not nil");
+    STAssertNotNil(app.price, @"price should not nil");
+    STAssertNotNil(app.releaseDate, @"releaseDate should not nil");    
+}
+- (void)testSearchAppSecondPage {
+    NSError* error = nil;
+    NSInteger count = 0;
+    NSArray* apps2 = [self.appStore searchByStore:@"143441" query:@"Camera" page:1 total:&count error:&error];
+    STAssertNil(error, @"should have no error searching second page");
+    STAssertNotNil(apps2, @"should not nil");
+    STAssertTrue([apps2 count] > 5, @"should have at least 5 result items");
+}
 
 
 - (void)testReviews {
     NSError* error = nil;
     NSInteger total = 0;
     NSDate* lastReviewDate = nil;
-    NSArray* reviews = [self.appStore reviews:@"343200656" page:0 total:&total lastReviewDate:&lastReviewDate error:&error];
+    NSArray* reviews = [self.appStore reviewsByStore:@"143441" appId:@"343200656" page:0 total:&total lastReviewDate:&lastReviewDate error:&error];
     STAssertNil(error, @"should have no error: %@", error);
     
     STAssertNotNil(reviews, @"should not nil");
@@ -91,20 +91,20 @@
     NSLog(@"rev: %@", [rev description]);
     
     // HKTV
-    reviews = [self.appStore reviews:@"348883035" page:0 total:&total lastReviewDate:&lastReviewDate error:&error];
+    reviews = [self.appStore reviewsByStore:@"143441" appId:@"348883035" page:0 total:&total lastReviewDate:&lastReviewDate error:&error];
     STAssertNil(error, @"should have no error: %@", error);
     STAssertTrue(total > 0, @"should have total > 0");
     STAssertTrue(total < 1000000, @"should have total < 1000000");
     
 }
 
-//- (void)testCountry {
-//    NSError* error = nil;
-//    NSArray* stores = [self.appStore stores:&error];
-//    STAssertNil(error, @"should have no error");
-//  
-//    STAssertNotNil(stores, @"should not nil");
-//    STAssertTrue([stores count] > 0, @"should have at least 1 comments");
-//}
+- (void)testCountry {
+    NSError* error = nil;
+    NSArray* stores = [self.appStore stores:&error];
+    STAssertNil(error, @"should have no error");
+  
+    STAssertNotNil(stores, @"should not nil");
+    STAssertTrue([stores count] > 0, @"should have at least 1 comments");
+}
 
 @end
