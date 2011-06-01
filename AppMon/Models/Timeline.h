@@ -16,7 +16,9 @@
 }
 
 @property (nonatomic, retain) App* app;
+
 @property (nonatomic, retain) NSDate* lastReviewDate;
+
 @property (nonatomic, retain) NSMutableArray* reviews;
 
 // last fetched page number

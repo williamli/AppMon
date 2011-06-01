@@ -150,8 +150,11 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 
 -(NSArray*) reviews:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total lastReviewDate:(NSDate**)lastReviewDate error:(NSError**)error{
     NSMutableArray* reviews = [NSMutableArray array];
-    ASIHTTPRequest* req = [self request:[NSString stringWithFormat:@"%@?id=%@&type=Purple+Software&displayable-kind=11&pageNumber=%ld", 
-                                         kAppStoreReviewUrl, appid, page]];
+    NSString* url = [NSString stringWithFormat:@"%@?id=%@&type=Purple+Software&displayable-kind=11&pageNumber=%ld", 
+                     kAppStoreReviewUrl, appid, page];
+
+    NSLog(@"request URL:  %@", url);
+    ASIHTTPRequest* req = [self request:url];
     [req setRequestMethod:@"GET"];
     [req startSynchronous];
     
@@ -178,13 +181,10 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {
                     *total = [[itemDict objectForKey:@"total-items"] intValue];
-                    NSString* moreUrl = [itemDict objectForKey:@"url"];
-                    NSLog(@"Total Result: %ld, More: %@", *total, moreUrl);
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"review-header"]) {
                     if ([itemDict objectForKey:@"last-review-date"]) {
                         *lastReviewDate = [itemDict objectForKey:@"last-review-date"];
-                        NSLog(@"last review date: %@", *lastReviewDate);
                     }
                 }
             }

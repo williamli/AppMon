@@ -18,6 +18,7 @@
 @end
 
 @interface AppUpdateViewController (Private)
+-(BOOL) shouldScrollToTopWhenUpdated;
 @end
 
 @implementation AppUpdateViewController
@@ -97,12 +98,28 @@
 -(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline {
     self.reviews = timeline.reviews;
 
-    NSLog(@"load reviews did finished:, %ld reviews loaded", [self.reviews count]);
+    NSLog(@"load reviews did finished: %ld reviews loaded, %ld total, last review date: %@", [self.reviews count], timeline.total, timeline.lastReviewDate);
     [self setLoaded:YES];
 
     [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
         [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
-        [self.listUpdates scrollPoint:NSZeroPoint];
+        
+        if ([self shouldScrollToTopWhenUpdated]) {
+            [self.listUpdates scrollPoint:NSZeroPoint];
+        }
+    }];
+}
+
+-(void) fetchTimelineNoUpdate:(App*)app timeline:(Timeline*)timeline {
+    self.reviews = timeline.reviews;
+    [self setLoaded:YES];
+    
+    [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
+        [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
+        
+        if ([self shouldScrollToTopWhenUpdated]) {
+            [self.listUpdates scrollPoint:NSZeroPoint];
+        }
     }];
 }
 
@@ -113,6 +130,10 @@
 
 -(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline {
 
+}
+
+-(BOOL) shouldScrollToTopWhenUpdated {
+    return YES;
 }
 
 @end

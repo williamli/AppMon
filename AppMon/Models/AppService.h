@@ -19,6 +19,9 @@
 // invoke when timeline update has failed
 -(void) fetchTimelineFailed:(App*)app timeline:(Timeline*)timeline error:(NSError*)error;
 
+// invoke when timeline has no update
+-(void) fetchTimelineNoUpdate:(App*)app timeline:(Timeline*)timeline;
+
 // invoke when timeline reach end
 -(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline;
 

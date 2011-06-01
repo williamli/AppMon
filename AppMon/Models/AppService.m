@@ -88,10 +88,10 @@
         NSInteger total;
         NSError* error = nil;
         NSDate* lastReviewDate = nil;
-        
+
         AppStoreApi* api = [AppMonAppDelegate instance].appStoreApi;
         NSArray* reviews = [api reviews:app.itemId 
-                                   page:timeline.page+1
+                                   page:timeline.page
                                   total:&total
                          lastReviewDate:&lastReviewDate
                                   error:&error];
@@ -105,23 +105,28 @@
             });
             
         } else {
-            // updated
-            timeline.total = total;
-            timeline.page = timeline.page+1;
-            timeline.lastReviewDate = lastReviewDate;
-            
             BOOL shouldInsertFromHead = !loadMore;
             if (loadMore || timeline.lastReviewDate == nil || [timeline.lastReviewDate compare:lastReviewDate] == NSOrderedAscending) {
                 NSLog(@"timeline of (%@) updated", app.title);
                 [timeline addReviews:reviews fromHead:shouldInsertFromHead];
-                
+
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.delegate fetchTimelineFinished:app timeline:timeline];
                 });
                 
+                if (!loadMore) {
+                    timeline.total = total;
+                    timeline.page = 0;
+                    timeline.lastReviewDate = lastReviewDate;
+                } else {
+                    timeline.page = timeline.page+1;
+                }
+
             } else {
                 NSLog(@"timeline of (%@) not updated", app.title);
-
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate fetchTimelineNoUpdate:app timeline:timeline];
+                });
             } 
         }
     });
