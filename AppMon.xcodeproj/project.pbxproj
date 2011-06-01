@@ -317,6 +317,7 @@
 		54B7C7181393B7D600AE8EDD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B7C7171393B7D600AE8EDD /* libicucore.dylib */; };
 		54CC03451393DCCE00F6DA6B /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 54CC03441393DCCE00F6DA6B /* XPathQuery.m */; };
 		54CC03551393DEC800F6DA6B /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54CC03541393DEC800F6DA6B /* libxml2.2.dylib */; };
+		54D77675139675A600617675 /* AppMonConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D77674139675A600617675 /* AppMonConfig.m */; };
 		54F6505F1393CFA3005FF9B7 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F6505E1393CFA3005FF9B7 /* Store.m */; };
 		54F7E47D1393F077007C8CCD /* AppMonMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F7E47B1393F076007C8CCD /* AppMonMainController.m */; };
 		54F7E4831393F6EA007C8CCD /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F7E4811393F6E9007C8CCD /* SearchViewController.m */; };
@@ -700,6 +701,8 @@
 		54CC03431393DCCE00F6DA6B /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
 		54CC03441393DCCE00F6DA6B /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		54CC03541393DEC800F6DA6B /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		54D77673139675A600617675 /* AppMonConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMonConfig.h; sourceTree = "<group>"; };
+		54D77674139675A600617675 /* AppMonConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMonConfig.m; sourceTree = "<group>"; };
 		54F6505D1393CFA3005FF9B7 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Store.h; path = Models/Store.h; sourceTree = "<group>"; };
 		54F6505E1393CFA3005FF9B7 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Store.m; path = Models/Store.m; sourceTree = "<group>"; };
 		54F7E47A1393F076007C8CCD /* AppMonMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMonMainController.h; path = Controllers/AppMonMainController.h; sourceTree = "<group>"; };
@@ -1215,6 +1218,8 @@
 				54645B83139394A00096466C /* AppStoreApi.m */,
 				54269951139496110052EE8E /* AppService.h */,
 				54269952139496110052EE8E /* AppService.m */,
+				54D77673139675A600617675 /* AppMonConfig.h */,
+				54D77674139675A600617675 /* AppMonConfig.m */,
 				54645B85139394AF0096466C /* App.h */,
 				54645B86139394AF0096466C /* App.m */,
 				54645B88139394B80096466C /* Review.h */,
@@ -1708,6 +1713,7 @@
 				549FFC211394FF99003321C5 /* AppReviewViewCell.m in Sources */,
 				54FBE27D139523520069A2C0 /* NS(Attributed)String+Geometrics.m in Sources */,
 				5426F0561395DD3100C049CF /* Timeline.m in Sources */,
+				54D77675139675A600617675 /* AppMonConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -219,8 +219,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 // save path for app mon config file
 // create intermediate directories if needed
 -(NSString*) saveFilePath {
+    NSBundle* bundle = [NSBundle mainBundle];
+    NSDictionary* info = [bundle infoDictionary];
+    NSString* bundleName = [info objectForKey:@"CFBundleName"];
+    
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, true);
-    NSString* path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"AppMon"];
+    NSString* path = [[paths objectAtIndex:0] stringByAppendingPathComponent:bundleName];
     
     NSFileManager* manager = [NSFileManager defaultManager];
     if (![manager fileExistsAtPath:path]) {

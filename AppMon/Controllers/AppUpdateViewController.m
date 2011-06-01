@@ -159,9 +159,8 @@
 
     [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
         [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
-        if ([self shouldScrollToTopWhenUpdated] && !isLoadMore) {
-            [self.listUpdates scrollPoint:NSZeroPoint];
-        }
+        
+        [[self.listUpdates superview] setNeedsDisplay:YES];
     }];
 }
 
@@ -173,10 +172,8 @@
 
     [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
         [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
-        
-        if ([self shouldScrollToTopWhenUpdated]) {
-            [self.listUpdates scrollPoint:NSZeroPoint];
-        }
+
+        [[self.listUpdates superview] setNeedsDisplay:YES];
     }];
 }
 

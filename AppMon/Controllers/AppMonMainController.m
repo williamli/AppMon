@@ -7,9 +7,13 @@
 //
 
 #import "AppMonMainController.h"
+#import "AppMonAppDelegate.h"
+#import "AppMonConfig.h"
 
 @interface AppMonMainController (Private)
 -(void) buildMenu;
+
+-(void) loadConfig;
 -(void) countryMenuClicked:(id)sender;
 @end
 
@@ -41,7 +45,8 @@
 -(void) awakeFromNib {
     [super awakeFromNib];
     
-    [self buildMenu];   
+    [self buildMenu];
+    [self loadConfig];
 }
 
 
@@ -113,7 +118,7 @@
                                                 keyEquivalent:@""] autorelease];
         [item setTarget:self];
         [item setImage:[NSImage imageNamed:iconName]];
-        [item setEnabled:YES];
+        [item setEnabled:YES];        
         [self.menuCountry addItem:item];
         
         [countries setValue:storeFront forKey:countryName];
@@ -121,6 +126,25 @@
 
     [_countries release];
     _countries = [countries retain];
+    
+}
+
+// load configuration
+-(void) loadConfig {
+    AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
+    [config load];
+    
+    NSString* selectedCountry = [config selectedCountry];
+    NSString* selectedCode = [config selectedCountryCode];
+    for (NSMenuItem* menuItem in [self.menuCountry itemArray]) {
+        if ([[menuItem title] isEqualToString:selectedCountry]) {
+            [menuItem setState:NSOnState];
+            [self.btnCountry selectItem:menuItem];
+        } else {
+            [menuItem setState:NSOffState];   
+        }
+    }
+    [[AppService sharedAppService] setStore:selectedCode];
 }
 
 #pragma mark - Action
