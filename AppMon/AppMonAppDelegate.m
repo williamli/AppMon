@@ -10,12 +10,17 @@
 #import "AppService.h"
 #import "AppStoreApi.h"
 
+#import "ASIHTTPRequest.h"
+#import "ASIDownloadCache.h"
+
 @implementation AppMonAppDelegate
 
 @synthesize window, mainController;
 @synthesize appStoreApi;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
+
     [self.mainController.appListViewController.listApps reloadData];
 
     window.titleBarHeight = 45.0;
