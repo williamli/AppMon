@@ -79,6 +79,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     
     if (loadMore && ![timeline hasMoreReviews]) {
         NSLog(@"timeline (%@) has no more reviews", app.title);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if([self.delegate respondsToSelector:@selector(fetchTimelineNoMore:timeline:)]) {
+                [self.delegate fetchTimelineNoMore:app timeline:timeline];
+            }
+        });
         return;
     }
 
@@ -108,13 +113,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
             if (loadMore || timeline.lastReviewDate == nil || [timeline.lastReviewDate compare:lastReviewDate] == NSOrderedAscending) {
                 NSLog(@"timeline of (%@) updated", app.title);
                 [timeline addReviews:reviews fromHead:shouldInsertFromHead];
-
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:)]) {
-                        [self.delegate fetchTimelineFinished:app timeline:timeline];
-                    }
-                });
                 
+                if ([reviews count] == 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        timeline.ended = YES;
+                        if([self.delegate respondsToSelector:@selector(fetchTimelineNoMore:timeline:)]) {
+                            [self.delegate fetchTimelineNoMore:app timeline:timeline];
+                        }
+                    });   
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:loadMore:)]) {
+                            [self.delegate fetchTimelineFinished:app timeline:timeline loadMore:loadMore];
+                        }
+                    });
+                }
+
                 if (!loadMore) {
                     timeline.total = total;
                     timeline.page = 0;

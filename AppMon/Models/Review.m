@@ -83,4 +83,14 @@
     return [NSString stringWithFormat:@"<Review#%ld>", self.position];
 }
 
+
+-(BOOL) isEqual:(id)object {
+    if ([object respondsToSelector:@selector(username)] && self.username &&
+        [object respondsToSelector:@selector(date)] && self.date) {
+        return [[self username] isEqual:[object username]] && [[self date] isEqual:[object date]];        
+    } else {
+        return NO;
+    }
+}
+
 @end

@@ -80,6 +80,8 @@
     STAssertNotNil(reviews, @"should not nil");
     STAssertTrue([reviews count] > 0, @"should have at least 1 comments");
     STAssertNotNil(lastReviewDate, @"lastReviewDate should not be nil");
+    STAssertTrue(total > 0, @"should have total > 0");
+    STAssertTrue(total < 1000000, @"should have total < 1000000");
     
     Review* rev = [reviews objectAtIndex:0];
     STAssertNotNil(rev.title, @"should have title");
@@ -87,6 +89,13 @@
     STAssertTrue(rev.rating > 0, @"should have rating");
     
     NSLog(@"rev: %@", [rev description]);
+    
+    // HKTV
+    reviews = [self.appStore reviews:@"348883035" page:0 total:&total lastReviewDate:&lastReviewDate error:&error];
+    STAssertNil(error, @"should have no error: %@", error);
+    STAssertTrue(total > 0, @"should have total > 0");
+    STAssertTrue(total < 1000000, @"should have total < 1000000");
+    
 }
 
 //- (void)testCountry {

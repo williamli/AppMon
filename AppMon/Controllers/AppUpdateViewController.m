@@ -40,7 +40,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self 
                                                     name:NSViewBoundsDidChangeNotification 
-                                                  object:self.listUpdates];
+                                                  object:[self.listUpdates superview]];
     
     self.app = nil;
     self.reviews = nil;
@@ -58,13 +58,18 @@
     _service.delegate = self;
 
     self.listUpdates.backgroundColor = [NSColor whiteColor];
+    [[self.listUpdates superview] setPostsBoundsChangedNotifications:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(boundsDidChange:) 
+                                                 name:NSViewBoundsDidChangeNotification 
+                                               object:[self.listUpdates superview]]; 
 }
 
 -(void) loadAppReviews:(App*)newApp {
     if ([newApp isEqual:self.app]) {
         return;
     }
-    
+
     self.app = newApp;
     self.reviews = [NSArray array];
 
@@ -72,6 +77,28 @@
     [self.listUpdates reloadDataAnimated:YES];
     [self setLoading:YES];
     [_service fetchTimelineWithApp:self.app];
+}
+
+-(void) loadMoreAppReviews {
+    if (self.app == nil) {
+        NSLog(@"no apps selected");
+        return;
+    }
+    
+    if (_loading) {
+        NSLog(@"currently loading, ignore load more");
+        return;
+    }
+    
+    Timeline* tl = [_service timelineWithApp:self.app];
+    if (![tl hasMoreReviews]) {
+        NSLog(@"no more reviews to be loaded");
+        return;
+    }
+
+    NSLog(@"Load More App Reviews: %@ (%@)", self.app.title, self.app.itemId);
+    [self setLoading:YES];
+    [_service fetchTimelineWithApp:self.app more:YES];
 }
 
 -(void) setLoading:(BOOL)newLoading {
@@ -90,6 +117,18 @@
 -(void) setLoaded:(BOOL)newLoaded {
     _loaded = newLoaded;
     _loading = NO;
+}
+
+#pragma mark - NSViewBoundsDidChangeNotification
+
+-(void) boundsDidChange:(NSNotification*)aNotification  {
+    CGRect bound = [[aNotification object] bounds];
+    CGFloat height = self.listUpdates.frame.size.height;
+
+    if ((bound.origin.y + bound.size.height)>=height) {
+        NSLog(@" scroll view reached bottom!");
+        [self loadMoreAppReviews];
+    }
 }
 
 #pragma mark - JAListViewDataSource
@@ -111,7 +150,7 @@
 #pragma mark - AppServiceDelegate
 
 // invoke when timeline is changed
--(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline {   
+-(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline loadMore:(BOOL)isLoadMore {   
     NSLog(@"load reviews: finished with %ld reviews loaded, %ld total, last review date: %@", 
             [timeline.reviews count], timeline.total, timeline.lastReviewDate);
 
@@ -121,8 +160,7 @@
 
     [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
         [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
-        
-        if ([self shouldScrollToTopWhenUpdated]) {
+        if ([self shouldScrollToTopWhenUpdated] && !isLoadMore) {
             [self.listUpdates scrollPoint:NSZeroPoint];
         }
     }];

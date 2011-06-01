@@ -32,7 +32,11 @@
 @property (nonatomic, retain) App* app;
 @property (nonatomic, retain) NSArray* reviews;
 
+// load app reviews from an app
 -(void) loadAppReviews:(App*)app;
+
+// load more app reviews from currently selected app
+-(void) loadMoreAppReviews;
 
 -(void) setLoading:(BOOL)newLoading;
 

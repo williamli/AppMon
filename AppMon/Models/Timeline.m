@@ -11,7 +11,7 @@
 
 @implementation Timeline
 
-@synthesize app, lastReviewDate, reviews, total, page;
+@synthesize app, lastReviewDate, reviews, total, page, ended;
 
 -(id) initWithApp:(App*)theApp
 {
@@ -22,6 +22,7 @@
         self.lastReviewDate = nil;
         self.total = 0;
         self.page = 0;
+        self.ended = NO;
     }
     return self;
 }
@@ -50,7 +51,7 @@
 
 -(BOOL) hasMoreReviews {
     NSUInteger fetched = ( self.page + 1 ) * kReviewsPerPage;
-    return self.total > fetched;
+    return self.ended || self.total > fetched;
 }
 
 @end

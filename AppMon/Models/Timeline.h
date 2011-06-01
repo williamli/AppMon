@@ -27,6 +27,9 @@
 // total number of reviews online
 @property (nonatomic, assign) NSUInteger total;
 
+// if this timeline reached end
+@property (nonatomic, assign) BOOL ended;
+
 -(id) initWithApp:(App*)app;
 
 -(void) addReviews:(NSArray*)newReviews fromHead:(BOOL)fromHead;

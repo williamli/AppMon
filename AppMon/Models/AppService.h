@@ -14,7 +14,7 @@
 @protocol AppServiceDelegate
 
 // invoke when timeline is changed
--(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline;
+-(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline loadMore:(BOOL)isLoadMore;
 
 // invoke when timeline update has failed
 -(void) fetchTimelineFailed:(App*)app timeline:(Timeline*)timeline error:(NSError*)error;
