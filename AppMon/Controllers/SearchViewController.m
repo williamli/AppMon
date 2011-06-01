@@ -19,7 +19,7 @@
 
 @implementation SearchViewController
 
-@synthesize searchScrollView, progressIndicator, searchResultList, api, results;
+@synthesize searchScrollView, progressIndicator, searchResultList, api, appService, results;
 @synthesize searchNotFoundView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,6 +33,7 @@
 
 - (void)dealloc
 {
+    self.appService = nil;
     self.api = nil;
     self.results = nil;
     [super dealloc];
@@ -41,6 +42,7 @@
 -(void) awakeFromNib {
     [super awakeFromNib];
     
+    self.appService = [AppService sharedAppService];
     self.api = [[[AppStoreApi alloc] init] autorelease];
 }
 
@@ -107,21 +109,17 @@
 
 -(void) follow:(id)sender {
     AppSearchResultItem* item = (AppSearchResultItem*) [sender superview];
-    AppService* appService = [AppMonAppDelegate instance].appService;
     
     NSLog(@"Follow App: %@", item.app);
-    [appService follow:item.app];
+    [self.appService follow:item.app];
     [item setFollowed:YES];
     [item setNeedsDisplay:YES];
 }
 
 -(void) unfollow:(id)sender {
     AppSearchResultItem* item = (AppSearchResultItem*)  [sender superview];
-
-    AppService* appService = [AppMonAppDelegate instance].appService;
-
     NSLog(@"Unfollow App: %@", item.app);
-    [appService unfollow:item.app];
+    [self.appService unfollow:item.app];
     [item setFollowed:NO];
     [item setNeedsDisplay:YES];
 }
@@ -147,11 +145,11 @@
     AppSearchResultItem* item = [AppSearchResultItem item];
     App* app = [results objectAtIndex:index];
     [item setApp:app];
+    [item setFollowed:[self.appService isFollowed:app]];    
     [item.btnFollow setTarget:self];
     [item.btnFollow setAction:@selector(follow:)];    
     [item.btnUnfollow setTarget:self];
     [item.btnUnfollow setAction:@selector(unfollow:)];
-    
     return item;
 }
 

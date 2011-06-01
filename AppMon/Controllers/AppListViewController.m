@@ -17,7 +17,7 @@
 
 @implementation AppListViewController
 
-@synthesize listApps=_listApps, appUpdateViewController=_appUpdateViewController;
+@synthesize listApps=_listApps, appUpdateViewController=_appUpdateViewController, appService=_appService;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,7 +36,9 @@
 
 -(void) awakeFromNib {
     [super awakeFromNib];
+    
     self.listApps.backgroundColor = [NSColor colorWithCalibratedRed:0.855 green:0.875 blue:0.902 alpha:1.];
+    self.appService = [AppService sharedAppService];
 }
 
 #pragma mark JAListViewDelegate
@@ -52,14 +54,12 @@
 #pragma mark - JAListViewDataSource
 
 - (NSUInteger)numberOfItemsInListView:(JAListView *)listView {
-    AppService* appService = [AppMonAppDelegate instance].appService;
-    NSUInteger count = [[appService followedApps] count];
+    NSUInteger count = [[self.appService followedApps] count];
     return count;
 }
 
 - (JAListViewItem *)listView:(JAListView *)listView viewAtIndex:(NSUInteger)index {
-    AppService* appService = [AppMonAppDelegate instance].appService;
-    App* app = [[appService followedApps] objectAtIndex:index];
+    App* app = [[self.appService followedApps] objectAtIndex:index];
 
     AppListViewCell* cell = [AppListViewCell appListViewCell];
     [cell setApp:app];

@@ -65,10 +65,7 @@
         [dateFormatter setDateStyle:NSDateFormatterShortStyle];    
         [self.lblDate setStringValue:[dateFormatter stringFromDate:self.app.releaseDate]];
         [dateFormatter release];
-        
-        AppService* appService = [AppMonAppDelegate instance].appService;
-        [self setFollowed:[appService isFollowed:newApp]];
-
+     
     } else if (newApp == nil) {
         [_app release];
         _app = [newApp retain];

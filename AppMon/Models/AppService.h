@@ -32,7 +32,9 @@
     NSMutableDictionary* _timelines;
 }
 
-@property (nonatomic, assign) id<AppServiceDelegate> delegate;
+@property (nonatomic, assign) id<AppServiceDelegate, NSObject> delegate;
+
++ (AppService *)sharedAppService;
 
 -(void) follow:(App*)app;
 

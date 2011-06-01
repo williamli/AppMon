@@ -10,6 +10,7 @@
 #import "JASectionedListView.h"
 #import "JAListView.h"
 #import "AppStoreApi.h"
+#import "AppService.h"
 
 //  Handle search actions and response
 @interface SearchViewController : NSViewController <JAListViewDelegate, JASectionedListViewDataSource> {
@@ -23,6 +24,7 @@
 @property (nonatomic, retain) IBOutlet NSProgressIndicator* progressIndicator;
 @property (nonatomic, retain) IBOutlet JASectionedListView* searchResultList;
 
+@property (nonatomic, retain) AppService* appService;
 @property (nonatomic, retain) AppStoreApi* api;
 @property (nonatomic, retain) NSArray* results;
 

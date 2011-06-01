@@ -38,6 +38,10 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self 
+                                                    name:NSViewBoundsDidChangeNotification 
+                                                  object:self.listUpdates];
+    
     self.app = nil;
     self.reviews = nil;
     
@@ -50,8 +54,14 @@
 -(void) awakeFromNib {
     [super awakeFromNib];
 
-    _service = [[AppService alloc] init];
+    _service = [[AppService sharedAppService] retain];
     _service.delegate = self;
+
+    [self.listUpdates setPostsBoundsChangedNotifications:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(boundsDidChange:) 
+                                                 name:NSViewBoundsDidChangeNotification 
+                                               object:self.listUpdates]; 
 }
 
 -(void) loadAppReviews:(App*)newApp {
@@ -74,6 +84,14 @@
 -(void) setLoaded:(BOOL)newLoaded {
     _loaded = newLoaded;
     _loading = NO;
+}
+
+#pragma mark - NSViewBoundsDidChangeNotification
+
+-(void) boundsDidChange:(NSNotification*)aNotification  {
+    CGRect bound = self.listUpdates.bounds;
+    
+    NSLog(@"bound change: %f,%f %f,%f", bound.origin.x, bound.origin.y, bound.size.width, bound.size.height);
 }
 
 #pragma mark - JAListViewDataSource

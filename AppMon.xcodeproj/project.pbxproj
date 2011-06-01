@@ -124,6 +124,7 @@
 		542699631394C5A80052EE8E /* AppListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppListViewCell.xib; path = Views/AppListViewCell.xib; sourceTree = "<group>"; };
 		5426F0541395DD3100C049CF /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timeline.h; path = Models/Timeline.h; sourceTree = "<group>"; };
 		5426F0551395DD3100C049CF /* Timeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Timeline.m; path = Models/Timeline.m; sourceTree = "<group>"; };
+		5426F058139612FA00C049CF /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthesizeSingleton.h; path = AppMon/External/SynthesizeSingleton.h; sourceTree = SOURCE_ROOT; };
 		546458B6139391C20096466C /* AppMon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		546458BA139391C20096466C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		546458BD139391C30096466C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -419,6 +420,7 @@
 		546458EE1393932F0096466C /* External */ = {
 			isa = PBXGroup;
 			children = (
+				5426F058139612FA00C049CF /* SynthesizeSingleton.h */,
 				54FBE264139523520069A2C0 /* NS(Attributed)String+Geometrics */,
 				5422F21B1394E39C0044E982 /* JAListView */,
 				542698FF13948CDE0052EE8E /* SDWebImage */,

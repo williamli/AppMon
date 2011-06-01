@@ -17,5 +17,6 @@
 
 @property (assign) IBOutlet AppUpdateViewController* appUpdateViewController;
 @property (nonatomic, retain) IBOutlet JAListView* listApps;
+@property (nonatomic, retain) AppService* appService;
 
 @end

@@ -18,7 +18,6 @@
     INAppStoreWindow *window;
 }
 
-@property (nonatomic, retain) AppService* appService;
 @property (nonatomic, retain) AppStoreApi* appStoreApi;
 
 @property (assign) IBOutlet INAppStoreWindow *window;

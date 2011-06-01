@@ -7,6 +7,7 @@
 //
 
 #import "AppService.h"
+#import "SynthesizeSingleton.h"
 
 #import "App.h"
 #import "AppStoreApi.h"
@@ -19,18 +20,16 @@
 
 @implementation AppService
 
+SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
+
 @synthesize delegate;
 
 - (id)init
 {
     self = [super init];
-
-    NSLog(@"init appservice");
     if (self) {
         [self load];
-
         _timelines = [[NSMutableDictionary dictionary] retain];
-        NSLog(@"apps: %@", _apps);
     }
     
     return self;
@@ -99,7 +98,7 @@
         if (error) {
             NSLog(@"timeline of (%@) encounter error: %@", app.title, error);
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (self.delegate) {
+                if([self.delegate respondsToSelector:@selector(fetchTimelineFailed:timeline:error:)]) {
                     [self.delegate fetchTimelineFailed:app timeline:timeline error:error];
                 }
             });
@@ -111,7 +110,9 @@
                 [timeline addReviews:reviews fromHead:shouldInsertFromHead];
 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate fetchTimelineFinished:app timeline:timeline];
+                    if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:)]) {
+                        [self.delegate fetchTimelineFinished:app timeline:timeline];
+                    }
                 });
                 
                 if (!loadMore) {
@@ -125,7 +126,9 @@
             } else {
                 NSLog(@"timeline of (%@) not updated", app.title);
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate fetchTimelineNoUpdate:app timeline:timeline];
+                    if([self.delegate respondsToSelector:@selector(fetchTimelineNoUpdate:timeline:)]) {
+                        [self.delegate fetchTimelineNoUpdate:app timeline:timeline];
+                    }
                 });
             } 
         }
