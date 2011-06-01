@@ -13,3 +13,6 @@
 [submodule "AppMon/External/JAListView"]
 	path = AppMon/External/JAListView
 	url = https://github.com/joshaber/JAListView.git
+[submodule "Flags/lib/app_store"]
+	path = Flags/lib/app_store
+	url = git://github.com/siuying/app_store.git

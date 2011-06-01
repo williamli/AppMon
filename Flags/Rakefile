@@ -1,9 +1,12 @@
 require 'rubygems'
+
 require 'nokogiri'
 require 'open-uri'
 require 'table_parser'
 require 'plist'
 require 'fileutils'
+
+require 'lib/app_store/lib/app_store'
 
 task :country do |t|
   include FileUtils
@@ -11,23 +14,47 @@ task :country do |t|
   doc = Nokogiri::HTML(html)
   table = TableParser::Table.new doc, "/html/body/div[3]/div[3]/table[3]"
 
-  result = {}
+  countries = {}
   table[0].children.each_index do |idx|
     code = table[0][idx].text.downcase
-    name = table[1][idx].text
-    result[name] = code
+    name = table[1][idx].text  
+    countries[name] = code
   end
 
   # manual override
-  result["대한민국"] = "kr"
-  result["日本"] = "jp"    
-  result["België/Belgique"] = "be"
-  result["México"] = "mx"
-  result["Panamá"] = "pa"
-  result["Perú"] = "pe"
-  result["Schweiz/Suisse"] = "Switzerland"
+  countries["대한민국"] = "kr"
+  countries["日本"] = "jp"    
+  countries["België/Belgique"] = "be"
+  countries["México"] = "mx"
+  countries["Panamá"] = "pa"
+  countries["Perú"] = "pe"
+  countries["Schweiz/Suisse"] = "ch"
+  countries["Venezuela"] = "ve"
+  countries["España"] = "es"
+  countries["Russia"] = "ru"
+  countries["Republic of Moldova"] = 'md'
+  countries["Vietnam"] = "vn"
+  countries["Nederland"] = "nl"
+  countries["Macedonia"] = "mk"
+  countries["Macau"] = "mo"
+  countries["Deutschland"] = "de"
+  countries["Italia"] = "it"
+  countries["Taiwan"] = "tw"
+  countries["Republic of Malta"] = "mt"
+  countries["Österreich"] = "at"
+
+  # find app store country
+  output = {}
+  stores = AppStore.stores
+  stores.each_key do |name|
+    unless countries[name]
+      puts "store image not found #{name}"
+    else
+      output[name] = countries[name]
+    end
+  end
 
   File.open("country.plist", "w") do |f|
-    f.write(Plist::Emit.dump(result, true))
+    f.write(Plist::Emit.dump(output, true))
   end
 end
