@@ -156,12 +156,7 @@
 
     [self setLoaded:YES];
     [self setLoading:NO];
-
-    [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
-        [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
-        
-        [[self.listUpdates superview] setNeedsDisplay:YES];
-    }];
+    [self.listUpdates reloadData];
 }
 
 -(void) fetchTimelineNoUpdate:(App*)app timeline:(Timeline*)timeline {
@@ -169,12 +164,7 @@
 
     [self setLoading:NO];
     [self setLoaded:YES];
-
-    [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
-        [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
-
-        [[self.listUpdates superview] setNeedsDisplay:YES];
-    }];
+    [self.listUpdates reloadData];
 }
 
 // invoke when timeline update has failed
