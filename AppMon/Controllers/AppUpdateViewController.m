@@ -57,6 +57,7 @@
     _service = [[AppService sharedAppService] retain];
     _service.delegate = self;
 
+    self.listUpdates.backgroundColor = [NSColor whiteColor];
 }
 
 -(void) loadAppReviews:(App*)newApp {
@@ -68,7 +69,7 @@
     self.reviews = [NSArray array];
 
     NSLog(@"Load App Reviews: %@ (%@)", self.app.title, self.app.itemId);
-    [self.listUpdates reloadDataAnimated:NO];
+    [self.listUpdates reloadDataAnimated:YES];
     [self setLoading:YES];
     [_service fetchTimelineWithApp:self.app];
 }
