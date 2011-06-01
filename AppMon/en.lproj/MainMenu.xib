@@ -598,7 +598,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSPopUpButton" id="901526276">
 						<reference key="NSNextResponder" ref="286371536"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{513, 9}, {56, 26}}</string>
 						<reference key="NSSuperview" ref="286371536"/>
 						<reference key="NSWindow"/>

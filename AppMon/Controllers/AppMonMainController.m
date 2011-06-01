@@ -96,27 +96,37 @@
     
     // open country config file, read country lists
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"country" 
-                                                         ofType:@"plist"];  
-    _countries = [[NSDictionary dictionaryWithContentsOfFile:filePath] retain];
-    
-    // build menu based on country list
-    NSArray* sortedCountries = [[_countries allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    for (NSString* country in sortedCountries) {
-        NSString* iconName = [_countries objectForKey:country];
-        NSMenuItem* item = [[[NSMenuItem alloc] initWithTitle:country
+                                                         ofType:@"plist"];
+
+    NSDictionary* configCountries = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    NSMutableDictionary* countries = [NSMutableDictionary dictionary];
+
+    // build a menu and a name->storeid dictionary based on country list
+    NSArray* sortedCountries = [[configCountries allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    for (NSString* countryName in sortedCountries) {
+        NSDictionary* countrySetting = [configCountries objectForKey:countryName];
+        NSString* storeFront = [countrySetting objectForKey:@"id"];
+        NSString* iconName = [countrySetting objectForKey:@"image"];
+
+        NSMenuItem* item = [[[NSMenuItem alloc] initWithTitle:countryName
                                                        action:@selector(countryMenuClicked:) 
                                                 keyEquivalent:@""] autorelease];
         [item setTarget:self];
         [item setImage:[NSImage imageNamed:iconName]];
         [item setEnabled:YES];
         [self.menuCountry addItem:item];
-    }    
+        
+        [countries setValue:storeFront forKey:countryName];
+    }
+
+    [_countries release];
+    _countries = [countries retain];
 }
 
 #pragma mark - Action
 
 -(void) countryMenuClicked:(id)sender {
-    NSLog(@"country selected: %@", [sender title]);
+    NSLog(@"country selected: %@, Store: %@", [sender title], [_countries objectForKey:[sender title]]);
 }
 
 @end

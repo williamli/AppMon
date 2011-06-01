@@ -50,10 +50,10 @@ task :country do |t|
     unless countries[name]
       puts "store image not found #{name}"
     else
-      output[name] = countries[name]
+      output[name] = {:image => countries[name], :id => stores[name]}
     end
   end
-
+  
   File.open("country.plist", "w") do |f|
     f.write(Plist::Emit.dump(output, true))
   end
