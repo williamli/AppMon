@@ -22,15 +22,14 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
-@synthesize delegate, store;
+@synthesize delegate, store=_store;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         [self load];
-
-        self.store = @"143441";
+        _store = [@"143441" retain];
         _queue = dispatch_queue_create("hk.ignition.appmon", NULL);
         _timelines = [[NSMutableDictionary dictionary] retain];
     }
@@ -48,7 +47,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     [_apps release];
     _apps = nil;
     
-    self.store = nil;
+    [_store release];
+    _store = nil;
     
     [super dealloc];
 }
@@ -73,6 +73,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     return [_apps containsObject:app];
 }
 
+-(void) setStore:(NSString*)newStore {
+    dispatch_sync(_queue, ^{
+        [_store release];
+        _store = [newStore retain];        
+        [_timelines removeAllObjects];   
+    });       
+}
+
 @end
 
 @implementation AppService (Timeline)
@@ -83,7 +91,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
 -(void) fetchTimelineWithApp:(App*)app more:(BOOL)loadMore {
     Timeline* timeline = [self timelineWithApp:app];
-    
     if (loadMore && ![timeline hasMoreReviews]) {
         NSLog(@"timeline (%@) has no more reviews", app.title);
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -163,6 +170,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         timeline = [[[Timeline alloc] initWithApp:app] autorelease];
         [_timelines setValue:timeline forKey:app.itemId];
     }
+
     return timeline;
 }
 
