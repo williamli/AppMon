@@ -149,7 +149,7 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
     return countries;
 }  
 
--(NSArray*) reviews:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error{
+-(NSArray*) reviews:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total lastReviewDate:(NSDate**)lastReviewDate error:(NSError**)error{
     NSMutableArray* reviews = [NSMutableArray array];
     ASIHTTPRequest* req = [self request:[NSString stringWithFormat:@"%@?id=%@&type=Purple+Software&displayable-kind=11&pageNumber=%ld", 
                                          kAppStoreReviewUrl, appid, page]];
@@ -182,6 +182,11 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
                     NSString* moreUrl = [itemDict objectForKey:@"url"];
                     NSLog(@"Total Result: %ld, More: %@", *total, moreUrl);
                     
+                } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"review-header"]) {
+                    if ([itemDict objectForKey:@"last-review-date"]) {
+                        *lastReviewDate = [itemDict objectForKey:@"last-review-date"];
+                        NSLog(@"last review date: %@", *lastReviewDate);
+                    }
                 }
             }
         }

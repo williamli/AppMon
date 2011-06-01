@@ -45,7 +45,7 @@ extern NSString * const kAppStoreReviewUrl;
 //  total   - if succeed, return the total number of search result on servers
 //  error   - if error occurred, error is set to non nil
 // Return: Array of Reviews
--(NSArray*) reviews:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error;
+-(NSArray*) reviews:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total lastReviewDate:(NSDate**)lastReviewDate  error:(NSError**)error;
 
 // Find list of available App Stores
 // Parameters: 
