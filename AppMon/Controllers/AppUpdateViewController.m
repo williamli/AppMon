@@ -23,7 +23,7 @@
 
 @implementation AppUpdateViewController
 
-@synthesize listUpdates=_listUpdates, app=_app, reviews=_reviews;
+@synthesize listUpdates=_listUpdates, progressView=_progressView, app=_app, reviews=_reviews;
 
 - (id)init
 {
@@ -57,11 +57,6 @@
     _service = [[AppService sharedAppService] retain];
     _service.delegate = self;
 
-    [self.listUpdates setPostsBoundsChangedNotifications:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(boundsDidChange:) 
-                                                 name:NSViewBoundsDidChangeNotification 
-                                               object:self.listUpdates]; 
 }
 
 -(void) loadAppReviews:(App*)newApp {
@@ -70,8 +65,10 @@
     }
     
     self.app = newApp;
+    self.reviews = [NSArray array];
 
     NSLog(@"Load App Reviews: %@ (%@)", self.app.title, self.app.itemId);
+    [self.listUpdates reloadDataAnimated:NO];
     [self setLoading:YES];
     [_service fetchTimelineWithApp:self.app];
 }
@@ -79,19 +76,19 @@
 -(void) setLoading:(BOOL)newLoading {
     _loading = newLoading;
     _loaded = !newLoading;
+
+    if (newLoading) {
+        [self.progressView startAnimation:self];
+        [self.progressView setHidden:NO];
+    } else {
+        [self.progressView stopAnimation:self];
+        [self.progressView setHidden:YES];
+    }
 }
 
 -(void) setLoaded:(BOOL)newLoaded {
     _loaded = newLoaded;
     _loading = NO;
-}
-
-#pragma mark - NSViewBoundsDidChangeNotification
-
--(void) boundsDidChange:(NSNotification*)aNotification  {
-    CGRect bound = self.listUpdates.bounds;
-    
-    NSLog(@"bound change: %f,%f %f,%f", bound.origin.x, bound.origin.y, bound.size.width, bound.size.height);
 }
 
 #pragma mark - JAListViewDataSource
@@ -113,11 +110,13 @@
 #pragma mark - AppServiceDelegate
 
 // invoke when timeline is changed
--(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline {
-    self.reviews = timeline.reviews;
+-(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline {   
+    NSLog(@"load reviews: finished with %ld reviews loaded, %ld total, last review date: %@", 
+            [timeline.reviews count], timeline.total, timeline.lastReviewDate);
 
-    NSLog(@"load reviews did finished: %ld reviews loaded, %ld total, last review date: %@", [self.reviews count], timeline.total, timeline.lastReviewDate);
+    self.reviews = timeline.reviews;
     [self setLoaded:YES];
+    [self setLoading:NO];
 
     [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
         [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
@@ -129,9 +128,12 @@
 }
 
 -(void) fetchTimelineNoUpdate:(App*)app timeline:(Timeline*)timeline {
+    NSLog(@"load reviews: no update");
+
     self.reviews = timeline.reviews;
     [self setLoaded:YES];
-    
+    [self setLoading:NO];
+
     [self.listUpdates reloadDataWithAnimation:^(NSView *newSuperview, NSArray *viewsToAdd, NSArray *viewsToRemove, NSArray *viewsToMove) {
         [self.listUpdates standardLayoutAnimated:YES removeViews:viewsToRemove addViews:viewsToAdd moveViews:viewsToMove];
         
@@ -143,11 +145,17 @@
 
 // invoke when timeline update has failed
 -(void) fetchTimelineFailed:(App*)app timeline:(Timeline*)timeline error:(NSError*)error {
+    NSLog(@"load reviews: failed with error: %@", error);
+    
     [self setLoaded:NO];
+    [self setLoading:NO];
 }
 
 -(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline {
+    NSLog(@"load reviews: no more!");
 
+    [self setLoaded:YES];
+    [self setLoading:NO];
 }
 
 -(BOOL) shouldScrollToTopWhenUpdated {

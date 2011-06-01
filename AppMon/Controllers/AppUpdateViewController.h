@@ -27,6 +27,7 @@
     BOOL _loaded;
 }
 
+@property (nonatomic, retain) IBOutlet NSProgressIndicator* progressView;
 @property (nonatomic, retain) IBOutlet JAListView* listUpdates;
 @property (nonatomic, retain) App* app;
 @property (nonatomic, retain) NSArray* reviews;
