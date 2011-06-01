@@ -29,6 +29,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     self = [super init];
     if (self) {
         [self load];
+        
+        _queue = dispatch_queue_create("hk.ignition.appmon", NULL);
         _timelines = [[NSMutableDictionary dictionary] retain];
     }
     
@@ -37,6 +39,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
 - (void)dealloc
 {
+    dispatch_release(_queue);
+
     [_timelines release];
     _timelines = nil;
 
@@ -87,15 +91,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         return;
     }
 
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
+    dispatch_async(_queue, ^{
         NSInteger total;
         NSError* error = nil;
         NSDate* lastReviewDate = nil;
 
         AppStoreApi* api = [AppMonAppDelegate instance].appStoreApi;
         NSArray* reviews = [api reviews:app.itemId 
-                                   page:timeline.page
+                                   page:(loadMore ? timeline.page+1 : 0)
                                   total:&total
                          lastReviewDate:&lastReviewDate
                                   error:&error];
@@ -120,7 +123,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                         if([self.delegate respondsToSelector:@selector(fetchTimelineNoMore:timeline:)]) {
                             [self.delegate fetchTimelineNoMore:app timeline:timeline];
                         }
-                    });   
+                    });
+
                 } else {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:loadMore:)]) {

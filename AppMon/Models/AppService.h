@@ -30,6 +30,7 @@
 @interface AppService : NSObject {   
     NSMutableArray* _apps;
     NSMutableDictionary* _timelines;
+    dispatch_queue_t _queue;
 }
 
 @property (nonatomic, assign) id<AppServiceDelegate, NSObject> delegate;

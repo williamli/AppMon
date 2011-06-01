@@ -152,8 +152,6 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
     NSMutableArray* reviews = [NSMutableArray array];
     NSString* url = [NSString stringWithFormat:@"%@?id=%@&type=Purple+Software&displayable-kind=11&pageNumber=%ld", 
                      kAppStoreReviewUrl, appid, page];
-
-    NSLog(@"request URL:  %@", url);
     ASIHTTPRequest* req = [self request:url];
     [req setRequestMethod:@"GET"];
     [req startSynchronous];
@@ -200,7 +198,9 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 
 #pragma mark - Private
 
--(ASIHTTPRequest*) request:(NSString*)urlStr {
+-(ASIHTTPRequest*) request:(NSString*)urlStr {    
+    NSLog(@"GET %@", urlStr);
+
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlStr]];
     [request addRequestHeader:@"X-Apple-Store-Front" 
                         value:[NSString stringWithFormat:@"%@-1,2", self.storeFront]];
