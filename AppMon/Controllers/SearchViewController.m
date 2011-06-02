@@ -20,8 +20,9 @@
 
 @implementation SearchViewController
 
-@synthesize searchScrollView, progressIndicator, searchResultList, api, appService, results;
-@synthesize searchNotFoundView;
+@synthesize searchScrollView=_searchScrollView, progressIndicator=_progressIndicator, searchResultList=_searchResultList;
+@synthesize api=_api, appService=_appService, results=_results;
+@synthesize searchNotFoundView=_searchNotFoundView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -137,19 +138,19 @@
 }
 
 - (NSUInteger)listView:(JASectionedListView *)listView numberOfViewsInSection:(NSUInteger)section {
-    return [results count];
+    return [_results count];
 }
 
 - (JAListViewItem *)listView:(JAListView *)listView sectionHeaderViewForSection:(NSUInteger)section {
     AppSearchHeaderItem* item = [AppSearchHeaderItem item];
-    [item.lblMessage setStringValue:[NSString stringWithFormat:@"%d search result loaded", [results count]]];
+    [item.lblMessage setStringValue:[NSString stringWithFormat:@"%d search result loaded", [_results count]]];
     [item setHidden:_loading];
     return item;
 }
 
 - (JAListViewItem *)listView:(JAListView *)listView viewForSection:(NSUInteger)section index:(NSUInteger)index {
     AppSearchResultItem* item = [AppSearchResultItem item];
-    App* app = [results objectAtIndex:index];
+    App* app = [_results objectAtIndex:index];
     [item setApp:app];
     [item setFollowed:[self.appService isFollowed:app]];    
     [item.btnFollow setTarget:self];

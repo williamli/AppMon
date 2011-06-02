@@ -19,7 +19,8 @@
 
 @interface AppUpdateViewController : NSViewController <JAListViewDataSource, JAListViewDelegate, AppServiceDelegate> {
 @private
-    
+    NSProgressIndicator* _progressView;
+    JAListView* _listUpdates;
     AppService* _service;
     Timeline* _timeline;
 

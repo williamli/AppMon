@@ -16,6 +16,9 @@
 @interface AppMonAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate> {
 @private
     INAppStoreWindow *window;
+    
+    AppStoreApi* appStoreApi;
+    AppMonMainController* mainController;
 }
 
 @property (nonatomic, retain) AppStoreApi* appStoreApi;

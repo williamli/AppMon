@@ -16,7 +16,19 @@
 //  controllers (SearchViewController, AppListViewController)
 @interface AppMonMainController : NSViewController <NSSplitViewDelegate> {
 @private
-    NSDictionary* _countries;    
+    NSDictionary* _countries;
+    
+    NSView* _titleBar;
+    NSSearchField* _searchField;
+    NSPopUpButton* _btnCountry;
+    NSMenu* _menuCountry;
+    
+    NSView* _searchView;
+    NSSplitView* _splitView;
+    
+    SearchViewController* _searchController;
+    AppListViewController* _appListViewController;
+    AppUpdateViewController* _appUpdateViewController;
 }
 
 @property (nonatomic, retain) IBOutlet NSView*          titleBar;

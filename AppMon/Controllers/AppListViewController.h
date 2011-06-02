@@ -13,6 +13,9 @@
 
 @interface AppListViewController : NSViewController <JAListViewDataSource> {
 @private
+    AppUpdateViewController* _appUpdateViewController;
+    JAListView* _listApps;
+    AppService* _appService;
 }
 
 @property (assign) IBOutlet AppUpdateViewController* appUpdateViewController;

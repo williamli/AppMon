@@ -11,7 +11,8 @@
 
 @interface AppMonConfig : NSObject <NSCoding> {
 @private
-    
+    NSString* _selectedCountry;
+    NSString* _selectedCountryCode;   
 }
 
 @property (nonatomic, retain) NSString* selectedCountry;

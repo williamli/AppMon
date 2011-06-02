@@ -24,7 +24,7 @@ NSString * const AppServiceNotificationAppListChanged  = @"hk.ignition.mac.appmo
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
-@synthesize delegate, store=_store;
+@synthesize delegate=_delegate, store=_store;
 
 - (id)init
 {

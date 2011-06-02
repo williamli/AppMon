@@ -19,13 +19,13 @@
 
 @implementation AppMonMainController
 
-@synthesize titleBar, searchField;
-@synthesize menuCountry, btnCountry;
-@synthesize searchView, splitView;
+@synthesize titleBar=_titleBar, searchField=_searchField;
+@synthesize menuCountry=_menuCountry, btnCountry=_btnCountry;
+@synthesize searchView=_searchView, splitView=_splitView;
 
-@synthesize searchController;
-@synthesize appListViewController;
-@synthesize appUpdateViewController;
+@synthesize searchController=_searchController;
+@synthesize appListViewController=_appListViewController;
+@synthesize appUpdateViewController=_appUpdateViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,7 +53,7 @@
 #pragma mark - Public
 
 -(IBAction) performSearch:(id)sender {
-    NSString* query = [searchField stringValue];
+    NSString* query = [_searchField stringValue];
     if ([query isEqualToString:@""]) {
         NSLog(@"Clear Text");
         [self setSearchModeEnabled:NO];

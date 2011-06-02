@@ -17,6 +17,14 @@
 @private
     BOOL _loading;
     
+    NSView* _searchNotFoundView;
+    NSScrollView* _searchScrollView;
+    NSProgressIndicator* _progressIndicator;
+    JASectionedListView* _searchResultList;
+    
+    AppService* _appService;
+    AppStoreApi* _api;
+    NSArray* _results;
 }
 
 @property (nonatomic, retain) IBOutlet NSView* searchNotFoundView;

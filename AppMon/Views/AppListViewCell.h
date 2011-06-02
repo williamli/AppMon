@@ -14,6 +14,12 @@
 @private
     NSGradient *gradient;
     NSGradient *selectedGradient;
+    
+    App*             _app;
+    NSTextField*     _lblTitle;
+    NSTextField*     _lblDate;
+    NSImageView*     _imgThumbnail;
+    NSView*          _backgroundView;
 }
 
 @property (nonatomic, retain) App* app;

@@ -13,6 +13,15 @@
 @interface AppSearchResultItem : JAListViewItem {
 @private
     NSGradient *gradient;
+    
+    App* _app;
+    NSTextField* _lblTitle;
+    NSTextField* _lblDate;
+    NSImageView* _imgThumbnail;
+    
+    NSButton* _btnFollow;
+    NSButton* _btnUnfollow;
+    NSView* _backgroundView;
 }
 
 @property (nonatomic, retain) App* app;

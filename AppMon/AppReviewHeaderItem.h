@@ -14,6 +14,15 @@
 @interface AppReviewHeaderItem : JAListViewItem {
 @private
     NSGradient *gradient;
+    
+    NSTextField* _lblTitle;
+    NSTextField* _lblInfo;
+    
+    NSImageView* _imgThumbnail;
+    NSButton* _btnFollow;
+    NSButton* _btnUnfollow;
+    NSButton* _btnAppStore;
+    NSView* _backgroundView;   
 }
 
 @property (nonatomic, retain) IBOutlet NSTextField*     lblTitle;

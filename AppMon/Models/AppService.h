@@ -37,6 +37,9 @@ extern NSString * const AppServiceNotificationAppListChanged;
     NSMutableArray* _apps;
     NSMutableDictionary* _timelines;
     dispatch_queue_t _queue;
+    
+    id<AppServiceDelegate, NSObject> _delegate;
+    NSString* _store;
 }
 
 @property (nonatomic, assign) id<AppServiceDelegate, NSObject> delegate;

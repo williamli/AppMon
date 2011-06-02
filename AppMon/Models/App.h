@@ -11,6 +11,12 @@
 
 @interface App : NSObject <NSCoding> {
 @private
+    NSString* _itemId;
+    NSString* _title;
+    NSString* _url;
+    NSString* _iconUrl;
+    NSString* _price;
+    NSDate* _releaseDate;
 }
 
 @property (nonatomic, retain) NSString* itemId;

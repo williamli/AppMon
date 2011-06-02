@@ -11,6 +11,7 @@
 
 @interface AppSearchHeaderItem : JAListViewItem {
 @private
+    NSTextField* _lblMessage;
     
 }
 

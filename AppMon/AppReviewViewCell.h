@@ -14,6 +14,11 @@
 @interface AppReviewViewCell : JAListViewItem {
 @private
     Review* _review;    
+    
+    NSTextField* _lblTitle;
+    NSTextField* _lblMessage;
+    NSTextField* _lblExtra;
+    NSTextField* _lblStar;
 }
 
 @property (nonatomic, retain) IBOutlet NSTextField*     lblTitle;

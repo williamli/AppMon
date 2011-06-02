@@ -11,7 +11,8 @@
 
 @interface Store : NSObject {
 @private
-    
+    NSString* _name;
+    NSString* _storefront;
 }
 
 @property (nonatomic, retain) NSString* name;

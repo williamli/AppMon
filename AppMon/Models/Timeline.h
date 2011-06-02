@@ -28,7 +28,15 @@
 @end
 
 @interface Timeline : NSObject <Timeline> {
-@private    
+@private
+    App* _app;
+    NSDate* _lastReviewDate;
+    NSMutableArray* _reviews;
+    NSUInteger _page;
+    NSUInteger _total;
+    BOOL _ended;
+    BOOL _loaded;
+    BOOL _loading;
 }
 
 #pragma mark - parameters

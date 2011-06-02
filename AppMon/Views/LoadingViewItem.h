@@ -11,7 +11,7 @@
 
 @interface LoadingViewItem : JAListViewItem {
 @private
-    
+    NSProgressIndicator* _progressView;
 }
 @property (nonatomic, retain) IBOutlet NSProgressIndicator* progressView;
 

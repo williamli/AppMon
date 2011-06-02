@@ -11,7 +11,13 @@
 
 @interface Review : NSObject <NSCoding> {
 @private
-    
+    CGFloat _rating;
+    NSString* _text;
+    NSString* _title;
+    NSString* _username;
+    NSString* _date;
+    NSUInteger _position;
+    NSString* _on_version;
 }
 
 @property (nonatomic, assign) CGFloat rating;
