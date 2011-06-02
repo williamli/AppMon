@@ -11,6 +11,8 @@
 #import "JAListView.h"
 #import "AppUpdateViewController.h"
 
+// manage the list of all followed apps
+
 @interface AppListViewController : NSViewController <JAListViewDataSource> {
 @private
     AppUpdateViewController* _appUpdateViewController;
