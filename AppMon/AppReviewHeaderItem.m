@@ -1,31 +1,26 @@
 //
-//  AppSearchResultItem.m
+//  AppReviewHeaderItem.m
 //  AppMon
 //
-//  Created by Francis Chong on 11年5月31日.
+//  Created by Francis Chong on 11年6月2日.
 //  Copyright 2011年 Ignition Soft Limited. All rights reserved.
 //
 #import <QuartzCore/QuartzCore.h>
-#import "AppSearchResultItem.h"
+
+#import "AppReviewHeaderItem.h"
 #import "UIImageView+WebCache.h"
 
-#import "AppMonAppDelegate.h"
-#import "AppService.h"
-
-@interface AppSearchResultItem (Private)
+@interface AppReviewHeaderItem (Private)
+- (NSGradient*) gradient;
 - (void)drawBackground;
-@property (nonatomic, readonly) NSGradient *gradient;
 @end
 
+@implementation AppReviewHeaderItem
 
-@implementation AppSearchResultItem
+@synthesize app=_app, lblTitle=_lblTitle, imgThumbnail=_imgThumbnail, btnFollow=_btnFollow, 
+    btnUnfollow=_btnUnfollow, btnAppStore=_btnAppStore, backgroundView=_backgroundView;
 
-@synthesize app=_app;
-
-@synthesize lblTitle=_lblTitle, lblDate=_lblDate, imgThumbnail=_imgThumbnail, 
-    btnFollow=_btnFollow, btnUnfollow=_btnUnfollow, backgroundView=_backgroundView;
-
-+ (AppSearchResultItem *) item {
++ (AppReviewHeaderItem *) item {
     static NSNib *nib = nil;
     if(nib == nil) {
         nib = [[NSNib alloc] initWithNibNamed:NSStringFromClass(self) bundle:nil];
@@ -43,10 +38,25 @@
     return nil;
 }
 
+- (id)initWithFrame:(NSRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code here.
+    }
+    
+    return self;
+}
+
 - (void)dealloc
 {
-    self.app = nil;
     [super dealloc];
+}
+
+-(void) awakeFromNib {
+    [super awakeFromNib];
+    
+    [self addSubview:self.imgThumbnail positioned:NSWindowAbove relativeTo:self.backgroundView];
 }
 
 -(void) setApp:(App*)newApp {
@@ -56,15 +66,10 @@
         
         [self.lblTitle setStringValue:self.app.title];
         [self.imgThumbnail setHidden:NO];
+        NSLog(@"icon: %@", self.app.iconUrl);
         [self.imgThumbnail setImageWithURL:[NSURL URLWithString:self.app.iconUrl] 
                           placeholderImage:[NSImage imageNamed:@"app_default"]];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];    
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];    
-        [self.lblDate setStringValue:[dateFormatter stringFromDate:self.app.releaseDate]];
-        [dateFormatter release];
-     
+
     } else if (newApp == nil) {
         [_app release];
         _app = [newApp retain];
@@ -90,19 +95,18 @@
     [self.btnUnfollow setHidden:!isFollowed];
 }
 
-
--(void) awakeFromNib {
-    [super awakeFromNib];
-    
-    [self addSubview:self.imgThumbnail positioned:NSWindowAbove relativeTo:self.backgroundView];
-}
-
-
 #pragma mark - Private
+- (NSGradient*) gradient {
+    if (gradient == nil) {
+        gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.92f alpha:1.0f] 
+                                                 endingColor:[NSColor colorWithDeviceWhite:0.97f alpha:1.0f]];
+    }
+    return gradient;
+}
 
 - (void)drawBackground {
     [self.gradient drawInRect:self.bounds angle:90.0f];
-
+    
     [[NSColor colorWithDeviceWhite:0.5f alpha:1.0f] set];
     NSRectFill(NSMakeRect(0.0f, 0.0f, self.bounds.size.width, 1.0f));
     
@@ -110,13 +114,5 @@
     NSRectFill(NSMakeRect(0.0f, self.bounds.size.height - 1.0f, self.bounds.size.width, 1.0f));
 }
 
-- (NSGradient *)gradient {
-    if(gradient == nil) {
-        gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.95 alpha:1.0f] 
-                                                 endingColor:[NSColor colorWithDeviceWhite:1.0f alpha:1.0f]];
-    }
-    
-    return gradient;
-}
 
 @end

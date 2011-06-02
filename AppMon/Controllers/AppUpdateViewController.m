@@ -13,6 +13,7 @@
 #import "AppReviewViewCell.h"
 #import "AppMonAppDelegate.h"
 #import "AppReviewNotFoundItem.h"
+#import "AppReviewHeaderItem.h"
 
 @interface JAListView ()
 - (void)standardLayoutRemoveViews:(NSArray *)viewsToRemove addViews:(NSArray *)viewsToAdd moveViews:(NSArray *)viewsToMove;
@@ -141,7 +142,7 @@
         if (reviewCount == 0) {
             return 1;            
         } else {
-            return reviewCount;
+            return reviewCount + 1;
         }
     } else {
         return 0;
@@ -156,16 +157,21 @@
             AppReviewNotFoundItem* item = [AppReviewNotFoundItem item];
             return item;
         } else {
-            Review* review = [self.timeline.reviews objectAtIndex:index];
-            AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
-            return item;
+            if (index == 0) {
+                AppReviewHeaderItem* header = [AppReviewHeaderItem item];
+                [header setApp:self.timeline.app];
+                [header setFollowed:[_service isFollowed:self.timeline.app]];   
+                return header;
+            } else {
+                Review* review = [self.timeline.reviews objectAtIndex:index-1];
+                AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
+                return item;
+            }
         }
     } else {
-        Review* review = [self.timeline.reviews objectAtIndex:index];
-        AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
+        AppReviewNotFoundItem* item = [AppReviewNotFoundItem item];
         return item;
     }
-    
 }
 
 #pragma mark - AppServiceDelegate
