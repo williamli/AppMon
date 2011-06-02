@@ -12,6 +12,8 @@
 #import "Timeline.h"
 #import "Store.h"
 
+extern NSString * const AppServiceNotificationAppListChanged;
+
 @protocol AppServiceDelegate
 
 // invoke when timeline is changed

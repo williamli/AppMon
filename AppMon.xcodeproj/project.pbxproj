@@ -1148,6 +1148,7 @@
 				5426994E13948E170052EE8E /* Resources */,
 				546458C1139391C30096466C /* Supporting Files */,
 				546458EE1393932F0096466C /* External */,
+				54C9723C13976CF000EB814F /* Helpers */,
 				54645B81139394800096466C /* Models */,
 				54F7E48513940335007C8CCD /* Controllers */,
 				542698F8139487FD0052EE8E /* Views */,
@@ -1292,6 +1293,13 @@
 			);
 			name = RegexKitLite;
 			path = External/RegexKitLite;
+			sourceTree = "<group>";
+		};
+		54C9723C13976CF000EB814F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		54CC03421393DCCE00F6DA6B /* XPathQuery */ = {

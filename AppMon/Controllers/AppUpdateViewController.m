@@ -209,6 +209,27 @@
     }
 }
 
+#pragma mark - Button Actions
+
+
+-(void) follow:(id)sender {
+    AppReviewHeaderItem* item = (AppReviewHeaderItem*) [sender superview];
+    [_service follow:self.timeline.app];
+    [item setFollowed:YES];
+    [item setNeedsDisplay:YES];
+}
+
+-(void) unfollow:(id)sender {
+    AppReviewHeaderItem* item = (AppReviewHeaderItem*) [sender superview];
+    [_service unfollow:self.timeline.app];
+    [item setFollowed:NO];
+    [item setNeedsDisplay:YES];
+}
+
+-(void) openAppStoreUrl:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.timeline.app.url]];
+}
+
 #pragma mark - Private
 
 -(BOOL) shouldScrollToTopWhenUpdated {
@@ -218,7 +239,13 @@
 - (JAListViewItem *) timelineHeaderItem:(Timeline*)theTimeline {
     AppReviewHeaderItem* header = [AppReviewHeaderItem item];
     [header setTimeline:theTimeline];
-    [header setFollowed:[_service isFollowed:theTimeline.app]];   
+    [header setFollowed:[_service isFollowed:theTimeline.app]];
+    [header.btnFollow setTarget:self];
+    [header.btnFollow setAction:@selector(follow:)];
+    [header.btnUnfollow setTarget:self];
+    [header.btnUnfollow setAction:@selector(unfollow:)];    
+    [header.btnAppStore setTarget:self];
+    [header.btnAppStore setAction:@selector(openAppStoreUrl:)];
     return header;
 }
 

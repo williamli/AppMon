@@ -14,6 +14,8 @@
 #import "AppMonAppDelegate.h"
 #import "Timeline.h"
 
+NSString * const AppServiceNotificationAppListChanged  = @"hk.ignition.mac.appmon.AppListChanged";
+
 @interface AppService (Private)
 -(NSString*) saveFilePath;
 @end
@@ -57,12 +59,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     if (![self isFollowed:app]) {
         [_apps addObject:app];
         [self save];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationAppListChanged 
+                                                            object:self];
     }
 }
 
 -(void) unfollow:(App*)app {
     [_apps removeObject:app];
     [self save];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationAppListChanged 
+                                                        object:self];
 }
 
 -(NSArray*) followedApps {

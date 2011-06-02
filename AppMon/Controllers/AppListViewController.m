@@ -7,13 +7,17 @@
 //
 
 #import "AppListViewController.h"
-
+#import "AppService.h"
 #import "AppMonAppDelegate.h"
 #import "App.h"
 #import "AppListViewCell.h"
 #import "AppUpdateViewController.h"
 
 #define kAppListCellReuseIdentifier @"AppListViewCell"
+
+@interface AppListViewController (Private)
+-(void) appListDidUpdated:(NSNotification*)notification;
+@end
 
 @implementation AppListViewController
 
@@ -31,14 +35,26 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
 
 -(void) awakeFromNib {
     [super awakeFromNib];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appListDidUpdated:) 
+                                                 name:AppServiceNotificationAppListChanged 
+                                               object:nil];
+
     self.listApps.backgroundColor = [NSColor colorWithCalibratedRed:0.855 green:0.875 blue:0.902 alpha:1.];
     self.appService = [AppService sharedAppService];
+}
+
+#pragma mark - Private
+
+-(void) appListDidUpdated:(NSNotification*)notification {
+    [self.listApps reloadDataAnimated:YES];
 }
 
 #pragma mark JAListViewDelegate
