@@ -6,11 +6,13 @@
 //  Copyright 2011年 Ignition Soft Limited. All rights reserved.
 //
 
+#import <Quartz/Quartz.h>
+
 #import "AppUpdateViewController.h"
 
 #import "AppReviewViewCell.h"
 #import "AppMonAppDelegate.h"
-#import <Quartz/Quartz.h>
+#import "AppReviewNotFoundItem.h"
 
 @interface JAListView ()
 - (void)standardLayoutRemoveViews:(NSArray *)viewsToRemove addViews:(NSArray *)viewsToAdd moveViews:(NSArray *)viewsToMove;
@@ -77,7 +79,7 @@
     
     // set timeline
     self.timeline = [_service timelineWithApp:newApp];
-    [self.listUpdates reloadDataAnimated:YES];
+    [self.listUpdates reloadData];
     [self setLoading:YES];
     [_service fetchTimelineWithApp:newApp];
 }
@@ -135,16 +137,35 @@
 
 - (NSUInteger)numberOfItemsInListView:(JAListView *)listView {
     if (self.timeline && self.timeline.loaded) {
-        return [self.timeline.reviews count];
+        NSUInteger reviewCount = [self.timeline.reviews count];
+        if (reviewCount == 0) {
+            return 1;            
+        } else {
+            return reviewCount;
+        }
     } else {
         return 0;
     }
 }
 
 - (JAListViewItem *)listView:(JAListView *)listView viewAtIndex:(NSUInteger)index {
-    Review* review = [self.timeline.reviews objectAtIndex:index];
-    AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
-    return item;
+    if (self.timeline && self.timeline.loaded) {
+        NSUInteger reviewCount = [self.timeline.reviews count];
+        if (reviewCount == 0) {
+            // NO Review found
+            AppReviewNotFoundItem* item = [AppReviewNotFoundItem item];
+            return item;
+        } else {
+            Review* review = [self.timeline.reviews objectAtIndex:index];
+            AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
+            return item;
+        }
+    } else {
+        Review* review = [self.timeline.reviews objectAtIndex:index];
+        AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
+        return item;
+    }
+    
 }
 
 #pragma mark - AppServiceDelegate
@@ -154,9 +175,9 @@
     NSLog(@"load reviews: finished with %ld reviews loaded, %ld total, last review date: %@", 
             [timeline.reviews count], timeline.total, timeline.lastReviewDate);
 
-    [self setLoaded:YES];
     [self setLoading:NO];
-    [self.listUpdates reloadDataAnimated:YES];
+    [self setLoaded:YES];
+    [self.listUpdates reloadData];
 }
 
 -(void) fetchTimelineNoUpdate:(App*)app timeline:(Timeline*)timeline {
@@ -164,7 +185,7 @@
 
     [self setLoading:NO];
     [self setLoaded:YES];
-    [self.listUpdates reloadDataAnimated:YES];
+    [self.listUpdates reloadData];
 }
 
 // invoke when timeline update has failed
@@ -178,6 +199,7 @@
     NSLog(@"load reviews: no more!");
     [self setLoading:NO];
     [self setLoaded:YES];
+    [self.listUpdates reloadData];
 }
 
 // invoked when timeline is reset - such as changing store

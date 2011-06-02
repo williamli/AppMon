@@ -46,6 +46,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     NSUserDefaults* setting = [NSUserDefaults standardUserDefaults];
     self.selectedCountry = [setting objectForKey:@"selectedCountry"];
     self.selectedCountryCode = [setting objectForKey:@"selectedCountryCode"];
+    
+    if (!self.selectedCountry) {
+        self.selectedCountry = @"United States";
+    }
+    
+    if (!self.selectedCountryCode) {
+        self.selectedCountryCode = @"143441";
+    }
+    
     return self;
 }
 
@@ -58,7 +67,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super init];
-    self.selectedCountry         = [coder decodeObjectForKey:@"selectedCountry"];
+    self.selectedCountry         = [coder decodeObjectForKey:@"selectedCountry"];   
     self.selectedCountryCode     = [coder decodeObjectForKey:@"selectedCountryCode"];
     return self;
 }

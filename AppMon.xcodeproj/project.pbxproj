@@ -315,6 +315,8 @@
 		54B7C6FE1393A8A300AE8EDD /* angry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C6FD1393A8A300AE8EDD /* angry.plist */; };
 		54B7C7161393B75B00AE8EDD /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */; };
 		54B7C7181393B7D600AE8EDD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B7C7171393B7D600AE8EDD /* libicucore.dylib */; };
+		54C9722B13972FC700EB814F /* AppReviewNotFoundItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54C9722A13972FC700EB814F /* AppReviewNotFoundItem.xib */; };
+		54C9722F13972FE600EB814F /* AppReviewNotFoundItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C9722E13972FE600EB814F /* AppReviewNotFoundItem.m */; };
 		54CC03451393DCCE00F6DA6B /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 54CC03441393DCCE00F6DA6B /* XPathQuery.m */; };
 		54CC03551393DEC800F6DA6B /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54CC03541393DEC800F6DA6B /* libxml2.2.dylib */; };
 		54D77675139675A600617675 /* AppMonConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D77674139675A600617675 /* AppMonConfig.m */; };
@@ -698,6 +700,9 @@
 		54B7C70A1393B75B00AE8EDD /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		54B7C70C1393B75B00AE8EDD /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		54B7C7171393B7D600AE8EDD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		54C9722A13972FC700EB814F /* AppReviewNotFoundItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppReviewNotFoundItem.xib; path = Views/AppReviewNotFoundItem.xib; sourceTree = "<group>"; };
+		54C9722D13972FE500EB814F /* AppReviewNotFoundItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppReviewNotFoundItem.h; path = Views/AppReviewNotFoundItem.h; sourceTree = "<group>"; };
+		54C9722E13972FE600EB814F /* AppReviewNotFoundItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppReviewNotFoundItem.m; path = Views/AppReviewNotFoundItem.m; sourceTree = "<group>"; };
 		54CC03431393DCCE00F6DA6B /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
 		54CC03441393DCCE00F6DA6B /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		54CC03541393DEC800F6DA6B /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -785,6 +790,9 @@
 				549FFC1F1394FF98003321C5 /* AppReviewViewCell.h */,
 				549FFC201394FF99003321C5 /* AppReviewViewCell.m */,
 				549FFC1D1394FDC2003321C5 /* AppReviewViewCell.xib */,
+				54C9722D13972FE500EB814F /* AppReviewNotFoundItem.h */,
+				54C9722E13972FE600EB814F /* AppReviewNotFoundItem.m */,
+				54C9722A13972FC700EB814F /* AppReviewNotFoundItem.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1639,6 +1647,7 @@
 				5426F259139649BB00C049CF /* zm.png in Resources */,
 				5426F25A139649BB00C049CF /* zw.png in Resources */,
 				5426F25C139649C400C049CF /* country.plist in Resources */,
+				54C9722B13972FC700EB814F /* AppReviewNotFoundItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1714,6 +1723,7 @@
 				54FBE27D139523520069A2C0 /* NS(Attributed)String+Geometrics.m in Sources */,
 				5426F0561395DD3100C049CF /* Timeline.m in Sources */,
 				54D77675139675A600617675 /* AppMonConfig.m in Sources */,
+				54C9722F13972FE600EB814F /* AppReviewNotFoundItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
