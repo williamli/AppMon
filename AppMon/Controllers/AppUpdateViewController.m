@@ -23,6 +23,7 @@
 @interface AppUpdateViewController (Private)
 -(BOOL) shouldScrollToTopWhenUpdated;
 -(void) loadAppReviews:(App*)newApp force:(BOOL)forceLoad;
+- (JAListViewItem *) timelineHeaderItem:(Timeline*)theTimeline;
 @end
 
 @implementation AppUpdateViewController
@@ -150,38 +151,16 @@
 }
 
 - (JAListViewItem *)listView:(JAListView *)listView viewAtIndex:(NSUInteger)index {
-    if (self.timeline && self.timeline.loaded) {
-        NSUInteger reviewCount = [self.timeline.reviews count];
-        if (reviewCount == 0) {
-            if (index == 0) {
-                AppReviewHeaderItem* header = [AppReviewHeaderItem item];
-                [header setTimeline:self.timeline];
-                [header setFollowed:[_service isFollowed:self.timeline.app]];   
-                return header;
-            } else {
-                AppReviewNotFoundItem* item = [AppReviewNotFoundItem item];
-                return item;
-            }
-        } else {
-            if (index == 0) {
-                AppReviewHeaderItem* header = [AppReviewHeaderItem item];
-                [header setTimeline:self.timeline];
-                [header setFollowed:[_service isFollowed:self.timeline.app]];   
-                return header;
-            } else {
-                Review* review = [self.timeline.reviews objectAtIndex:index-1];
-                AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
-                return item;
-            }
-        }
+    NSUInteger reviewCount = [self.timeline.reviews count];
+    if (index == 0) {
+        return [self timelineHeaderItem:self.timeline];
     } else {
-        if (index == 0) {
-            AppReviewHeaderItem* header = [AppReviewHeaderItem item];
-            [header setTimeline:self.timeline];
-            [header setFollowed:[_service isFollowed:self.timeline.app]];   
-            return header;
-        } else {
+        if (reviewCount == 0) {
             AppReviewNotFoundItem* item = [AppReviewNotFoundItem item];
+            return item;
+        } else {
+            Review* review = [self.timeline.reviews objectAtIndex:index-1];
+            AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
             return item;
         }
     }
@@ -234,6 +213,13 @@
 
 -(BOOL) shouldScrollToTopWhenUpdated {
     return YES;
+}
+
+- (JAListViewItem *) timelineHeaderItem:(Timeline*)theTimeline {
+    AppReviewHeaderItem* header = [AppReviewHeaderItem item];
+    [header setTimeline:theTimeline];
+    [header setFollowed:[_service isFollowed:theTimeline.app]];   
+    return header;
 }
 
 @end
