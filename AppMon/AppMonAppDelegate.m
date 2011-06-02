@@ -35,6 +35,11 @@
     [self.mainController.appUpdateViewController.listUpdates reloadDataAnimated:YES];
 }
 
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
+    [self.window makeKeyAndOrderFront:self];
+    return YES;
+}
+
 +(AppMonAppDelegate*) instance {
     return (AppMonAppDelegate*) [NSApplication sharedApplication].delegate;
 }

@@ -53,7 +53,7 @@
 						<reference key="NSNextKeyView" ref="713607188"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="971725871">
-							<int key="NSCellFlags">68288064</int>
+							<int key="NSCellFlags">70385217</int>
 							<int key="NSCellFlags2">71304192</int>
 							<string key="NSContents">★★★★★</string>
 							<object class="NSFont" key="NSSupport">
@@ -86,7 +86,7 @@
 						<reference key="NSNextKeyView" ref="657638133"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="881363017">
-							<int key="NSCellFlags">68288064</int>
+							<int key="NSCellFlags">70385217</int>
 							<int key="NSCellFlags2">4195328</int>
 							<string key="NSContents">Label</string>
 							<object class="NSFont" key="NSSupport">
@@ -116,7 +116,7 @@
 						<reference key="NSNextKeyView" ref="645920156"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="54609865">
-							<int key="NSCellFlags">68288064</int>
+							<int key="NSCellFlags">70385217</int>
 							<int key="NSCellFlags2">272630784</int>
 							<string key="NSContents">Title</string>
 							<object class="NSFont" key="NSSupport">
@@ -145,7 +145,7 @@
 						<reference key="NSWindow"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="350730162">
-							<int key="NSCellFlags">67239424</int>
+							<int key="NSCellFlags">69336577</int>
 							<int key="NSCellFlags2">4202496</int>
 							<string key="NSContents">Reviews</string>
 							<object class="NSFont" key="NSSupport">
