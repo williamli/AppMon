@@ -20,6 +20,9 @@ extern NSString * const AppServiceNotificationAppListChanged;
 // the timeline is pass as Object
 extern NSString * const AppServiceNotificationTimelineChanged;
 
+// app store is changed
+extern NSString * const AppServiceNotificationStoreChanged;
+
 @protocol AppServiceDelegate
 
 // invoke when timeline is changed
@@ -33,9 +36,6 @@ extern NSString * const AppServiceNotificationTimelineChanged;
 
 // invoke when timeline reach end
 -(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline;
-
-// when timelines have been reset (when switching store)
--(void) timelinesReset;
 
 @end
 

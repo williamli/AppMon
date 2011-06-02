@@ -121,6 +121,7 @@
     [self.appService follow:item.app];
     [item setFollowed:YES];
     [item setNeedsDisplay:YES];
+    [[AppMonAppDelegate instance].mainController.appListViewController selectApp:item.app];
 }
 
 -(void) unfollow:(id)sender {

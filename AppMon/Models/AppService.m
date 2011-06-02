@@ -14,8 +14,9 @@
 #import "AppMonAppDelegate.h"
 #import "Timeline.h"
 
-NSString * const AppServiceNotificationAppListChanged  = @"hk.ignition.mac.appmon.AppListChanged";
-NSString * const AppServiceNotificationTimelineChanged = @"hk.ignition.mac.appmon.TimelineChanged";
+NSString * const AppServiceNotificationAppListChanged   = @"hk.ignition.mac.appmon.AppListChanged";
+NSString * const AppServiceNotificationTimelineChanged  = @"hk.ignition.mac.appmon.TimelineChanged";
+NSString * const AppServiceNotificationStoreChanged     = @"hk.ignition.mac.appmon.StoreChanged";
 
 @interface AppService (Private)
 -(NSString*) saveFilePath;
@@ -92,12 +93,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         for (Timeline* timeline in [_timelines allValues]) {
             [timeline reset];
         }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if([self.delegate respondsToSelector:@selector(fetchTimelineNoMore:timeline:)]) {
-                [self.delegate timelinesReset];
-            }
-        });
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationStoreChanged 
+                                                            object:self];
     });       
 }
 

@@ -45,6 +45,10 @@
                                                     name:NSViewBoundsDidChangeNotification 
                                                   object:[self.listUpdates superview]];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self 
+                                                    name:AppServiceNotificationStoreChanged 
+                                                  object:nil];
+    
     self.timeline = nil;
     
     [_service release];
@@ -65,6 +69,11 @@
                                              selector:@selector(boundsDidChange:) 
                                                  name:NSViewBoundsDidChangeNotification 
                                                object:[self.listUpdates superview]]; 
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(storeDidChanged:) 
+                                                 name:AppServiceNotificationStoreChanged
+                                               object:nil];
 }
 
 -(void) loadAppReviews:(App*)newApp {
@@ -200,15 +209,6 @@
     [self.listUpdates reloadData];
 }
 
-// invoked when timeline is reset - such as changing store
-// reload the selected timeline
--(void) timelinesReset {
-    if (self.timeline) {
-        NSLog(@"timeline reset - reload app reviews");
-        [self loadAppReviews:self.timeline.app force:YES];
-    }
-}
-
 #pragma mark - Button Actions
 
 
@@ -247,6 +247,15 @@
     [header.btnAppStore setTarget:self];
     [header.btnAppStore setAction:@selector(openAppStoreUrl:)];
     return header;
+}
+
+
+// reload the selected timeline
+-(void) storeDidChanged:(NSNotification*)aNotification {
+    NSLog(@"store did changed, reload app reviews");
+    if (self.timeline) {
+        [self loadAppReviews:self.timeline.app force:YES];
+    }
 }
 
 @end

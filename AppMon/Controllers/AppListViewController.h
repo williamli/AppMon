@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "App.h"
 #import "JAListView.h"
 #import "AppUpdateViewController.h"
 
@@ -20,11 +21,21 @@
     AppService* _appService;
     
     NSMutableDictionary* _appViews;
+    App* _selectedApp;
 }
 
 @property (assign) IBOutlet AppUpdateViewController* appUpdateViewController;
 @property (nonatomic, retain) IBOutlet JAListView* listApps;
 @property (nonatomic, retain) AppService* appService;
 @property (nonatomic, retain) NSMutableDictionary* appViews;
+@property (nonatomic, retain) App* selectedApp;
+
+// Update all apps on the app list. 
+// param: includeSelectedApp - By default the function update all apps, if this param is NO,
+//        it will skip 'selectedApp'
+-(void) updateAllApps:(BOOL)includeSelectedApp;
+
+// selected supplied app
+-(void) selectApp:(App*)app;
 
 @end

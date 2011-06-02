@@ -20,11 +20,16 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
-
-    [self.mainController.appListViewController.listApps reloadData];
-
+    
     window.titleBarHeight = 45.0;
     [window.titleBarView addSubview:mainController.titleBar];
+    
+    [self.mainController.appListViewController.listApps reloadData];
+    NSArray* apps = [[AppService sharedAppService] followedApps];
+    if ([apps count] > 0) {
+        [self.mainController.appListViewController selectApp:[apps objectAtIndex:0]];
+        [self.mainController.appListViewController updateAllApps:NO];
+    }
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {

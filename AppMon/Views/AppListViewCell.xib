@@ -46,7 +46,7 @@
 				<int key="NSvFlags">266</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="NSTextField" id="286452713">
+					<object class="NSTextField" id="670077530">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">-2147483380</int>
 						<string key="NSFrame">{{45, 57}, {50, 18}}</string>
@@ -56,7 +56,7 @@
 						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSTextFieldCell" key="NSCell" id="259439600">
+						<object class="NSTextFieldCell" key="NSCell" id="567603132">
 							<int key="NSCellFlags">67239488</int>
 							<int key="NSCellFlags2">138414144</int>
 							<string key="NSContents">65535</string>
@@ -65,7 +65,7 @@
 								<double key="NSSize">12</double>
 								<int key="NSfFlags">16</int>
 							</object>
-							<reference key="NSControlView" ref="286452713"/>
+							<reference key="NSControlView" ref="670077530"/>
 							<object class="NSColor" key="NSBackgroundColor" id="414401427">
 								<int key="NSColorSpace">3</int>
 								<bytes key="NSWhite">MAA</bytes>
@@ -99,7 +99,8 @@
 						<string key="NSFrame">{{10, 10}, {57, 57}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="286452713"/>
+						<reference key="NSNextKeyView" ref="670077530"/>
+						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="518207419">
@@ -243,7 +244,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">lblCount</string>
 						<reference key="source" ref="1005"/>
-						<reference key="destination" ref="286452713"/>
+						<reference key="destination" ref="670077530"/>
 					</object>
 					<int key="connectionID">17</int>
 				</object>
@@ -284,7 +285,7 @@
 							<reference ref="648291137"/>
 							<reference ref="991712461"/>
 							<reference ref="390000470"/>
-							<reference ref="286452713"/>
+							<reference ref="670077530"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">App List View Cell</string>
@@ -338,17 +339,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">15</int>
-						<reference key="object" ref="286452713"/>
+						<reference key="object" ref="670077530"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="259439600"/>
+							<reference ref="567603132"/>
 						</object>
 						<reference key="parent" ref="1005"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">16</int>
-						<reference key="object" ref="259439600"/>
-						<reference key="parent" ref="286452713"/>
+						<reference key="object" ref="567603132"/>
+						<reference key="parent" ref="670077530"/>
 					</object>
 				</object>
 			</object>

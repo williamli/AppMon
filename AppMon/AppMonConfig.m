@@ -14,7 +14,7 @@
 
 @implementation AppMonConfig
 
-@synthesize selectedCountry=_selectedCountry, selectedCountryCode=_selectedCountryCode;
+@synthesize selectedCountry=_selectedCountry, selectedCountryCode=_selectedCountryCode, autoRefreshIntervalMinute=_autoRefreshIntervalMinute;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 
@@ -22,6 +22,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 {
     self = [super init];
     if (self) {
+        self.autoRefreshIntervalMinute = 15;
     }
     
     return self;
@@ -38,6 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     NSUserDefaults* setting = [NSUserDefaults standardUserDefaults];
     [setting setObject:self.selectedCountry forKey:@"selectedCountry"];
     [setting setObject:self.selectedCountryCode forKey:@"selectedCountryCode"];
+    [setting setInteger:self.autoRefreshIntervalMinute forKey:@"autoRefreshIntervalMinute"];
     [setting synchronize];
     return self;
 }
@@ -46,7 +48,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     NSUserDefaults* setting = [NSUserDefaults standardUserDefaults];
     self.selectedCountry = [setting objectForKey:@"selectedCountry"];
     self.selectedCountryCode = [setting objectForKey:@"selectedCountryCode"];
-    
+    self.autoRefreshIntervalMinute = [setting integerForKey:@"autoRefreshIntervalMinute"];
+
     if (!self.selectedCountry) {
         self.selectedCountry = @"United States";
     }
@@ -54,21 +57,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     if (!self.selectedCountryCode) {
         self.selectedCountryCode = @"143441";
     }
+
+    if (self.autoRefreshIntervalMinute <= 0) {
+        self.autoRefreshIntervalMinute = 15;
+    }
     
-    return self;
-}
-
-#pragma mark - NSCoder
-
-- (void)encodeWithCoder:(NSCoder *)coder {    
-    [coder encodeObject:self.selectedCountry forKey:@"selectedCountry"];
-    [coder encodeObject:self.selectedCountryCode forKey:@"selectedCountryCode"];
-}
-
-- (id)initWithCoder:(NSCoder *)coder {
-    self = [super init];
-    self.selectedCountry         = [coder decodeObjectForKey:@"selectedCountry"];   
-    self.selectedCountryCode     = [coder decodeObjectForKey:@"selectedCountryCode"];
     return self;
 }
 
