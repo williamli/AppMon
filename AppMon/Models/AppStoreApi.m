@@ -18,6 +18,7 @@
 #import "Store.h"
 
 #define kStoreFrontRegexp @"storeFrontId=([0-9]+)"
+#define kReviewCountRegexp @"Reviews \\(([0-9]+)\\)"
 
 NSString * const kAppStoreSearchUrl     = @"http://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search";
 NSString * const kAppStoreSoftwareUrl   = @"http://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware";
@@ -164,13 +165,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                                                                     mutabilityOption:NSPropertyListImmutable
                                                                               format:&format
                                                                     errorDescription:&errorDesc];
-        
         if (errorDesc) {
             *error = [NSError errorWithDomain:@"PlistSerializationError" 
                                          code:1 
                                      userInfo:[NSDictionary dictionaryWithObject:errorDesc 
                                                                           forKey:@"Description"]];
         } else {
+            NSString* title = [dictionary objectForKey:@"title"];
+            if (title) {
+                NSArray* matches = [title captureComponentsMatchedByRegex:kReviewCountRegexp];
+                if (matches && [matches count] > 1) {
+                    *total = [[matches objectAtIndex:1] intValue];
+                }
+            }
+            
             NSArray* items = [dictionary objectForKey:@"items"];
             for (NSDictionary* itemDict in items) {
                 if ([[itemDict objectForKey:@"type"] isEqualToString:@"review"]) {
@@ -178,7 +186,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                     [reviews addObject:review];
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {
-                    *total = [[itemDict objectForKey:@"total-items"] intValue];
+
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"review-header"]) {
                     if ([itemDict objectForKey:@"last-review-date"]) {

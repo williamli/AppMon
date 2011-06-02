@@ -136,6 +136,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
             if (loadMore || timeline.lastReviewDate == nil || [timeline.lastReviewDate compare:lastReviewDate] == NSOrderedAscending) {
                 NSLog(@"timeline of (%@) updated", app.title);
                 [timeline addReviews:reviews fromHead:shouldInsertFromHead];
+
+                if (!loadMore) {
+                    timeline.total = total;
+                    timeline.page = 0;
+                    timeline.lastReviewDate = lastReviewDate;
+                } else {
+                    timeline.page = timeline.page+1;
+                }
                 
                 if ([reviews count] == 0) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -144,21 +152,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                             [self.delegate fetchTimelineNoMore:app timeline:timeline];
                         }
                     });
-
+                    
                 } else {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:loadMore:)]) {
                             [self.delegate fetchTimelineFinished:app timeline:timeline loadMore:loadMore];
                         }
                     });
-                }
-
-                if (!loadMore) {
-                    timeline.total = total;
-                    timeline.page = 0;
-                    timeline.lastReviewDate = lastReviewDate;
-                } else {
-                    timeline.page = timeline.page+1;
                 }
 
             } else {

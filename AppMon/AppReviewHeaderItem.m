@@ -17,7 +17,7 @@
 
 @implementation AppReviewHeaderItem
 
-@synthesize app=_app, lblTitle=_lblTitle, imgThumbnail=_imgThumbnail, btnFollow=_btnFollow, 
+@synthesize lblTitle=_lblTitle, lblInfo=_lblInfo, imgThumbnail=_imgThumbnail, btnFollow=_btnFollow, 
     btnUnfollow=_btnUnfollow, btnAppStore=_btnAppStore, backgroundView=_backgroundView;
 
 + (AppReviewHeaderItem *) item {
@@ -59,35 +59,18 @@
     [self addSubview:self.imgThumbnail positioned:NSWindowAbove relativeTo:self.backgroundView];
 }
 
--(void) setApp:(App*)newApp {
-    if (![_app isEqual:newApp] && newApp != nil) {
-        [_app release];
-        _app = [newApp retain];
-        
-        [self.lblTitle setStringValue:self.app.title];
-        [self.imgThumbnail setHidden:NO];
-        NSLog(@"icon: %@", self.app.iconUrl);
-        [self.imgThumbnail setImageWithURL:[NSURL URLWithString:self.app.iconUrl] 
-                          placeholderImage:[NSImage imageNamed:@"app_default"]];
-
-    } else if (newApp == nil) {
-        [_app release];
-        _app = [newApp retain];
+-(void) setTimeline:(Timeline*)theTimeline {
+    if (theTimeline.total == 0) {
+        [self.lblInfo setStringValue:@"No reviews yet"];
+    } else {
+        [self.lblInfo setStringValue:[NSString stringWithFormat:@"%ld reviews", theTimeline.total]];
     }
+    [self.lblTitle setStringValue:theTimeline.app.title];
 }
 
 - (void)drawRect:(NSRect)rect {
     [self drawBackground];
     [super drawRect:rect];
-    
-    self.backgroundView.layer.backgroundColor = CGColorCreateGenericRGB(1, 1, 1, 1);
-    self.backgroundView.layer.shadowRadius = 2.0;
-    self.backgroundView.layer.shadowOffset = CGSizeMake(0, -2);
-    self.backgroundView.layer.shadowOpacity = 0.5;
-    self.backgroundView.layer.cornerRadius = 10.0;
-    
-    self.imgThumbnail.layer.masksToBounds = true;
-    self.imgThumbnail.layer.cornerRadius = 10.0;
 }
 
 -(void) setFollowed:(BOOL)isFollowed {

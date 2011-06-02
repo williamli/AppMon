@@ -140,7 +140,7 @@
     if (self.timeline && self.timeline.loaded) {
         NSUInteger reviewCount = [self.timeline.reviews count];
         if (reviewCount == 0) {
-            return 1;            
+            return 2;            
         } else {
             return reviewCount + 1;
         }
@@ -153,13 +153,19 @@
     if (self.timeline && self.timeline.loaded) {
         NSUInteger reviewCount = [self.timeline.reviews count];
         if (reviewCount == 0) {
-            // NO Review found
-            AppReviewNotFoundItem* item = [AppReviewNotFoundItem item];
-            return item;
+            if (index == 0) {
+                AppReviewHeaderItem* header = [AppReviewHeaderItem item];
+                [header setTimeline:self.timeline];
+                [header setFollowed:[_service isFollowed:self.timeline.app]];   
+                return header;
+            } else {
+                AppReviewNotFoundItem* item = [AppReviewNotFoundItem item];
+                return item;
+            }
         } else {
             if (index == 0) {
                 AppReviewHeaderItem* header = [AppReviewHeaderItem item];
-                [header setApp:self.timeline.app];
+                [header setTimeline:self.timeline];
                 [header setFollowed:[_service isFollowed:self.timeline.app]];   
                 return header;
             } else {
@@ -169,8 +175,15 @@
             }
         }
     } else {
-        AppReviewNotFoundItem* item = [AppReviewNotFoundItem item];
-        return item;
+        if (index == 0) {
+            AppReviewHeaderItem* header = [AppReviewHeaderItem item];
+            [header setTimeline:self.timeline];
+            [header setFollowed:[_service isFollowed:self.timeline.app]];   
+            return header;
+        } else {
+            AppReviewNotFoundItem* item = [AppReviewNotFoundItem item];
+            return item;
+        }
     }
 }
 

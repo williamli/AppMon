@@ -44,16 +44,16 @@
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="NSTextField" id="73038556">
+					<object class="NSTextField" id="171936678">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">298</int>
-						<string key="NSFrame">{{17, 149}, {462, 18}}</string>
+						<string key="NSFrame">{{17, 182}, {462, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="361630359"/>
+						<reference key="NSNextKeyView" ref="1052354361"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSTextFieldCell" key="NSCell" id="135151665">
+						<object class="NSTextFieldCell" key="NSCell" id="585156809">
 							<int key="NSCellFlags">68288064</int>
 							<int key="NSCellFlags2">138413056</int>
 							<string key="NSContents">There are no reviews for this app.</string>
@@ -62,8 +62,8 @@
 								<double key="NSSize">14</double>
 								<int key="NSfFlags">16</int>
 							</object>
-							<reference key="NSControlView" ref="73038556"/>
-							<object class="NSColor" key="NSBackgroundColor" id="159332726">
+							<reference key="NSControlView" ref="171936678"/>
+							<object class="NSColor" key="NSBackgroundColor" id="2918255">
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
 								<string key="NSColorName">controlColor</string>
@@ -83,16 +83,16 @@
 							</object>
 						</object>
 					</object>
-					<object class="NSTextField" id="361630359">
+					<object class="NSTextField" id="1052354361">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">298</int>
-						<string key="NSFrame">{{17, 124}, {462, 17}}</string>
+						<string key="NSFrame">{{17, 157}, {462, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSTextFieldCell" key="NSCell" id="910492607">
+						<object class="NSTextFieldCell" key="NSCell" id="567104110">
 							<int key="NSCellFlags">68288064</int>
 							<int key="NSCellFlags2">138413056</int>
 							<string key="NSContents">Maybe try another country?</string>
@@ -101,8 +101,8 @@
 								<double key="NSSize">13</double>
 								<int key="NSfFlags">1044</int>
 							</object>
-							<reference key="NSControlView" ref="361630359"/>
-							<reference key="NSBackgroundColor" ref="159332726"/>
+							<reference key="NSControlView" ref="1052354361"/>
+							<reference key="NSBackgroundColor" ref="2918255"/>
 							<object class="NSColor" key="NSTextColor">
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
@@ -118,7 +118,7 @@
 				<string key="NSFrameSize">{496, 315}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="73038556"/>
+				<reference key="NSNextKeyView" ref="171936678"/>
 				<string key="NSClassName">AppReviewNotFoundItem</string>
 			</object>
 		</object>
@@ -158,41 +158,41 @@
 						<reference key="object" ref="1005"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="361630359"/>
-							<reference ref="73038556"/>
+							<reference ref="1052354361"/>
+							<reference ref="171936678"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Custom View</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">4</int>
-						<reference key="object" ref="361630359"/>
+						<reference key="object" ref="1052354361"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="910492607"/>
+							<reference ref="567104110"/>
 						</object>
 						<reference key="parent" ref="1005"/>
 						<string key="objectName">Label Not Found Message</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
-						<reference key="object" ref="910492607"/>
-						<reference key="parent" ref="361630359"/>
+						<reference key="object" ref="567104110"/>
+						<reference key="parent" ref="1052354361"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
-						<reference key="object" ref="73038556"/>
+						<reference key="object" ref="171936678"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="135151665"/>
+							<reference ref="585156809"/>
 						</object>
 						<reference key="parent" ref="1005"/>
 						<string key="objectName">Label Not Found Title</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
-						<reference key="object" ref="135151665"/>
-						<reference key="parent" ref="73038556"/>
+						<reference key="object" ref="585156809"/>
+						<reference key="parent" ref="171936678"/>
 					</object>
 				</object>
 			</object>

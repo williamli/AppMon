@@ -36,7 +36,10 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    // Drawing code here.
+    [[NSColor whiteColor] set];
+    NSRectFill(NSMakeRect(0.0f, 0.0f, self.bounds.size.width, self.bounds.size.height));
+    
+    [super drawRect:dirtyRect];
 }
 
 @end

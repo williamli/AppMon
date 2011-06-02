@@ -9,14 +9,15 @@
 #import <Cocoa/Cocoa.h>
 #import "App.h"
 #import "JAListViewItem.h"
+#import "Timeline.h"
 
 @interface AppReviewHeaderItem : JAListViewItem {
 @private
     NSGradient *gradient;
 }
 
-@property (nonatomic, retain) App* app;
 @property (nonatomic, retain) IBOutlet NSTextField*     lblTitle;
+@property (nonatomic, retain) IBOutlet NSTextField*     lblInfo;
 @property (nonatomic, retain) IBOutlet NSImageView*     imgThumbnail;
 @property (nonatomic, retain) IBOutlet NSButton*        btnFollow;
 @property (nonatomic, retain) IBOutlet NSButton*        btnUnfollow;
@@ -25,6 +26,7 @@
 
 + (AppReviewHeaderItem *) item;
 
+-(void) setTimeline:(Timeline*)theTimeline;
 -(void) setFollowed:(BOOL)isFollowed;
 
 @end
