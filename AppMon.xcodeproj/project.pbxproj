@@ -319,6 +319,7 @@
 		54C9722F13972FE600EB814F /* AppReviewNotFoundItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C9722E13972FE600EB814F /* AppReviewNotFoundItem.m */; };
 		54C972331397351200EB814F /* AppReviewHeaderItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54C972321397351200EB814F /* AppReviewHeaderItem.xib */; };
 		54C972391397364800EB814F /* AppReviewHeaderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C972381397364700EB814F /* AppReviewHeaderItem.m */; };
+		54C9723B1397650C00EB814F /* Monster.icns in Resources */ = {isa = PBXBuildFile; fileRef = 54C9723A1397650B00EB814F /* Monster.icns */; };
 		54CC03451393DCCE00F6DA6B /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 54CC03441393DCCE00F6DA6B /* XPathQuery.m */; };
 		54CC03551393DEC800F6DA6B /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54CC03541393DEC800F6DA6B /* libxml2.2.dylib */; };
 		54D77675139675A600617675 /* AppMonConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D77674139675A600617675 /* AppMonConfig.m */; };
@@ -708,6 +709,7 @@
 		54C972321397351200EB814F /* AppReviewHeaderItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppReviewHeaderItem.xib; sourceTree = "<group>"; };
 		54C972371397364700EB814F /* AppReviewHeaderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppReviewHeaderItem.h; sourceTree = "<group>"; };
 		54C972381397364700EB814F /* AppReviewHeaderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppReviewHeaderItem.m; sourceTree = "<group>"; };
+		54C9723A1397650B00EB814F /* Monster.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Monster.icns; path = Resources/Monster.icns; sourceTree = "<group>"; };
 		54CC03431393DCCE00F6DA6B /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
 		54CC03441393DCCE00F6DA6B /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		54CC03541393DEC800F6DA6B /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -828,6 +830,7 @@
 		5426994E13948E170052EE8E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				54C9723A1397650B00EB814F /* Monster.icns */,
 				5426F25B139649C400C049CF /* country.plist */,
 				5426F06C139649BB00C049CF /* flags */,
 				5426994F13948E670052EE8E /* app_default.png */,
@@ -1657,6 +1660,7 @@
 				5426F25C139649C400C049CF /* country.plist in Resources */,
 				54C9722B13972FC700EB814F /* AppReviewNotFoundItem.xib in Resources */,
 				54C972331397351200EB814F /* AppReviewHeaderItem.xib in Resources */,
+				54C9723B1397650C00EB814F /* Monster.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
