@@ -202,13 +202,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 @implementation AppService (Persistence)
 
 -(void) save {
-    NSString* savePath = [self saveFilePath];
-    BOOL result = [NSKeyedArchiver archiveRootObject:_apps 
-                                              toFile:savePath];
-    if (!result) {
-        NSLog(@"WARN: Failed saving AppService: %@", savePath);
-    }
-    
+    dispatch_sync(_queue, ^{
+        NSString* savePath = [self saveFilePath];
+        BOOL result = [NSKeyedArchiver archiveRootObject:_apps 
+                                                  toFile:savePath];
+        if (!result) {
+            NSLog(@"WARN: Failed saving AppService: %@", savePath);
+        }
+    });
 }
 
 -(void) load {

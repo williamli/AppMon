@@ -17,6 +17,7 @@
     NSString* _iconUrl;
     NSString* _price;
     NSDate* _releaseDate;
+    NSInteger _unread;
 }
 
 @property (nonatomic, retain) NSString* itemId;
@@ -25,6 +26,7 @@
 @property (nonatomic, retain) NSString* iconUrl;
 @property (nonatomic, retain) NSString* price;
 @property (nonatomic, retain) NSDate* releaseDate;
+@property (nonatomic, assign) NSInteger unread;
 
 -(id) initWithPlist:(NSDictionary*)plist;
 -(BOOL) isEqual:(id)object;

@@ -100,11 +100,7 @@
 }
 
 -(void) setUnreadCount:(NSInteger)unread {
-    if (unread == 0) {
-        [self.lblCount setStringValue:@""];            
-        [self.lblCount setHidden:YES];
-        
-    } else {
+    if (unread > 0) {        
         [self.lblCount setStringValue:[NSString stringWithFormat:@"%ld", unread]];            
         [self.lblCount sizeToFit];
         
@@ -114,6 +110,10 @@
                                          width, cFrame.size.height);
         [self addSubview:self.lblCount];
         [self.lblCount setHidden:NO];
+        
+    } else {
+        [self.lblCount setStringValue:@""];            
+        [self.lblCount setHidden:YES];
     }
     
 }

@@ -33,7 +33,6 @@
     NSDate* lastReviewDate;
     NSMutableArray* reviews;
     NSUInteger page;
-    NSUInteger unread;
     NSUInteger total;
 
     BOOL ended;
@@ -61,7 +60,7 @@
 @property (nonatomic, assign) NSUInteger total;
 
 // number of unread reviews
-@property (nonatomic, assign) NSUInteger unread;
+@property (nonatomic, assign) NSInteger unread;
 
 // if this timeline reached end
 @property (nonatomic, assign) BOOL ended;

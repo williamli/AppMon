@@ -11,7 +11,7 @@
 
 @implementation App
 
-@synthesize itemId=_itemId, title=_title, url=_url, iconUrl=_iconUrl, price=_price, releaseDate=_releaseDate;
+@synthesize itemId=_itemId, title=_title, url=_url, iconUrl=_iconUrl, price=_price, releaseDate=_releaseDate, unread=_unread;
 
 - (id)init
 {
@@ -61,6 +61,7 @@
     [coder encodeObject:_iconUrl forKey:@"AppIconUrl"];
     [coder encodeObject:_price forKey:@"AppPrice"];
     [coder encodeObject:_releaseDate forKey:@"AppReleaseDate"];
+    [coder encodeInteger:_unread forKey:@"AppUnreadCount"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -71,6 +72,7 @@
     _iconUrl        = [[coder decodeObjectForKey:@"AppIconUrl"] retain];
     _price          = [[coder decodeObjectForKey:@"AppPrice"] retain];
     _releaseDate    = [[coder decodeObjectForKey:@"AppReleaseDate"] retain];
+    _unread         = [coder decodeIntegerForKey:@"AppUnreadCount"];
     return self;
 }
 

@@ -75,4 +75,12 @@
     return self.ended || self.total > fetched;
 }
 
+-(void) setUnread:(NSInteger)unread {
+    [self.app setUnread:unread];
+}
+
+-(NSInteger) unread {
+    return self.app.unread;
+}
+
 @end
