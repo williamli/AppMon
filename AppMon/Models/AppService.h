@@ -12,7 +12,13 @@
 #import "Timeline.h"
 #import "Store.h"
 
+// the content of application list is changed
+// the AppService is pass as Object
 extern NSString * const AppServiceNotificationAppListChanged;
+
+// a timeline content or meta data is changed
+// the timeline is pass as Object
+extern NSString * const AppServiceNotificationTimelineChanged;
 
 @protocol AppServiceDelegate
 

@@ -12,7 +12,7 @@
 @implementation Timeline
 
 @synthesize app;
-@synthesize lastReviewDate, reviews, total, page, ended;
+@synthesize lastReviewDate, reviews, total, unread, page, ended;
 @synthesize loaded, loading;
 
 -(id) initWithApp:(App*)theApp
@@ -24,6 +24,7 @@
         self.lastReviewDate = nil;
         self.total = 0;
         self.page = 0;
+        self.unread = 0;
 
         self.ended = NO;
         self.loaded = NO;
@@ -61,6 +62,7 @@
         [self.reviews removeAllObjects];
         self.lastReviewDate = nil;
         self.total = 0;
+        self.unread = 0;
         self.page = 0;
         self.ended = NO;
         self.loaded = NO;

@@ -33,7 +33,9 @@
     NSDate* lastReviewDate;
     NSMutableArray* reviews;
     NSUInteger page;
+    NSUInteger unread;
     NSUInteger total;
+
     BOOL ended;
     BOOL loaded;
     BOOL loading;
@@ -57,6 +59,9 @@
 
 // total number of reviews online
 @property (nonatomic, assign) NSUInteger total;
+
+// number of unread reviews
+@property (nonatomic, assign) NSUInteger unread;
 
 // if this timeline reached end
 @property (nonatomic, assign) BOOL ended;

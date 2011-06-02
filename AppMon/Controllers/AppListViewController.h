@@ -16,10 +16,13 @@
     AppUpdateViewController* _appUpdateViewController;
     JAListView* _listApps;
     AppService* _appService;
+    
+    NSMutableDictionary* _appViews;
 }
 
 @property (assign) IBOutlet AppUpdateViewController* appUpdateViewController;
 @property (nonatomic, retain) IBOutlet JAListView* listApps;
 @property (nonatomic, retain) AppService* appService;
+@property (nonatomic, retain) NSMutableDictionary* appViews;
 
 @end

@@ -18,6 +18,7 @@
     App*             _app;
     NSTextField*     _lblTitle;
     NSTextField*     _lblDate;
+    NSTextField*     _lblCount;
     NSImageView*     _imgThumbnail;
     NSView*          _backgroundView;
 }
@@ -25,9 +26,13 @@
 @property (nonatomic, retain) App* app;
 @property (nonatomic, retain) IBOutlet NSTextField*     lblTitle;
 @property (nonatomic, retain) IBOutlet NSTextField*     lblDate;
+@property (nonatomic, retain) IBOutlet NSTextField*     lblCount;
+
 @property (nonatomic, retain) IBOutlet NSImageView*     imgThumbnail;
 @property (nonatomic, retain) IBOutlet NSView*          backgroundView;
 
 +(AppListViewCell *) appListViewCell;
+
+-(void) setUnreadCount:(NSInteger) unread;
 
 @end

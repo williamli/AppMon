@@ -19,7 +19,7 @@
 
 @implementation AppListViewCell
 
-@synthesize lblTitle=_lblTitle, lblDate=_lblDate, imgThumbnail=_imgThumbnail, backgroundView=_backgroundView;
+@synthesize lblTitle=_lblTitle, lblCount=_lblCount, lblDate=_lblDate, imgThumbnail=_imgThumbnail, backgroundView=_backgroundView;
 @synthesize app=_app;
 
 + (AppListViewCell *) appListViewCell {
@@ -74,6 +74,8 @@
         [dateFormatter setDateStyle:NSDateFormatterShortStyle];    
         [self.lblDate setStringValue:[dateFormatter stringFromDate:self.app.releaseDate]];
         [dateFormatter release];
+        
+        [self.lblCount sizeToFit];
     } else if (newApp == nil) {
         [_app release];
         _app = [newApp retain];
@@ -92,8 +94,29 @@
     
     self.imgThumbnail.layer.masksToBounds = true;
     self.imgThumbnail.layer.cornerRadius = 10.0;
+
+    self.lblCount.layer.backgroundColor = CGColorCreateGenericRGB(0.914,0.145,0.098,1);
+    self.lblCount.layer.cornerRadius = 9.0;
 }
 
+-(void) setUnreadCount:(NSInteger)unread {
+    if (unread == 0) {
+        [self.lblCount setStringValue:@""];            
+        [self.lblCount setHidden:YES];
+        
+    } else {
+        [self.lblCount setStringValue:[NSString stringWithFormat:@"%ld", unread]];            
+        [self.lblCount sizeToFit];
+        
+        CGRect cFrame = self.lblCount.frame;
+        CGFloat width = fmax(cFrame.size.width, 20);
+        self.lblCount.frame = CGRectMake(10 + 57 - width/2, cFrame.origin.y, 
+                                         width, cFrame.size.height);
+        [self addSubview:self.lblCount];
+        [self.lblCount setHidden:NO];
+    }
+    
+}
 
 #pragma mark - Private
 

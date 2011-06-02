@@ -15,6 +15,7 @@
 #import "Timeline.h"
 
 NSString * const AppServiceNotificationAppListChanged  = @"hk.ignition.mac.appmon.AppListChanged";
+NSString * const AppServiceNotificationTimelineChanged = @"hk.ignition.mac.appmon.TimelineChanged";
 
 @interface AppService (Private)
 -(NSString*) saveFilePath;
@@ -148,6 +149,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                 [timeline addReviews:reviews fromHead:shouldInsertFromHead];
 
                 if (!loadMore) {
+                    timeline.unread = total - timeline.total;
                     timeline.total = total;
                     timeline.page = 0;
                     timeline.lastReviewDate = lastReviewDate;
@@ -170,7 +172,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                         }
                     });
                 }
-
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationTimelineChanged
+                                                                    object:timeline];
             } else {
                 NSLog(@"timeline of (%@) not updated", app.title);
                 dispatch_async(dispatch_get_main_queue(), ^{
