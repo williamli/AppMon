@@ -65,10 +65,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                                                                     errorDescription:&errorDesc];
 
         if (errorDesc) {
-            *error = [NSError errorWithDomain:@"PlistSerializationError" 
-                                         code:1 
-                                     userInfo:[NSDictionary dictionaryWithObject:errorDesc 
-                                                                          forKey:@"Description"]];
+            if (error != NULL){
+                *error = [NSError errorWithDomain:@"PlistSerializationError" 
+                                             code:1 
+                                         userInfo:[NSDictionary dictionaryWithObject:errorDesc 
+                                                                              forKey:@"Description"]];
+            }
         } else {
             NSDictionary* metadata = [dictionary objectForKey:@"item-metadata"];
             app = [[[App alloc] initWithPlist:metadata] autorelease];
@@ -76,7 +78,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
         }
 
     } else {
-        *error = [req error];
+        if (error) {
+            *error = [req error];
+        }
 
     }
 
@@ -103,10 +107,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                                                                     errorDescription:&errorDesc];
         
         if (errorDesc) {
-            *error = [NSError errorWithDomain:@"PlistSerializationError" 
-                                         code:1 
-                                     userInfo:[NSDictionary dictionaryWithObject:errorDesc 
-                                                                          forKey:@"Description"]];
+            if (error) {
+                *error = [NSError errorWithDomain:@"PlistSerializationError" 
+                                             code:1 
+                                         userInfo:[NSDictionary dictionaryWithObject:errorDesc 
+                                                                              forKey:@"Description"]];
+            }
         } else {
             NSArray* items = [dictionary objectForKey:@"items"];
             for (NSDictionary* itemDict in items) {
@@ -125,7 +131,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
         }
         
     } else {
-        *error = [req error];
+        if (error) {
+            *error = [req error];
+        }
         
     }
     
@@ -133,7 +141,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 }  
 
 -(NSArray*) stores:(NSError**)error {
-    NSArray* countries;
+    NSArray* countries = nil;
+
     ASIHTTPRequest* req = [self request:kAppStoreCountryUrl store:@"143441"];
     [req startSynchronous];
     
@@ -142,7 +151,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
         countries      = [self storesFromNodes:countryTags];
 
     } else {
-        *error = [req error];
+        if (error) {
+            *error = [req error];
+        }
         
     }
 
@@ -166,10 +177,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                                                                               format:&format
                                                                     errorDescription:&errorDesc];
         if (errorDesc) {
-            *error = [NSError errorWithDomain:@"PlistSerializationError" 
-                                         code:1 
-                                     userInfo:[NSDictionary dictionaryWithObject:errorDesc 
-                                                                          forKey:@"Description"]];
+            if (error) {
+                *error = [NSError errorWithDomain:@"PlistSerializationError" 
+                                             code:1 
+                                         userInfo:[NSDictionary dictionaryWithObject:errorDesc 
+                                                                              forKey:@"Description"]];
+            }
         } else {
             NSString* title = [dictionary objectForKey:@"title"];
             if (title) {
@@ -197,7 +210,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
         }
         
     } else {
-        *error = [req error];
+        if (error) {
+            *error = [req error];
+        }
         
     }
     
