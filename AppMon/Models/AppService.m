@@ -31,7 +31,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     self = [super init];
     if (self) {
         [self load];
-        _store = [@"143441" retain];
         _queue = dispatch_queue_create("hk.ignition.appmon", NULL);
         _timelines = [[NSMutableDictionary dictionary] retain];
     }
@@ -58,6 +57,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 -(void) follow:(App*)app {
     if (![self isFollowed:app]) {
         [_apps addObject:app];
+        [_apps sortWithOptions:0 usingComparator:^(id id1, id id2){
+            App* app1 = id1;
+            App* app2 = id2;            
+            return [app1.title compare:app2.title];
+        }];
         [self save];
         [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationAppListChanged 
                                                             object:self];
@@ -211,6 +215,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         NSLog(@"load config file: %@", savePath);
         [_apps release];
         _apps = [[NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithFile:savePath]] retain];
+        [_apps sortWithOptions:0 usingComparator:^(id id1, id id2){
+            App* app1 = id1;
+            App* app2 = id2;            
+            return [app1.title compare:app2.title];
+        }];
+        
         return;
     }
 
