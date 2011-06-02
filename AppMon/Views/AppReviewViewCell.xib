@@ -72,13 +72,8 @@
 								</object>
 							</object>
 							<object class="NSColor" key="NSTextColor">
-								<int key="NSColorSpace">6</int>
-								<string key="NSCatalogName">System</string>
-								<string key="NSColorName">selectedMenuItemColor</string>
-								<object class="NSColor" key="NSColor" id="119289200">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
-								</object>
+								<int key="NSColorSpace">1</int>
+								<bytes key="NSRGB">MC4yNDcwNTg4MjM1IDAuNzY4NjI3NDUxIDEAA</bytes>
 							</object>
 						</object>
 					</object>
@@ -105,7 +100,10 @@
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
 								<string key="NSColorName">controlShadowColor</string>
-								<reference key="NSColor" ref="119289200"/>
+								<object class="NSColor" key="NSColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
+								</object>
 							</object>
 						</object>
 					</object>
@@ -145,7 +143,6 @@
 						<string key="NSFrame">{{17, 20}, {245, 251}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="350730162">
 							<int key="NSCellFlags">67239424</int>

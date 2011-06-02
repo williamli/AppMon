@@ -100,8 +100,10 @@
 - (void)drawBackground {
     if (self.selected) {
         [self.selectedGradient drawInRect:self.bounds angle:270.0f];
+        [self.lblTitle setTextColor:[NSColor colorWithCalibratedRed:0.290 green:0.494 blue:0.769 alpha:1.]];
     } else {
         [self.gradient drawInRect:self.bounds angle:90.0f];
+        [self.lblTitle setTextColor:[NSColor blackColor]];
     }
     
     [[NSColor colorWithDeviceWhite:0.5f alpha:1.0f] set];
