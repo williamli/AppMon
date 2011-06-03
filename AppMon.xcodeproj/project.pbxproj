@@ -273,6 +273,8 @@
 		5426F25A139649BB00C049CF /* zw.png in Resources */ = {isa = PBXBuildFile; fileRef = 5426F163139649BB00C049CF /* zw.png */; };
 		5426F25C139649C400C049CF /* country.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5426F25B139649C400C049CF /* country.plist */; };
 		5460668913991658007CD7EC /* AppMonConfigWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460668813991658007CD7EC /* AppMonConfigWindowController.m */; };
+		5460668B13991DB2007CD7EC /* CountryListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5460668A13991DB2007CD7EC /* CountryListItem.xib */; };
+		5460668E13991E5B007CD7EC /* CountryListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460668D13991E5B007CD7EC /* CountryListItem.m */; };
 		546458BB139391C20096466C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546458BA139391C20096466C /* Cocoa.framework */; };
 		546458C5139391C30096466C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 546458C3139391C30096466C /* InfoPlist.strings */; };
 		546458C8139391C30096466C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 546458C7139391C30096466C /* main.m */; };
@@ -632,6 +634,9 @@
 		5426F25B139649C400C049CF /* country.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = country.plist; path = Flags/country.plist; sourceTree = SOURCE_ROOT; };
 		5460668713991658007CD7EC /* AppMonConfigWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMonConfigWindowController.h; path = Controllers/AppMonConfigWindowController.h; sourceTree = "<group>"; };
 		5460668813991658007CD7EC /* AppMonConfigWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppMonConfigWindowController.m; path = Controllers/AppMonConfigWindowController.m; sourceTree = "<group>"; };
+		5460668A13991DB2007CD7EC /* CountryListItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CountryListItem.xib; path = Views/CountryListItem.xib; sourceTree = "<group>"; };
+		5460668C13991E5B007CD7EC /* CountryListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; name = CountryListItem.h; path = Views/CountryListItem.h; sourceTree = "<group>"; };
+		5460668D13991E5B007CD7EC /* CountryListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountryListItem.m; path = Views/CountryListItem.m; sourceTree = "<group>"; };
 		546458B6139391C20096466C /* AppMon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		546458BA139391C20096466C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		546458BD139391C30096466C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -811,6 +816,9 @@
 				54C972371397364700EB814F /* AppReviewHeaderItem.h */,
 				54C972381397364700EB814F /* AppReviewHeaderItem.m */,
 				54C972321397351200EB814F /* AppReviewHeaderItem.xib */,
+				5460668C13991E5B007CD7EC /* CountryListItem.h */,
+				5460668D13991E5B007CD7EC /* CountryListItem.m */,
+				5460668A13991DB2007CD7EC /* CountryListItem.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1683,6 +1691,7 @@
 				54C972331397351200EB814F /* AppReviewHeaderItem.xib in Resources */,
 				54C9723B1397650C00EB814F /* Monster.icns in Resources */,
 				54E711F51398E1CA00100033 /* angry-review.plist in Resources */,
+				5460668B13991DB2007CD7EC /* CountryListItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1762,6 +1771,7 @@
 				54C972391397364800EB814F /* AppReviewHeaderItem.m in Sources */,
 				54E711F21398E17000100033 /* ReviewResponse.m in Sources */,
 				5460668913991658007CD7EC /* AppMonConfigWindowController.m in Sources */,
+				5460668E13991E5B007CD7EC /* CountryListItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

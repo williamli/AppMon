@@ -9,16 +9,22 @@
 #import <Cocoa/Cocoa.h>
 
 #import "JAListView.h"
+#import "CountryListItem.h"
 
-@interface AppMonConfigWindowController : NSWindowController {
+@interface AppMonConfigWindowController : NSObject <JAListViewDataSource, JAListViewDelegate> {
 @private
     NSWindow*           window;
     NSPopUpButton*      popAutoRefresh;
     JAListView*         listCountries;
+    
+    NSDictionary*       countries;
+    NSArray*            countriesList;
 }
 
 @property (nonatomic, retain) IBOutlet NSWindow* window;
 @property (nonatomic, retain) IBOutlet NSPopUpButton* popAutoRefresh;
 @property (nonatomic, retain) IBOutlet JAListView* listCountries;
+@property (nonatomic, retain) NSDictionary* countries;
+@property (nonatomic, retain) NSArray* countriesList;
 
 @end
