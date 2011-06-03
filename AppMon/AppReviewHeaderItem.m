@@ -50,6 +50,9 @@
 
 - (void)dealloc
 {
+    [gradient release];
+    gradient = nil;
+
     [super dealloc];
 }
 
