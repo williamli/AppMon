@@ -160,13 +160,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                 [timeline addReviews:reviews fromHead:shouldInsertFromHead];
 
                 if (!loadMore) {
-                    timeline.unread = total - timeline.total;
+                    if (total - timeline.total > 0) {
+                        timeline.unread = total - timeline.total;
+                    }
                     timeline.total = total;
-                    timeline.page = 0;
                     timeline.lastReviewDate = lastReviewDate;
-                } else {
-                    timeline.page = timeline.page+1;
                 }
+
                 timeline.moreUrl = moreUrl;
                 
 
@@ -204,7 +204,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 @implementation AppService (Persistence)
 
 -(void) save {
-    dispatch_sync(_queue, ^{
+    dispatch_async(_queue, ^{
         NSString* savePath = [self saveFilePath];
         if (!savePath) {
             NSLog(@"ERROR: Cannot save AppService: save path not available");

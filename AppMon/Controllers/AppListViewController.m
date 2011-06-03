@@ -136,17 +136,13 @@
 #pragma mark JAListViewDelegate
 
 - (void)listView:(JAListView *)list willSelectView:(JAListViewItem *)view {
-    if(list == self.listApps) {
+    if(list == self.listApps) {       
+        // show review lists of selected app
         AppListViewCell* cell = (AppListViewCell *) view;
         cell.selected = YES;
         [self.appUpdateViewController loadAppReviews:cell.app];
         self.selectedApp = cell.app;
-    }
-}
-
-- (void)listView:(JAListView *)list didDeselectView:(JAListViewItem *)view {
-    if(list == self.listApps) {
-        AppListViewCell* cell = (AppListViewCell *) view;
+        
         Timeline* timeline = [self.appService timelineWithApp:cell.app];
         timeline.unread = 0;
         [cell setUnreadCount:0];
@@ -167,8 +163,10 @@
 
 - (JAListViewItem *)listView:(JAListView *)listView viewAtIndex:(NSUInteger)index {
     App* app = [[self.appService followedApps] objectAtIndex:index];
+    Timeline* timeline = [self.appService timelineWithApp:app];
     AppListViewCell* cell = [AppListViewCell appListViewCell];
     [cell setApp:app];
+    [cell setUnreadCount:timeline.unread];
     [self.appViews setValue:cell forKey:app.itemId];
     return cell;
 }

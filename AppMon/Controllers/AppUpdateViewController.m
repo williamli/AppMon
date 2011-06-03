@@ -134,6 +134,7 @@
 
 #pragma mark - NSViewBoundsDidChangeNotification
 
+// the list has been scrolled
 -(void) boundsDidChange:(NSNotification*)aNotification  {
     CGRect bound = [[aNotification object] bounds];
     CGFloat height = self.listUpdates.frame.size.height;

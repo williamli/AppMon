@@ -32,7 +32,6 @@
     NSDate* lastReviewDate;
     NSMutableArray* reviews;
     NSString* moreUrl;
-    NSUInteger page;
     NSUInteger total;
     
     BOOL loaded;
@@ -54,9 +53,6 @@
 
 // URL to load more reviews
 @property (nonatomic, retain) NSString* moreUrl;
-
-// last fetched page number
-@property (nonatomic, assign) NSUInteger page;
 
 // total number of reviews online
 @property (nonatomic, assign) NSUInteger total;

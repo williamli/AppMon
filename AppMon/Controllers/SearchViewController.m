@@ -116,12 +116,10 @@
 
 -(void) follow:(id)sender {
     AppSearchResultItem* item = (AppSearchResultItem*) [sender superview];
-    
     NSLog(@"Follow App: %@", item.app);
     [self.appService follow:item.app];
     [item setFollowed:YES];
     [item setNeedsDisplay:YES];
-    [[AppMonAppDelegate instance].mainController.appListViewController selectApp:item.app];
 }
 
 -(void) unfollow:(id)sender {
