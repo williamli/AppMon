@@ -122,10 +122,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {
                     *total = [[itemDict objectForKey:@"total-items"] intValue];
-
-                    NSString* moreUrl = [itemDict objectForKey:@"url"];
-                    NSLog(@"Total Result: %ld, More: %@", *total, moreUrl);
-                    
                 }
             }
         }
@@ -215,7 +211,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {
                     *moreUrl = [itemDict objectForKey:@"url"];
-                    NSLog(@"more URL : %@ (%@)", *moreUrl, [*moreUrl class]);
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"review-header"]) {
                     *lastReviewDate = [itemDict objectForKey:@"last-review-date"];
