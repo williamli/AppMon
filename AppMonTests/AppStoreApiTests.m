@@ -69,12 +69,12 @@
     STAssertTrue([apps2 count] > 5, @"should have at least 5 result items");
 }
 
-
 - (void)testReviews {
     NSError* error = nil;
     NSInteger total = 0;
+    NSString* moreUrl = nil;
     NSDate* lastReviewDate = nil;
-    NSArray* reviews = [self.appStore reviewsByStore:@"143441" appId:@"343200656" page:0 total:&total lastReviewDate:&lastReviewDate error:&error];
+    NSArray* reviews = [self.appStore reviewsByStore:@"143441" appId:@"343200656" page:0 total:&total moreUrl:&moreUrl lastReviewDate:&lastReviewDate error:&error];
     STAssertNil(error, @"should have no error: %@", error);
     
     STAssertNotNil(reviews, @"should not nil");
@@ -83,15 +83,19 @@
     STAssertTrue(total > 0, @"should have total > 0");
     STAssertTrue(total < 1000000, @"should have total < 1000000");
     
-    Review* rev = [reviews objectAtIndex:0];
-    STAssertNotNil(rev.title, @"should have title");
-    STAssertNotNil(rev.text, @"should have text");
-    STAssertTrue(rev.rating > 0, @"should have rating");
+    Review* rev1 = [reviews objectAtIndex:0];
+    STAssertNotNil(rev1.title, @"should have title");
+    STAssertNotNil(rev1.text, @"should have text");
+    STAssertTrue(rev1.rating > 0, @"should have rating");
     
-    NSLog(@"rev: %@", [rev description]);
-    
+    Review* rev2 = [reviews objectAtIndex:1];
+    STAssertNotNil(rev2.title, @"should have title");
+    STAssertNotNil(rev2.text, @"should have text");
+    STAssertTrue(rev2.rating > 0, @"should have rating");
+    STAssertTrue(rev2.position > rev1.position, @"position 2 should be larger than position 1");
+
     // HKTV
-    reviews = [self.appStore reviewsByStore:@"143441" appId:@"348883035" page:0 total:&total lastReviewDate:&lastReviewDate error:&error];
+    reviews = [self.appStore reviewsByStore:@"143441" appId:@"348883035" page:0 total:&total moreUrl:&moreUrl lastReviewDate:&lastReviewDate error:&error];
     STAssertNil(error, @"should have no error: %@", error);
     STAssertTrue(total > 0, @"should have total > 0");
     STAssertTrue(total < 1000000, @"should have total < 1000000");
