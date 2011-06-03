@@ -9,22 +9,29 @@
 #import <Cocoa/Cocoa.h>
 
 #import "JAListView.h"
+#import "JASectionedListView.h"
 #import "CountryListItem.h"
 
-@interface AppMonConfigWindowController : NSObject <JAListViewDataSource, JAListViewDelegate> {
+@interface AppMonConfigWindowController : NSObject <JASectionedListViewDataSource, JAListViewDelegate> {
 @private
     NSWindow*           window;
     NSPopUpButton*      popAutoRefresh;
-    JAListView*         listCountries;
+    JASectionedListView* listCountries;
     
-    NSDictionary*       countries;
-    NSArray*            countriesList;
+    NSDictionary*       countriesInfo;
+    NSArray*            countries;
+    NSArray*            topCountries;
 }
 
 @property (nonatomic, retain) IBOutlet NSWindow* window;
 @property (nonatomic, retain) IBOutlet NSPopUpButton* popAutoRefresh;
-@property (nonatomic, retain) IBOutlet JAListView* listCountries;
-@property (nonatomic, retain) NSDictionary* countries;
-@property (nonatomic, retain) NSArray* countriesList;
+@property (nonatomic, retain) IBOutlet JASectionedListView* listCountries;
+@property (nonatomic, retain) NSDictionary* countriesInfo;
+@property (nonatomic, retain) NSArray* countries;
+@property (nonatomic, retain) NSArray* topCountries;
+
+-(IBAction) clickedItemCheckbox:(id)sender;
+-(IBAction) clickedHeaderCheckbox:(id)sender;
+-(IBAction) clickedHeader:(id)sender;
 
 @end

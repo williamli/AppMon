@@ -275,6 +275,8 @@
 		5460668913991658007CD7EC /* AppMonConfigWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460668813991658007CD7EC /* AppMonConfigWindowController.m */; };
 		5460668B13991DB2007CD7EC /* CountryListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5460668A13991DB2007CD7EC /* CountryListItem.xib */; };
 		5460668E13991E5B007CD7EC /* CountryListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460668D13991E5B007CD7EC /* CountryListItem.m */; };
+		5460669013992FEF007CD7EC /* CountryListHeaderItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5460668F13992FEE007CD7EC /* CountryListHeaderItem.xib */; };
+		5460669313993035007CD7EC /* CountryListHeaderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460669213993034007CD7EC /* CountryListHeaderItem.m */; };
 		546458BB139391C20096466C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546458BA139391C20096466C /* Cocoa.framework */; };
 		546458C5139391C30096466C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 546458C3139391C30096466C /* InfoPlist.strings */; };
 		546458C8139391C30096466C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 546458C7139391C30096466C /* main.m */; };
@@ -635,8 +637,11 @@
 		5460668713991658007CD7EC /* AppMonConfigWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMonConfigWindowController.h; path = Controllers/AppMonConfigWindowController.h; sourceTree = "<group>"; };
 		5460668813991658007CD7EC /* AppMonConfigWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppMonConfigWindowController.m; path = Controllers/AppMonConfigWindowController.m; sourceTree = "<group>"; };
 		5460668A13991DB2007CD7EC /* CountryListItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CountryListItem.xib; path = Views/CountryListItem.xib; sourceTree = "<group>"; };
-		5460668C13991E5B007CD7EC /* CountryListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; name = CountryListItem.h; path = Views/CountryListItem.h; sourceTree = "<group>"; };
+		5460668C13991E5B007CD7EC /* CountryListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountryListItem.h; path = Views/CountryListItem.h; sourceTree = "<group>"; };
 		5460668D13991E5B007CD7EC /* CountryListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountryListItem.m; path = Views/CountryListItem.m; sourceTree = "<group>"; };
+		5460668F13992FEE007CD7EC /* CountryListHeaderItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CountryListHeaderItem.xib; path = Views/CountryListHeaderItem.xib; sourceTree = "<group>"; };
+		5460669113993034007CD7EC /* CountryListHeaderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListHeaderItem.h; sourceTree = "<group>"; };
+		5460669213993034007CD7EC /* CountryListHeaderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryListHeaderItem.m; sourceTree = "<group>"; };
 		546458B6139391C20096466C /* AppMon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		546458BA139391C20096466C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		546458BD139391C30096466C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -819,6 +824,9 @@
 				5460668C13991E5B007CD7EC /* CountryListItem.h */,
 				5460668D13991E5B007CD7EC /* CountryListItem.m */,
 				5460668A13991DB2007CD7EC /* CountryListItem.xib */,
+				5460669113993034007CD7EC /* CountryListHeaderItem.h */,
+				5460669213993034007CD7EC /* CountryListHeaderItem.m */,
+				5460668F13992FEE007CD7EC /* CountryListHeaderItem.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1692,6 +1700,7 @@
 				54C9723B1397650C00EB814F /* Monster.icns in Resources */,
 				54E711F51398E1CA00100033 /* angry-review.plist in Resources */,
 				5460668B13991DB2007CD7EC /* CountryListItem.xib in Resources */,
+				5460669013992FEF007CD7EC /* CountryListHeaderItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1772,6 +1781,7 @@
 				54E711F21398E17000100033 /* ReviewResponse.m in Sources */,
 				5460668913991658007CD7EC /* AppMonConfigWindowController.m in Sources */,
 				5460668E13991E5B007CD7EC /* CountryListItem.m in Sources */,
+				5460669313993035007CD7EC /* CountryListHeaderItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
