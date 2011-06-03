@@ -75,8 +75,8 @@
     return self.ended || self.total > fetched;
 }
 
--(void) setUnread:(NSInteger)unread {
-    [self.app setUnread:unread];
+-(void) setUnread:(NSInteger)newUnread {
+    [self.app setUnread:newUnread];
 }
 
 -(NSInteger) unread {
