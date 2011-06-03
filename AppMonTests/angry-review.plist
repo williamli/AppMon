@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>page-type</key>
+  <dict>
+    <key>template-name</key><string>reviews</string>
+    <key>template-parameters</key>
+    <dict>
+    </dict>
+  </dict>
+  <key>title</key><string>Reviews (311861)</string>
+  <key>store-version</key><string>1.0</string>
+  <key>store-client-application</key><string>Software</string>
+  <key>pings</key>
+  <array>
+    <string>http://metrics.apple.com/b/ss/applesuperglobal/1/G.6--NS?h5=appleitmsnaapmb%2Cappleitmsusapmb&amp;pccr=true&amp;pageName=App%20Store-User%20Review%20Page-US-Angry%20Birds-343200656&amp;ch=App%20Store-User%20Review%20Page&amp;g=http%3A%2F%2Fitunes.apple.com%2FWebObjects%2FMZStore.woa%2Fwa%2FviewContentsUserReviews%3Ftype%3DPurple%2BSoftware%26id%3D343200656%26displayable-kind%3D11</string>
+  </array>
+  <key>items</key>
+  <array>
+    <dict>
+      <key>average-user-rating</key><real>0.94</real>
+      <key>item-id</key><integer>343200656</integer>
+      <key>last-review-date</key><date>2011-06-02T23:50:00Z</date>
+      <key>title</key><string>Average of 65465 ratings (current version)</string>
+      <key>type</key><string>review-header</string>
+      <key>submit-user-review-url</key><string>https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/userReviewInfo?type=Purple+Software&amp;id=343200656&amp;displayable-kind=11</string>
+    </dict>
+    <dict>
+      <key>average-user-rating</key><real>1</real>
+      <key>text</key><string>I love this game!</string>
+      <key>title</key><string>1. Fun (v1.5.3)</string>
+      <key>type</key><string>review</string>
+      <key>user-name</key><string>AnnaPeanut on Jun 2, 2011</string>
+    </dict>
+    <dict>
+      <key>average-user-rating</key><real>1</real>
+      <key>text</key><string>Omg...I love this game!!!!!!!</string>
+      <key>title</key><string>2. Angry birds (v1.5.3)</string>
+      <key>type</key><string>review</string>
+      <key>user-name</key><string>BaileygurlNC on Jun 2, 2011</string>
+    </dict>
+    <dict>
+      <key>average-user-rating</key><real>1</real>
+      <key>text</key><string>Love it!!!</string>
+      <key>title</key><string>3. I said the Bird, Bird, Bird...Bird Bird&#39;s the Word!!! (v1.5.3)</string>
+      <key>type</key><string>review</string>
+      <key>user-name</key><string>Jose AKA Nene on Jun 2, 2011</string>
+    </dict>
+    <dict>
+      <key>average-user-rating</key><real>1</real>
+      <key>text</key><string>Constantly playing and I never get bored...just angry</string>
+      <key>title</key><string>4. Best Game EVER MADE!!! (v1.5.3)</string>
+      <key>type</key><string>review</string>
+      <key>user-name</key><string>GuitarFrEaK1224 on Jun 2, 2011</string>
+    </dict>
+    <dict>
+      <key>average-user-rating</key><real>1</real>
+      <key>text</key><string>Got in trouble with family for playing too much. Avoid if you can!</string>
+      <key>title</key><string>5. Addictive !  Will get you in trouble! (v1.5.3)</string>
+      <key>type</key><string>review</string>
+      <key>user-name</key><string>Frank Lundy Jr. on Jun 2, 2011</string>
+    </dict>
+    <dict>
+      <key>average-user-rating</key><real>1</real>
+      <key>text</key><string>This game is very cool and very adventurous. I really recommend this game for anyone that likes pigs getting their butts kicked by birds!!!</string>
+      <key>title</key><string>6. This is addictive (v1.5.3)</string>
+      <key>type</key><string>review</string>
+      <key>user-name</key><string>ShizumiSoulStealer on Jun 2, 2011</string>
+    </dict>
+    <dict>
+      <key>average-user-rating</key><real>1</real>
+      <key>text</key><string>Get it!</string>
+      <key>title</key><string>7. ¡Ya tu sabes! (v1.5.3)</string>
+      <key>type</key><string>review</string>
+      <key>user-name</key><string>Sener1 on Jun 2, 2011</string>
+    </dict>
+    <dict>
+      <key>average-user-rating</key><real>1</real>
+      <key>text</key><string>VERRY ADDICTIVE!  I often wonder where the time goes while I&#39;m playing.</string>
+      <key>title</key><string>8. Angry Birds (v1.5.3)</string>
+      <key>type</key><string>review</string>
+      <key>user-name</key><string>Andrea Truelson on Jun 2, 2011</string>
+    </dict>
+    <dict>
+      <key>average-user-rating</key><real>1</real>
+      <key>text</key><string>Total addiction!!!!</string>
+      <key>title</key><string>9. Angry Birds (v1.5.3)</string>
+      <key>type</key><string>review</string>
+      <key>user-name</key><string>Harman9 on Jun 2, 2011</string>
+    </dict>
+    <dict>
+      <key>average-user-rating</key><real>1</real>
+      <key>text</key><string>it&#39;s so cool</string>
+      <key>title</key><string>10. awsome (v1.5.3)</string>
+      <key>type</key><string>review</string>
+      <key>user-name</key><string>pets pls on Jun 2, 2011</string>
+    </dict>
+    <dict>
+      <key>type</key><string>more</string>
+      <key>title</key><string>More Reviews...</string>
+      <key>url</key><string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=1&amp;type=Purple+Software&amp;id=343200656</string>
+      <key>total-items</key><integer>311861</integer>
+    </dict>
+  </array>
+</dict>
+</plist>
