@@ -19,6 +19,7 @@
 @interface AppListViewController (Private)
 -(void) appListDidUpdated:(NSNotification*)notification;
 -(void) timelineDidUpdated:(NSNotification*)notification;
+-(void) followedApp:(NSNotification*)notification;
 -(void) resetUnreadCount;
 @end
 
@@ -50,8 +51,8 @@
     [super awakeFromNib];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(appListDidUpdated:) 
-                                                 name:AppServiceNotificationAppListChanged 
+                                             selector:@selector(unfollowedApp:) 
+                                                 name:AppServiceNotificationUnfollowedApp 
                                                object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -63,6 +64,12 @@
                                              selector:@selector(storeDidChanged:) 
                                                  name:AppServiceNotificationStoreChanged
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(followedApp:) 
+                                                 name:AppServiceNotificationFollowedApp
+                                               object:nil];
+    
 
     self.appViews = [NSMutableDictionary dictionary];
     self.listApps.backgroundColor = [NSColor colorWithCalibratedRed:0.855 green:0.875 blue:0.902 alpha:1.];
@@ -101,7 +108,14 @@
 
 #pragma mark - Private
 
--(void) appListDidUpdated:(NSNotification*)notification {
+-(void) followedApp:(NSNotification*)notification {
+    [self.listApps reloadDataAnimated:YES];
+    
+    App* app = [notification object];
+    [self.appService fetchTimelineWithApp:app];
+}
+
+-(void) unfollowedApp:(NSNotification*)notification {
     [self.listApps reloadDataAnimated:YES];
 }
 
