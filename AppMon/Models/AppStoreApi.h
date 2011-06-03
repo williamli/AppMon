@@ -26,6 +26,10 @@ extern NSString * const kAppStoreReviewUrl;
 
 + (AppStoreApi *)sharedAppStoreApi;
 
+// TODO: Hints API
+// http://ax.search.itunes.apple.com/WebObjects/MZSearchHints.woa/wa/hints?q=term
+
+
 // Find an App by store and id
 // Parameters: 
 //  store   - app store front id
