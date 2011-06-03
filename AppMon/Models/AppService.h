@@ -25,7 +25,8 @@ extern NSString * const AppServiceNotificationTimelineChanged;
 // app store is changed
 extern NSString * const AppServiceNotificationStoreChanged;
 
-
+// user read the specific app
+extern NSString * const AppServiceNotificationReadApp;
 
 @protocol AppServiceDelegate
 
@@ -74,6 +75,9 @@ extern NSString * const AppServiceNotificationStoreChanged;
 -(void) fetchTimelineWithApp:(App*)app more:(BOOL)loadMore;
 
 -(Timeline*) timelineWithApp:(App*)app;
+
+// user has READ the timeline of specific app
+-(void) markAppAsRead:(App*)app;
 
 @end
 

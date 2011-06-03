@@ -69,6 +69,12 @@
                                              selector:@selector(followedApp:) 
                                                  name:AppServiceNotificationFollowedApp
                                                object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userReadAppTimeline:) 
+                                                 name:AppServiceNotificationReadApp
+                                               object:nil];
+    
     
 
     self.appViews = [NSMutableDictionary dictionary];
@@ -140,6 +146,14 @@
     
 }
 
+-(void) userReadAppTimeline:(NSNotification*)notification {
+    App* app = [notification object];
+    AppListViewCell* cell = [self.appViews objectForKey:app.itemId];
+    if (cell) {
+        [cell setUnreadCount:0];
+    }
+}
+
 -(void) resetUnreadCount {
     for (AppListViewCell* cell in [self.appViews allValues]) {
         [cell setUnreadCount:0];
@@ -156,10 +170,7 @@
         cell.selected = YES;
         [self.appUpdateViewController loadAppReviews:cell.app];
         self.selectedApp = cell.app;
-        
-        Timeline* timeline = [self.appService timelineWithApp:cell.app];
-        timeline.unread = 0;
-        [cell setUnreadCount:0];
+        [self.appService markAppAsRead:cell.app];
     }
 }
 

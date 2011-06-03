@@ -15,6 +15,7 @@
 #import "Timeline.h"
 
 NSString * const AppServiceNotificationTimelineChanged  = @"hk.ignition.mac.appmon.TimelineChanged";
+NSString * const AppServiceNotificationReadApp          = @"hk.ignition.mac.appmon.ReadApp";
 NSString * const AppServiceNotificationStoreChanged     = @"hk.ignition.mac.appmon.StoreChanged";
 
 NSString * const AppServiceNotificationFollowedApp      = @"hk.ignition.mac.appmon.FollowedApp";
@@ -189,6 +190,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
             } 
         }
     });
+}
+
+-(void) markAppAsRead:(App*)app {
+    app.unread = 0;
+    [self save];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationReadApp 
+                                                        object:app];
+    
 }
 
 -(Timeline*) timelineWithApp:(App*)app {   
