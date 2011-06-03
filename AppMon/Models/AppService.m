@@ -32,9 +32,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 {
     self = [super init];
     if (self) {
-        [self load];
         _queue = dispatch_queue_create("hk.ignition.appmon", NULL);
         _timelines = [[NSMutableDictionary dictionary] retain];
+        [self load];
     }
     
     return self;
@@ -206,6 +206,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 -(void) save {
     dispatch_sync(_queue, ^{
         NSString* savePath = [self saveFilePath];
+        if (!savePath) {
+            NSLog(@"ERROR: Cannot save AppService: save path not available");
+            return;
+        }
+        
         BOOL result = [NSKeyedArchiver archiveRootObject:_apps 
                                                   toFile:savePath];
         if (!result) {
@@ -216,10 +221,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
 -(void) load {
     NSString* savePath = [self saveFilePath];
-    NSFileManager* manager = [NSFileManager defaultManager];
+    if (!savePath) {
+        NSLog(@"ERROR: Cannot load AppService: save path not available");
+        return;
+    }
 
+    NSFileManager* manager = [NSFileManager defaultManager];
     if ([manager fileExistsAtPath:savePath]) {
-        NSLog(@"load config file: %@", savePath);
+        NSLog(@"Load config file: %@", savePath);
         [_apps release];
         _apps = [[NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithFile:savePath]] retain];
         [_apps sortWithOptions:0 usingComparator:^(id id1, id id2){
@@ -232,7 +241,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     }
 
     // create initial empty data record
-    NSLog(@"initialize config  file");
     [_apps release];
     _apps = [[NSMutableArray array] retain];
     [self save];        
@@ -254,7 +262,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         NSError* error;
         [manager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
         if (error) {
-            NSLog(@"ERROR: cannot create config file path: %@, error=%@", path, error);
+            NSLog(@"ERROR: Cannot create config file path: %@, error=%@", path, error);
+            return nil;
         }
     }
     
