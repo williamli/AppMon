@@ -140,7 +140,16 @@
     CGFloat height = self.listUpdates.frame.size.height;
 
     if ((bound.origin.y + bound.size.height)>=height) {
-        [self loadMoreAppReviews];
+        if (self.timeline) {
+            [self loadMoreAppReviews];
+            [_service markAppAsRead:self.timeline.app];
+        }
+    }
+    
+    if (bound.origin.y == 0) {
+        if (self.timeline) {
+            [_service markAppAsRead:self.timeline.app];
+        }
     }
 }
 

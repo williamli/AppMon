@@ -165,12 +165,16 @@
 
 - (void)listView:(JAListView *)list willSelectView:(JAListViewItem *)view {
     if(list == self.listApps) {       
+        // mark all previously selected app as read
+        for (AppListViewCell * item in [list selectedViews]) {
+            [self.appService markAppAsRead:item.app];
+        }
+
         // show review lists of selected app
         AppListViewCell* cell = (AppListViewCell *) view;
         cell.selected = YES;
         [self.appUpdateViewController loadAppReviews:cell.app];
         self.selectedApp = cell.app;
-        [self.appService markAppAsRead:cell.app];
     }
 }
 
