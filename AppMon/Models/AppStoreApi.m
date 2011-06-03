@@ -156,25 +156,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     return countries;
 }  
 
--(NSArray*) reviewsByStore:(NSString*)store 
-                     appId:(NSString*)appid 
-                      page:(NSInteger)page 
-                     total:(NSInteger*)total
-                   moreUrl:(NSString**)moreUrl
-            lastReviewDate:(NSDate**)lastReviewDate 
-                     error:(NSError**)error{
+-(ReviewResponse*) reviewsByStore:(NSString*)store 
+                            appId:(NSString*)appid 
+                             page:(NSInteger)page {
     NSString* url = [NSString stringWithFormat:@"%@?id=%@&type=Purple+Software&displayable-kind=11&pageNumber=%ld", 
                      kAppStoreReviewUrl, appid, page];
-    return [self reviewsByStore:store url:url total:total moreUrl:moreUrl lastReviewDate:lastReviewDate error:error];
-} 
+    return [self reviewsByStore:store url:url];
+}
 
--(NSArray*) reviewsByStore:(NSString*)store 
-                       url:(NSString*)url
-                     total:(NSInteger*)total
-                   moreUrl:(NSString**)moreUrl
-            lastReviewDate:(NSDate**)lastReviewDate 
-                     error:(NSError**)error {
+-(ReviewResponse*) reviewsByStore:(NSString*)store 
+                              url:(NSString*)url {
+
+    ReviewResponse* response = [[ReviewResponse alloc] init];
     NSMutableArray* reviews = [NSMutableArray array];
+
     ASIHTTPRequest* req = [self request:url store:store];
     [req setRequestMethod:@"GET"];
     [req startSynchronous];
@@ -188,18 +183,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                                                                               format:&format
                                                                     errorDescription:&errorDesc];
         if (errorDesc) {
-            if (error) {
-                *error = [NSError errorWithDomain:@"PlistSerializationError" 
-                                             code:1 
-                                         userInfo:[NSDictionary dictionaryWithObject:errorDesc 
-                                                                              forKey:@"Description"]];
-            }
+            response.error = [NSError errorWithDomain:@"PlistSerializationError" 
+                                                 code:1 
+                                             userInfo:[NSDictionary dictionaryWithObject:errorDesc 
+                                                                                  forKey:@"Description"]];
+            return response;
+
         } else {
             NSString* title = [dictionary objectForKey:@"title"];
             if (title) {
                 NSArray* matches = [title captureComponentsMatchedByRegex:kReviewCountRegexp];
                 if (matches && [matches count] > 1) {
-                    *total = [[matches objectAtIndex:1] intValue];
+                    response.total = [[matches objectAtIndex:1] intValue];
                 }
             }
             
@@ -210,24 +205,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                     [reviews addObject:review];
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {
-                    *moreUrl = [itemDict objectForKey:@"url"];
+                    response.moreUrl = [itemDict objectForKey:@"url"];
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"review-header"]) {
-                    *lastReviewDate = [itemDict objectForKey:@"last-review-date"];
+                    response.lastReviewDate = [itemDict objectForKey:@"last-review-date"];
                     
                 }
             }
-        }
+            
+            response.reviews = reviews;
+            return response;
+        }       
+        
         
     } else {
-        if (error) {
-            *error = [req error];
-        }
-        
+        response.error = [req error];
+        return response;
     }
-    
-    return reviews;
-} 
+}
 
 #pragma mark - Private
 

@@ -10,6 +10,7 @@
 
 #import "App.h"
 #import "Timeline.h"
+#import "ReviewResponse.h"
 
 extern NSString * const kAppStoreSoftwareUrl;
 extern NSString * const kAppStoreSearchUrl;
@@ -53,19 +54,15 @@ extern NSString * const kAppStoreReviewUrl;
 //  store   - app store front id
 //  appid   - App Id
 //  page    - number of page, 0 based
-//  total   - if succeed, return the total number of search result on servers
-//  error   - if error occurred, error is set to non nil
-// Return: Array of Reviews
--(NSArray*) reviewsByStore:(NSString*)store appId:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total moreUrl:(NSString**)moreUrl lastReviewDate:(NSDate**)lastReviewDate  error:(NSError**)error;
+// Return: ReviewResponse - repsone object
+-(ReviewResponse*) reviewsByStore:(NSString*)store appId:(NSString*)appid page:(NSInteger)page;
 
 // Find reviews of an app by review URL
 // Parameters: 
 //  store   - app store front id
 //  url     - review URL
-//  total   - if succeed, return the total number of search result on servers
-//  error   - if error occurred, error is set to non nil
-// Return: Array of Reviews
--(NSArray*) reviewsByStore:(NSString*)store url:(NSString*)url total:(NSInteger*)total moreUrl:(NSString**)moreUrl lastReviewDate:(NSDate**)lastReviewDate  error:(NSError**)error;
+// Return: ReviewResponse - repsone object
+-(ReviewResponse*) reviewsByStore:(NSString*)store url:(NSString*)url;
 
 // Find list of available App Stores
 // Parameters: 

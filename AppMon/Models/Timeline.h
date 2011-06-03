@@ -15,7 +15,6 @@
 @protocol Timeline
 
 @property (nonatomic, retain) NSDate* lastReviewDate;
-@property (nonatomic, assign) NSUInteger page;
 @property (nonatomic, assign) NSUInteger total;
 @property (nonatomic, assign) BOOL loaded;
 @property (nonatomic, assign) BOOL loading;

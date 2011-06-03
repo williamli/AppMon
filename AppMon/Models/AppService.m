@@ -114,14 +114,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     Timeline* timeline = [self timelineWithApp:app];
 
     dispatch_async(_queue, ^{
-        NSInteger total = 0;
-        NSError* error = nil;
-        NSDate* lastReviewDate = nil;
-        NSString* moreUrl = nil;
         AppStoreApi* api = [AppStoreApi sharedAppStoreApi];
-        
-        
-        NSArray* reviews = nil;
+        ReviewResponse* reviewResp = nil;
         
         if (loadMore) {
             if (![timeline hasMoreReviews]) {
@@ -133,44 +127,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                 return;
             }
             
-            reviews = [api reviewsByStore:self.store 
-                                      url:timeline.moreUrl 
-                                    total:&total
-                                  moreUrl:&moreUrl
-                           lastReviewDate:&lastReviewDate
-                                    error:&error];
+            reviewResp = [api reviewsByStore:self.store 
+                                         url:timeline.moreUrl];
+
         } else {
-            reviews = [api reviewsByStore:self.store
-                                    appId:app.itemId 
-                                     page:0
-                                    total:&total
-                                  moreUrl:&moreUrl
-                           lastReviewDate:&lastReviewDate
-                                    error:&error];
+            reviewResp = [api reviewsByStore:self.store 
+                                       appId:app.itemId 
+                                        page:0];
+
         }
         
-        if (error) {
-            NSLog(@"timeline of (%@) encounter error: %@", app.title, error);
+        if (reviewResp.error) {
+            NSLog(@"timeline of (%@) encounter error: %@", app.title, reviewResp.error);
             dispatch_async(dispatch_get_main_queue(), ^{
                 if([self.delegate respondsToSelector:@selector(fetchTimelineFailed:timeline:error:)]) {
-                    [self.delegate fetchTimelineFailed:app timeline:timeline error:error];
+                    [self.delegate fetchTimelineFailed:app timeline:timeline error:reviewResp.error];
                 }
             });
             
         } else {
             BOOL shouldInsertFromHead = !loadMore && timeline.total > 0;
-            if (loadMore || timeline.lastReviewDate == nil || [timeline.lastReviewDate compare:lastReviewDate] == NSOrderedAscending) {
-                [timeline addReviews:reviews fromHead:shouldInsertFromHead];
+            if (loadMore || timeline.lastReviewDate == nil || [timeline.lastReviewDate compare:reviewResp.lastReviewDate] == NSOrderedAscending) {
+                [timeline addReviews:reviewResp.reviews fromHead:shouldInsertFromHead];
 
                 if (!loadMore) {
-                    if (total - timeline.total > 0) {
-                        timeline.unread = total - timeline.total;
+                    if (reviewResp.total - timeline.total > 0) {
+                        timeline.unread = reviewResp.total - timeline.total;
                     }
-                    timeline.total = total;
-                    timeline.lastReviewDate = lastReviewDate;
+                    timeline.total = reviewResp.total;
+                    timeline.lastReviewDate = reviewResp.lastReviewDate;
                 }
 
-                timeline.moreUrl = moreUrl;
+                timeline.moreUrl = reviewResp.moreUrl;
                 
 
                 dispatch_async(dispatch_get_main_queue(), ^{
