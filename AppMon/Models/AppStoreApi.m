@@ -167,7 +167,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 -(ReviewResponse*) reviewsByStore:(NSString*)store 
                               url:(NSString*)url {
 
-    ReviewResponse* response = [[ReviewResponse alloc] init];
+    ReviewResponse* response = [[[ReviewResponse alloc] initWithStore:store] autorelease];
     NSMutableArray* reviews = [NSMutableArray array];
 
     ASIHTTPRequest* req = [self request:url store:store];

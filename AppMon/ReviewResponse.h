@@ -11,6 +11,8 @@
 
 @interface ReviewResponse : NSObject {
 @private
+    NSString*   store;
+    
     NSInteger   total;
     CGFloat     averageUserRating;
     NSInteger   ratingCount;
@@ -21,6 +23,9 @@
     NSError*    error;
 }
 
+// request store id
+@property (nonatomic, retain) NSString*     store;
+
 @property (nonatomic, assign) NSInteger     total;
 @property (nonatomic, assign) CGFloat       averageUserRating;
 @property (nonatomic, assign) NSInteger     ratingCount;
@@ -30,5 +35,7 @@
 @property (nonatomic, retain) NSString*     moreUrl;
 
 @property (nonatomic, retain) NSError*      error;
+
+-(id) initWithStore:(NSString*)store;
 
 @end

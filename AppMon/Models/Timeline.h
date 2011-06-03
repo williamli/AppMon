@@ -12,25 +12,12 @@
 
 #define kReviewsPerPage         10
 
-@protocol Timeline
-
-@property (nonatomic, retain) NSDate* lastReviewDate;
-@property (nonatomic, assign) NSUInteger total;
-@property (nonatomic, assign) BOOL loaded;
-@property (nonatomic, assign) BOOL loading;
-
--(void) setApp:(App*)newApp;
--(NSArray*) reviews;
--(void) reset;
-
-@end
-
-@interface Timeline : NSObject <Timeline> {
+@interface Timeline : NSObject {
 @private
     App* app;
     NSDate* lastReviewDate;
     NSMutableArray* reviews;
-    NSString* moreUrl;
+    NSMutableDictionary* moreUrls;
     NSUInteger total;
     
     BOOL loaded;
@@ -51,7 +38,7 @@
 @property (nonatomic, retain) NSMutableArray* reviews;
 
 // URL to load more reviews
-@property (nonatomic, retain) NSString* moreUrl;
+@property (nonatomic, retain) NSMutableDictionary* moreUrls;
 
 // total number of reviews online
 @property (nonatomic, assign) NSUInteger total;
@@ -77,6 +64,12 @@
 -(void) reset;
 
 // if the timeline has more reviews
+-(BOOL) hasMoreReviewsWithStore:(NSString*)store;
+
 -(BOOL) hasMoreReviews;
+
+-(NSString*) moreUrlWithStore:(NSString*)store;
+
+-(void) setMoreUrl:(NSString*)moreUrl withStore:(NSString*)store;
 
 @end

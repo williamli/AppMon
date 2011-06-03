@@ -11,18 +11,21 @@
 
 @implementation ReviewResponse
 
+@synthesize store;
 @synthesize total, averageUserRating, ratingCount, reviews, lastReviewDate, moreUrl, error;
 
-- (id)init
+-(id) initWithStore:(NSString*)aStore
 {
     self = [super init];
     if (self) {
+        self.store = aStore;
     }    
     return self;
 }
 
 - (void)dealloc
 {
+    self.store = nil;
     self.reviews = nil;
     self.lastReviewDate = nil;
     self.moreUrl = nil;

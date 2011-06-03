@@ -12,7 +12,7 @@
 @implementation Timeline
 
 @synthesize app;
-@synthesize lastReviewDate, reviews, moreUrl, total, unread;
+@synthesize lastReviewDate, reviews, moreUrls, total, unread;
 @synthesize loaded, loading;
 
 -(id) initWithApp:(App*)theApp
@@ -21,8 +21,8 @@
     if (self) {
         self.app = theApp;
         self.reviews = [NSMutableArray array];
+        self.moreUrls = [NSMutableDictionary dictionary];
         self.lastReviewDate = nil;
-        self.moreUrl = nil;
         self.total = 0;
         self.unread = 0;
 
@@ -37,7 +37,8 @@
     self.app = nil;
     self.lastReviewDate = nil;
     self.reviews = nil;
-    self.moreUrl = nil;
+    self.moreUrls = nil;
+
     [super dealloc];
 }
 
@@ -74,8 +75,8 @@
     @synchronized(self) {
         NSLog(@"reset timeline - %@", self.app);
         [self.reviews removeAllObjects];
+        [self.moreUrls removeAllObjects];
         self.lastReviewDate = nil;
-        self.moreUrl = nil;
         self.total = 0;
         self.unread = 0;
         self.loaded = NO;
@@ -84,7 +85,15 @@
 }
 
 -(BOOL) hasMoreReviews {
-    return self.moreUrl != nil;
+    for (NSString* url in [self.moreUrls allValues]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+-(BOOL) hasMoreReviewsWithStore:(NSString*)store {
+    return [self.moreUrls objectForKey:store] != nil;
 }
 
 -(void) setUnread:(NSInteger)newUnread {
@@ -93,6 +102,14 @@
 
 -(NSInteger) unread {
     return self.app.unread;
+}
+
+-(NSString*) moreUrlWithStore:(NSString*)store {
+    return [self.moreUrls objectForKey:store];
+}
+
+-(void) setMoreUrl:(NSString*)theMoreUrl withStore:(NSString*)store {
+    [self.moreUrls setValue:theMoreUrl forKey:store];
 }
 
 @end
