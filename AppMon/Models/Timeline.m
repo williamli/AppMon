@@ -44,14 +44,29 @@
 
 -(void) addReviews:(NSArray*)newReviews fromHead:(BOOL)fromHead {
     @synchronized(self) {
-        for (Review* review in newReviews) {
-            if (![self.reviews containsObject:review]) {
-                if (fromHead) {
-                    [self.reviews insertObject:review atIndex:0];
+        if (fromHead) {
+            // insert to the head of timeline, use for 'refresh'
+            // we should first reverse the review list (they were sorted by time already) and insert to head
+            
+            NSComparator descReviewSort = ^(id rev1, id rev2) {
+                Review* r1 = rev1;
+                Review* r2 = rev2;
+                if (r1.position < r2.position) {
+                    return (NSComparisonResult) NSOrderedDescending;
+                } else if (r1.position > r2.position) {
+                    return (NSComparisonResult) NSOrderedAscending;
                 } else {
-                    [self.reviews addObject:review];
+                    return (NSComparisonResult) NSOrderedSame;
                 }
+            }; 
+            NSArray* revReviews = [newReviews sortedArrayUsingComparator:descReviewSort];
+            for (Review* review in revReviews) {
+                [self.reviews insertObject:review atIndex:0];
             }
+
+        } else {
+            // insert to end of timeline, used for 'initial load' or 'load more'
+            [self.reviews addObjectsFromArray:newReviews];
         }
     }
 }

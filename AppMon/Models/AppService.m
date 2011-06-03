@@ -141,9 +141,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
             });
             
         } else {
-            BOOL shouldInsertFromHead = !loadMore;
+            BOOL shouldInsertFromHead = !loadMore && timeline.total > 0;
             if (loadMore || timeline.lastReviewDate == nil || [timeline.lastReviewDate compare:lastReviewDate] == NSOrderedAscending) {
-                NSLog(@"timeline of (%@) updated", app.title);
+                NSLog(@"timeline of (%@) updated, shouldInsertFromHead=%@", app.title, shouldInsertFromHead ? @"YES" : @"NO");
                 [timeline addReviews:reviews fromHead:shouldInsertFromHead];
 
                 if (!loadMore) {
