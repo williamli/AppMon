@@ -18,6 +18,7 @@
     NSString* _date;
     NSUInteger _position;
     NSString* _on_version;
+    NSString* _store;
 }
 
 @property (nonatomic, assign) CGFloat rating;
@@ -27,5 +28,8 @@
 @property (nonatomic, retain) NSString* date;
 @property (nonatomic, assign) NSUInteger position;
 @property (nonatomic, retain) NSString* on_version;
+@property (nonatomic, retain) NSString* store;
+
+-(id) initWithPlist:(NSDictionary*)plist store:(NSString*)aStore;
 
 @end

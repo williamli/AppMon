@@ -210,7 +210,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
             NSArray* items = [dictionary objectForKey:@"items"];
             for (NSDictionary* itemDict in items) {
                 if ([[itemDict objectForKey:@"type"] isEqualToString:@"review"]) {
-                    Review* review = [[[Review alloc] initWithPlist:itemDict] autorelease];
+                    Review* review = [[[Review alloc] initWithPlist:itemDict store:store] autorelease];
                     [reviews addObject:review];
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {

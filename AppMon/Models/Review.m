@@ -14,7 +14,7 @@
 
 @implementation Review
 
-@synthesize rating=_rating, text=_text, title=_title, username=_username, date=_date, position=_position, on_version=_on_version;
+@synthesize rating=_rating, text=_text, title=_title, username=_username, date=_date, position=_position, on_version=_on_version, store=_store;
 
 - (id)init {
     self = [super init];
@@ -24,7 +24,7 @@
     return self;
 }
 
--(id) initWithPlist:(NSDictionary*)plist {
+-(id) initWithPlist:(NSDictionary*)plist store:(NSString*)aStore {
     self = [super init];
     if (self) {
         self.rating         = [[plist objectForKey:@"average-user-rating"] doubleValue];
@@ -44,6 +44,8 @@
             self.username       = [matches objectAtIndex:1];
             self.date           = [matches objectAtIndex:2];
         }
+        
+        self.store          = aStore;
     }
     return self;
 }
@@ -56,6 +58,7 @@
     [coder encodeObject:_date forKey:@"date"];
     [coder encodeInteger:_position forKey:@"position"];
     [coder encodeObject:_on_version forKey:@"on_version"];
+    [coder encodeObject:_store forKey:@"store"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -67,6 +70,7 @@
     _date           = [[coder decodeObjectForKey:@"date"] retain];
     _position       = [coder decodeIntegerForKey:@"position"];
     _on_version     = [[coder decodeObjectForKey:@"on_version"] retain];
+    _store          = [[coder decodeObjectForKey:@"store"] retain];
     return self;
 }
 
@@ -76,6 +80,7 @@
     self.username = nil;
     self.date = nil;
     self.on_version = nil;
+    self.store = nil;
     [super dealloc];
 }
 
