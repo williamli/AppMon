@@ -22,7 +22,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 {
     self = [super init];
     if (self) {
-        self.autoRefreshIntervalMinute = 15;
+        self.autoRefreshIntervalMinute = 5;
     }
     
     return self;
@@ -59,9 +59,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     }
 
     if (self.autoRefreshIntervalMinute <= 0) {
-        self.autoRefreshIntervalMinute = 15;
+        self.autoRefreshIntervalMinute = 5;
     }
-    
+
     return self;
 }
 
