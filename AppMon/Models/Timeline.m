@@ -12,7 +12,7 @@
 @implementation Timeline
 
 @synthesize app;
-@synthesize lastReviewDate, reviews, total, unread, page, ended;
+@synthesize lastReviewDate, reviews, moreUrl, total, unread, page;
 @synthesize loaded, loading;
 
 -(id) initWithApp:(App*)theApp
@@ -22,11 +22,11 @@
         self.app = theApp;
         self.reviews = [NSMutableArray array];
         self.lastReviewDate = nil;
+        self.moreUrl = nil;
         self.total = 0;
         self.page = 0;
         self.unread = 0;
 
-        self.ended = NO;
         self.loaded = NO;
         self.loading = NO;
     }
@@ -38,7 +38,7 @@
     self.app = nil;
     self.lastReviewDate = nil;
     self.reviews = nil;
-    
+    self.moreUrl = nil;
     [super dealloc];
 }
 
@@ -76,18 +76,17 @@
         NSLog(@"reset timeline - %@", self.app);
         [self.reviews removeAllObjects];
         self.lastReviewDate = nil;
+        self.moreUrl = nil;
         self.total = 0;
         self.unread = 0;
         self.page = 0;
-        self.ended = NO;
         self.loaded = NO;
         self.loading = NO;
     }
 }
 
 -(BOOL) hasMoreReviews {
-    NSUInteger fetched = ( self.page + 1 ) * kReviewsPerPage;
-    return self.ended || self.total > fetched;
+    return self.moreUrl != nil;
 }
 
 -(void) setUnread:(NSInteger)newUnread {

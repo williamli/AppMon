@@ -109,28 +109,42 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
 -(void) fetchTimelineWithApp:(App*)app more:(BOOL)loadMore {
     Timeline* timeline = [self timelineWithApp:app];
-    if (loadMore && ![timeline hasMoreReviews]) {
-        NSLog(@"timeline (%@) has no more reviews", app.title);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if([self.delegate respondsToSelector:@selector(fetchTimelineNoMore:timeline:)]) {
-                [self.delegate fetchTimelineNoMore:app timeline:timeline];
-            }
-        });
-        return;
-    }
 
     dispatch_async(_queue, ^{
-        NSInteger total;
+        NSInteger total = 0;
         NSError* error = nil;
         NSDate* lastReviewDate = nil;
-
+        NSString* moreUrl = nil;
         AppStoreApi* api = [AppStoreApi sharedAppStoreApi];
-        NSArray* reviews = [api reviewsByStore:self.store
-                                         appId:app.itemId 
-                                          page:(loadMore ? timeline.page+1 : 0)
-                                         total:&total
-                                lastReviewDate:&lastReviewDate
-                                         error:&error];
+        
+        
+        NSArray* reviews = nil;
+        
+        if (loadMore) {
+            if (![timeline hasMoreReviews]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if([self.delegate respondsToSelector:@selector(fetchTimelineNoMore:timeline:)]) {
+                        [self.delegate fetchTimelineNoMore:app timeline:timeline];
+                    }
+                });
+                return;
+            }
+            
+            reviews = [api reviewsByStore:self.store 
+                                      url:timeline.moreUrl 
+                                    total:&total
+                                  moreUrl:&moreUrl
+                           lastReviewDate:&lastReviewDate
+                                    error:&error];
+        } else {
+            reviews = [api reviewsByStore:self.store
+                                    appId:app.itemId 
+                                     page:0
+                                    total:&total
+                                  moreUrl:&moreUrl
+                           lastReviewDate:&lastReviewDate
+                                    error:&error];
+        }
         
         if (error) {
             NSLog(@"timeline of (%@) encounter error: %@", app.title, error);
@@ -143,7 +157,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         } else {
             BOOL shouldInsertFromHead = !loadMore && timeline.total > 0;
             if (loadMore || timeline.lastReviewDate == nil || [timeline.lastReviewDate compare:lastReviewDate] == NSOrderedAscending) {
-                NSLog(@"timeline of (%@) updated, shouldInsertFromHead=%@", app.title, shouldInsertFromHead ? @"YES" : @"NO");
                 [timeline addReviews:reviews fromHead:shouldInsertFromHead];
 
                 if (!loadMore) {
@@ -154,27 +167,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                 } else {
                     timeline.page = timeline.page+1;
                 }
+                timeline.moreUrl = moreUrl;
                 
-                if ([reviews count] == 0) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        timeline.ended = YES;
-                        if([self.delegate respondsToSelector:@selector(fetchTimelineNoMore:timeline:)]) {
-                            [self.delegate fetchTimelineNoMore:app timeline:timeline];
-                        }
-                    });
-                    
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:loadMore:)]) {
-                            [self.delegate fetchTimelineFinished:app timeline:timeline loadMore:loadMore];
-                        }
-                    });
-                }
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:loadMore:)]) {
+                        [self.delegate fetchTimelineFinished:app timeline:timeline loadMore:loadMore];
+                    }
+                });
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationTimelineChanged
                                                                     object:timeline];
             } else {
-                NSLog(@"timeline of (%@) not updated", app.title);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if([self.delegate respondsToSelector:@selector(fetchTimelineNoUpdate:timeline:)]) {
                         [self.delegate fetchTimelineNoUpdate:app timeline:timeline];

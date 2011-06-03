@@ -52,7 +52,16 @@ extern NSString * const kAppStoreReviewUrl;
 //  total   - if succeed, return the total number of search result on servers
 //  error   - if error occurred, error is set to non nil
 // Return: Array of Reviews
--(NSArray*) reviewsByStore:(NSString*)store appId:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total lastReviewDate:(NSDate**)lastReviewDate  error:(NSError**)error;
+-(NSArray*) reviewsByStore:(NSString*)store appId:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total moreUrl:(NSString**)moreUrl lastReviewDate:(NSDate**)lastReviewDate  error:(NSError**)error;
+
+// Find reviews of an app by review URL
+// Parameters: 
+//  store   - app store front id
+//  url     - review URL
+//  total   - if succeed, return the total number of search result on servers
+//  error   - if error occurred, error is set to non nil
+// Return: Array of Reviews
+-(NSArray*) reviewsByStore:(NSString*)store url:(NSString*)url total:(NSInteger*)total moreUrl:(NSString**)moreUrl lastReviewDate:(NSDate**)lastReviewDate  error:(NSError**)error;
 
 // Find list of available App Stores
 // Parameters: 

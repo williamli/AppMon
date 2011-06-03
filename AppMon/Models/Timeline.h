@@ -17,7 +17,6 @@
 @property (nonatomic, retain) NSDate* lastReviewDate;
 @property (nonatomic, assign) NSUInteger page;
 @property (nonatomic, assign) NSUInteger total;
-@property (nonatomic, assign) BOOL ended;
 @property (nonatomic, assign) BOOL loaded;
 @property (nonatomic, assign) BOOL loading;
 
@@ -32,10 +31,10 @@
     App* app;
     NSDate* lastReviewDate;
     NSMutableArray* reviews;
+    NSString* moreUrl;
     NSUInteger page;
     NSUInteger total;
-
-    BOOL ended;
+    
     BOOL loaded;
     BOOL loading;
 }
@@ -53,6 +52,9 @@
 // array of reviews of this timeline
 @property (nonatomic, retain) NSMutableArray* reviews;
 
+// URL to load more reviews
+@property (nonatomic, retain) NSString* moreUrl;
+
 // last fetched page number
 @property (nonatomic, assign) NSUInteger page;
 
@@ -61,9 +63,6 @@
 
 // number of unread reviews
 @property (nonatomic, assign) NSInteger unread;
-
-// if this timeline reached end
-@property (nonatomic, assign) BOOL ended;
 
 // if this timeline is loaded
 @property (nonatomic, assign) BOOL loaded;

@@ -160,10 +160,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     return countries;
 }  
 
--(NSArray*) reviewsByStore:(NSString*)store appId:(NSString*)appid page:(NSInteger)page total:(NSInteger*)total lastReviewDate:(NSDate**)lastReviewDate error:(NSError**)error{
-    NSMutableArray* reviews = [NSMutableArray array];
+-(NSArray*) reviewsByStore:(NSString*)store 
+                     appId:(NSString*)appid 
+                      page:(NSInteger)page 
+                     total:(NSInteger*)total
+                   moreUrl:(NSString**)moreUrl
+            lastReviewDate:(NSDate**)lastReviewDate 
+                     error:(NSError**)error{
     NSString* url = [NSString stringWithFormat:@"%@?id=%@&type=Purple+Software&displayable-kind=11&pageNumber=%ld", 
                      kAppStoreReviewUrl, appid, page];
+    return [self reviewsByStore:store url:url total:total moreUrl:moreUrl lastReviewDate:lastReviewDate error:error];
+} 
+
+-(NSArray*) reviewsByStore:(NSString*)store 
+                       url:(NSString*)url
+                     total:(NSInteger*)total
+                   moreUrl:(NSString**)moreUrl
+            lastReviewDate:(NSDate**)lastReviewDate 
+                     error:(NSError**)error {
+    NSMutableArray* reviews = [NSMutableArray array];
     ASIHTTPRequest* req = [self request:url store:store];
     [req setRequestMethod:@"GET"];
     [req startSynchronous];
@@ -171,7 +186,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     if ([req responseStatusCode] == 200) {
         NSPropertyListFormat format;
         NSString *errorDesc;
-
+        
         NSDictionary* dictionary = [NSPropertyListSerialization propertyListFromData:[req responseData]
                                                                     mutabilityOption:NSPropertyListImmutable
                                                                               format:&format
@@ -199,12 +214,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                     [reviews addObject:review];
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {
-
+                    *moreUrl = [itemDict objectForKey:@"url"];
+                    NSLog(@"more URL : %@ (%@)", *moreUrl, [*moreUrl class]);
                     
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"review-header"]) {
-                    if ([itemDict objectForKey:@"last-review-date"]) {
-                        *lastReviewDate = [itemDict objectForKey:@"last-review-date"];
-                    }
+                    *lastReviewDate = [itemDict objectForKey:@"last-review-date"];
+                    
                 }
             }
         }
