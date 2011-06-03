@@ -139,7 +139,6 @@
     CGFloat height = self.listUpdates.frame.size.height;
 
     if ((bound.origin.y + bound.size.height)>=height) {
-        NSLog(@" scroll view reached bottom!");
         [self loadMoreAppReviews];
     }
 }
