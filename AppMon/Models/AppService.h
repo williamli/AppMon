@@ -71,11 +71,15 @@ extern NSString * const AppServiceNotificationReadApp;
 
 @interface AppService (Timeline)
 
+// return the timeline object of the app, the object contains downloaded reviews.
+// to start download, call fetchTimelineWithApp:
+-(Timeline*) timelineWithApp:(App*)app;
+
+// start fetch a specific timeline and check if newer reviews exists
 -(void) fetchTimelineWithApp:(App*)app;
 
+// start fetch a specific timeline, optionally download more pages since last fetch
 -(void) fetchTimelineWithApp:(App*)app more:(BOOL)loadMore;
-
--(Timeline*) timelineWithApp:(App*)app;
 
 // user has READ the timeline of specific app
 -(void) markAppAsRead:(App*)app;
