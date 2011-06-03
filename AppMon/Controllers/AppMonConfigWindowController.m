@@ -168,6 +168,16 @@
     NSString* key = [self keyForCode:countryCode];
     [settings setBool:selected forKey:key];
     [settings synchronize];
+    
+    if (!selected) {
+        [settings setBool:NO forKey:@"appstore.enabled.all"];
+        if ([btnCheckbox tag] == 1) {
+            [settings setBool:NO forKey:@"appstore.enabled.top"];
+        } else if ([btnCheckbox tag] == 2) {
+            [settings setBool:NO forKey:@"appstore.enabled.others"];            
+        }
+        [self.listCountries reloadData];
+    }
 }
 
 
@@ -214,7 +224,6 @@
     }
     
     [settings synchronize];
-    
     [self.listCountries reloadData];
 
 }
