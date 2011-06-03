@@ -52,10 +52,12 @@ extern NSString * const AppServiceNotificationReadApp;
     
     id<AppServiceDelegate, NSObject> _delegate;
     NSString* _store;
+    NSArray* _stores;
 }
 
 @property (nonatomic, assign) id<AppServiceDelegate, NSObject> delegate;
 @property (nonatomic, retain) NSString* store;
+@property (nonatomic, retain) NSArray*  stores;
 
 + (AppService *)sharedAppService;
 

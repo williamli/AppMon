@@ -10,6 +10,7 @@
 #import "AppMonMainController.h"
 #import "INAppStoreWindow.h"
 
+#import "AppMonConfigWindowController.h"
 #import "AppService.h"
 #import "AppStoreApi.h"
 
@@ -19,13 +20,17 @@
     
     AppStoreApi* appStoreApi;
     AppMonMainController* mainController;
+    AppMonConfigWindowController* configController;
 }
 
 @property (nonatomic, retain) AppStoreApi* appStoreApi;
 
 @property (assign) IBOutlet INAppStoreWindow *window;
 @property (retain) IBOutlet AppMonMainController* mainController;
+@property (retain) IBOutlet AppMonConfigWindowController* configController;
 
 +(AppMonAppDelegate*) instance;
+
+-(IBAction) showConfigurationScreen:(id)sender;
 
 @end

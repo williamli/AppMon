@@ -15,7 +15,7 @@
 
 @implementation AppMonAppDelegate
 
-@synthesize window, mainController;
+@synthesize window, mainController, configController;
 @synthesize appStoreApi;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -43,6 +43,11 @@
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
     [self.window makeKeyAndOrderFront:self];
     return YES;
+}
+
+-(IBAction) showConfigurationScreen:(id)sender {
+    NSLog(@"show config: %@ %@", self.configController, self.configController.window);
+    [self.configController.window makeKeyAndOrderFront:self];
 }
 
 +(AppMonAppDelegate*) instance {

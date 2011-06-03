@@ -272,6 +272,7 @@
 		5426F259139649BB00C049CF /* zm.png in Resources */ = {isa = PBXBuildFile; fileRef = 5426F162139649BB00C049CF /* zm.png */; };
 		5426F25A139649BB00C049CF /* zw.png in Resources */ = {isa = PBXBuildFile; fileRef = 5426F163139649BB00C049CF /* zw.png */; };
 		5426F25C139649C400C049CF /* country.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5426F25B139649C400C049CF /* country.plist */; };
+		5460668913991658007CD7EC /* AppMonConfigWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460668813991658007CD7EC /* AppMonConfigWindowController.m */; };
 		546458BB139391C20096466C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546458BA139391C20096466C /* Cocoa.framework */; };
 		546458C5139391C30096466C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 546458C3139391C30096466C /* InfoPlist.strings */; };
 		546458C8139391C30096466C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 546458C7139391C30096466C /* main.m */; };
@@ -629,6 +630,8 @@
 		5426F162139649BB00C049CF /* zm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zm.png; sourceTree = "<group>"; };
 		5426F163139649BB00C049CF /* zw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zw.png; sourceTree = "<group>"; };
 		5426F25B139649C400C049CF /* country.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = country.plist; path = Flags/country.plist; sourceTree = SOURCE_ROOT; };
+		5460668713991658007CD7EC /* AppMonConfigWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMonConfigWindowController.h; path = Controllers/AppMonConfigWindowController.h; sourceTree = "<group>"; };
+		5460668813991658007CD7EC /* AppMonConfigWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppMonConfigWindowController.m; path = Controllers/AppMonConfigWindowController.m; sourceTree = "<group>"; };
 		546458B6139391C20096466C /* AppMon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		546458BA139391C20096466C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		546458BD139391C30096466C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -1331,6 +1334,8 @@
 				5426995C1394C2270052EE8E /* AppListViewController.m */,
 				549FFC151394F849003321C5 /* AppUpdateViewController.h */,
 				549FFC161394F849003321C5 /* AppUpdateViewController.m */,
+				5460668713991658007CD7EC /* AppMonConfigWindowController.h */,
+				5460668813991658007CD7EC /* AppMonConfigWindowController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1756,6 +1761,7 @@
 				54C9722F13972FE600EB814F /* AppReviewNotFoundItem.m in Sources */,
 				54C972391397364800EB814F /* AppReviewHeaderItem.m in Sources */,
 				54E711F21398E17000100033 /* ReviewResponse.m in Sources */,
+				5460668913991658007CD7EC /* AppMonConfigWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

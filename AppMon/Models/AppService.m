@@ -29,7 +29,7 @@ NSString * const AppServiceNotificationUnfollowedApp    = @"hk.ignition.mac.appm
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
-@synthesize delegate=_delegate, store=_store;
+@synthesize delegate=_delegate, store=_store, stores=_stores;
 
 - (id)init
 {
