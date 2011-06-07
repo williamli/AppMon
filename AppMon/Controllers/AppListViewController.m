@@ -178,11 +178,6 @@
     }
 }
 
-- (void)listView:(JAListView *)listView didRemoveView:(JAListViewItem *)view {
-    AppListViewCell* cell = (AppListViewCell *) view;
-    [self.appViews removeObjectForKey:cell.app.itemId];
-}
-
 #pragma mark - JAListViewDataSource
 
 - (NSUInteger)numberOfItemsInListView:(JAListView *)listView {
