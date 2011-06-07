@@ -18,9 +18,7 @@
 @private    
     NSView* _titleBar;
     NSSearchField* _searchField;
-    NSPopUpButton* _btnCountry;
-    NSMenu* _menuCountry;
-    
+
     NSView* _searchView;
     NSSplitView* _splitView;
     
@@ -31,8 +29,6 @@
 
 @property (nonatomic, retain) IBOutlet NSView*          titleBar;
 @property (nonatomic, retain) IBOutlet NSSearchField*   searchField;
-@property (nonatomic, retain) IBOutlet NSPopUpButton*   btnCountry;
-@property (nonatomic, retain) IBOutlet NSMenu*          menuCountry;
 
 @property (nonatomic, retain) IBOutlet NSView*          searchView;
 @property (nonatomic, retain) IBOutlet NSSplitView*     splitView;

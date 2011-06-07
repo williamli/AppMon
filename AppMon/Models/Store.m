@@ -43,7 +43,7 @@
 }
 
 -(NSString*) description {
-    return [NSString stringWithFormat:@"<Store#%ld, name=%@>", self.storefront, self.name];
+    return [NSString stringWithFormat:@"<Store#%ld, name=%@, flag=%@>", self.storefront, self.name, self.code];
 }
 
 -(NSString*) key {

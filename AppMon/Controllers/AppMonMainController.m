@@ -11,14 +11,11 @@
 #import "AppMonConfig.h"
 
 @interface AppMonMainController (Private)
--(void) loadConfig;
--(void) countryMenuClicked:(id)sender;
 @end
 
 @implementation AppMonMainController
 
 @synthesize titleBar=_titleBar, searchField=_searchField;
-@synthesize menuCountry=_menuCountry, btnCountry=_btnCountry;
 @synthesize searchView=_searchView, splitView=_splitView;
 
 @synthesize searchController=_searchController;
@@ -42,8 +39,6 @@
 
 -(void) awakeFromNib {
     [super awakeFromNib];
-    
-    [self loadConfig];
 }
 
 
@@ -91,35 +86,5 @@
 	[[[sender subviews] objectAtIndex:1] setFrame:rightRect];
 }
 
-// load configuration
--(void) loadConfig {
-    AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
-    [config load];
-    
-    NSString* selectedCountry = [config selectedCountry];
-    NSString* selectedCode = [config selectedCountryCode];
-    for (NSMenuItem* menuItem in [self.menuCountry itemArray]) {
-        if ([[menuItem title] isEqualToString:selectedCountry]) {
-            [menuItem setState:NSOnState];
-            [self.btnCountry selectItem:menuItem];
-        } else {
-            [menuItem setState:NSOffState];   
-        }
-    }
-    [[AppService sharedAppService] setStore:selectedCode];
-}
-
-#pragma mark - Action
-
--(void) countryMenuClicked:(id)sender {
-    NSString* country = [sender title];
-    AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
-    Store* store = [[config allCountries] objectForKey:country];
-    [[AppService sharedAppService] setStore:store.storefront];
-    
-    [config setSelectedCountry:store.name];
-    [config setSelectedCountryCode:store.storefront];
-    [config save];
-}
 
 @end

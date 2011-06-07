@@ -51,12 +51,10 @@ extern NSString * const AppServiceNotificationReadApp;
     dispatch_queue_t _queue;
     
     id<AppServiceDelegate, NSObject> _delegate;
-    NSString* _store;
     NSArray* _stores;
 }
 
 @property (nonatomic, assign) id<AppServiceDelegate, NSObject> delegate;
-@property (nonatomic, retain) NSString* store;
 @property (nonatomic, retain) NSArray*  stores;
 
 + (AppService *)sharedAppService;

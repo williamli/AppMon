@@ -13,6 +13,7 @@
 #import "JASectionedListView.h"
 #import "AppMonConfig.h"
 #import "Store.h"
+#import "AppService.h"
 
 @interface AppMonConfigWindowController (Private)
 @end
@@ -101,7 +102,7 @@
             break;
         case 2:
             countryName = [[config othersCountyNames] objectAtIndex:index];
-            store = [[config topCountries]  objectForKey:countryName];
+            store = [[config othersCountries]  objectForKey:countryName];
             break;
         default:
             break;
@@ -144,6 +145,7 @@
     BOOL selected = ([btnCheckbox state] == NSOnState);
     NSString* countryName = [item.lblCountry stringValue];
     
+    // update config
     AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
     [config setStoreEnabled:selected withCountryName:countryName];    
     if (!selected) {
@@ -155,6 +157,9 @@
         }
         [self.listCountries reloadData];
     }
+    
+    AppService* service = [AppService sharedAppService];
+    [service setStores:[config enabledStores]];
 }
 
 

@@ -80,6 +80,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 }
 
 -(NSArray*) enabledStores {
+    if (!self.allCountryNames) {
+        [self load];
+    }
+
     NSMutableArray* array = [NSMutableArray array];
     
     for (NSString* name in self.allCountryNames) {
@@ -225,8 +229,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     }
     self.othersCountries = othersCountries;
     self.othersCountyNames = [othersCountryNames sortedArrayUsingSelector:@selector(compare:)];
-    
-
 }
 
 @end

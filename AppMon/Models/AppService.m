@@ -30,15 +30,20 @@ NSString * const AppServiceNotificationUnfollowedApp    = @"hk.ignition.mac.appm
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
-@synthesize delegate=_delegate, store=_store, stores=_stores;
+@synthesize delegate=_delegate, stores=_stores;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         _queue = dispatch_queue_create("hk.ignition.appmon", NULL);
+        
         _timelines = [[NSMutableDictionary dictionary] retain];
+
+        _stores = [[[AppMonConfig sharedAppMonConfig] enabledStores] retain];
+
         [self load];
+        
     }
     
     return self;
@@ -54,8 +59,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     [_apps release];
     _apps = nil;
     
-    [_store release];
-    _store = nil;
+    [_stores release];
+    _stores = nil;
     
     [super dealloc];
 }
@@ -89,9 +94,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     return [_apps containsObject:app];
 }
 
--(void) setStore:(NSString*)newStore {
-    [_store release];
-    _store = [newStore retain];
+-(void) setStores:(NSArray*)newStores {
+    @synchronized(_stores) {
+        [_stores release];
+        _stores = [newStores retain];
+        
+        for (Timeline* tl in [_timelines allValues]) {
+            [tl reset];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationStoreChanged
+                                                            object:self];
+    }
 }
 
 @end
@@ -107,9 +121,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSUInteger prevTotal        = [timeline total];
-        AppMonConfig* config        = [AppMonConfig sharedAppMonConfig];
         AppStoreApi* api            = [AppStoreApi sharedAppStoreApi];
-        NSArray* stores             = [config enabledStores];
         NSArray* reviewResponses    = nil;
 
         if (loadMore) {
@@ -118,7 +130,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
             [previousReviewResponse release];
 
         } else {
-            reviewResponses = [api reviewsByStores:stores 
+            reviewResponses = [api reviewsByStores:self.stores 
                                              appId:app.itemId];
 
         }
@@ -230,8 +242,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     // create initial empty data record
     [_apps release];
     _apps = [[NSMutableArray array] retain];
-    [self save];        
-
+    [self save];
 }
 
 // save path for app mon config file
