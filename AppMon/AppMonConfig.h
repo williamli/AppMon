@@ -12,8 +12,6 @@
 
 @interface AppMonConfig : NSObject {
 @private
-    NSString* _selectedCountry;
-    NSString* _selectedCountryCode;
     NSUInteger _autoRefreshIntervalMinute;
     
     NSDictionary* _allCountries;
@@ -26,8 +24,6 @@
     NSArray* _othersCountyNames;
 }
 
-@property (nonatomic, retain) NSString* selectedCountry;
-@property (nonatomic, retain) NSString* selectedCountryCode;
 @property (nonatomic, assign) NSUInteger autoRefreshIntervalMinute;
 
 @property (nonatomic, retain) NSDictionary* allCountries;

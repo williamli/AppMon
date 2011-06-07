@@ -20,7 +20,7 @@
 
 @implementation AppMonConfig
 
-@synthesize selectedCountry=_selectedCountry, selectedCountryCode=_selectedCountryCode, autoRefreshIntervalMinute=_autoRefreshIntervalMinute;
+@synthesize autoRefreshIntervalMinute=_autoRefreshIntervalMinute;
 @synthesize allCountries=_allCountries, topCountries=_topCountries, othersCountries=_othersCountries;
 @synthesize allCountryNames=_allCountryNames, topCountryNames=_topCountryNames, othersCountyNames=_othersCountyNames;
 
@@ -44,8 +44,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     self.topCountryNames = nil;
     self.allCountryNames = nil;
     self.othersCountyNames = nil;
-    self.selectedCountry = nil;
-    self.selectedCountryCode = nil;
     [super dealloc];
 }
 
@@ -148,8 +146,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 
 -(AppMonConfig*) save {
     NSUserDefaults* setting = [NSUserDefaults standardUserDefaults];
-    [setting setObject:self.selectedCountry forKey:@"selectedCountry"];
-    [setting setObject:self.selectedCountryCode forKey:@"selectedCountryCode"];
     [setting setInteger:self.autoRefreshIntervalMinute forKey:@"autoRefreshIntervalMinute"];
     [setting synchronize];
     return self;
@@ -159,17 +155,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     [self loadCountries];
 
     NSUserDefaults* setting = [NSUserDefaults standardUserDefaults];
-    self.selectedCountry = [setting objectForKey:@"selectedCountry"];
-    self.selectedCountryCode = [setting objectForKey:@"selectedCountryCode"];
     self.autoRefreshIntervalMinute = [setting integerForKey:@"autoRefreshIntervalMinute"];
-
-    if (!self.selectedCountry) {
-        self.selectedCountry = @"United States";
-    }
-    
-    if (!self.selectedCountryCode) {
-        self.selectedCountryCode = @"143441";
-    }
 
     if (self.autoRefreshIntervalMinute <= 0) {
         self.autoRefreshIntervalMinute = 5;
@@ -184,7 +170,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     // open country config file, read country lists
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"country" 
                                                          ofType:@"plist"];
-    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary* configCountries = [NSDictionary dictionaryWithContentsOfFile:filePath];
     NSMutableDictionary* allCountries = [NSMutableDictionary dictionary];
     NSMutableDictionary* topCountries = [NSMutableDictionary dictionary];
@@ -202,7 +188,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
         Store* store = [[[Store alloc] initWithName:countryName storefront:storeFront code:code] autorelease];
         [allCountries setValue:store forKey:countryName];
         [storeFronts setValue:store forKey:storeFront];
+        
+        NSString* key = [store key];
+        if ([defaults objectForKey:key] == nil) {
+            [defaults setBool:YES forKey:key];
+        }
     }
+    [defaults synchronize];
+
     self.allCountries = allCountries;
     self.allCountryNames = sortedCountries;
     
