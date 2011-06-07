@@ -11,42 +11,29 @@
 #import "CountryListItem.h"
 
 #import "JASectionedListView.h"
+#import "AppMonConfig.h"
+#import "Store.h"
 
 @interface AppMonConfigWindowController (Private)
--(NSString*) keyForCode:(NSString*)countryCode;
 @end
 
 @implementation AppMonConfigWindowController
 
-@synthesize window, popAutoRefresh, listCountries, countries, topCountries, countriesInfo;
+@synthesize window, popAutoRefresh, listCountries;
 
 - (void)dealloc
-{
-    self.countriesInfo = nil;
-    self.countries = nil;
-    self.topCountries = nil;
-    
+{    
     [super dealloc];
 }
 
 -(void) awakeFromNib {
     [super awakeFromNib];
-
-    self.listCountries.backgroundColor = [NSColor whiteColor];
-
-    // open country config file, read country lists
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"country" 
-                                                         ofType:@"plist"];
-    self.topCountries = [NSArray arrayWithObjects:@"United States", @"United Kingdom", @"Canada", @"Deutschland",
-                         @"España", @"France", @"Australia", @"日本", nil];
     
-    self.countriesInfo = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    NSArray* baseCountryList = [[self.countriesInfo allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    NSMutableArray* workingCountriesList = [NSMutableArray arrayWithArray:baseCountryList];
-    for (NSString* topCountry in self.topCountries) {
-        [workingCountriesList removeObject:topCountry];
-    }
-    self.countries = workingCountriesList;
+    self.listCountries.backgroundColor  = [NSColor whiteColor];
+
+    AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
+    [config load];
+
     [self.listCountries reloadData];
 }
 
@@ -56,13 +43,14 @@
 }
 
 - (NSUInteger)listView:(JASectionedListView *)listView numberOfViewsInSection:(NSUInteger)section {
+    AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
     switch (section) {
         case 0:
             return 0;
         case 1:
-            return [self.topCountries count];
+            return [[config topCountryNames] count];
         case 2:
-            return [self.countries count];
+            return [[config othersCountyNames] count];
         default:
             return 0;
     }
@@ -100,33 +88,29 @@
 }
 
 - (JAListViewItem *)listView:(JAListView *)listView viewForSection:(NSUInteger)section index:(NSUInteger)index {
+    Store* store = nil;
     NSString* countryName = nil;
-    NSString* iconName = nil;
-    NSString* countryCode = nil;
+    AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
 
     switch (section) {
         case 0:
             return nil;
         case 1:
-            countryName = [self.topCountries objectAtIndex:index];
-            iconName = [[self.countriesInfo objectForKey:countryName] objectForKey:@"image"];
-            countryCode = [[self.countriesInfo objectForKey:countryName] objectForKey:@"id"];
+            countryName = [[config topCountryNames] objectAtIndex:index];
+            store = [[config topCountries] objectForKey:countryName];
             break;
         case 2:
-            countryName = [self.countries objectAtIndex:index];
-            iconName = [[self.countriesInfo objectForKey:countryName] objectForKey:@"image"];
-            countryCode = [[self.countriesInfo objectForKey:countryName] objectForKey:@"id"];
+            countryName = [[config othersCountyNames] objectAtIndex:index];
+            store = [[config topCountries]  objectForKey:countryName];
             break;
         default:
             break;
     }
 
-    NSUserDefaults* settings = [NSUserDefaults standardUserDefaults];
-    NSString* key = [self keyForCode:countryCode];
-    BOOL selected = [settings boolForKey:key];
+    BOOL selected = [config storeEnabledWithCountryName:countryName];
     CountryListItem* item = [CountryListItem item];
     [item setCountryName:countryName];
-    [item setFlagName:iconName];
+    [item setFlagName:store.code];
     [item.btnCheckbox setTag:section];
     [item.btnCheckbox setState:(selected? NSOnState : NSOffState)]; 
     [item.btnCheckbox setAction:@selector(clickedItemCheckbox:)];
@@ -154,21 +138,15 @@
     }
 }
 
--(NSString*) keyForCode:(NSString*)countryCode {
-    return [NSString stringWithFormat:@"appstore.enabled.%@", countryCode];
-}
-
 -(IBAction) clickedItemCheckbox:(id)sender {
     NSUserDefaults* settings = [NSUserDefaults standardUserDefaults];
     NSButton* btnCheckbox = (NSButton*) sender;
     CountryListItem* item = (CountryListItem*) [btnCheckbox superview];
     BOOL selected = ([btnCheckbox state] == NSOnState);
     NSString* countryName = [item.lblCountry stringValue];
-    NSString* countryCode = [[self.countriesInfo objectForKey:countryName] objectForKey:@"id"];
-    NSString* key = [self keyForCode:countryCode];
-    [settings setBool:selected forKey:key];
-    [settings synchronize];
-    
+    AppMonConfig* configuration = [AppMonConfig sharedAppMonConfig];
+    [configuration setStoreEnabled:selected withCountryName:countryName];
+
     if (!selected) {
         [settings setBool:NO forKey:@"appstore.enabled.all"];
         if ([btnCheckbox tag] == 1) {
@@ -190,36 +168,29 @@
     CountryListHeaderItem* header = (CountryListHeaderItem*) sender;
     NSInteger section = [header.lblHeader tag];
     BOOL selected = ([header.btnCheckbox state] == NSOnState);
-    
+
+    AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
     NSUserDefaults* settings = [NSUserDefaults standardUserDefaults];
     if (section == 0) {
         [settings setBool:selected forKey:@"appstore.enabled.all"];
         [settings setBool:selected forKey:@"appstore.enabled.top"];
         [settings setBool:selected forKey:@"appstore.enabled.others"];
-        NSArray* allCountries = [self.countriesInfo allKeys];
-        for (NSString* countryName in allCountries) {
-            NSString* countryCode = [[self.countriesInfo objectForKey:countryName] objectForKey:@"id"];
-            NSString* key = [self keyForCode:countryCode];            
-            [settings setBool:selected
-                       forKey:key];
+        for (NSString* countryName in [config allCountryNames]) {
+            [config setStoreEnabled:selected 
+                    withCountryName:countryName];
         }
     } else if (section == 1) {
         [settings setBool:selected forKey:@"appstore.enabled.top"];
-        
-        for (NSString* countryName in self.topCountries) {
-            NSString* countryCode = [[self.countriesInfo objectForKey:countryName] objectForKey:@"id"];
-            NSString* key = [self keyForCode:countryCode];            
-            [settings setBool:selected
-                       forKey:key];
+        for (NSString* countryName in [config topCountryNames]) {
+            [config setStoreEnabled:selected 
+                    withCountryName:countryName];
+
         }
     } else if (section == 2) {
         [settings setBool:selected forKey:@"appstore.enabled.others"];
-
-        for (NSString* countryName in self.countries) {
-            NSString* countryCode = [[self.countriesInfo objectForKey:countryName] objectForKey:@"id"];
-            NSString* key = [self keyForCode:countryCode];            
-            [settings setBool:selected
-                       forKey:key];
+        for (NSString* countryName in [config othersCountyNames]) {
+            [config setStoreEnabled:selected 
+                    withCountryName:countryName];
         }
     }
     

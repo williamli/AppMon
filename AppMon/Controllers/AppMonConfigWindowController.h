@@ -17,18 +17,11 @@
     NSWindow*           window;
     NSPopUpButton*      popAutoRefresh;
     JASectionedListView* listCountries;
-    
-    NSDictionary*       countriesInfo;
-    NSArray*            countries;
-    NSArray*            topCountries;
 }
 
 @property (nonatomic, retain) IBOutlet NSWindow* window;
 @property (nonatomic, retain) IBOutlet NSPopUpButton* popAutoRefresh;
 @property (nonatomic, retain) IBOutlet JASectionedListView* listCountries;
-@property (nonatomic, retain) NSDictionary* countriesInfo;
-@property (nonatomic, retain) NSArray* countries;
-@property (nonatomic, retain) NSArray* topCountries;
 
 -(IBAction) clickedItemCheckbox:(id)sender;
 -(IBAction) clickedHeaderCheckbox:(id)sender;

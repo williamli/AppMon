@@ -64,10 +64,4 @@ extern NSString * const kAppStoreReviewUrl;
 // Return: ReviewResponse - repsone object
 -(ReviewResponse*) reviewsByStore:(NSString*)store url:(NSString*)url;
 
-// Find list of available App Stores
-// Parameters: 
-//  error   - if error occurred, error is set to non nil
-// Return: Array of Stores
--(NSArray*) stores:(NSError**)error;
-
 @end

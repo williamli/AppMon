@@ -33,6 +33,9 @@
 
 - (void)dealloc
 {
+    [_key release];
+    _key = nil;
+    
     self.code = nil;
     self.name = nil;
     self.storefront = nil;
@@ -41,6 +44,13 @@
 
 -(NSString*) description {
     return [NSString stringWithFormat:@"<Store#%ld, name=%@>", self.storefront, self.name];
+}
+
+-(NSString*) key {
+    if (!_key) {
+        _key = [[NSString stringWithFormat:@"appstore.enabled.%@", self.storefront] retain];
+    }
+    return _key;
 }
 
 @end

@@ -48,6 +48,9 @@
 
 -(NSArray*) othersCountryNames;
 
+-(BOOL) storeEnabledWithCountryName:(NSString*)countryName;
+
+-(void) setStoreEnabled:(BOOL)enabled withCountryName:(NSString*)countryName;
 
 -(AppMonConfig*) save;
 

@@ -70,6 +70,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     return _othersCountyNames;
 }
 
+-(BOOL) storeEnabledWithCountryName:(NSString*)countryName {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    Store* store = [self.allCountries objectForKey:countryName];
+    NSString* key = [store key];
+    return [[defaults objectForKey:key] boolValue];
+}
+
+-(void) setStoreEnabled:(BOOL)enabled withCountryName:(NSString*)countryName {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    Store* store = [self.allCountries objectForKey:countryName];
+    NSString* key = [store key];
+    [defaults setBool:enabled forKey:key];
+    [defaults synchronize];
+}
+
 -(AppMonConfig*) save {
     NSUserDefaults* setting = [NSUserDefaults standardUserDefaults];
     [setting setObject:self.selectedCountry forKey:@"selectedCountry"];
@@ -147,7 +162,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
         }
     }
     self.othersCountries = othersCountries;
-    self.othersCountyNames = othersCountryNames;
+    self.othersCountyNames = [othersCountryNames sortedArrayUsingSelector:@selector(compare:)];
     
 }
 @end

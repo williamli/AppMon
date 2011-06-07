@@ -244,43 +244,4 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     return request;
 }
 
-// parse the nodes return by XPath and return Array of Stores
--(NSArray*) storesFromNodes:(NSArray*)nodes {
-    NSMutableArray* result = [NSMutableArray array];
-
-    for (NSDictionary* dict in nodes) {
-        NSArray* nodeAttributeArray = [dict objectForKey:@"nodeAttributeArray"];
-        NSString* storefront = nil;
-        NSString* country = nil;
-        for (NSDictionary* attr in nodeAttributeArray) {
-            if ([[attr objectForKey:@"attributeName"] isEqualToString:@"url"]) {
-                NSString* url = [attr objectForKey:@"nodeContent"];
-                NSArray* array = [url captureComponentsMatchedByRegex:kStoreFrontRegexp];
-                if ([array count] == 2) {
-                    storefront = [array objectAtIndex:1];
-                    break;
-                }
-            }
-        }
-        
-        NSArray* nodeChildArray = [dict objectForKey:@"nodeChildArray"];
-        for (NSDictionary* children in nodeChildArray) {
-            NSArray* nodeChildArray2 = [children objectForKey:@"nodeChildArray"];
-            for (NSDictionary* children2 in nodeChildArray2) {
-                if ([[children2 objectForKey:@"nodeName"] isEqualToString:@"SetFontStyle"]) {
-                    country = [children2 objectForKey:@"nodeContent"];
-                    break;
-                }
-            }
-        }
-
-        if (country && storefront) {
-            [result addObject:[[[Store alloc] initWithName:country 
-                                                storefront:storefront] autorelease]];
-        }
-    }
-
-    return result;
-}
-
 @end
