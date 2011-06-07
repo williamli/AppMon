@@ -13,11 +13,13 @@
 @private
     NSString* _name;
     NSString* _storefront;
+    NSString* _code;
 }
 
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, retain) NSString* storefront;
+@property (nonatomic, retain) NSString* code;
 
--(id)initWithName:(NSString*)name storefront:(NSString*)storefront;
+-(id)initWithName:(NSString*)theName storefront:(NSString*)theStorefront code:(NSString*)theCode;
 
 @end

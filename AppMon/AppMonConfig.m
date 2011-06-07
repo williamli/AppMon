@@ -8,13 +8,17 @@
 
 #import "AppMonConfig.h"
 #import "SynthesizeSingleton.h"
+#import "Store.h"
 
 @interface AppMonConfig (Private)
+-(void) loadCountries;
 @end
 
 @implementation AppMonConfig
 
 @synthesize selectedCountry=_selectedCountry, selectedCountryCode=_selectedCountryCode, autoRefreshIntervalMinute=_autoRefreshIntervalMinute;
+@synthesize allCountries=_allCountries, topCountries=_topCountries, othersCountries=_othersCountries;
+@synthesize allCountryNames=_allCountryNames, topCountryNames=_topCountryNames, othersCountyNames=_othersCountyNames;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 
@@ -30,9 +34,40 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 
 - (void)dealloc
 {
+    self.topCountries = nil;
+    self.allCountries = nil;
+    self.othersCountries = nil;
+    self.topCountryNames = nil;
+    self.allCountryNames = nil;
+    self.othersCountyNames = nil;
     self.selectedCountry = nil;
     self.selectedCountryCode = nil;
     [super dealloc];
+}
+
+
+-(NSDictionary*) allCountries {
+    return _allCountries;
+}
+
+-(NSDictionary*) topCountries {
+    return _topCountries;
+}
+
+-(NSDictionary*) othersCountries {
+    return _othersCountries;
+}
+
+-(NSArray*) allCountryNames {
+    return _allCountryNames;
+}
+
+-(NSArray*) topCountryNames {
+    return _topCountryNames;
+}
+
+-(NSArray*) othersCountryNames {
+    return _othersCountyNames;
 }
 
 -(AppMonConfig*) save {
@@ -45,6 +80,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 }
 
 -(AppMonConfig*) load {
+    [self loadCountries];
+
     NSUserDefaults* setting = [NSUserDefaults standardUserDefaults];
     self.selectedCountry = [setting objectForKey:@"selectedCountry"];
     self.selectedCountryCode = [setting objectForKey:@"selectedCountryCode"];
@@ -67,4 +104,50 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 
 #pragma mark - Private
 
+-(void) loadCountries {
+    // open country config file, read country lists
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"country" 
+                                                         ofType:@"plist"];
+    
+    NSDictionary* configCountries = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    NSMutableDictionary* allCountries = [NSMutableDictionary dictionary];
+    NSMutableDictionary* topCountries = [NSMutableDictionary dictionary];
+    NSMutableDictionary* othersCountries = [NSMutableDictionary dictionary];
+    NSMutableArray* othersCountryNames = [NSMutableArray array];
+    
+    // build all country list
+    NSArray* sortedCountries = [[configCountries allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    for (NSString* countryName in sortedCountries) {
+        NSDictionary* countrySetting = [configCountries objectForKey:countryName];
+        NSString* storeFront = [countrySetting objectForKey:@"id"];
+        NSString* code = [countrySetting objectForKey:@"image"];
+
+        Store* store = [[[Store alloc] initWithName:countryName storefront:storeFront code:code] autorelease];
+        [allCountries setValue:store forKey:countryName];
+    }
+    self.allCountries = allCountries;
+    self.allCountryNames = sortedCountries;
+    
+    // build top country list
+    NSArray* topCountryNames = [NSArray arrayWithObjects:@"United States", @"United Kingdom", @"Canada", @"Deutschland",
+                         @"España", @"France", @"Australia", @"日本", nil];
+    for (NSString* countryName in topCountryNames) {
+        Store* store = [allCountries objectForKey:countryName];
+        [topCountries setValue:store forKey:countryName];
+    }
+    self.topCountries = topCountries;
+    self.topCountryNames = topCountryNames;
+
+    // build non-top country list
+    for (NSString* countryName in [allCountries allKeys]) {
+        Store* store = [allCountries objectForKey:countryName];
+        if (![self.topCountries objectForKey:countryName]) {
+            [othersCountries setValue:store forKey:countryName];
+            [othersCountryNames addObject:countryName];
+        }
+    }
+    self.othersCountries = othersCountries;
+    self.othersCountyNames = othersCountryNames;
+    
+}
 @end

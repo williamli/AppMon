@@ -10,7 +10,7 @@
 
 @implementation Store
 
-@synthesize name=_name, storefront=_storefront;
+@synthesize name=_name, storefront=_storefront, code=_code;
 
 - (id)init
 {
@@ -20,18 +20,20 @@
     return self;
 }
 
-- (id)initWithName:(NSString*)name storefront:(NSString*)storefront
+-(id)initWithName:(NSString*)theName storefront:(NSString*)theStorefront code:(NSString*)theCode
 {
     self = [super init];
     if (self) {
-        self.name = name;
-        self.storefront = storefront;
+        self.name = theName;
+        self.storefront = theStorefront;
+        self.code = theCode;
     }
     return self;
 }
 
 - (void)dealloc
 {
+    self.code = nil;
     self.name = nil;
     self.storefront = nil;
     [super dealloc];
