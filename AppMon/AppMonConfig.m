@@ -51,6 +51,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 
 #pragma mark - Stores
 
+-(Store*) storeWithStorefront:(NSString*)theStoreFront {
+    return [_storeFronts objectForKey:theStoreFront];
+}
+
 -(NSDictionary*) allCountries {
     return _allCountries;
 }
@@ -181,8 +185,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     NSMutableDictionary* allCountries = [NSMutableDictionary dictionary];
     NSMutableDictionary* topCountries = [NSMutableDictionary dictionary];
     NSMutableDictionary* othersCountries = [NSMutableDictionary dictionary];
+    NSMutableDictionary* storeFronts = [NSMutableDictionary dictionary];
     NSMutableArray* othersCountryNames = [NSMutableArray array];
-    
+
     // build all country list
     NSArray* sortedCountries = [[configCountries allKeys] sortedArrayUsingSelector:@selector(compare:)];
     for (NSString* countryName in sortedCountries) {
@@ -192,9 +197,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
 
         Store* store = [[[Store alloc] initWithName:countryName storefront:storeFront code:code] autorelease];
         [allCountries setValue:store forKey:countryName];
+        [storeFronts setValue:store forKey:storeFront];
     }
     self.allCountries = allCountries;
     self.allCountryNames = sortedCountries;
+    
+    [_storeFronts release];
+    _storeFronts = [storeFronts retain];
     
     // build top country list
     NSArray* topCountryNames = [NSArray arrayWithObjects:@"United States", @"United Kingdom", @"Canada", @"Deutschland",
@@ -217,6 +226,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     self.othersCountries = othersCountries;
     self.othersCountyNames = [othersCountryNames sortedArrayUsingSelector:@selector(compare:)];
     
+
 }
 
 @end

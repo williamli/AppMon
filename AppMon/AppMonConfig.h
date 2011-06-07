@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Store.h"
 
 @interface AppMonConfig : NSObject {
 @private
@@ -18,6 +19,8 @@
     NSDictionary* _allCountries;
     NSDictionary* _topCountries;
     NSDictionary* _othersCountries;
+    NSDictionary* _storeFronts;
+    
     NSArray* _allCountryNames;
     NSArray* _topCountryNames;
     NSArray* _othersCountyNames;
@@ -43,6 +46,8 @@
 @end
 
 @interface AppMonConfig (Stores)
+
+-(Store*) storeWithStorefront:(NSString*)theStoreFront;
 
 -(NSDictionary*) allCountries;
 

@@ -10,6 +10,7 @@
 
 #import "AppReviewViewCell.h"
 #import "Review.h"
+#import "Store.h"
 
 @interface AppReviewViewCell (Private)
 -(void)drawBackground;
@@ -18,7 +19,7 @@
 
 @implementation AppReviewViewCell
 
-@synthesize lblTitle=_lblTitle, lblMessage = _lblMessage, lblExtra = _lblExtra, lblStar=_lblStar;
+@synthesize lblTitle=_lblTitle, lblMessage = _lblMessage, lblExtra = _lblExtra, lblStar=_lblStar, imgFlag=_imgFlag;
 @synthesize review=_review;
 
 + (AppReviewViewCell *) item {
@@ -95,7 +96,10 @@
             
             NSUInteger ratingStar = (NSUInteger) (aReview.rating * 5.0);
             [self.lblStar setStringValue:[AppReviewViewCell stars:ratingStar]];
-
+            AppMonConfig* conf = [AppMonConfig sharedAppMonConfig];
+            Store* store = [conf storeWithStorefront:aReview.store];
+            NSString* flagCode = [store code];
+            [self.imgFlag setImage:[NSImage imageNamed:flagCode]];
         }
 
         [_review release];
