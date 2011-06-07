@@ -19,7 +19,7 @@
     
     NSArray*    reviews;
     NSDate*     lastReviewDate;
-    NSString*   nextUrl;
+    NSString*   moreUrl;
     NSError*    error;
 }
 
