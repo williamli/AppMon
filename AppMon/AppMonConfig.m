@@ -188,13 +188,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
         Store* store = [[[Store alloc] initWithName:countryName storefront:storeFront code:code] autorelease];
         [allCountries setValue:store forKey:countryName];
         [storeFronts setValue:store forKey:storeFront];
-        
-        NSString* key = [store key];
-        if ([defaults objectForKey:key] == nil) {
-            [defaults setBool:YES forKey:key];
-        }
     }
-    [defaults synchronize];
 
     self.allCountries = allCountries;
     self.allCountryNames = sortedCountries;
@@ -208,6 +202,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     for (NSString* countryName in topCountryNames) {
         Store* store = [allCountries objectForKey:countryName];
         [topCountries setValue:store forKey:countryName];
+        
+        // Add Top Countries as default
+        NSString* key = [store key];
+        if ([defaults objectForKey:key] == nil) {
+            [defaults setBool:YES forKey:key];
+        }
     }
     self.topCountries = topCountries;
     self.topCountryNames = topCountryNames;
@@ -219,9 +219,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
             [othersCountries setValue:store forKey:countryName];
             [othersCountryNames addObject:countryName];
         }
+        
+        // Add hongkong as default
+        if ([[store name] isEqualToString:@"Hong Kong"]) {
+            NSString* key = [store key];
+            if ([defaults objectForKey:key] == nil) {
+                [defaults setBool:YES forKey:key];
+            }
+        }
     }
     self.othersCountries = othersCountries;
     self.othersCountyNames = [othersCountryNames sortedArrayUsingSelector:@selector(compare:)];
+    [defaults synchronize];
 }
 
 @end
