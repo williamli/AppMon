@@ -139,20 +139,19 @@
 }
 
 -(IBAction) clickedItemCheckbox:(id)sender {
-    NSUserDefaults* settings = [NSUserDefaults standardUserDefaults];
     NSButton* btnCheckbox = (NSButton*) sender;
     CountryListItem* item = (CountryListItem*) [btnCheckbox superview];
     BOOL selected = ([btnCheckbox state] == NSOnState);
     NSString* countryName = [item.lblCountry stringValue];
-    AppMonConfig* configuration = [AppMonConfig sharedAppMonConfig];
-    [configuration setStoreEnabled:selected withCountryName:countryName];
-
+    
+    AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
+    [config setStoreEnabled:selected withCountryName:countryName];    
     if (!selected) {
-        [settings setBool:NO forKey:@"appstore.enabled.all"];
+        [config setAllStoresSelected:NO];
         if ([btnCheckbox tag] == 1) {
-            [settings setBool:NO forKey:@"appstore.enabled.top"];
+            [config setTopStoresSelected:NO];
         } else if ([btnCheckbox tag] == 2) {
-            [settings setBool:NO forKey:@"appstore.enabled.others"];            
+            [config setOtherStoresSelected:NO];
         }
         [self.listCountries reloadData];
     }
@@ -170,31 +169,28 @@
     BOOL selected = ([header.btnCheckbox state] == NSOnState);
 
     AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
-    NSUserDefaults* settings = [NSUserDefaults standardUserDefaults];
     if (section == 0) {
-        [settings setBool:selected forKey:@"appstore.enabled.all"];
-        [settings setBool:selected forKey:@"appstore.enabled.top"];
-        [settings setBool:selected forKey:@"appstore.enabled.others"];
+        [config setAllStoresSelected:selected];
+        [config setTopStoresSelected:selected];
+        [config setOtherStoresSelected:selected];
         for (NSString* countryName in [config allCountryNames]) {
             [config setStoreEnabled:selected 
                     withCountryName:countryName];
         }
     } else if (section == 1) {
-        [settings setBool:selected forKey:@"appstore.enabled.top"];
+        [config setTopStoresSelected:selected];
         for (NSString* countryName in [config topCountryNames]) {
             [config setStoreEnabled:selected 
                     withCountryName:countryName];
 
         }
     } else if (section == 2) {
-        [settings setBool:selected forKey:@"appstore.enabled.others"];
+        [config setOtherStoresSelected:selected];
         for (NSString* countryName in [config othersCountyNames]) {
             [config setStoreEnabled:selected 
                     withCountryName:countryName];
         }
     }
-    
-    [settings synchronize];
     [self.listCountries reloadData];
 
 }
