@@ -12,7 +12,7 @@
 @implementation Timeline
 
 @synthesize app;
-@synthesize lastReviewDate, reviews, moreUrls, total, unread;
+@synthesize lastReviewDate, reviews, reviewResponses, total, unread;
 @synthesize loaded, loading;
 
 -(id) initWithApp:(App*)theApp
@@ -21,7 +21,7 @@
     if (self) {
         self.app = theApp;
         self.reviews = [NSMutableArray array];
-        self.moreUrls = [NSMutableDictionary dictionary];
+        self.reviewResponses = [NSMutableDictionary dictionary];
         self.lastReviewDate = nil;
         self.total = 0;
         self.unread = 0;
@@ -37,7 +37,7 @@
     self.app = nil;
     self.lastReviewDate = nil;
     self.reviews = nil;
-    self.moreUrls = nil;
+    self.reviewResponses = nil;
 
     [super dealloc];
 }
@@ -75,7 +75,7 @@
     @synchronized(self) {
         NSLog(@"reset timeline - %@", self.app);
         [self.reviews removeAllObjects];
-        [self.moreUrls removeAllObjects];
+        [self.reviewResponses removeAllObjects];
         self.lastReviewDate = nil;
         self.total = 0;
         self.unread = 0;
@@ -85,15 +85,17 @@
 }
 
 -(BOOL) hasMoreReviews {
-    for (NSString* url in [self.moreUrls allValues]) {
-        return YES;
+    for (ReviewResponse* resp in [self.reviewResponses allValues]) {
+        if ([resp moreUrl] != nil) {
+            return YES;
+        }
     }
-    
     return NO;
 }
 
 -(BOOL) hasMoreReviewsWithStore:(NSString*)store {
-    return [self.moreUrls objectForKey:store] != nil;
+    ReviewResponse* response = [self.reviewResponses objectForKey:store];
+    return response && [response moreUrl] != nil;
 }
 
 -(void) setUnread:(NSInteger)newUnread {
@@ -104,12 +106,12 @@
     return self.app.unread;
 }
 
--(NSString*) moreUrlWithStore:(NSString*)store {
-    return [self.moreUrls objectForKey:store];
+-(ReviewResponse*) responseWithStore:(NSString*)theStore {
+    return [self.reviewResponses objectForKey:theStore];
 }
 
--(void) setMoreUrl:(NSString*)theMoreUrl withStore:(NSString*)store {
-    [self.moreUrls setValue:theMoreUrl forKey:store];
+-(void) setResponse:(ReviewResponse*)theResponse withStore:theStore {
+    [self.reviewResponses setValue:theResponse forKey:theStore];
 }
 
 @end

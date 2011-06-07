@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "App.h"
 #import "Store.h"
+#import "ReviewResponse.h"
 
 #define kReviewsPerPage         10
 
@@ -17,7 +19,7 @@
     App* app;
     NSDate* lastReviewDate;
     NSMutableArray* reviews;
-    NSMutableDictionary* moreUrls;
+    NSMutableDictionary* reviewResponses;
     NSUInteger total;
     
     BOOL loaded;
@@ -38,7 +40,7 @@
 @property (nonatomic, retain) NSMutableArray* reviews;
 
 // URL to load more reviews
-@property (nonatomic, retain) NSMutableDictionary* moreUrls;
+@property (nonatomic, retain) NSMutableDictionary* reviewResponses;
 
 // total number of reviews online
 @property (nonatomic, assign) NSUInteger total;
@@ -68,8 +70,8 @@
 
 -(BOOL) hasMoreReviews;
 
--(NSString*) moreUrlWithStore:(NSString*)store;
+-(ReviewResponse*) responseWithStore:(NSString*)theStore;
 
--(void) setMoreUrl:(NSString*)moreUrl withStore:(NSString*)store;
+-(void) setResponse:(ReviewResponse*)theResponse withStore:theStore;
 
 @end

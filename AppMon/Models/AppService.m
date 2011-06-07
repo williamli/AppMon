@@ -118,7 +118,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         ReviewResponse* reviewResp = nil;
         
         if (loadMore) {
-            NSString* moreUrl = [timeline moreUrlWithStore:self.store];
+            ReviewResponse* resp = [timeline responseWithStore:self.store];
+            NSString* moreUrl = [resp moreUrl];
 
             if (![timeline hasMoreReviewsWithStore:self.store] || !moreUrl) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -160,8 +161,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                     timeline.total = reviewResp.total;
                     timeline.lastReviewDate = reviewResp.lastReviewDate;
                 }
-
-                [timeline setMoreUrl:reviewResp.moreUrl withStore:self.store];
+                
+                [timeline setResponse:reviewResp withStore:self.store];
 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:loadMore:)]) {
