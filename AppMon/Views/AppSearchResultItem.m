@@ -77,8 +77,11 @@
 - (void)drawRect:(NSRect)rect {
     [self drawBackground];
     [super drawRect:rect];
+
+    CGColorRef color = CGColorCreateGenericRGB(1, 1, 1, 1);
+    self.backgroundView.layer.backgroundColor = color;
+    CFRelease(color);
     
-    self.backgroundView.layer.backgroundColor = CGColorCreateGenericRGB(1, 1, 1, 1);
     self.backgroundView.layer.shadowRadius = 2.0;
     self.backgroundView.layer.shadowOffset = CGSizeMake(0, -2);
     self.backgroundView.layer.shadowOpacity = 0.5;

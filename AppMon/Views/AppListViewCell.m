@@ -86,17 +86,21 @@
     [self drawBackground];
     [super drawRect:rect];
     
-    self.backgroundView.layer.backgroundColor = CGColorCreateGenericRGB(1, 1, 1, 1);
+    CGColorRef color = CGColorCreateGenericRGB(1, 1, 1, 1);
+    self.backgroundView.layer.backgroundColor = color;    
     self.backgroundView.layer.shadowRadius = 2.0;
     self.backgroundView.layer.shadowOffset = CGSizeMake(0, -2);
     self.backgroundView.layer.shadowOpacity = 0.5;
     self.backgroundView.layer.cornerRadius = 10.0;
-    
+    CFRelease(color);
+
     self.imgThumbnail.layer.masksToBounds = true;
     self.imgThumbnail.layer.cornerRadius = 10.0;
 
-    self.lblCount.layer.backgroundColor = CGColorCreateGenericRGB(0.914,0.145,0.098,1);
+    color = CGColorCreateGenericRGB(0.914,0.145,0.098,1);
+    self.lblCount.layer.backgroundColor = color;
     self.lblCount.layer.cornerRadius = 9.0;
+    CFRelease(color);
 }
 
 -(void) setUnreadCount:(NSInteger)unread {
