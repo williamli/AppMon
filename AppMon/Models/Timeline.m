@@ -42,8 +42,12 @@
 }
 
 -(void) addReviews:(NSArray*)newReviews {
-    @synchronized(self) {        
-        [self.reviews addObjectsFromArray:newReviews];
+    @synchronized(self) {
+        for (Review* r in newReviews) {
+            if (![self.reviews containsObject:r]) {
+                [self.reviews addObjectsFromArray:newReviews];
+            }
+        }
         [self.reviews sortUsingSelector:@selector(compareReview:)];
     }
 }
