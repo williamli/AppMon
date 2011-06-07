@@ -6,7 +6,7 @@
 	url = https://github.com/incbee/ESScrollView.git
 [submodule "AppMon/External/ASIHttpRequest"]
 	path = AppMon/External/ASIHttpRequest
-	url = https://github.com/pokeb/asi-http-request.git
+	url = https://github.com/siuying/asi-http-request.git
 [submodule "AppMon/External/SDWebImage"]
 	path = AppMon/External/SDWebImage
 	url = https://github.com/rs/SDWebImage.git
