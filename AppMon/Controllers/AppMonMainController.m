@@ -11,8 +11,6 @@
 #import "AppMonConfig.h"
 
 @interface AppMonMainController (Private)
--(void) buildMenu;
-
 -(void) loadConfig;
 -(void) countryMenuClicked:(id)sender;
 @end
@@ -45,7 +43,6 @@
 -(void) awakeFromNib {
     [super awakeFromNib];
     
-    [self buildMenu];
     [self loadConfig];
 }
 
@@ -94,41 +91,6 @@
 	[[[sender subviews] objectAtIndex:1] setFrame:rightRect];
 }
 
-#pragma mark - Private
--(void) buildMenu {
-    // remove existing menu items
-    [self.menuCountry removeAllItems];
-    
-    // open country config file, read country lists
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"country" 
-                                                         ofType:@"plist"];
-
-    NSDictionary* configCountries = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    NSMutableDictionary* countries = [NSMutableDictionary dictionary];
-
-    // build a menu and a name->storeid dictionary based on country list
-    NSArray* sortedCountries = [[configCountries allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    for (NSString* countryName in sortedCountries) {
-        NSDictionary* countrySetting = [configCountries objectForKey:countryName];
-        NSString* storeFront = [countrySetting objectForKey:@"id"];
-        NSString* iconName = [countrySetting objectForKey:@"image"];
-
-        NSMenuItem* item = [[[NSMenuItem alloc] initWithTitle:countryName
-                                                       action:@selector(countryMenuClicked:) 
-                                                keyEquivalent:@""] autorelease];
-        [item setTarget:self];
-        [item setImage:[NSImage imageNamed:iconName]];
-        [item setEnabled:YES];        
-        [self.menuCountry addItem:item];
-        
-        [countries setValue:storeFront forKey:countryName];
-    }
-
-    [_countries release];
-    _countries = [countries retain];
-    
-}
-
 // load configuration
 -(void) loadConfig {
     AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
@@ -151,14 +113,12 @@
 
 -(void) countryMenuClicked:(id)sender {
     NSString* country = [sender title];
-    NSString* countryCode = [_countries objectForKey:[sender title]];
-    NSLog(@"country selected: %@, countryCode: %@", country, countryCode);
-
-    [[AppService sharedAppService] setStore:countryCode];
-    
     AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
-    [config setSelectedCountry:country];
-    [config setSelectedCountryCode:countryCode];
+    Store* store = [[config allCountries] objectForKey:country];
+    [[AppService sharedAppService] setStore:store.storefront];
+    
+    [config setSelectedCountry:store.name];
+    [config setSelectedCountryCode:store.storefront];
     [config save];
 }
 

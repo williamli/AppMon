@@ -36,6 +36,14 @@
 
 + (AppMonConfig *)sharedAppMonConfig;
 
+-(AppMonConfig*) save;
+
+-(AppMonConfig*) load;
+
+@end
+
+@interface AppMonConfig (Stores)
+
 -(NSDictionary*) allCountries;
 
 -(NSDictionary*) topCountries;
@@ -50,10 +58,18 @@
 
 -(BOOL) storeEnabledWithCountryName:(NSString*)countryName;
 
+-(BOOL) allStoresSelected;
+
+-(BOOL) topStoresSelected;
+
+-(BOOL) otherStoresSelected;
+
 -(void) setStoreEnabled:(BOOL)enabled withCountryName:(NSString*)countryName;
 
--(AppMonConfig*) save;
+-(void) setAllStoresSelected:(BOOL)allStoresSelected;
 
--(AppMonConfig*) load;
+-(void) setTopStoresSelected:(BOOL)topStoresSelected;
+
+-(void) setOtherStoresSelected:(BOOL)otherStoresSelected;
 
 @end

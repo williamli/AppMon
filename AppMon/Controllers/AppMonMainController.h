@@ -15,9 +15,7 @@
 //  Top level controller that handle main window logic, it delegate jobs to underlying 
 //  controllers (SearchViewController, AppListViewController)
 @interface AppMonMainController : NSViewController <NSSplitViewDelegate> {
-@private
-    NSDictionary* _countries;
-    
+@private    
     NSView* _titleBar;
     NSSearchField* _searchField;
     NSPopUpButton* _btnCountry;

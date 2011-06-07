@@ -10,6 +10,10 @@
 #import "SynthesizeSingleton.h"
 #import "Store.h"
 
+#define kAppStoreEnabledAllKey @"appstore.enabled.all"
+#define kAppStoreEnabledTopKey @"appstore.enabled.top"
+#define kAppStoreEnabledOthersKey @"appstore.enabled.others"
+
 @interface AppMonConfig (Private)
 -(void) loadCountries;
 @end
@@ -45,6 +49,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     [super dealloc];
 }
 
+#pragma mark - Stores
 
 -(NSDictionary*) allCountries {
     return _allCountries;
@@ -84,6 +89,41 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     [defaults setBool:enabled forKey:key];
     [defaults synchronize];
 }
+
+-(void) setAllStoresSelected:(BOOL)allStoresSelected {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:allStoresSelected forKey:kAppStoreEnabledAllKey];
+    [defaults synchronize];
+}
+
+-(void) setTopStoresSelected:(BOOL)topStoresSelected {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:topStoresSelected forKey:kAppStoreEnabledTopKey];
+    [defaults synchronize];
+}
+
+-(void) setOtherStoresSelected:(BOOL)othersStoresSelected {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:othersStoresSelected forKey:kAppStoreEnabledOthersKey];
+    [defaults synchronize];
+}
+
+-(BOOL) allStoresSelected {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [[defaults objectForKey:kAppStoreEnabledAllKey] boolValue];
+}
+
+-(BOOL) topStoresSelected {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [[defaults objectForKey:kAppStoreEnabledTopKey] boolValue];
+}
+
+-(BOOL) otherStoresSelected {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [[defaults objectForKey:kAppStoreEnabledOthersKey] boolValue];
+}
+
+#pragma Save/Load
 
 -(AppMonConfig*) save {
     NSUserDefaults* setting = [NSUserDefaults standardUserDefaults];
@@ -165,4 +205,5 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     self.othersCountyNames = [othersCountryNames sortedArrayUsingSelector:@selector(compare:)];
     
 }
+
 @end
