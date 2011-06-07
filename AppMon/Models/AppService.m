@@ -124,17 +124,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         AppStoreApi* api            = [AppStoreApi sharedAppStoreApi];
         NSArray* reviewResponses    = nil;
 
-        if (loadMore) {
-            NSArray* previousReviewResponse = [[timeline responsesWithStoresWithMoreReviews] retain];
-            reviewResponses = [api reviewsByResponses:previousReviewResponse];
-            [previousReviewResponse release];
+        NSMutableDictionary* previousReviewResponseMap = [NSMutableDictionary dictionary];
+        NSArray* previousReviewResponse = [timeline responsesWithStoresWithMoreReviews];
+        for (ReviewResponse* resp in previousReviewResponse) {
+            [previousReviewResponseMap setValue:resp forKey:resp.store];
+        }
 
+        if (loadMore) {
+            reviewResponses = [api reviewsByResponses:previousReviewResponse];
         } else {
             reviewResponses = [api reviewsByStores:self.stores 
                                              appId:app.itemId];
 
         }
-
+        
         BOOL changed = NO;
         for (ReviewResponse* reviewResp in reviewResponses) {
             if (reviewResp.error) {
@@ -147,16 +150,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                     }
                 });
             } else {
-                [timeline addReviews:reviewResp.reviews];
-                [timeline setResponse:reviewResp withStore:reviewResp.store];                    
-                changed = YES;            
+                NSString* store = reviewResp.store;
+                ReviewResponse* prevReviewResp = [previousReviewResponseMap objectForKey:store];
+                if (loadMore ||
+                    prevReviewResp == nil ||
+                    [[prevReviewResp lastReviewDate] compare:[reviewResp lastReviewDate]] == NSOrderedAscending) {
+                    [timeline addReviews:reviewResp.reviews];
+                    [timeline setResponse:reviewResp withStore:store];                    
+                    changed = YES;
+                }
             }
 
         } // for each review responses
 
-        if (loadMore && (timeline.total - prevTotal > 0)) {
-            timeline.unread = timeline.total - prevTotal;
-        } else if (!loadMore) {
+        if (!loadMore && changed && (timeline.total - prevTotal > 0)) {
             timeline.unread = timeline.total;            
         }
   

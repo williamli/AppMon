@@ -34,7 +34,7 @@
 }
 
 -(NSString*) description {
-    return [NSString stringWithFormat:@"<ReviewResponse#%@, reviews=%ld, mroeUrl=%@>", self.store, [self.reviews count], self.moreUrl];
+    return [NSString stringWithFormat:@"<ReviewResponse#%@, reviews=%ld, moreUrl=%@>", self.store, [self.reviews count], self.moreUrl];
 }
 
 @end
