@@ -30,6 +30,7 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 -(ASIHTTPRequest*) request:(NSString*)urlStr store:(NSString*)store ;
 -(ASIFormDataRequest*) postRequest:(NSString*)urlStr store:(NSString*)store;
 -(NSArray*) storesFromNodes:(NSArray*)nodes;
+-(NSArray*) reviewsByStores:(NSArray*)stores url:(NSString*)url;
 @end
 
 @implementation AppStoreApi
@@ -224,7 +225,47 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     }
 }
 
+-(NSArray*) reviewsByStores:(NSArray*)stores appId:(NSString*)appId {
+    NSString* url = [NSString stringWithFormat:@"%@?id=%@&type=Purple+Software&displayable-kind=11&pageNumber=%ld", 
+                     kAppStoreReviewUrl, appId, 0];
+    return [self reviewsByStores:stores url:url];
+}
+
+-(NSArray*) reviewsByResponses:(NSArray*)responses {
+    NSMutableArray* results = [NSMutableArray array];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+    
+    for (ReviewResponse* response in responses) {
+        dispatch_group_async(group, queue, ^{
+            ReviewResponse* response = [self reviewsByStore:response.store url:response.moreUrl];
+            [results addObject:response];
+        });
+    }
+    
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    dispatch_release(group);
+    return results;
+}
+
 #pragma mark - Private
+
+-(NSArray*) reviewsByStores:(NSArray*)stores url:(NSString*)url {
+    NSMutableArray* results = [NSMutableArray array];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+    
+    for (NSString* store in stores) {
+        dispatch_group_async(group, queue, ^{
+            ReviewResponse* response = [self reviewsByStore:store url:url];
+            [results addObject:response];
+        });
+    }
+    
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    dispatch_release(group);
+    return results;
+}
 
 -(ASIHTTPRequest*) request:(NSString*)urlStr store:(NSString*)store {    
     NSLog(@"GET %@", urlStr);
