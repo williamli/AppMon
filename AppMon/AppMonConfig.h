@@ -56,6 +56,9 @@
 
 -(NSArray*) othersCountryNames;
 
+// return array of Store that are enabled
+-(NSArray*) enabledStores;
+
 -(BOOL) storeEnabledWithCountryName:(NSString*)countryName;
 
 -(BOOL) allStoresSelected;

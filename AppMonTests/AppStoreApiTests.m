@@ -102,13 +102,4 @@
     
 }
 
-- (void)testCountry {
-    NSError* error = nil;
-    NSArray* stores = [self.appStore stores:&error];
-    STAssertNil(error, @"should have no error");
-  
-    STAssertNotNil(stores, @"should not nil");
-    STAssertTrue([stores count] > 0, @"should have at least 1 comments");
-}
-
 @end

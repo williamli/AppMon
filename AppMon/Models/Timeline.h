@@ -20,7 +20,6 @@
     NSDate* lastReviewDate;
     NSMutableArray* reviews;
     NSMutableDictionary* reviewResponses;
-    NSUInteger total;
     
     BOOL loaded;
     BOOL loading;
@@ -43,7 +42,7 @@
 @property (nonatomic, retain) NSMutableDictionary* reviewResponses;
 
 // total number of reviews online
-@property (nonatomic, assign) NSUInteger total;
+@property (nonatomic, readonly) NSUInteger total;
 
 // number of unread reviews
 @property (nonatomic, assign) NSInteger unread;
@@ -60,7 +59,7 @@
 -(id) initWithApp:(App*)theApp;
 
 // add reviews to this timeline
--(void) addReviews:(NSArray*)newReviews fromHead:(BOOL)fromHead;
+-(void) addReviews:(NSArray*)newReviews;
 
 // reset the timeline to initial state (when switching channel)
 -(void) reset;
@@ -73,5 +72,7 @@
 -(ReviewResponse*) responseWithStore:(NSString*)theStore;
 
 -(void) setResponse:(ReviewResponse*)theResponse withStore:theStore;
+
+-(NSArray*) responsesWithStoresWithMoreReviews;
 
 @end

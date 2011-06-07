@@ -66,6 +66,6 @@ extern NSString * const kAppStoreReviewUrl;
 
 -(NSArray*) reviewsByStores:(NSArray*)stores appId:(NSString*)appId;
 
--(NSArray*) reviewsByResponses:(NSMutableArray*)responses;
+-(NSArray*) reviewsByResponses:(NSArray*)responses;
 
 @end

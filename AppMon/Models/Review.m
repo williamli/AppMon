@@ -8,13 +8,14 @@
 
 #import "Review.h"
 #import "RegexKitLite.h"
+#import "NSString+Parser.h"
 
 #define kTitleRegexp    @"^([0-9]+)\\. (.*) \\(v(.*)\\)$"
 #define kNameRegexp     @"^(.+) on (.+)$"
 
 @implementation Review
 
-@synthesize rating=_rating, text=_text, title=_title, username=_username, date=_date, position=_position, on_version=_on_version, store=_store;
+@synthesize rating=_rating, text=_text, title=_title, username=_username, date=_date, dateStr=_dateStr, position=_position, on_version=_on_version, store=_store, fetchTime=_fetchTime;
 
 - (id)init {
     self = [super init];
@@ -41,11 +42,18 @@
         
         matches = [rawName captureComponentsMatchedByRegex:kNameRegexp];
         if (matches && [matches count] == 3) {
-            self.username       = [matches objectAtIndex:1];
-            self.date           = [matches objectAtIndex:2];
+            self.username   = [matches objectAtIndex:1];
+            self.dateStr    = [matches objectAtIndex:2];
+            
+            self.date       = [self.dateStr dateWithString];
+            
+            if (self.date == nil) {
+                NSLog(@"WARN: Unparsable Date: dateStr=%@, date = %@ (store: %@)", self.dateStr, self.date, aStore);
+            }
         }
         
         self.store          = aStore;
+        self.fetchTime      = [NSDate date];
     }
     return self;
 }
@@ -56,6 +64,7 @@
     [coder encodeObject:_title forKey:@"title"];
     [coder encodeObject:_username forKey:@"username"];
     [coder encodeObject:_date forKey:@"date"];
+    [coder encodeObject:_dateStr forKey:@"dateStr"];
     [coder encodeInteger:_position forKey:@"position"];
     [coder encodeObject:_on_version forKey:@"on_version"];
     [coder encodeObject:_store forKey:@"store"];
@@ -68,6 +77,7 @@
     _title          = [[coder decodeObjectForKey:@"title"] retain];
     _username       = [[coder decodeObjectForKey:@"username"] retain];
     _date           = [[coder decodeObjectForKey:@"date"] retain];
+    _dateStr        = [[coder decodeObjectForKey:@"dateStr"] retain];
     _position       = [coder decodeIntegerForKey:@"position"];
     _on_version     = [[coder decodeObjectForKey:@"on_version"] retain];
     _store          = [[coder decodeObjectForKey:@"store"] retain];
@@ -79,8 +89,10 @@
     self.title = nil;
     self.username = nil;
     self.date = nil;
+    self.dateStr = nil;
     self.on_version = nil;
     self.store = nil;
+    self.fetchTime = nil;
     [super dealloc];
 }
 
@@ -95,6 +107,26 @@
         return [[self username] isEqual:[object username]] && [[self date] isEqual:[object date]];        
     } else {
         return NO;
+    }
+}
+
+- (NSComparisonResult)compareReview:(Review *)rev2 {
+    Review* r1 = self;
+    Review* r2 = rev2;
+    
+    if (r1.date && r2.date) {
+        NSComparisonResult dateResult = [r2.date compare:r1.date];
+        if (dateResult != NSOrderedSame) {
+            return dateResult;
+        }
+    }
+
+    if (r1.position > r2.position) {
+        return (NSComparisonResult) NSOrderedDescending;
+    } else if (r1.position < r2.position) {
+        return (NSComparisonResult) NSOrderedAscending;
+    } else {
+        return (NSComparisonResult) [r2.fetchTime compare:r1.fetchTime];
     }
 }
 

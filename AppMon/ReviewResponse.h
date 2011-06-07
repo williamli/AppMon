@@ -25,16 +25,14 @@
 
 // request store id
 @property (nonatomic, retain) NSString*     store;
+@property (nonatomic, retain) NSArray*      reviews;
+@property (nonatomic, retain) NSDate*       lastReviewDate;
+@property (nonatomic, retain) NSString*     moreUrl;
+@property (nonatomic, retain) NSError*      error;
 
 @property (nonatomic, assign) NSInteger     total;
 @property (nonatomic, assign) CGFloat       averageUserRating;
 @property (nonatomic, assign) NSInteger     ratingCount;
-
-@property (nonatomic, retain) NSArray*      reviews;
-@property (nonatomic, retain) NSDate*       lastReviewDate;
-@property (nonatomic, retain) NSString*     moreUrl;
-
-@property (nonatomic, retain) NSError*      error;
 
 -(id) initWithStore:(NSString*)store;
 

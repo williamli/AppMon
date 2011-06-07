@@ -13,6 +13,7 @@
 #import "AppStoreApi.h"
 #import "AppMonAppDelegate.h"
 #import "Timeline.h"
+#import "AppMonConfig.h"
 
 NSString * const AppServiceNotificationTimelineChanged  = @"hk.ignition.mac.appmon.TimelineChanged";
 NSString * const AppServiceNotificationReadApp          = @"hk.ignition.mac.appmon.ReadApp";
@@ -89,17 +90,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 }
 
 -(void) setStore:(NSString*)newStore {
-    dispatch_sync(_queue, ^{
-        [_store release];
-        _store = [newStore retain];      
-
-        for (Timeline* timeline in [_timelines allValues]) {
-            [timeline reset];
-        }
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationStoreChanged 
-                                                            object:self];
-    });       
+    [_store release];
+    _store = [newStore retain];
 }
 
 @end
@@ -113,72 +105,64 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 -(void) fetchTimelineWithApp:(App*)app more:(BOOL)loadMore {
     Timeline* timeline = [self timelineWithApp:app];
 
-    dispatch_async(_queue, ^{
-        AppStoreApi* api = [AppStoreApi sharedAppStoreApi];
-        ReviewResponse* reviewResp = nil;
-        
-        if (loadMore) {
-            ReviewResponse* resp = [timeline responseWithStore:self.store];
-            NSString* moreUrl = [resp moreUrl];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSUInteger prevTotal        = [timeline total];
+        AppMonConfig* config        = [AppMonConfig sharedAppMonConfig];
+        AppStoreApi* api            = [AppStoreApi sharedAppStoreApi];
+        NSArray* stores             = [config enabledStores];
+        NSArray* reviewResponses    = nil;
 
-            if (![timeline hasMoreReviewsWithStore:self.store] || !moreUrl) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if([self.delegate respondsToSelector:@selector(fetchTimelineNoMore:timeline:)]) {
-                        [self.delegate fetchTimelineNoMore:app timeline:timeline];
-                    }
-                });
-                return;
-            }
-            
-            
-            reviewResp = [api reviewsByStore:self.store 
-                                         url:moreUrl];
+        if (loadMore) {
+            NSArray* previousReviewResponse = [[timeline responsesWithStoresWithMoreReviews] retain];
+            reviewResponses = [api reviewsByResponses:previousReviewResponse];
+            [previousReviewResponse release];
 
         } else {
-            reviewResp = [api reviewsByStore:self.store 
-                                       appId:app.itemId 
-                                        page:0];
+            reviewResponses = [api reviewsByStores:stores 
+                                             appId:app.itemId];
 
         }
-        
-        if (reviewResp.error) {
-            NSLog(@"timeline of (%@) encounter error: %@", app.title, reviewResp.error);
+
+        BOOL changed = NO;
+        for (ReviewResponse* reviewResp in reviewResponses) {
+            if (reviewResp.error) {
+                NSLog(@"timeline of (%@) encounter error: %@", app.title, reviewResp.error);
+                [timeline setResponse:reviewResp withStore:reviewResp.store];
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if([self.delegate respondsToSelector:@selector(fetchTimelineFailed:timeline:error:)]) {
+                        [self.delegate fetchTimelineFailed:app timeline:timeline error:reviewResp.error];
+                    }
+                });
+            } else {
+                [timeline addReviews:reviewResp.reviews];
+                [timeline setResponse:reviewResp withStore:reviewResp.store];                    
+                changed = YES;            
+            }
+
+        } // for each review responses
+
+        if (loadMore && (timeline.total - prevTotal > 0)) {
+            timeline.unread = timeline.total - prevTotal;
+        } else if (!loadMore) {
+            timeline.unread = timeline.total;            
+        }
+  
+        if (changed) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationTimelineChanged
+                                                                object:timeline];
             dispatch_async(dispatch_get_main_queue(), ^{
-                if([self.delegate respondsToSelector:@selector(fetchTimelineFailed:timeline:error:)]) {
-                    [self.delegate fetchTimelineFailed:app timeline:timeline error:reviewResp.error];
+                if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:loadMore:)]) {
+                    [self.delegate fetchTimelineFinished:app timeline:timeline loadMore:loadMore];
                 }
             });
             
         } else {
-            BOOL shouldInsertFromHead = !loadMore && timeline.total > 0;
-            if (loadMore || timeline.lastReviewDate == nil || [timeline.lastReviewDate compare:reviewResp.lastReviewDate] == NSOrderedAscending) {
-                [timeline addReviews:reviewResp.reviews fromHead:shouldInsertFromHead];
-
-                if (!loadMore) {
-                    if (reviewResp.total - timeline.total > 0) {
-                        timeline.unread = reviewResp.total - timeline.total;
-                    }
-                    timeline.total = reviewResp.total;
-                    timeline.lastReviewDate = reviewResp.lastReviewDate;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if([self.delegate respondsToSelector:@selector(fetchTimelineNoUpdate:timeline:)]) {
+                    [self.delegate fetchTimelineNoUpdate:app timeline:timeline];
                 }
-                
-                [timeline setResponse:reviewResp withStore:self.store];
-
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:loadMore:)]) {
-                        [self.delegate fetchTimelineFinished:app timeline:timeline loadMore:loadMore];
-                    }
-                });
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationTimelineChanged
-                                                                    object:timeline];
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if([self.delegate respondsToSelector:@selector(fetchTimelineNoUpdate:timeline:)]) {
-                        [self.delegate fetchTimelineNoUpdate:app timeline:timeline];
-                    }
-                });
-            } 
+            });
         }
     });
 }

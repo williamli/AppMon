@@ -32,8 +32,11 @@
 
 // Update all apps on the app list. 
 // param: includeSelectedApp - By default the function update all apps, if this param is NO,
-//        it will skip 'selectedApp'
+//        it will skip 'selected app'
 -(void) updateAllApps:(BOOL)includeSelectedApp;
+
+// Update all apps on the app list, skip currently selected app
+-(void) updateAllAppsExceptSelected;
 
 // selected supplied app
 -(void) selectApp:(App*)app;

@@ -106,8 +106,13 @@
     [self updateAllApps:YES];
 }
 
+-(void) updateAllAppsExceptSelected {
+    [self updateAllApps:NO];
+}
+
 -(void) selectApp:(App*)app {
     JAListViewItem* item = [self.appViews objectForKey:app.itemId];
+    self.selectedApp = app;
     [self.listApps selectView:item];
     [self.appUpdateViewController loadAppReviews:app];
 }
@@ -128,9 +133,6 @@
 -(void) storeDidChanged:(NSNotification*)notification {
     NSLog(@"store did changed, reset unread count in app list");
     [self resetUnreadCount];
-
-    NSLog(@" and update all apps");
-    [self updateAllApps:NO];
 }
 
 -(void) timelineDidUpdated:(NSNotification*)notification {
@@ -172,9 +174,11 @@
 
         // show review lists of selected app
         AppListViewCell* cell = (AppListViewCell *) view;
-        cell.selected = YES;
-        [self.appUpdateViewController loadAppReviews:cell.app];
-        self.selectedApp = cell.app;
+        if (cell.selected != YES) {
+            cell.selected = YES;
+            [self.appUpdateViewController loadAppReviews:cell.app];
+            self.selectedApp = cell.app;
+        }
     }
 }
 

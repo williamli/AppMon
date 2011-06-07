@@ -308,6 +308,7 @@
 		54645BC713939EC40096466C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC513939EC40096466C /* Quartz.framework */; };
 		54645BC813939EC40096466C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC613939EC40096466C /* QuartzCore.framework */; };
 		54645BCA13939EFA0096466C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54645BC913939EFA0096466C /* libz.dylib */; };
+		5495E481139E851E000A6A26 /* NSString+Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5495E480139E851E000A6A26 /* NSString+Parser.m */; };
 		549FFC0B1394EBE8003321C5 /* AppSearchResultItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549FFC0A1394EBE8003321C5 /* AppSearchResultItem.xib */; };
 		549FFC0F1394EC89003321C5 /* AppSearchResultItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FFC0E1394EC89003321C5 /* AppSearchResultItem.m */; };
 		549FFC111394EE20003321C5 /* AppSearchHeaderItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549FFC101394EE1F003321C5 /* AppSearchHeaderItem.xib */; };
@@ -700,6 +701,8 @@
 		54645BC513939EC40096466C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		54645BC613939EC40096466C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		54645BC913939EFA0096466C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		5495E47F139E851E000A6A26 /* NSString+Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "NSString+Parser.h"; sourceTree = "<group>"; };
+		5495E480139E851E000A6A26 /* NSString+Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Parser.m"; sourceTree = "<group>"; };
 		549FFC0A1394EBE8003321C5 /* AppSearchResultItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppSearchResultItem.xib; sourceTree = "<group>"; };
 		549FFC0D1394EC89003321C5 /* AppSearchResultItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSearchResultItem.h; path = Views/AppSearchResultItem.h; sourceTree = "<group>"; };
 		549FFC0E1394EC89003321C5 /* AppSearchResultItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSearchResultItem.m; path = Views/AppSearchResultItem.m; sourceTree = "<group>"; };
@@ -1325,6 +1328,8 @@
 		54C9723C13976CF000EB814F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5495E47F139E851E000A6A26 /* NSString+Parser.h */,
+				5495E480139E851E000A6A26 /* NSString+Parser.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1782,6 +1787,7 @@
 				5460668913991658007CD7EC /* AppMonConfigWindowController.m in Sources */,
 				5460668E13991E5B007CD7EC /* CountryListItem.m in Sources */,
 				5460669313993035007CD7EC /* CountryListHeaderItem.m in Sources */,
+				5495E481139E851E000A6A26 /* NSString+Parser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

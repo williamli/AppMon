@@ -28,7 +28,9 @@
     NSArray* apps = [[AppService sharedAppService] followedApps];
     if ([apps count] > 0) {
         [self.mainController.appListViewController selectApp:[apps objectAtIndex:0]];
-        [self.mainController.appListViewController updateAllApps:NO];
+        [self.mainController.appListViewController performSelector:@selector(updateAllAppsExceptSelected) 
+                                                        withObject:nil
+                                                        afterDelay:1.0];
     }
 }
 

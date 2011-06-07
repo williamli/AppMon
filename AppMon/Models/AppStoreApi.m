@@ -235,16 +235,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     NSMutableArray* results = [NSMutableArray array];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
-    
-    for (ReviewResponse* response in responses) {
+    [responses retain];
+
+    for (ReviewResponse* origResponse in responses) {
         dispatch_group_async(group, queue, ^{
-            ReviewResponse* response = [self reviewsByStore:response.store url:response.moreUrl];
-            [results addObject:response];
+            ReviewResponse* resp = [self reviewsByStore:origResponse.store 
+                                                    url:origResponse.moreUrl];
+            [results addObject:resp];
         });
     }
-    
+
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     dispatch_release(group);
+    [responses release];
+
     return results;
 }
 
@@ -255,9 +259,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
     
-    for (NSString* store in stores) {
+    for (Store* store in stores) {
         dispatch_group_async(group, queue, ^{
-            ReviewResponse* response = [self reviewsByStore:store url:url];
+            ReviewResponse* response = [self reviewsByStore:store.storefront url:url];
             [results addObject:response];
         });
     }
@@ -268,7 +272,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 }
 
 -(ASIHTTPRequest*) request:(NSString*)urlStr store:(NSString*)store {    
-    NSLog(@"GET %@", urlStr);
+    NSLog(@"GET %@ (Store: %@)", urlStr, store);
 
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlStr]];
     [request addRequestHeader:@"X-Apple-Store-Front" 

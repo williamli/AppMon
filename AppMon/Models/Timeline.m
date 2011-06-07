@@ -12,7 +12,7 @@
 @implementation Timeline
 
 @synthesize app;
-@synthesize lastReviewDate, reviews, reviewResponses, total, unread;
+@synthesize lastReviewDate, reviews, reviewResponses, unread;
 @synthesize loaded, loading;
 
 -(id) initWithApp:(App*)theApp
@@ -23,7 +23,6 @@
         self.reviews = [NSMutableArray array];
         self.reviewResponses = [NSMutableDictionary dictionary];
         self.lastReviewDate = nil;
-        self.total = 0;
         self.unread = 0;
 
         self.loaded = NO;
@@ -42,32 +41,10 @@
     [super dealloc];
 }
 
--(void) addReviews:(NSArray*)newReviews fromHead:(BOOL)fromHead {
-    @synchronized(self) {
-        if (fromHead) {
-            // insert to the head of timeline, use for 'refresh'
-            // we should first reverse the review list (they were sorted by time already) and insert to head
-            
-            NSComparator descReviewSort = ^(id rev1, id rev2) {
-                Review* r1 = rev1;
-                Review* r2 = rev2;
-                if (r1.position < r2.position) {
-                    return (NSComparisonResult) NSOrderedDescending;
-                } else if (r1.position > r2.position) {
-                    return (NSComparisonResult) NSOrderedAscending;
-                } else {
-                    return (NSComparisonResult) NSOrderedSame;
-                }
-            }; 
-            NSArray* revReviews = [newReviews sortedArrayUsingComparator:descReviewSort];
-            for (Review* review in revReviews) {
-                [self.reviews insertObject:review atIndex:0];
-            }
-
-        } else {
-            // insert to end of timeline, used for 'initial load' or 'load more'
-            [self.reviews addObjectsFromArray:newReviews];
-        }
+-(void) addReviews:(NSArray*)newReviews {
+    @synchronized(self) {        
+        [self.reviews addObjectsFromArray:newReviews];
+        [self.reviews sortUsingSelector:@selector(compareReview:)];
     }
 }
 
@@ -77,7 +54,6 @@
         [self.reviews removeAllObjects];
         [self.reviewResponses removeAllObjects];
         self.lastReviewDate = nil;
-        self.total = 0;
         self.unread = 0;
         self.loaded = NO;
         self.loading = NO;
@@ -106,6 +82,17 @@
     return self.app.unread;
 }
 
+-(NSUInteger) total {
+    NSUInteger theTotal = 0;
+    if (self.reviewResponses) {
+        for (ReviewResponse* rev in [self.reviewResponses allValues]) {
+            theTotal += rev.total;
+        }
+    }
+
+    return theTotal;
+}
+
 -(ReviewResponse*) responseWithStore:(NSString*)theStore {
     return [self.reviewResponses objectForKey:theStore];
 }
@@ -114,4 +101,13 @@
     [self.reviewResponses setValue:theResponse forKey:theStore];
 }
 
+-(NSArray*) responsesWithStoresWithMoreReviews {
+    NSMutableArray* responses = [NSMutableArray array];
+    for (ReviewResponse* rev in [self.reviewResponses allValues]) {
+        if (rev.moreUrl != nil) {
+            [responses addObject:rev];
+        }
+    }
+    return responses;
+}
 @end

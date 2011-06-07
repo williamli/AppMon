@@ -75,6 +75,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     return _othersCountyNames;
 }
 
+-(NSArray*) enabledStores {
+    NSMutableArray* array = [NSMutableArray array];
+    
+    for (NSString* name in self.allCountryNames) {
+        if ([self storeEnabledWithCountryName:name]) {
+            Store* store = [self.allCountries objectForKey:name];
+            [array addObject:store];
+        }
+    }
+    
+    return array;
+}
+
 -(BOOL) storeEnabledWithCountryName:(NSString*)countryName {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     Store* store = [self.allCountries objectForKey:countryName];

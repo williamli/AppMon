@@ -90,7 +90,7 @@
         } else {
             [self.lblTitle setStringValue:aReview.title];        
             [self.lblExtra setStringValue:[NSString stringWithFormat:@"by %@ - version %@ - %@", 
-                                           aReview.username, aReview.on_version, aReview.date]];
+                                           aReview.username, aReview.on_version, aReview.dateStr]];
             [self.lblMessage setStringValue:aReview.text];
             
             NSUInteger ratingStar = (NSUInteger) (aReview.rating * 5.0);

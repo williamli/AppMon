@@ -207,8 +207,8 @@
 // invoke when timeline update has failed
 -(void) fetchTimelineFailed:(App*)app timeline:(Timeline*)timeline error:(NSError*)error {
     NSLog(@"load reviews: failed with error: %@", error);
-    [self setLoading:NO];    
-    [self setLoaded:NO];
+//    [self setLoading:NO];    
+//    [self setLoaded:NO];
 }
 
 -(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline {
