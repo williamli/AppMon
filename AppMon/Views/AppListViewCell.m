@@ -58,6 +58,25 @@
     [super awakeFromNib];
     
     [self addSubview:self.imgThumbnail positioned:NSWindowAbove relativeTo:self.backgroundView];
+    
+    [self.lblDate setDrawsBackground:YES];
+    [self.lblTitle setDrawsBackground:YES];
+    
+    CGColorRef color = CGColorCreateGenericRGB(1, 1, 1, 1);
+    self.backgroundView.layer.backgroundColor = color;    
+    self.backgroundView.layer.shadowRadius = 2.0;
+    self.backgroundView.layer.shadowOffset = CGSizeMake(0, -2);
+    self.backgroundView.layer.shadowOpacity = 0.5;
+    self.backgroundView.layer.cornerRadius = 10.0;
+    CFRelease(color);
+    
+    self.imgThumbnail.layer.masksToBounds = true;
+    self.imgThumbnail.layer.cornerRadius = 10.0;
+    
+    color = CGColorCreateGenericRGB(0.914,0.145,0.098,1);
+    self.lblCount.layer.backgroundColor = color;
+    self.lblCount.layer.cornerRadius = 9.0;
+    CFRelease(color);
 }
 
 -(void) setApp:(App*)newApp {
@@ -78,27 +97,13 @@
         [_app release];
         _app = [newApp retain];
     }
+    
 }
 
 - (void)drawRect:(NSRect)rect {
     [self drawBackground];
     [super drawRect:rect];
-    
-    CGColorRef color = CGColorCreateGenericRGB(1, 1, 1, 1);
-    self.backgroundView.layer.backgroundColor = color;    
-    self.backgroundView.layer.shadowRadius = 2.0;
-    self.backgroundView.layer.shadowOffset = CGSizeMake(0, -2);
-    self.backgroundView.layer.shadowOpacity = 0.5;
-    self.backgroundView.layer.cornerRadius = 10.0;
-    CFRelease(color);
 
-    self.imgThumbnail.layer.masksToBounds = true;
-    self.imgThumbnail.layer.cornerRadius = 10.0;
-
-    color = CGColorCreateGenericRGB(0.914,0.145,0.098,1);
-    self.lblCount.layer.backgroundColor = color;
-    self.lblCount.layer.cornerRadius = 9.0;
-    CFRelease(color);
 }
 
 -(void) setUnreadCount:(NSInteger)unread {
@@ -122,13 +127,33 @@
 
 #pragma mark - Private
 
-- (void)drawBackground {
+- (void)drawBackground {    
+    CGRect solidSize = CGRectMake(0, 30, 
+                                 self.bounds.size.width, self.bounds.size.height - 30);
+    CGRect gradSize = CGRectMake(0, 0, 
+                                 self.bounds.size.width, 30);
+
     if (self.selected) {
-        [self.selectedGradient drawInRect:self.bounds angle:270.0f];
+        NSColor* backgroundColor = [NSColor colorWithDeviceWhite:0.92f alpha:1.0f];
+        [backgroundColor set];
+        NSRectFill(solidSize);
+        
+        [self.selectedGradient drawInRect:gradSize angle:270.0f];
+        [self.lblDate setBackgroundColor:backgroundColor];
+        [self.lblTitle setBackgroundColor:backgroundColor];
+        [self.lblDate setTextColor:[NSColor colorWithCalibratedRed:0.290 green:0.494 blue:0.769 alpha:1.]];
         [self.lblTitle setTextColor:[NSColor colorWithCalibratedRed:0.290 green:0.494 blue:0.769 alpha:1.]];
+        
     } else {
-        [self.gradient drawInRect:self.bounds angle:90.0f];
-        [self.lblTitle setTextColor:[NSColor blackColor]];
+        NSColor* backgroundColor = [NSColor colorWithDeviceWhite:0.85f alpha:1.0f];
+        [backgroundColor set];
+        NSRectFill(solidSize);
+
+        [self.gradient drawInRect:gradSize angle:90.0f];
+        [self.lblDate setTextColor:[NSColor blackColor]];
+        [self.lblTitle setTextColor:[NSColor blackColor]];        
+        [self.lblDate setBackgroundColor:backgroundColor];
+        [self.lblTitle setBackgroundColor:backgroundColor];
     }
     
     [[NSColor colorWithDeviceWhite:0.5f alpha:1.0f] set];
@@ -140,7 +165,7 @@
 
 - (NSGradient *)gradient {
     if(gradient == nil) {
-        gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.8f alpha:1.0f] 
+        gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.75f alpha:1.0f] 
                                                  endingColor:[NSColor colorWithDeviceWhite:0.85f alpha:1.0f]];
     }    
     return gradient;
@@ -149,7 +174,7 @@
 - (NSGradient*) selectedGradient {
     if (selectedGradient == nil) {
         selectedGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.92f alpha:1.0f] 
-                                                 endingColor:[NSColor colorWithDeviceWhite:0.97f alpha:1.0f]];
+                                                 endingColor:[NSColor colorWithDeviceWhite:1.0f alpha:1.0f]];
     }
     return selectedGradient;
 }

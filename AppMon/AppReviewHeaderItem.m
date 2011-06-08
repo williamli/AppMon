@@ -61,6 +61,11 @@
     [super awakeFromNib];
     
     [self addSubview:self.imgThumbnail positioned:NSWindowAbove relativeTo:self.backgroundView];
+
+    [self.lblInfo setDrawsBackground:YES];
+    [self.lblInfo setBackgroundColor:[NSColor colorWithDeviceWhite:0.97f alpha:1.0f]];
+    [self.lblTitle setDrawsBackground:YES];
+    [self.lblTitle setBackgroundColor:[NSColor colorWithDeviceWhite:0.97f alpha:1.0f]];
 }
 
 -(void) setTimeline:(Timeline*)theTimeline {
@@ -94,7 +99,13 @@
 }
 
 - (void)drawBackground {
-    [self.gradient drawInRect:self.bounds angle:90.0f];
+    [[NSColor colorWithDeviceWhite:0.97f alpha:1.0f] set];
+    NSRectFill(self.bounds);
+
+    CGRect gradSize = CGRectMake(0, 0, 
+                                 self.bounds.size.width, 32);
+
+    [self.gradient drawInRect:gradSize angle:90.0f];
     
     [[NSColor colorWithDeviceWhite:0.5f alpha:1.0f] set];
     NSRectFill(NSMakeRect(0.0f, 0.0f, self.bounds.size.width, 1.0f));
