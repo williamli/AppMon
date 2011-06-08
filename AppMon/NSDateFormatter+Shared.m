@@ -46,4 +46,18 @@
     return dateFormatter;
 }
 
++(NSDateFormatter*) sharedUserDateTimeFormatter {
+    NSMutableDictionary* threadDictionary = [[NSThread currentThread] threadDictionary];
+    NSDateFormatter* dateFormatter = [threadDictionary objectForKey:@"user.date.formatter"];
+    
+    if (!dateFormatter) {
+        dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        [threadDictionary setObject:dateFormatter forKey:@"user.datetime.formatter"] ;
+    }
+    
+    return dateFormatter;
+}
+
 @end

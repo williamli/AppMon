@@ -272,6 +272,7 @@
 		5426F259139649BB00C049CF /* zm.png in Resources */ = {isa = PBXBuildFile; fileRef = 5426F162139649BB00C049CF /* zm.png */; };
 		5426F25A139649BB00C049CF /* zw.png in Resources */ = {isa = PBXBuildFile; fileRef = 5426F163139649BB00C049CF /* zw.png */; };
 		5426F25C139649C400C049CF /* country.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5426F25B139649C400C049CF /* country.plist */; };
+		543ADC78139F26050060C3F8 /* NSDateFormatter+Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 543ADC77139F26050060C3F8 /* NSDateFormatter+Shared.m */; };
 		5460668913991658007CD7EC /* AppMonConfigWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460668813991658007CD7EC /* AppMonConfigWindowController.m */; };
 		5460668B13991DB2007CD7EC /* CountryListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5460668A13991DB2007CD7EC /* CountryListItem.xib */; };
 		5460668E13991E5B007CD7EC /* CountryListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460668D13991E5B007CD7EC /* CountryListItem.m */; };
@@ -635,6 +636,8 @@
 		5426F162139649BB00C049CF /* zm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zm.png; sourceTree = "<group>"; };
 		5426F163139649BB00C049CF /* zw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zw.png; sourceTree = "<group>"; };
 		5426F25B139649C400C049CF /* country.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = country.plist; path = Flags/country.plist; sourceTree = SOURCE_ROOT; };
+		543ADC76139F26050060C3F8 /* NSDateFormatter+Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "NSDateFormatter+Shared.h"; sourceTree = "<group>"; };
+		543ADC77139F26050060C3F8 /* NSDateFormatter+Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Shared.m"; sourceTree = "<group>"; };
 		5460668713991658007CD7EC /* AppMonConfigWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMonConfigWindowController.h; path = Controllers/AppMonConfigWindowController.h; sourceTree = "<group>"; };
 		5460668813991658007CD7EC /* AppMonConfigWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppMonConfigWindowController.m; path = Controllers/AppMonConfigWindowController.m; sourceTree = "<group>"; };
 		5460668A13991DB2007CD7EC /* CountryListItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CountryListItem.xib; path = Views/CountryListItem.xib; sourceTree = "<group>"; };
@@ -701,7 +704,7 @@
 		54645BC513939EC40096466C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		54645BC613939EC40096466C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		54645BC913939EFA0096466C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		5495E47F139E851E000A6A26 /* NSString+Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "NSString+Parser.h"; sourceTree = "<group>"; };
+		5495E47F139E851E000A6A26 /* NSString+Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Parser.h"; sourceTree = "<group>"; };
 		5495E480139E851E000A6A26 /* NSString+Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Parser.m"; sourceTree = "<group>"; };
 		549FFC0A1394EBE8003321C5 /* AppSearchResultItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppSearchResultItem.xib; sourceTree = "<group>"; };
 		549FFC0D1394EC89003321C5 /* AppSearchResultItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSearchResultItem.h; path = Views/AppSearchResultItem.h; sourceTree = "<group>"; };
@@ -1330,6 +1333,8 @@
 			children = (
 				5495E47F139E851E000A6A26 /* NSString+Parser.h */,
 				5495E480139E851E000A6A26 /* NSString+Parser.m */,
+				543ADC76139F26050060C3F8 /* NSDateFormatter+Shared.h */,
+				543ADC77139F26050060C3F8 /* NSDateFormatter+Shared.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1788,6 +1793,7 @@
 				5460668E13991E5B007CD7EC /* CountryListItem.m in Sources */,
 				5460669313993035007CD7EC /* CountryListHeaderItem.m in Sources */,
 				5495E481139E851E000A6A26 /* NSString+Parser.m in Sources */,
+				543ADC78139F26050060C3F8 /* NSDateFormatter+Shared.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

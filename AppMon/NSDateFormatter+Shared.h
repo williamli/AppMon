@@ -19,4 +19,6 @@
 
 +(NSDateFormatter*) sharedUserDateFormatter;
 
++(NSDateFormatter*) sharedUserDateTimeFormatter;
+
 @end
