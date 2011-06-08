@@ -19,11 +19,11 @@
 @implementation NSScroller (AppScrollerExt)
 
 +(CGFloat) scrollerWidth{
-    return 12;
+    return 14;
 }
 
 +(CGFloat) scrollerWidthForControlSize:(NSControlSize)controlSize{
-    return 12;
+    return 14;
 }
 
 @end
@@ -31,11 +31,11 @@
 @implementation AppScroller
 
 +(CGFloat) scrollerWidth{
-    return 6;
+    return 8;
 }
 
 +(CGFloat) scrollerWidthForControlSize:(NSControlSize)controlSize{
-    return 6;
+    return 8;
 }
 
 -(id) initWithFrame:(NSRect)frameRect {
@@ -64,8 +64,8 @@
     NSRect knobRect = [self rectForPart:NSScrollerKnob];
     NSRect newRect = NSMakeRect((knobRect.size.width - [AppScroller scrollerWidth]) / 2, knobRect.origin.y, 
                                 [AppScroller scrollerWidth], knobRect.size.height);
-    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:newRect xRadius:3 yRadius:3];
-    [[NSColor colorWithCalibratedRed:0.2 green:0.2 blue:0.2 alpha:0.5] set];
+    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:newRect xRadius:4 yRadius:4];
+    [[NSColor colorWithCalibratedRed:0.2f green:0.2f blue:0.2f alpha:0.3f] set];
     [path fill];
 }
 
