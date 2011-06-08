@@ -9,6 +9,7 @@
 
 #import "AppReviewHeaderItem.h"
 #import "UIImageView+WebCache.h"
+#import "NSDateFormatter+Shared.h"
 
 @interface AppReviewHeaderItem (Private)
 - (NSGradient*) gradient;
@@ -66,7 +67,9 @@
     if (theTimeline.total == 0) {
         [self.lblInfo setStringValue:@"No reviews yet"];
     } else {
-        [self.lblInfo setStringValue:[NSString stringWithFormat:@"%ld reviews", theTimeline.total]];
+        NSDateFormatter* formatter = [NSDateFormatter sharedUserDateTimeFormatter];
+        [self.lblInfo setStringValue:[NSString stringWithFormat:@"%ld reviews, last review at %@", 
+                                      theTimeline.total, [formatter stringFromDate:theTimeline.lastReviewDate]]];
     }
     [self.lblTitle setStringValue:theTimeline.app.title];
 }
