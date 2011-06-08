@@ -11,6 +11,7 @@
 #import "AppSearchHeaderItem.h"
 #import "AppMonAppDelegate.h"
 #import "AppService.h"
+#import "AppMonConfig.h"
 
 @interface SearchViewController (Private)
 -(void) searchDidFinished:(NSArray*)results;
@@ -70,22 +71,17 @@
     NSLog(@"search: %@", query);
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        NSError* error = nil;
         NSInteger total;
 
-        NSArray* searchResult = [self.api searchByStore:[self store]
-                                                  query:query 
-                                                   page:0 
-                                                  total:&total 
-                                                  error:&error];
+        NSArray* stores = [[AppMonConfig sharedAppMonConfig] enabledStores];
+        NSArray* searchResult = [self.api searchByStores:stores
+                                                   query:query 
+                                                    page:0 
+                                                   total:&total];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setLoading:NO];
-            if (error) {
-                [self searchDidFailed:error];
-            } else {
-                [self searchDidFinished:searchResult];
-            }
+            [self searchDidFinished:searchResult];
         });
     });
 }

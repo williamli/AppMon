@@ -1,4 +1,4 @@
-//
+    //
 //  AppStore.m
 //  AppMon
 //
@@ -135,7 +135,39 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     }
     
     return searchResult;
-}  
+}
+
+-(NSArray*) searchByStores:(NSArray*)stores query:(NSString*)query page:(NSInteger)page total:(NSInteger*)total {
+    NSMutableArray* results = [NSMutableArray array];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+    *total = 0;
+    
+    for (Store* store in stores) {
+        dispatch_group_async(group, queue, ^{
+            NSError* error = nil;
+            NSInteger subPage = 0;
+            NSArray* apps = [self searchByStore:store.storefront query:query page:subPage total:total error:&error];
+            if (!error) {
+                for (App* app in apps) {
+                    if (![results containsObject:app]) {
+                        [results addObject:app];
+                    }
+                }
+                *total += subPage;
+
+            } else {
+                NSLog(@"ERROR: search store failed: %@ %@", store, error);
+
+            }
+        });
+    }
+
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    dispatch_release(group);
+    
+    return results;
+}
 
 -(NSArray*) stores:(NSError**)error {
     NSArray* countries = nil;

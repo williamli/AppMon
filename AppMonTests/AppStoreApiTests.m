@@ -60,6 +60,30 @@
     STAssertNotNil(app.price, @"price should not nil");
     STAssertNotNil(app.releaseDate, @"releaseDate should not nil");    
 }
+
+
+- (void)testSearchMultiple {
+    NSInteger count = 0;
+    Store* s1 = [[[Store alloc] initWithName:@"United States" storefront:@"143441" code:@"us"] autorelease];
+    Store* s2 = [[[Store alloc] initWithName:@"Hong Kong" storefront:@"143463" code:@"hk"] autorelease];
+    NSArray* stores = [NSArray arrayWithObjects:s1, s2, nil];
+    
+    NSArray* apps = [self.appStore searchByStores:stores query:@"Camera" page:0 total:&count];
+    STAssertNotNil(apps, @"should not nil");
+    STAssertTrue([apps count] > 5, @"should have at least 5 result items");
+    NSLog(@"result count: %ld, total result count: %ld", [apps count], count);
+
+    App* app = [apps objectAtIndex:0];
+    STAssertNotNil(app, @"should not nil");
+    STAssertNotNil(app.title, @"title should not nil");
+    STAssertNotNil(app.itemId, @"itemId should not nil");
+    STAssertNotNil(app.url, @"url should not nil");
+    STAssertNotNil(app.iconUrl, @"iconUrl should not nil");
+    STAssertNotNil(app.price, @"price should not nil");
+    STAssertNotNil(app.releaseDate, @"releaseDate should not nil");    
+}
+
+
 - (void)testSearchAppSecondPage {
     NSError* error = nil;
     NSInteger count = 0;
@@ -70,35 +94,32 @@
 }
 
 - (void)testReviews {
-    NSError* error = nil;
-    NSInteger total = 0;
-    NSString* moreUrl = nil;
-    NSDate* lastReviewDate = nil;
-    NSArray* reviews = [self.appStore reviewsByStore:@"143441" appId:@"343200656" page:0 total:&total moreUrl:&moreUrl lastReviewDate:&lastReviewDate error:&error];
-    STAssertNil(error, @"should have no error: %@", error);
+    ReviewResponse* resp = [self.appStore reviewsByStore:@"143441" appId:@"343200656" page:0];
     
-    STAssertNotNil(reviews, @"should not nil");
-    STAssertTrue([reviews count] > 0, @"should have at least 1 comments");
-    STAssertNotNil(lastReviewDate, @"lastReviewDate should not be nil");
-    STAssertTrue(total > 0, @"should have total > 0");
-    STAssertTrue(total < 1000000, @"should have total < 1000000");
+    STAssertNil(resp.error, @"should have no error: %@", resp.error);
     
-    Review* rev1 = [reviews objectAtIndex:0];
+    STAssertNotNil(resp.reviews, @"should not nil");
+    STAssertTrue([resp.reviews count] > 0, @"should have at least 1 comments");
+    STAssertNotNil(resp.lastReviewDate, @"lastReviewDate should not be nil");
+    STAssertTrue(resp.total > 0, @"should have total > 0");
+    STAssertTrue(resp.total < 1000000, @"should have total < 1000000");
+    
+    Review* rev1 = [resp.reviews objectAtIndex:0];
     STAssertNotNil(rev1.title, @"should have title");
     STAssertNotNil(rev1.text, @"should have text");
     STAssertTrue(rev1.rating > 0, @"should have rating");
     
-    Review* rev2 = [reviews objectAtIndex:1];
+    Review* rev2 = [resp.reviews objectAtIndex:1];
     STAssertNotNil(rev2.title, @"should have title");
     STAssertNotNil(rev2.text, @"should have text");
     STAssertTrue(rev2.rating > 0, @"should have rating");
     STAssertTrue(rev2.position > rev1.position, @"position 2 should be larger than position 1");
 
     // HKTV
-    reviews = [self.appStore reviewsByStore:@"143441" appId:@"348883035" page:0 total:&total moreUrl:&moreUrl lastReviewDate:&lastReviewDate error:&error];
-    STAssertNil(error, @"should have no error: %@", error);
-    STAssertTrue(total > 0, @"should have total > 0");
-    STAssertTrue(total < 1000000, @"should have total < 1000000");
+    resp = [self.appStore reviewsByStore:@"143441" appId:@"348883035" page:0];
+    STAssertNil(resp.error, @"should have no error: %@", resp.error);
+    STAssertTrue(resp.total > 0, @"should have total > 0");
+    STAssertTrue(resp.total < 1000000, @"should have total < 1000000");
     
 }
 
