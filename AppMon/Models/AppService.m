@@ -90,6 +90,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     return _apps;
 }
 
+-(NSUInteger) unreadCount {
+    NSUInteger totalUnreadCount = 0;
+
+    if (_timelines) {
+        for (Timeline* tl in [_timelines allValues]) {
+            totalUnreadCount += tl.unread;
+        }
+    }
+
+    return totalUnreadCount;
+}
+
 -(BOOL) isFollowed:(App*)app {
     return [_apps containsObject:app];
 }

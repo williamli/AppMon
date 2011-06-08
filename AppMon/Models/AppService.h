@@ -67,6 +67,8 @@ extern NSString * const AppServiceNotificationReadApp;
 
 -(NSArray*) followedApps;
 
+-(NSUInteger) unreadCount;
+
 @end
 
 @interface AppService (Timeline)

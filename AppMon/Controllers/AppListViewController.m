@@ -21,6 +21,7 @@
 -(void) timelineDidUpdated:(NSNotification*)notification;
 -(void) followedApp:(NSNotification*)notification;
 -(void) resetUnreadCount;
+-(void) recalculateTotalUnreadCount;
 @end
 
 @implementation AppListViewController
@@ -192,7 +193,7 @@
         if (cell) {
             [cell setUnreadCount:timeline.unread];
         }
-        [cell setNeedsDisplay:YES];
+        [self recalculateTotalUnreadCount];
     });
    
 }
@@ -205,6 +206,7 @@
         if (cell) {
             [cell setUnreadCount:0];
         }
+        [self recalculateTotalUnreadCount];
     });
 }
 
@@ -214,6 +216,17 @@
     for (AppListViewCell* cell in [self.appViews allValues]) {
         [cell setUnreadCount:0];
         [cell setNeedsDisplay:YES];
+    }
+    [self recalculateTotalUnreadCount];
+}
+
+-(void) recalculateTotalUnreadCount {
+    NSUInteger unreadCount = [self.appService unreadCount];
+    NSDockTile* tile = [NSApp dockTile];
+    if (unreadCount > 0) {
+        [tile setBadgeLabel:[NSString stringWithFormat:@"%ld", unreadCount]];        
+    } else {
+        [tile setBadgeLabel:nil];
     }
 }
 
