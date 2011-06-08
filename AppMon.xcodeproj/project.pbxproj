@@ -332,6 +332,7 @@
 		54D77675139675A600617675 /* AppMonConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D77674139675A600617675 /* AppMonConfig.m */; };
 		54E711F21398E17000100033 /* ReviewResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 54E711F11398E17000100033 /* ReviewResponse.m */; };
 		54E711F51398E1CA00100033 /* angry-review.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54E711F41398E1CA00100033 /* angry-review.plist */; };
+		54F3ABB3139F890C003734BC /* AppScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F3ABB2139F890B003734BC /* AppScroller.m */; };
 		54F6505F1393CFA3005FF9B7 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F6505E1393CFA3005FF9B7 /* Store.m */; };
 		54F7E47D1393F077007C8CCD /* AppMonMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F7E47B1393F076007C8CCD /* AppMonMainController.m */; };
 		54F7E4831393F6EA007C8CCD /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F7E4811393F6E9007C8CCD /* SearchViewController.m */; };
@@ -636,7 +637,7 @@
 		5426F162139649BB00C049CF /* zm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zm.png; sourceTree = "<group>"; };
 		5426F163139649BB00C049CF /* zw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zw.png; sourceTree = "<group>"; };
 		5426F25B139649C400C049CF /* country.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = country.plist; path = Flags/country.plist; sourceTree = SOURCE_ROOT; };
-		543ADC76139F26050060C3F8 /* NSDateFormatter+Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "NSDateFormatter+Shared.h"; sourceTree = "<group>"; };
+		543ADC76139F26050060C3F8 /* NSDateFormatter+Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+Shared.h"; sourceTree = "<group>"; };
 		543ADC77139F26050060C3F8 /* NSDateFormatter+Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Shared.m"; sourceTree = "<group>"; };
 		5460668713991658007CD7EC /* AppMonConfigWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMonConfigWindowController.h; path = Controllers/AppMonConfigWindowController.h; sourceTree = "<group>"; };
 		5460668813991658007CD7EC /* AppMonConfigWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppMonConfigWindowController.m; path = Controllers/AppMonConfigWindowController.m; sourceTree = "<group>"; };
@@ -739,6 +740,8 @@
 		54E711F01398E17000100033 /* ReviewResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewResponse.h; sourceTree = "<group>"; };
 		54E711F11398E17000100033 /* ReviewResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewResponse.m; sourceTree = "<group>"; };
 		54E711F41398E1CA00100033 /* angry-review.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "angry-review.plist"; sourceTree = "<group>"; };
+		54F3ABB1139F890A003734BC /* AppScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppScroller.h; sourceTree = "<group>"; };
+		54F3ABB2139F890B003734BC /* AppScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppScroller.m; sourceTree = "<group>"; };
 		54F6505D1393CFA3005FF9B7 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Store.h; path = Models/Store.h; sourceTree = "<group>"; };
 		54F6505E1393CFA3005FF9B7 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Store.m; path = Models/Store.m; sourceTree = "<group>"; };
 		54F7E47A1393F076007C8CCD /* AppMonMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMonMainController.h; path = Controllers/AppMonMainController.h; sourceTree = "<group>"; };
@@ -833,6 +836,8 @@
 				5460669113993034007CD7EC /* CountryListHeaderItem.h */,
 				5460669213993034007CD7EC /* CountryListHeaderItem.m */,
 				5460668F13992FEE007CD7EC /* CountryListHeaderItem.xib */,
+				54F3ABB1139F890A003734BC /* AppScroller.h */,
+				54F3ABB2139F890B003734BC /* AppScroller.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1794,6 +1799,7 @@
 				5460669313993035007CD7EC /* CountryListHeaderItem.m in Sources */,
 				5495E481139E851E000A6A26 /* NSString+Parser.m in Sources */,
 				543ADC78139F26050060C3F8 /* NSDateFormatter+Shared.m in Sources */,
+				54F3ABB3139F890C003734BC /* AppScroller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
