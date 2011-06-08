@@ -94,7 +94,7 @@
 								<int key="NSfFlags">16</int>
 							</object>
 							<reference key="NSControlView" ref="645920156"/>
-							<object class="NSColor" key="NSBackgroundColor" id="313442390">
+							<object class="NSColor" key="NSBackgroundColor">
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
 								<string key="NSColorName">controlColor</string>
@@ -127,15 +127,21 @@
 								<int key="NSfFlags">16</int>
 							</object>
 							<reference key="NSControlView" ref="713607188"/>
-							<reference key="NSBackgroundColor" ref="313442390"/>
+							<bool key="NSDrawsBackground">YES</bool>
+							<object class="NSColor" key="NSBackgroundColor" id="433684498">
+								<int key="NSColorSpace">6</int>
+								<string key="NSCatalogName">System</string>
+								<string key="NSColorName">textBackgroundColor</string>
+								<object class="NSColor" key="NSColor" id="274565512">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MQA</bytes>
+								</object>
+							</object>
 							<object class="NSColor" key="NSTextColor">
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
-								<string key="NSColorName">controlShadowColor</string>
-								<object class="NSColor" key="NSColor">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
-								</object>
+								<string key="NSColorName">headerColor</string>
+								<reference key="NSColor" ref="274565512"/>
 							</object>
 						</object>
 					</object>
@@ -157,11 +163,12 @@
 								<int key="NSfFlags">16</int>
 							</object>
 							<reference key="NSControlView" ref="753808802"/>
-							<reference key="NSBackgroundColor" ref="313442390"/>
-							<object class="NSColor" key="NSTextColor" id="411106772">
+							<bool key="NSDrawsBackground">YES</bool>
+							<reference key="NSBackgroundColor" ref="433684498"/>
+							<object class="NSColor" key="NSTextColor" id="947054455">
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
-								<string key="NSColorName">controlTextColor</string>
+								<string key="NSColorName">textColor</string>
 								<object class="NSColor" key="NSColor">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MAA</bytes>
@@ -175,7 +182,6 @@
 						<string key="NSFrame">{{17, 20}, {245, 251}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="350730162">
 							<int key="NSCellFlags">69336577</int>
@@ -187,8 +193,9 @@
 								<int key="NSfFlags">16</int>
 							</object>
 							<reference key="NSControlView" ref="657638133"/>
-							<reference key="NSBackgroundColor" ref="313442390"/>
-							<reference key="NSTextColor" ref="411106772"/>
+							<bool key="NSDrawsBackground">YES</bool>
+							<reference key="NSBackgroundColor" ref="433684498"/>
+							<reference key="NSTextColor" ref="947054455"/>
 						</object>
 					</object>
 				</object>
