@@ -121,50 +121,63 @@
 }
 
 -(void) selectApp:(App*)app {
-    JAListViewItem* item = [self.appViews objectForKey:app.itemId];
-    self.selectedApp = app;
-    [self.listApps selectView:item];
-    [self.appUpdateViewController loadAppReviews:app];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        JAListViewItem* item = [self.appViews objectForKey:app.itemId];
+        self.selectedApp = app;
+        [self.listApps selectView:item];
+        [self.appUpdateViewController loadAppReviews:app];
+    });
 }
 
-#pragma mark - Private
+#pragma mark - Notifications
 
 -(void) followedApp:(NSNotification*)notification {
-    [self.listApps reloadDataAnimated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.listApps reloadDataAnimated:YES];
+    });
     
     App* app = [notification object];
     [self.appService fetchTimelineWithApp:app];
 }
 
 -(void) unfollowedApp:(NSNotification*)notification {
-    [self.listApps reloadDataAnimated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.listApps reloadDataAnimated:YES];
+    });
 }
 
 -(void) storeDidChanged:(NSNotification*)notification {
-    NSLog(@"store did changed, reset unread count in app list");
-    [self resetUnreadCount];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self resetUnreadCount];
+    });
 }
 
 -(void) timelineDidUpdated:(NSNotification*)notification {
     Timeline* timeline = [notification object];
     if (!timeline) return;
     
-    AppListViewCell* cell = [self.appViews objectForKey:timeline.app.itemId];
-    if (cell) {
-        [cell setUnreadCount:timeline.unread];
-    }
-    [cell setNeedsDisplay:YES];
-    NSLog(@"  timeline updated, update app list view: %@", timeline.app.title);
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AppListViewCell* cell = [self.appViews objectForKey:timeline.app.itemId];
+        if (cell) {
+            [cell setUnreadCount:timeline.unread];
+        }
+        [cell setNeedsDisplay:YES];
+    });
+   
 }
 
 -(void) userReadAppTimeline:(NSNotification*)notification {
     App* app = [notification object];
-    AppListViewCell* cell = [self.appViews objectForKey:app.itemId];
-    if (cell) {
-        [cell setUnreadCount:0];
-    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AppListViewCell* cell = [self.appViews objectForKey:app.itemId];
+        if (cell) {
+            [cell setUnreadCount:0];
+        }
+    });
 }
+
+#pragma mark - Private
 
 -(void) resetUnreadCount {
     for (AppListViewCell* cell in [self.appViews allValues]) {

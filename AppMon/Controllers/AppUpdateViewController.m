@@ -90,7 +90,10 @@
     
     // set timeline
     self.timeline = [_service timelineWithApp:newApp];
-    [self.listUpdates reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.listUpdates reloadData];
+    });
+
     [self setLoading:YES];
     [_service fetchTimelineWithApp:newApp];
 }
@@ -117,14 +120,16 @@
 
 -(void) setLoading:(BOOL)newLoading {
     self.timeline.loading = newLoading;
-
-    if (newLoading) {
-        [self.progressView startAnimation:self];
-        [self.progressView setHidden:NO];
-    } else {
-        [self.progressView stopAnimation:self];
-        [self.progressView setHidden:YES];
-    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (newLoading) {
+            [self.progressView startAnimation:self];
+            [self.progressView setHidden:NO];
+        } else {
+            [self.progressView stopAnimation:self];
+            [self.progressView setHidden:YES];
+        }
+    });
 }
 
 -(void) setLoaded:(BOOL)newLoaded {
@@ -190,18 +195,22 @@
 -(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline loadMore:(BOOL)isLoadMore {   
     NSLog(@"load reviews: finished with %ld reviews loaded, %ld total, last review date: %@", 
             [timeline.reviews count], timeline.total, timeline.lastReviewDate);
-
     [self setLoading:NO];
     [self setLoaded:YES];
-    [self.listUpdates reloadData];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.listUpdates reloadData];
+    });
 }
 
 -(void) fetchTimelineNoUpdate:(App*)app timeline:(Timeline*)timeline {
     NSLog(@"load reviews: no update");
-
     [self setLoading:NO];
     [self setLoaded:YES];
-    [self.listUpdates reloadData];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.listUpdates reloadData];
+    });
 }
 
 // invoke when timeline update has failed
@@ -215,11 +224,13 @@
     NSLog(@"load reviews: no more!");
     [self setLoading:NO];
     [self setLoaded:YES];
-    [self.listUpdates reloadData];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.listUpdates reloadData];
+    });
 }
 
 #pragma mark - Button Actions
-
 
 -(void) follow:(id)sender {
     AppReviewHeaderItem* item = (AppReviewHeaderItem*) [sender superview];
