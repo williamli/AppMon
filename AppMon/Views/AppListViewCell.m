@@ -9,6 +9,7 @@
 #import "AppListViewCell.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
+#import "NSDateFormatter+Shared.h"
 
 @interface AppListViewCell (Private)
 - (void)drawBackground;
@@ -68,12 +69,9 @@
         [self.imgThumbnail setHidden:NO];
         [self.imgThumbnail setImageWithURL:[NSURL URLWithString:self.app.iconUrl] 
                           placeholderImage:[NSImage imageNamed:@"app_default"]];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];    
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];    
+
+        NSDateFormatter *dateFormatter = [NSDateFormatter sharedUserDateFormatter];    
         [self.lblDate setStringValue:[dateFormatter stringFromDate:self.app.releaseDate]];
-        [dateFormatter release];
         
         [self.lblCount sizeToFit];
     } else if (newApp == nil) {

@@ -11,6 +11,7 @@
 
 #import "AppMonAppDelegate.h"
 #import "AppService.h"
+#import "NSDateFormatter+Shared.h"
 
 @interface AppSearchResultItem (Private)
 - (void)drawBackground;
@@ -62,12 +63,9 @@
         [self.imgThumbnail setImageWithURL:[NSURL URLWithString:self.app.iconUrl] 
                           placeholderImage:[NSImage imageNamed:@"app_default"]];
         
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];    
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];    
+        NSDateFormatter *dateFormatter = [NSDateFormatter sharedUserDateFormatter];    
         [self.lblDate setStringValue:[dateFormatter stringFromDate:self.app.releaseDate]];
-        [dateFormatter release];
-     
+
     } else if (newApp == nil) {
         [_app release];
         _app = [newApp retain];
