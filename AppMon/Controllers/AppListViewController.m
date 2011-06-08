@@ -224,6 +224,9 @@
     NSUInteger unreadCount = [self.appService unreadCount];
     NSDockTile* tile = [NSApp dockTile];
     if (unreadCount > 0) {
+        if (![NSApp isActive]) {
+            [NSApp requestUserAttention:NSInformationalRequest];
+        }
         [tile setBadgeLabel:[NSString stringWithFormat:@"%ld", unreadCount]];        
     } else {
         [tile setBadgeLabel:nil];
