@@ -131,7 +131,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 -(void) fetchTimelineWithApp:(App*)app more:(BOOL)loadMore {
     Timeline* timeline = [self timelineWithApp:app];
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(_queue, ^{
         NSUInteger prevTotal        = [timeline total];
         AppStoreApi* api            = [AppStoreApi sharedAppStoreApi];
         NSArray* reviewResponses    = nil;
@@ -181,11 +181,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         } // for each review responses
 
         if (!loadMore && changed && (timeline.total - prevTotal > 0)) {
-            if (timeline.unread > 0) {
-                timeline.unread = timeline.total;            
-            } else {
-                timeline.unread = timeline.total - prevTotal;
-            }
+            timeline.unread += timeline.total - prevTotal;
         }
   
         if (changed) {
