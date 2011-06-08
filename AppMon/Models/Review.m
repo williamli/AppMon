@@ -9,6 +9,7 @@
 #import "Review.h"
 #import "RegexKitLite.h"
 #import "NSString+Parser.h"
+#import "NSDateFormatter+Shared.h"
 
 #define kTitleRegexp    @"^([0-9]+)\\. (.*) \\(v(.*)\\)$"
 #define kNameRegexp     @"^(.+) on (.+)$"
@@ -49,6 +50,8 @@
             
             if (self.date == nil) {
                 NSLog(@"WARN: Unparsable Date: dateStr=%@, date = %@ (store: %@)", self.dateStr, self.date, aStore);
+            } else {
+                self.dateStr = [[NSDateFormatter sharedUserDateFormatter] stringFromDate:self.date];
             }
         }
         

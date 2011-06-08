@@ -7,52 +7,30 @@
 //
 
 #import "NSString+Parser.h"
-
+#import "NSDateFormatter+Shared.h"
 
 @implementation NSString (DateParser)
 
 +(NSDateFormatter*) dateFormatter1 {
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    [dateFormatter setLocale:usLocale];
-    [dateFormatter setDateFormat:@"dd-MMM-yyyy"];
-    
-    return dateFormatter;
+    return [NSDateFormatter sharedDateFormatterNamed:@"dateFormatter1" format:@"dd-MMM-yyyy" locale:@"en_US"];
 }
 
 +(NSDateFormatter*) dateFormatter2 {
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    [dateFormatter setLocale:usLocale];
-    [dateFormatter setDateFormat:@"MMM dd, yyyy"];
-    return dateFormatter;
+    return [NSDateFormatter sharedDateFormatterNamed:@"dateFormatter2" format:@"MMM dd, yyyy" locale:@"en_US"];
 }
 
 
 +(NSDateFormatter*) dateFormatter3 {
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    [dateFormatter setLocale:usLocale];
-    [dateFormatter setDateFormat:@"dd.MM.yyyy"];
-    return dateFormatter;
+    return [NSDateFormatter sharedDateFormatterNamed:@"dateFormatter3" format:@"dd.MM.yyyy" locale:@"en_US"];
 }
 
 +(NSDateFormatter*) dateFormatter4 {
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"fr_FR"];
-    [dateFormatter setLocale:usLocale];
-    [dateFormatter setDateFormat:@"dd MMM yyyy"];
-    return dateFormatter;
+    return [NSDateFormatter sharedDateFormatterNamed:@"dateFormatter4" format:@"dd MMM yyyy" locale:@"fr_FR"];
 }
 
 +(NSDateFormatter*) dateFormatter5 {
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"it_IT"];
-    [dateFormatter setLocale:usLocale];
-    [dateFormatter setDateFormat:@"dd-MMM-yyyy"];
-    return dateFormatter;
+    return [NSDateFormatter sharedDateFormatterNamed:@"dateFormatter5" format:@"dd-MMM-yyyy" locale:@"it_IT"];
 }
-
 
 -(NSDate*) dateWithString {
     NSDate* date = nil;
