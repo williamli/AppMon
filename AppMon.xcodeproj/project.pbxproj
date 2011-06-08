@@ -329,6 +329,7 @@
 		54C9723B1397650C00EB814F /* Monster.icns in Resources */ = {isa = PBXBuildFile; fileRef = 54C9723A1397650B00EB814F /* Monster.icns */; };
 		54CC03451393DCCE00F6DA6B /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 54CC03441393DCCE00F6DA6B /* XPathQuery.m */; };
 		54CC03551393DEC800F6DA6B /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54CC03541393DEC800F6DA6B /* libxml2.2.dylib */; };
+		54CE3088139FA67400A59812 /* AppScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54CE3087139FA67400A59812 /* AppScrollView.m */; };
 		54D77675139675A600617675 /* AppMonConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D77674139675A600617675 /* AppMonConfig.m */; };
 		54E711F21398E17000100033 /* ReviewResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 54E711F11398E17000100033 /* ReviewResponse.m */; };
 		54E711F51398E1CA00100033 /* angry-review.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54E711F41398E1CA00100033 /* angry-review.plist */; };
@@ -735,6 +736,8 @@
 		54CC03431393DCCE00F6DA6B /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
 		54CC03441393DCCE00F6DA6B /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		54CC03541393DEC800F6DA6B /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		54CE3086139FA67400A59812 /* AppScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppScrollView.h; sourceTree = "<group>"; };
+		54CE3087139FA67400A59812 /* AppScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppScrollView.m; sourceTree = "<group>"; };
 		54D77673139675A600617675 /* AppMonConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMonConfig.h; sourceTree = "<group>"; };
 		54D77674139675A600617675 /* AppMonConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMonConfig.m; sourceTree = "<group>"; };
 		54E711F01398E17000100033 /* ReviewResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewResponse.h; sourceTree = "<group>"; };
@@ -838,6 +841,8 @@
 				5460668F13992FEE007CD7EC /* CountryListHeaderItem.xib */,
 				54F3ABB1139F890A003734BC /* AppScroller.h */,
 				54F3ABB2139F890B003734BC /* AppScroller.m */,
+				54CE3086139FA67400A59812 /* AppScrollView.h */,
+				54CE3087139FA67400A59812 /* AppScrollView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1800,6 +1805,7 @@
 				5495E481139E851E000A6A26 /* NSString+Parser.m in Sources */,
 				543ADC78139F26050060C3F8 /* NSDateFormatter+Shared.m in Sources */,
 				54F3ABB3139F890C003734BC /* AppScroller.m in Sources */,
+				54CE3088139FA67400A59812 /* AppScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

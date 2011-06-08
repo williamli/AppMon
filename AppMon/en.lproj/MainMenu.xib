@@ -472,7 +472,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="578893987"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMaxSize">{1e+13, 1e+13}</string>
 			</object>
 			<object class="NSWindowTemplate" id="972006081">
@@ -670,7 +670,7 @@
 													<string key="NSFrameSize">{185, 388}</string>
 													<reference key="NSSuperview" ref="3359310"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="294119013"/>
+													<reference key="NSNextKeyView" ref="42957280"/>
 												</object>
 											</object>
 											<string key="NSFrameSize">{185, 388}</string>
@@ -687,7 +687,7 @@
 											<string key="NSFrame">{{185, 0}, {15, 388}}</string>
 											<reference key="NSSuperview" ref="29387235"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="766569842"/>
+											<reference key="NSNextKeyView" ref="294119013"/>
 											<int key="NSArrowsLoc">2</int>
 											<reference key="NSTarget" ref="29387235"/>
 											<string key="NSAction">_doScroller:</string>
@@ -710,7 +710,7 @@
 									<string key="NSFrameSize">{200, 388}</string>
 									<reference key="NSSuperview" ref="462034083"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="42957280"/>
+									<reference key="NSNextKeyView" ref="766569842"/>
 									<int key="NSsFlags">16</int>
 									<reference key="NSVScroller" ref="42957280"/>
 									<reference key="NSHScroller" ref="766569842"/>
@@ -802,7 +802,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="841517619"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{400, 322}</string>
 				<string key="NSMaxSize">{1e+13, 1e+13}</string>
 				<bool key="NSAutorecalculatesContentBorderThicknessMinY">NO</bool>
@@ -1904,8 +1904,11 @@
 					<string>552.IBPluginDependency</string>
 					<string>56.IBPluginDependency</string>
 					<string>56.ImportedFromIB2</string>
+					<string>560.CustomClassName</string>
 					<string>560.IBPluginDependency</string>
+					<string>561.CustomClassName</string>
 					<string>561.IBPluginDependency</string>
+					<string>562.CustomClassName</string>
 					<string>562.IBPluginDependency</string>
 					<string>563.CustomClassName</string>
 					<string>563.IBPluginDependency</string>
@@ -1920,6 +1923,7 @@
 					<string>573.IBPluginDependency</string>
 					<string>58.IBPluginDependency</string>
 					<string>58.ImportedFromIB2</string>
+					<string>586.CustomClassName</string>
 					<string>586.IBPluginDependency</string>
 					<string>587.CustomClassName</string>
 					<string>587.IBPluginDependency</string>
@@ -1929,8 +1933,11 @@
 					<string>589.IBPluginDependency</string>
 					<string>600.CustomClassName</string>
 					<string>600.IBPluginDependency</string>
+					<string>605.CustomClassName</string>
 					<string>605.IBPluginDependency</string>
+					<string>606.CustomClassName</string>
 					<string>606.IBPluginDependency</string>
+					<string>607.CustomClassName</string>
 					<string>607.IBPluginDependency</string>
 					<string>608.CustomClassName</string>
 					<string>608.IBPluginDependency</string>
@@ -2030,8 +2037,11 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
+					<string>AppScrollView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>AppScroller</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>AppScroller</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>JASectionedListView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2046,6 +2056,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
+					<string>AppScrollView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>AppScroller</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2055,8 +2066,11 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>AppUpdateViewController</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>AppScrollView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>AppScroller</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>AppScroller</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>JAListView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2380,6 +2394,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/AppMonMainController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">AppScrollView</string>
+					<string key="superclassName">NSScrollView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AppScrollView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
