@@ -48,8 +48,8 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSTextField" id="689098775">
 						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{17, 33}, {299, 14}}</string>
+						<int key="NSvFlags">270</int>
+						<string key="NSFrame">{{17, 33}, {366, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="960609993"/>
@@ -119,7 +119,6 @@
 						<string key="NSFrame">{{108, 10}, {80, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="834442599">
@@ -195,7 +194,6 @@
 				<string key="NSFrameSize">{400, 80}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				<string key="NSClassName">AppReviewHeaderItem</string>
 			</object>
@@ -279,8 +277,8 @@
 							<reference ref="824052974"/>
 							<reference ref="815342533"/>
 							<reference ref="960609993"/>
-							<reference ref="689098775"/>
 							<reference ref="1066869392"/>
+							<reference ref="689098775"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">App Review Header Item</string>
