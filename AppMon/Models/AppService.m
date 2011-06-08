@@ -156,7 +156,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                     prevReviewResp == nil ||
                     [[prevReviewResp lastReviewDate] compare:[reviewResp lastReviewDate]] == NSOrderedAscending) {
                     [timeline addReviews:reviewResp.reviews];
-                    [timeline setResponse:reviewResp withStore:store];                    
+                    [timeline setResponse:reviewResp withStore:store];
+                    
+                    if ([timeline lastReviewDate] == nil || [[timeline lastReviewDate] compare:[reviewResp lastReviewDate]] == NSOrderedAscending) {
+                        [timeline setLastReviewDate:[reviewResp lastReviewDate]];
+                    }
+                    
                     changed = YES;
                 }
             }
@@ -164,7 +169,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         } // for each review responses
 
         if (!loadMore && changed && (timeline.total - prevTotal > 0)) {
-            timeline.unread = timeline.total;            
+            if (prevTotal == 0) {
+                timeline.unread = timeline.total;            
+            } else {
+                timeline.unread = timeline.total - prevTotal;
+            }
         }
   
         if (changed) {
