@@ -36,6 +36,9 @@
 // load more app reviews from currently selected app
 -(void) loadMoreAppReviews;
 
+// clear the timeline
+-(void) unloadReviews;
+
 -(void) setLoading:(BOOL)newLoading;
 
 -(void) setLoaded:(BOOL)newLoaded;

@@ -123,6 +123,7 @@
 -(void) selectApp:(App*)app {
     dispatch_async(dispatch_get_main_queue(), ^{
         JAListViewItem* item = [self.appViews objectForKey:app.itemId];
+        item.selected = YES;
         self.selectedApp = app;
         [self.listApps selectView:item];
         [self.appUpdateViewController loadAppReviews:app];
@@ -142,7 +143,37 @@
 
 -(void) unfollowedApp:(NSNotification*)notification {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.listApps reloadDataAnimated:YES];
+        App* app = [notification object];
+        NSLog(@"unfollowed app: %@", app);
+
+        // select next app if possible, otherwise, select previous app
+        // if no other apps, clear the review list
+        NSArray* followedApps = [self.appService followedApps];
+        if (app) {
+            JAListViewItem* item = [self.appViews objectForKey:app.itemId];
+            if (item) {
+                NSInteger index = [self.listApps indexForView:item];
+                JAListViewItem* newItem = nil;
+                if (index < [followedApps count]) {
+                    newItem = [self.listApps viewAtIndex:index];
+                } else if (index > 1) {
+                    newItem = [self.listApps viewAtIndex:index-1];
+                }
+                
+
+                if (newItem) {
+                    App* newApp = [(AppListViewCell*)newItem app];
+                    [self selectApp:newApp];
+                } else {
+                    [self.appUpdateViewController unloadReviews];
+                }
+            } else {
+                [self.appUpdateViewController unloadReviews];
+            }
+        }
+
+        // refresh the app list
+        [self.listApps reloadData];
     });
 }
 

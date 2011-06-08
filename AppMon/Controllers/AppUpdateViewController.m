@@ -118,6 +118,13 @@
     [_service fetchTimelineWithApp:self.timeline.app more:YES];
 }
 
+-(void) unloadReviews {
+    self.timeline = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.listUpdates reloadData];
+    });
+}
+
 -(void) setLoading:(BOOL)newLoading {
     self.timeline.loading = newLoading;
     
