@@ -26,5 +26,6 @@
 -(IBAction) clickedItemCheckbox:(id)sender;
 -(IBAction) clickedHeaderCheckbox:(id)sender;
 -(IBAction) clickedHeader:(id)sender;
+-(IBAction) changedRefreshTime:(id)sender;
 
 @end

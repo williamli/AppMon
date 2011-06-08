@@ -43,6 +43,7 @@
     self.appViews = nil;
     self.selectedApp = nil;
 
+    [self setAutoRefreshTime:0];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
@@ -82,6 +83,19 @@
     self.appService = [AppService sharedAppService];
 }
 
+-(void) setAutoRefreshTime:(NSUInteger)seconds {
+    NSLog(@"set auto refresh time: %ld", seconds);
+    [NSRunLoop cancelPreviousPerformRequestsWithTarget:self 
+                                              selector:@selector(updateAllApps) 
+                                                object:nil];
+
+    if (seconds > 0) {
+        [self performSelector:@selector(updateAllApps) 
+                   withObject:nil 
+                   afterDelay:seconds];
+    }
+}
+
 -(void) updateAllApps:(BOOL)includeSelectedApp {
     NSArray* allApps = [self.appService followedApps];
     for (App* theApp in allApps) {
@@ -93,13 +107,9 @@
     }
     
     // setup auto refresh
-    NSLog(@"auto refresh after %ld minutes", [AppMonConfig sharedAppMonConfig].autoRefreshIntervalMinute);
-    [NSRunLoop cancelPreviousPerformRequestsWithTarget:self 
-                                              selector:@selector(updateAllApps) 
-                                                object:nil];
-    [self performSelector:@selector(updateAllApps) 
-               withObject:nil 
-               afterDelay:60*[AppMonConfig sharedAppMonConfig].autoRefreshIntervalMinute];
+    NSUInteger interval = [AppMonConfig sharedAppMonConfig].autoRefreshIntervalMinute*60;
+    NSLog(@"auto refresh after %ld seconds", interval);
+    [self setAutoRefreshTime:interval];
 }
      
 -(void) updateAllApps {

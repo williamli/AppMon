@@ -38,6 +38,9 @@
 // Update all apps on the app list, skip currently selected app
 -(void) updateAllAppsExceptSelected;
 
+// set and change the auto refresh timeline time
+-(void) setAutoRefreshTime:(NSUInteger)seconds;
+
 // selected supplied app
 -(void) selectApp:(App*)app;
 

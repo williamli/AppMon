@@ -10,6 +10,8 @@
 #import "CountryListHeaderItem.h"
 #import "CountryListItem.h"
 
+#import "AppMonAppDelegate.h"
+
 #import "JASectionedListView.h"
 #import "AppMonConfig.h"
 #import "Store.h"
@@ -34,7 +36,18 @@
 
     AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
     [config load];
-
+    
+    NSUInteger interval = config.autoRefreshIntervalMinute;
+    for (NSMenuItem* item in [[self.popAutoRefresh menu] itemArray]) {
+        if ([item tag] == interval) {
+            NSLog(@"load config: select interval: %ld", interval);
+            [item setState:NSOnState];
+            [self.popAutoRefresh selectItem:item];
+        } else {
+            [item setState:NSOffState];
+        }
+    }
+    
     [self.listCountries reloadData];
 }
 
@@ -198,6 +211,18 @@
     }
     [self.listCountries reloadData];
 
+}
+
+-(IBAction) changedRefreshTime:(id)sender {
+    NSMenuItem* menuItem = sender;
+    NSUInteger interval = [menuItem tag];
+    
+    [[AppMonAppDelegate instance].mainController.appListViewController setAutoRefreshTime:interval*60];
+    
+    // save config
+    AppMonConfig* config = [AppMonConfig sharedAppMonConfig];
+    [config setAutoRefreshIntervalMinute:interval];
+    [config save];    
 }
 
 @end
