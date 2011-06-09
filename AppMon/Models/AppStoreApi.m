@@ -140,6 +140,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 
 -(NSArray*) searchByStores:(NSArray*)stores query:(NSString*)query page:(NSInteger)page total:(NSInteger*)total {
     NSMutableArray* results = [NSMutableArray array];
+    dispatch_queue_t search_queue = dispatch_queue_create("search.mutex", 0);
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
     *total = 0;
@@ -154,10 +155,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                                           total:total 
                                           error:&error];
             if (!error) {
-                for (App* app in apps) {
-                    [results addObject:app];
-                }
-                *total += subPage;
+                dispatch_sync(search_queue, ^{
+                    for (App* app in apps) {
+                        [results addObject:app];
+                    }
+                    *total += subPage;
+                });
             } else {
                 NSLog(@"ERROR: search store failed: %@ %@", store, error);
 
@@ -169,6 +172,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     dispatch_release(group);
+    dispatch_release(search_queue);
     
     return results;
 }
@@ -292,18 +296,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 
 -(NSArray*) reviewsByStores:(NSArray*)stores url:(NSString*)url {
     NSMutableArray* results = [NSMutableArray array];
+    dispatch_queue_t review_queue = dispatch_queue_create("review.mutex", 0);
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
     
     for (Store* store in stores) {
         dispatch_group_async(group, queue, ^{
             ReviewResponse* response = [self reviewsByStore:store.storefront url:url];
-            [results addObject:response];
+            dispatch_sync(review_queue, ^{
+                [results addObject:response];
+            });            
         });
     }
     
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     dispatch_release(group);
+    dispatch_release(review_queue);
     return results;
 }
 
