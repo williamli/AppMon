@@ -147,7 +147,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
         dispatch_group_async(group, queue, ^{
             NSError* error = nil;
             NSInteger subPage = 0;
-            NSArray* apps = [self searchByStore:store.storefront query:query page:subPage total:total error:&error];
+            NSArray* apps = [self searchByStore:store.storefront 
+                                          query:query 
+                                           page:subPage 
+                                          total:total 
+                                          error:&error];
             if (!error) {
                 for (App* app in apps) {
                     if (![results containsObject:app]) {
@@ -155,7 +159,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                     }
                 }
                 *total += subPage;
-
             } else {
                 NSLog(@"ERROR: search store failed: %@ %@", store, error);
 

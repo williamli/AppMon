@@ -44,4 +44,6 @@
 
 -(void) search:(NSString*)query;
 
+-(IBAction) dismissSearch:(id)sender;
+
 @end

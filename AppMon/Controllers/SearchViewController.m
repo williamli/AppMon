@@ -16,7 +16,7 @@
 @interface SearchViewController (Private)
 -(void) searchDidFinished:(NSArray*)results;
 -(void) searchDidFailed:(NSError*)error;
--(void) dismissSearch:(id)sender;
+
 @end
 
 @implementation SearchViewController
