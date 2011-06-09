@@ -7,7 +7,7 @@
 //
 
 #import "NSString+Parser.h"
-#import "NSDateFormatter+Shared.h"
+#import "NSDateFormatter+IGUtils.h"
 
 @implementation NSString (DateParser)
 

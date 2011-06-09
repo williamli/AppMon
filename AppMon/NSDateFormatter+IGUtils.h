@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NSDateFormatter (Shared)
+@interface NSDateFormatter (IGUtils)
 
 // create a thread safe, shared date formatter used by the app, with custom date format and locale
 +(NSDateFormatter*) sharedDateFormatterNamed:(NSString*)formatterName format:(NSString*)format locale:(NSString*)localeName;

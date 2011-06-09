@@ -45,7 +45,7 @@
 @property (nonatomic, readonly) NSUInteger total;
 
 // number of unread reviews
-@property (nonatomic, assign) NSInteger unread;
+@property (nonatomic, assign) NSUInteger unread;
 
 // if this timeline is loaded
 @property (nonatomic, assign) BOOL loaded;

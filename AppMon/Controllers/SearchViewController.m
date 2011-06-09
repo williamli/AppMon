@@ -95,7 +95,6 @@
         NSLog(@"no search result");
         [self setNotFound:YES];
     } else {
-        NSLog(@"search finished: %@", theResults);
         [self setNotFound:NO];
         self.results = theResults;
         [self.searchResultList reloadDataAnimated:YES];

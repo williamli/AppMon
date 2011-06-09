@@ -9,7 +9,7 @@
 #import "Review.h"
 #import "RegexKitLite.h"
 #import "NSString+Parser.h"
-#import "NSDateFormatter+Shared.h"
+#import "NSDateFormatter+IGUtils.h"
 
 #define kTitleRegexp    @"^([0-9]+)\\. (.*) \\(v(.*)\\)$"
 #define kNameRegexp     @"^(.+) on (.+)$"

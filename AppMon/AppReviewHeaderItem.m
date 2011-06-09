@@ -9,7 +9,7 @@
 
 #import "AppReviewHeaderItem.h"
 #import "UIImageView+WebCache.h"
-#import "NSDateFormatter+Shared.h"
+#import "NSDateFormatter+IGUtils.h"
 
 @interface AppReviewHeaderItem (Private)
 - (NSGradient*) gradient;

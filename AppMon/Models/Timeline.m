@@ -78,11 +78,11 @@
     return response && [response moreUrl] != nil;
 }
 
--(void) setUnread:(NSInteger)newUnread {
+-(void) setUnread:(NSUInteger)newUnread {
     [self.app setUnread:newUnread];
 }
 
--(NSInteger) unread {
+-(NSUInteger) unread {
     return self.app.unread;
 }
 

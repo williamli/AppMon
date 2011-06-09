@@ -6,9 +6,9 @@
 //  Copyright 2011年 Ignition Soft Limited. All rights reserved.
 //
 
-#import "NSDateFormatter+Shared.h"
+#import "NSDateFormatter+IGUtils.h"
 
-@implementation NSDateFormatter (Shared)
+@implementation NSDateFormatter (IGUtils)
 
 +(NSDateFormatter*) sharedDateFormatterNamed:(NSString*)formatterName format:(NSString*)format locale:(NSString*)localeName {
     NSMutableDictionary* threadDictionary = [[NSThread currentThread] threadDictionary];

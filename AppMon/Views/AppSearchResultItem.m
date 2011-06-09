@@ -11,7 +11,7 @@
 
 #import "AppMonAppDelegate.h"
 #import "AppService.h"
-#import "NSDateFormatter+Shared.h"
+#import "NSDateFormatter+IGUtils.h"
 
 @interface AppSearchResultItem (Private)
 - (void)drawBackground;

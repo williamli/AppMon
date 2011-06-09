@@ -9,7 +9,7 @@
 #import "AppListViewCell.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
-#import "NSDateFormatter+Shared.h"
+#import "NSDateFormatter+IGUtils.h"
 
 @interface AppListViewCell (Private)
 - (void)drawBackground;
