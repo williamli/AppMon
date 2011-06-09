@@ -11,7 +11,7 @@
 
 @implementation AppSearchHeaderItem
 
-@synthesize lblMessage=_lblMessage;
+@synthesize lblMessage=_lblMessage, btnProceed=_btnProceed;
 
 + (AppSearchHeaderItem *) item {
     static NSNib *nib = nil;

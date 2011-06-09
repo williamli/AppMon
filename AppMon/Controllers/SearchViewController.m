@@ -16,7 +16,7 @@
 @interface SearchViewController (Private)
 -(void) searchDidFinished:(NSArray*)results;
 -(void) searchDidFailed:(NSError*)error;
--(NSString*) store;
+-(void) dismissSearch:(id)sender;
 @end
 
 @implementation SearchViewController
@@ -24,6 +24,7 @@
 @synthesize searchScrollView=_searchScrollView, progressIndicator=_progressIndicator, searchResultList=_searchResultList;
 @synthesize api=_api, appService=_appService, results=_results;
 @synthesize searchNotFoundView=_searchNotFoundView;
+@synthesize error=_error;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +37,7 @@
 
 - (void)dealloc
 {
+    self.error = nil;
     self.appService = nil;
     self.api = nil;
     self.results = nil;
@@ -100,12 +102,14 @@
     }
 }
 
--(NSString*) store {
-    return @"143441"; // US
-}
-
 -(void) searchDidFailed:(NSError*)error {
     NSLog(@"search failed: %@", error);
+    self.error = error;
+    [self.searchResultList reloadDataAnimated:YES];
+}
+
+-(void) dismissSearch:(id)sender {
+    [[AppMonAppDelegate instance].mainController setSearchModeEnabled:NO];
 }
 
 #pragma mark - Actions
@@ -138,8 +142,14 @@
 
 - (JAListViewItem *)listView:(JAListView *)listView sectionHeaderViewForSection:(NSUInteger)section {
     AppSearchHeaderItem* item = [AppSearchHeaderItem item];
-    [item.lblMessage setStringValue:[NSString stringWithFormat:@"%d search result loaded", [_results count]]];
     [item setHidden:_loading];
+    [item.btnProceed setTarget:self];
+    [item.btnProceed setAction:@selector(dismissSearch:)];
+    if (self.error) {
+        [item.lblMessage setStringValue:[NSString stringWithFormat:@"Search Failed! (%@)", [self.error description]]];
+    } else {
+        [item.lblMessage setStringValue:[NSString stringWithFormat:@"%d search result loaded", [_results count]]];
+    }
     return item;
 }
 

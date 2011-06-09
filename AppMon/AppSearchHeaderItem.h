@@ -12,10 +12,12 @@
 @interface AppSearchHeaderItem : JAListViewItem {
 @private
     NSTextField* _lblMessage;
+    NSButton* _btnProceed;
     
 }
 
 @property (nonatomic, retain) IBOutlet NSTextField*     lblMessage;
+@property (nonatomic, retain) IBOutlet NSButton*        btnProceed;
 
 + (AppSearchHeaderItem *) item;
 

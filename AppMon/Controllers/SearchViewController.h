@@ -25,6 +25,7 @@
     AppService* _appService;
     AppStoreApi* _api;
     NSArray* _results;
+    NSError* _error;
 }
 
 @property (nonatomic, retain) IBOutlet NSView* searchNotFoundView;
@@ -35,6 +36,7 @@
 @property (nonatomic, retain) AppService* appService;
 @property (nonatomic, retain) AppStoreApi* api;
 @property (nonatomic, retain) NSArray* results;
+@property (nonatomic, retain) NSError* error;
 
 -(void) setNotFound:(BOOL)isNotFound;
 
