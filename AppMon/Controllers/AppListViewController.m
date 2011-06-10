@@ -221,13 +221,13 @@
 }
 
 -(void) recalculateTotalUnreadCount {
-    NSUInteger unreadCount = [self.appService unreadCount];
+    NSInteger unreadCount = [self.appService unreadCount];
     NSDockTile* tile = [NSApp dockTile];
     if (unreadCount > 0) {
         if (![NSApp isActive]) {
             [NSApp requestUserAttention:NSInformationalRequest];
         }
-        [tile setBadgeLabel:[NSString stringWithFormat:@"%ld", unreadCount]];        
+        [tile setBadgeLabel:[NSString stringWithFormat:@"%qi", unreadCount]];        
     } else {
         [tile setBadgeLabel:nil];
     }

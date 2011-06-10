@@ -316,8 +316,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 }
 
 -(ASIHTTPRequest*) request:(NSString*)urlStr store:(NSString*)store {    
-    NSLog(@"GET %@ (Store: %@)", urlStr, store);
-
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlStr]];
     [request addRequestHeader:@"X-Apple-Store-Front" 
                         value:[NSString stringWithFormat:@"%@-1,2", store]];

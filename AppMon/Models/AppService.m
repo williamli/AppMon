@@ -129,10 +129,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 }
 
 -(void) fetchTimelineWithApp:(App*)app more:(BOOL)loadMore {
+    if (loadMore) {
+        NSLog(@"fetch more timeline with app: %@", app.title);
+    } else {
+        NSLog(@"fetch timeline with app: %@", app.title);        
+    }
+    
     Timeline* timeline = [self timelineWithApp:app];
 
     dispatch_async(_queue, ^{
-        NSUInteger prevTotal        = [timeline total];
+        NSInteger prevTotal         = [timeline total];
         AppStoreApi* api            = [AppStoreApi sharedAppStoreApi];
         NSArray* reviewResponses    = nil;
 
@@ -181,7 +187,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
         } // for each review responses
 
         if (!loadMore && changed && (timeline.total - prevTotal > 0)) {
-            timeline.unread += timeline.total - prevTotal;
+            timeline.unread = timeline.unread + timeline.total - prevTotal;
+            
         }
   
         if (changed) {
