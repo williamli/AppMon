@@ -24,6 +24,7 @@
 -(BOOL) shouldScrollToTopWhenUpdated;
 -(void) loadAppReviews:(App*)newApp force:(BOOL)forceLoad;
 - (JAListViewItem *) timelineHeaderItem:(Timeline*)theTimeline;
+-(AppReviewNotFoundItem*) notFoundItem;
 @end
 
 @implementation AppUpdateViewController
@@ -51,6 +52,9 @@
     
     self.timeline = nil;
     
+    [_notFoundItem release];
+    _notFoundItem = nil;
+
     [_service release];
     _service = nil;
 
@@ -84,6 +88,8 @@
 // loadAppReviews: will not load an app if it has already the current app
 // force will make the system load reviews again even it is current app
 -(void) loadAppReviews:(App*)newApp force:(BOOL)forceLoad {
+    NSLog(@"load reviews for app: %@", newApp.title);
+    
     if ([newApp isEqual:self.timeline.app] && !forceLoad) {
         return;
     }
@@ -186,8 +192,7 @@
         return [self timelineHeaderItem:self.timeline];
     } else {
         if (reviewCount == 0) {
-            AppReviewNotFoundItem* item = [AppReviewNotFoundItem item];
-            return item;
+            return [self notFoundItem];
         } else {
             Review* review = [self.timeline.reviews objectAtIndex:index-1];
             AppReviewViewCell* item = [AppReviewViewCell itemWithSuperView:listView review:review];
@@ -285,4 +290,11 @@
     }
 }
 
+-(AppReviewNotFoundItem*) notFoundItem {
+    if (!_notFoundItem) {
+        _notFoundItem = [AppReviewNotFoundItem item];
+        NSLog(@"not found item retain count: %ld", [_notFoundItem retainCount]);
+    }
+    return _notFoundItem;
+}
 @end

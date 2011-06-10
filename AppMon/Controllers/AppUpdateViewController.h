@@ -14,6 +14,7 @@
 #import "AppStoreApi.h"
 #import "App.h"
 #import "Timeline.h"
+#import "AppReviewNotFoundItem.h"
 
 #import "LoadingViewItem.h"
 
@@ -23,6 +24,7 @@
     JAListView* _listUpdates;
     AppService* _service;
     Timeline* _timeline;
+    AppReviewNotFoundItem* _notFoundItem;
 
 }
 
