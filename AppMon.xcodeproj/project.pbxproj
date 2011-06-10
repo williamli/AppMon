@@ -651,6 +651,7 @@
 		5460668F13992FEE007CD7EC /* CountryListHeaderItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CountryListHeaderItem.xib; path = Views/CountryListHeaderItem.xib; sourceTree = "<group>"; };
 		5460669113993034007CD7EC /* CountryListHeaderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListHeaderItem.h; sourceTree = "<group>"; };
 		5460669213993034007CD7EC /* CountryListHeaderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryListHeaderItem.m; sourceTree = "<group>"; };
+		5460C63613A0C86800548648 /* AppMon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AppMon.entitlements; sourceTree = "<group>"; };
 		546458B6139391C20096466C /* AppMon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		546458BA139391C20096466C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		546458BD139391C30096466C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -1188,6 +1189,7 @@
 		546458C0139391C30096466C /* AppMon */ = {
 			isa = PBXGroup;
 			children = (
+				5460C63613A0C86800548648 /* AppMon.entitlements */,
 				5426994E13948E170052EE8E /* Resources */,
 				546458C1139391C30096466C /* Supporting Files */,
 				546458EE1393932F0096466C /* External */,
@@ -1436,6 +1438,7 @@
 		546458AD139391C10096466C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Ignition Soft Limited";
 			};
 			buildConfigurationList = 546458B0139391C10096466C /* Build configuration list for PBXProject "AppMon" */;
@@ -1880,6 +1883,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
@@ -1896,6 +1900,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
@@ -1908,6 +1913,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1926,6 +1932,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
