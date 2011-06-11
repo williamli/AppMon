@@ -97,7 +97,9 @@
     // set timeline
     self.timeline = [_service timelineWithApp:newApp];
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         [self.listUpdates reloadData];
+        [pool release];
     });
 
     [self setLoading:YES];
@@ -127,7 +129,9 @@
 -(void) unloadReviews {
     self.timeline = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         [self.listUpdates reloadData];
+        [pool release];
     });
 }
 
@@ -135,6 +139,7 @@
     self.timeline.loading = newLoading;
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         if (newLoading) {
             [self.progressView startAnimation:self];
             [self.progressView setHidden:NO];
@@ -142,6 +147,7 @@
             [self.progressView stopAnimation:self];
             [self.progressView setHidden:YES];
         }
+        [pool release];
     });
 }
 
@@ -211,7 +217,9 @@
     [self setLoaded:YES];
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         [self.listUpdates reloadData];
+        [pool release];
     });
 }
 
@@ -221,7 +229,9 @@
     [self setLoaded:YES];
 
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         [self.listUpdates reloadData];
+        [pool release];
     });
 }
 
@@ -238,7 +248,9 @@
     [self setLoaded:YES];
 
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         [self.listUpdates reloadData];
+        [pool release];
     });
 }
 

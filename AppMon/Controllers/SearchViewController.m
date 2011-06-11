@@ -82,8 +82,10 @@
                                                    total:&total];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
             [self setLoading:NO];
             [self searchDidFinished:searchResult];
+            [pool release];
         });
     });
 }
