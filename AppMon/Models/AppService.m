@@ -98,7 +98,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     NSUInteger totalUnreadCount = 0;
 
     if (_timelines) {
-        for (Timeline* tl in [_timelines allValues]) {
+        for (Timeline* tl in [[[_timelines allValues] copy] autorelease]) {
             totalUnreadCount += tl.unread;
         }
     }

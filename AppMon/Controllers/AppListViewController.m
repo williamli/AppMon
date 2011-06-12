@@ -186,9 +186,7 @@
 
 -(void) storeDidChanged:(NSNotification*)notification {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         [self resetUnreadCount];
-        [pool release];
     });
 }
 
@@ -197,14 +195,12 @@
     if (!timeline) return;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         AppListViewCell* cell = [self.appViews objectForKey:timeline.app.itemId];
         if (cell) {
             [cell setUnreadCount:timeline.unread];
             [cell setApp:timeline.app timeline:timeline];
         }
         [self recalculateTotalUnreadCount];
-        [pool release];
     });
    
 }
@@ -213,13 +209,11 @@
     App* app = [notification object];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         AppListViewCell* cell = [self.appViews objectForKey:app.itemId];
         if (cell) {
             [cell setUnreadCount:0];
         }
         [self recalculateTotalUnreadCount];
-        [pool release];
     });
 }
 
@@ -240,10 +234,12 @@
         if (![NSApp isActive]) {
             [NSApp requestUserAttention:NSInformationalRequest];
         }
-        [tile setBadgeLabel:[NSString stringWithFormat:@"%qi", unreadCount]];        
-    } else {
+        [tile setBadgeLabel:[NSString stringWithFormat:@"%ld", unreadCount]];        
+    } else { 
         [tile setBadgeLabel:nil];
+
     }
+    [tile display];
 }
 
 #pragma mark JAListViewDelegate
