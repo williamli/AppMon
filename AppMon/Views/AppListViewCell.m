@@ -31,6 +31,8 @@
     
     NSArray *objects = nil;
     [nib instantiateNibWithOwner:nil topLevelObjects:&objects];
+    [objects makeObjectsPerformSelector:@selector(release)];
+
     for(id object in objects) {
         if([object isKindOfClass:self]) {
             return object;
@@ -41,7 +43,6 @@
     return nil;
 }
 
-
 - (void)dealloc
 {
     [selectedGradient release];
@@ -49,6 +50,12 @@
 
     [gradient release];
     gradient = nil;
+    
+    self.lblTitle = nil;
+    self.lblDate = nil;
+    self.lblCount = nil;
+    self.imgThumbnail = nil;
+    self.backgroundView = nil;
     
     self.app = nil;
     [super dealloc];

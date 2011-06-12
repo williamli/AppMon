@@ -11,6 +11,8 @@
 
 @implementation AppReviewNotFoundItem
 
+@synthesize lblMessage;
+
 + (AppReviewNotFoundItem *) item {
     static NSNib *nib = nil;
     if(nib == nil) {
@@ -19,6 +21,8 @@
     
     NSArray *objects = nil;
     [nib instantiateNibWithOwner:nil topLevelObjects:&objects];
+    [objects makeObjectsPerformSelector:@selector(release)];
+
     for(id object in objects) {
         if([object isKindOfClass:self]) {
             return object;
@@ -31,6 +35,7 @@
 
 - (void)dealloc
 {
+    self.lblMessage = nil;
     [super dealloc];
 }
 

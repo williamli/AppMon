@@ -21,6 +21,8 @@
     
     NSArray *objects = nil;
     [nib instantiateNibWithOwner:nil topLevelObjects:&objects];
+    [objects makeObjectsPerformSelector:@selector(release)];
+
     for(id object in objects) {
         if([object isKindOfClass:self]) {
             return object;
@@ -33,6 +35,8 @@
 
 - (void)dealloc
 {
+    self.lblMessage = nil;
+    self.btnProceed = nil;
     [super dealloc];
 }
 

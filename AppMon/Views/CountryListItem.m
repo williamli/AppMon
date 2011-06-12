@@ -24,6 +24,8 @@
     
     NSArray *objects = nil;
     [nib instantiateNibWithOwner:nil topLevelObjects:&objects];
+    [objects makeObjectsPerformSelector:@selector(release)];
+
     for(id object in objects) {
         if([object isKindOfClass:self]) {
             return object;
@@ -48,9 +50,10 @@
 }
 
 -(void) dealloc {
-    [gradient release];
-    gradient = nil;
-
+    self.btnCheckbox = nil;
+    self.imgFlag = nil;
+    self.lblCountry = nil;
+    self.gradient = nil;
     [super dealloc];
 }
 

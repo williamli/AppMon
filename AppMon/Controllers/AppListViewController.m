@@ -123,11 +123,13 @@
 
 -(void) selectApp:(App*)app {
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         JAListViewItem* item = [self.appViews objectForKey:app.itemId];
         item.selected = YES;
         self.selectedApp = app;
         [self.listApps selectView:item];
         [self.appUpdateViewController loadAppReviews:app];
+        [pool release];
     });
 }
 
@@ -135,7 +137,9 @@
 
 -(void) followedApp:(NSNotification*)notification {
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         [self.listApps reloadDataAnimated:YES];
+        [pool release];
     });
     
     App* app = [notification object];
@@ -144,6 +148,7 @@
 
 -(void) unfollowedApp:(NSNotification*)notification {
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         App* app = [notification object];
         NSLog(@"unfollowed app: %@", app);
 
@@ -175,12 +180,15 @@
 
         // refresh the app list
         [self.listApps reloadData];
+        [pool release];
     });
 }
 
 -(void) storeDidChanged:(NSNotification*)notification {
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         [self resetUnreadCount];
+        [pool release];
     });
 }
 
@@ -189,11 +197,13 @@
     if (!timeline) return;
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         AppListViewCell* cell = [self.appViews objectForKey:timeline.app.itemId];
         if (cell) {
             [cell setUnreadCount:timeline.unread];
         }
         [self recalculateTotalUnreadCount];
+        [pool release];
     });
    
 }
@@ -202,11 +212,13 @@
     App* app = [notification object];
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         AppListViewCell* cell = [self.appViews objectForKey:app.itemId];
         if (cell) {
             [cell setUnreadCount:0];
         }
         [self recalculateTotalUnreadCount];
+        [pool release];
     });
 }
 

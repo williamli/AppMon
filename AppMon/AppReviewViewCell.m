@@ -30,6 +30,8 @@
     
     NSArray *objects = nil;
     [nib instantiateNibWithOwner:nil topLevelObjects:&objects];
+    [objects makeObjectsPerformSelector:@selector(release)];
+
     for(id object in objects) {
         if([object isKindOfClass:self]) {
             return object;
@@ -43,7 +45,10 @@
 + (AppReviewViewCell *) itemWithSuperView:(JAListView*)listView review:(Review*)review {
     AppReviewViewCell* cell = [self item];
     [cell setReview:review];
-	
+    
+    NSLog(@"cell retain count: %ld", [cell retainCount]);
+
+    
     CGFloat padding         = cell.frame.size.height - cell.lblTitle.frame.size.height - cell.lblExtra.frame.size.height - cell.lblMessage.frame.size.height;
     CGRect  msgFrame        = [cell.lblMessage frame];
 
@@ -74,8 +79,12 @@
 
 - (void)dealloc
 {
-    [_review release];
-    _review = nil;
+    self.review = nil;    
+    self.lblTitle = nil;
+    self.lblMessage = nil;
+    self.lblExtra = nil;
+    self.lblStar = nil;
+    self.imgFlag = nil;
 
     [super dealloc];
 }

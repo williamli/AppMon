@@ -138,6 +138,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     Timeline* timeline = [self timelineWithApp:app];
 
     dispatch_async(_queue, ^{
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         NSInteger prevTotal         = [timeline total];
         AppStoreApi* api            = [AppStoreApi sharedAppStoreApi];
         NSArray* reviewResponses    = nil;
@@ -163,9 +164,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                 [timeline setResponse:reviewResp withStore:reviewResp.store];
 
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
                     if([self.delegate respondsToSelector:@selector(fetchTimelineFailed:timeline:error:)]) {
                         [self.delegate fetchTimelineFailed:app timeline:timeline error:reviewResp.error];
                     }
+                    [pool release];
                 });
             } else {
                 NSString* store = reviewResp.store;
@@ -195,18 +198,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
             [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationTimelineChanged
                                                                 object:timeline];
             dispatch_async(dispatch_get_main_queue(), ^{
+                NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
                 if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:loadMore:)]) {
                     [self.delegate fetchTimelineFinished:app timeline:timeline loadMore:loadMore];
                 }
+                [pool release];
             });
             
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
+                NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
                 if([self.delegate respondsToSelector:@selector(fetchTimelineNoUpdate:timeline:)]) {
                     [self.delegate fetchTimelineNoUpdate:app timeline:timeline];
                 }
+                [pool release];
             });
         }
+        [pool release];
     });
 }
 

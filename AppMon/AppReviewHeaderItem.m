@@ -29,6 +29,8 @@
     
     NSArray *objects = nil;
     [nib instantiateNibWithOwner:nil topLevelObjects:&objects];
+    [objects makeObjectsPerformSelector:@selector(release)];
+
     for(id object in objects) {
         if([object isKindOfClass:self]) {
             return object;
@@ -53,6 +55,14 @@
 {
     [gradient release];
     gradient = nil;
+    
+    self.lblTitle = nil;
+    self.lblInfo = nil;
+    self.imgThumbnail = nil;
+    self.btnFollow = nil;
+    self.btnUnfollow = nil;
+    self.btnAppStore = nil;
+    self.backgroundView = nil;
 
     [super dealloc];
 }
