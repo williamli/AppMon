@@ -145,7 +145,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     dispatch_group_t group = dispatch_group_create();
     *total = 0;
     
-    for (Store* store in stores) {
+    for (Store* store in [[stores copy] autorelease]) {
         dispatch_group_async(group, queue, ^{
             NSError* error = nil;
             NSInteger subPage = 0;
@@ -156,7 +156,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                                           error:&error];
             if (!error) {
                 dispatch_sync(search_queue, ^{
-                    for (App* app in apps) {
+                    for (App* app in [[apps copy] autorelease]) {
                         [results addObject:app];
                     }
                     *total += subPage;

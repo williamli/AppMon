@@ -11,7 +11,7 @@
 @implementation NSMutableArray (IGUtils)
 
 -(void) unique {
-    NSArray* resultsCopy = [self copy];
+    NSArray* resultsCopy = [[self copy] autorelease];
     NSInteger index = [resultsCopy count] - 1;
     for (id object in [resultsCopy reverseObjectEnumerator]) {
         if ([self indexOfObject:object inRange:NSMakeRange(0, index)] != NSNotFound) {
@@ -19,7 +19,6 @@
         }
         index--;
     }
-    [resultsCopy release];
 }
   
 @end
