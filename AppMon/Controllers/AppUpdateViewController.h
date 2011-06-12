@@ -18,7 +18,7 @@
 
 #import "LoadingViewItem.h"
 
-@interface AppUpdateViewController : NSViewController <JAListViewDataSource, JAListViewDelegate, AppServiceDelegate> {
+@interface AppUpdateViewController : NSViewController <JAListViewDataSource, JAListViewDelegate> {
 @private
     NSProgressIndicator* _progressView;
     JAListView* _listUpdates;

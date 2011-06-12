@@ -201,6 +201,7 @@
         AppListViewCell* cell = [self.appViews objectForKey:timeline.app.itemId];
         if (cell) {
             [cell setUnreadCount:timeline.unread];
+            [cell setApp:timeline.app timeline:timeline];
         }
         [self recalculateTotalUnreadCount];
         [pool release];

@@ -34,7 +34,7 @@ NSString * const AppServiceNotificationFetchFailed      = @"hk.ignition.mac.appm
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
 
-@synthesize delegate=_delegate, stores=_stores;
+@synthesize stores=_stores;
 
 - (id)init
 {
@@ -168,11 +168,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
                 [timeline setResponse:reviewResp withStore:reviewResp.store];
 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-                    if([self.delegate respondsToSelector:@selector(fetchTimelineFailed:timeline:error:)]) {
-                        [self.delegate fetchTimelineFailed:app timeline:timeline error:reviewResp.error];
-                    }
-                    [pool release];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationFetchFailed
+                                                                        object:reviewResp];
                 });
             } else {
                 NSString* store = reviewResp.store;
@@ -202,20 +199,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
             [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationTimelineChanged
                                                                 object:timeline];
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-                if([self.delegate respondsToSelector:@selector(fetchTimelineFinished:timeline:loadMore:)]) {
-                    [self.delegate fetchTimelineFinished:app timeline:timeline loadMore:loadMore];
-                }
-                [pool release];
+                [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationFetchFinished
+                                                                    object:timeline];                
             });
             
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-                if([self.delegate respondsToSelector:@selector(fetchTimelineNoUpdate:timeline:)]) {
-                    [self.delegate fetchTimelineNoUpdate:app timeline:timeline];
-                }
-                [pool release];
+                [[NSNotificationCenter defaultCenter] postNotificationName:AppServiceNotificationFetchNoUpdate
+                                                                    object:timeline];
             });
         }
         [pool release];

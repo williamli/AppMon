@@ -81,20 +81,19 @@
         [self.imgThumbnail setHidden:NO];
         [self.imgThumbnail setImageWithURL:[NSURL URLWithString:self.app.iconUrl] 
                           placeholderImage:[NSImage imageNamed:@"app_default"]];
-
-        if (theTimeline.lastReviewDate) {
-            NSDateFormatter *dateFormatter = [NSDateFormatter sharedUserDateFormatter];    
-            [self.lblDate setStringValue:[dateFormatter stringFromDate:theTimeline.lastReviewDate]];       
-        } else {
-            [self.lblDate setStringValue:@""];
-        }
-        NSLog(@"last review: %@", theTimeline.lastReviewDate);
-
         [self.lblCount sizeToFit];
     } else if (newApp == nil) {
         [_app release];
         _app = nil;
     }
+    
+    if (theTimeline.lastReviewDate) {
+        NSDateFormatter *dateFormatter = [NSDateFormatter sharedUserDateFormatter];    
+        [self.lblDate setStringValue:[dateFormatter stringFromDate:theTimeline.lastReviewDate]];       
+    } else {
+        [self.lblDate setStringValue:@""];
+    }
+    
     [self setNeedsDisplay:YES];
 }
 

@@ -34,32 +34,13 @@ extern NSString * const AppServiceNotificationFetchNoUpdate;
 extern NSString * const AppServiceNotificationFetchFinished;
 extern NSString * const AppServiceNotificationFetchFailed;
 
-@protocol AppServiceDelegate
-
-// invoke when timeline is changed
--(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline loadMore:(BOOL)isLoadMore;
-
-// invoke when timeline update has failed
--(void) fetchTimelineFailed:(App*)app timeline:(Timeline*)timeline error:(NSError*)error;
-
-// invoke when timeline has no update
--(void) fetchTimelineNoUpdate:(App*)app timeline:(Timeline*)timeline;
-
-// invoke when timeline reach end
--(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline;
-
-@end
-
 @interface AppService : NSObject {
     NSMutableArray* _apps;
     NSMutableDictionary* _timelines;
     dispatch_queue_t _queue;
-    
-    id<AppServiceDelegate, NSObject> _delegate;
     NSArray* _stores;
 }
 
-@property (nonatomic, assign) id<AppServiceDelegate, NSObject> delegate;
 @property (nonatomic, retain) NSArray*  stores;
 
 + (AppService *)sharedAppService;

@@ -25,6 +25,10 @@
 -(void) loadAppReviews:(App*)newApp force:(BOOL)forceLoad;
 - (JAListViewItem *) timelineHeaderItem:(Timeline*)theTimeline;
 -(AppReviewNotFoundItem*) notFoundItem;
+
+-(void) fetchTimelineFinished:(NSNotificationCenter*)aNotification;
+-(void) fetchTimelineNoUpdate:(NSNotificationCenter*)aNotification;
+-(void) fetchTimelineFailed:(NSNotificationCenter*)aNotification;
 @end
 
 @implementation AppUpdateViewController
@@ -50,6 +54,16 @@
                                                     name:AppServiceNotificationStoreChanged 
                                                   object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self 
+                                                    name:AppServiceNotificationFetchFailed
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self 
+                                                    name:AppServiceNotificationFetchFinished 
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self 
+                                                    name:AppServiceNotificationFetchNoUpdate
+                                                  object:nil];
+    
     self.timeline = nil;
     
     [_notFoundItem release];
@@ -65,10 +79,10 @@
     [super awakeFromNib];
 
     _service = [[AppService sharedAppService] retain];
-    _service.delegate = self;
 
     self.listUpdates.backgroundColor = [NSColor whiteColor];
     [[self.listUpdates superview] setPostsBoundsChangedNotifications:YES];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(boundsDidChange:) 
                                                  name:NSViewBoundsDidChangeNotification 
@@ -77,6 +91,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(storeDidChanged:) 
                                                  name:AppServiceNotificationStoreChanged
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fetchTimelineFinished:) 
+                                                 name:AppServiceNotificationFetchFinished 
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fetchTimelineFailed:) 
+                                                 name:AppServiceNotificationFetchFailed
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fetchTimelineNoUpdate:)
+                                                 name:AppServiceNotificationFetchNoUpdate
                                                object:nil];
 }
 
@@ -136,19 +165,14 @@
 }
 
 -(void) setLoading:(BOOL)newLoading {
-    self.timeline.loading = newLoading;
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-        if (newLoading) {
-            [self.progressView startAnimation:self];
-            [self.progressView setHidden:NO];
-        } else {
-            [self.progressView stopAnimation:self];
-            [self.progressView setHidden:YES];
-        }
-        [pool release];
-    });
+    self.timeline.loading = newLoading;    
+    if (newLoading) {
+        [self.progressView startAnimation:self];
+        [self.progressView setHidden:NO];
+    } else {
+        [self.progressView stopAnimation:self];
+        [self.progressView setHidden:YES];
+    }
 }
 
 -(void) setLoaded:(BOOL)newLoaded {
@@ -210,46 +234,34 @@
 #pragma mark - AppServiceDelegate
 
 // invoke when timeline is changed
--(void) fetchTimelineFinished:(App*)app timeline:(Timeline*)timeline loadMore:(BOOL)isLoadMore {   
-    NSLog(@"load reviews: finished with %ld reviews loaded, %ld total, last review date: %@", 
-            [timeline.reviews count], timeline.total, timeline.lastReviewDate);
-    [self setLoading:NO];
-    [self setLoaded:YES];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-        [self.listUpdates reloadData];
-        [pool release];
-    });
-}
-
--(void) fetchTimelineNoUpdate:(App*)app timeline:(Timeline*)timeline {
-    NSLog(@"load reviews: no update");
-    [self setLoading:NO];
-    [self setLoaded:YES];
+-(void) fetchTimelineFinished:(NSNotificationCenter*)aNotification{
+//(App*)app timeline:(Timeline*)timeline loadMore:(BOOL)isLoadMore {   
+//    NSLog(@"load reviews: finished with %ld reviews loaded, %ld total, last review date: %@", 
+//            [timeline.reviews count], timeline.total, timeline.lastReviewDate);
 
     dispatch_async(dispatch_get_main_queue(), ^{
         NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+        [self setLoading:NO];
+        [self setLoaded:YES];   
         [self.listUpdates reloadData];
         [pool release];
     });
 }
 
 // invoke when timeline update has failed
--(void) fetchTimelineFailed:(App*)app timeline:(Timeline*)timeline error:(NSError*)error {
-    NSLog(@"load reviews: failed with error: %@", error);
+-(void) fetchTimelineFailed:(NSNotificationCenter*)aNotification{
+//    NSLog(@"load reviews: failed with error: %@", error);
 //    [self setLoading:NO];    
 //    [self setLoaded:NO];
 }
 
--(void) fetchTimelineNoMore:(App*)app timeline:(Timeline*)timeline {
+-(void) fetchTimelineNoMore:(NSNotificationCenter*)aNotification{
     NSLog(@"load reviews: no more!");
-    [self setLoading:NO];
-    [self setLoaded:YES];
-
     dispatch_async(dispatch_get_main_queue(), ^{
         NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         [self.listUpdates reloadData];
+        [self setLoading:NO];
+        [self setLoaded:YES];
         [pool release];
     });
 }
