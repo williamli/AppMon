@@ -272,7 +272,6 @@
 		5426F259139649BB00C049CF /* zm.png in Resources */ = {isa = PBXBuildFile; fileRef = 5426F162139649BB00C049CF /* zm.png */; };
 		5426F25A139649BB00C049CF /* zw.png in Resources */ = {isa = PBXBuildFile; fileRef = 5426F163139649BB00C049CF /* zw.png */; };
 		5426F25C139649C400C049CF /* country.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5426F25B139649C400C049CF /* country.plist */; };
-		5433780813A059B600B53E4C /* NSMutableArray+IGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5433780713A059B600B53E4C /* NSMutableArray+IGUtils.m */; };
 		543ADC78139F26050060C3F8 /* NSDateFormatter+IGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 543ADC77139F26050060C3F8 /* NSDateFormatter+IGUtils.m */; };
 		5460668913991658007CD7EC /* AppMonConfigWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460668813991658007CD7EC /* AppMonConfigWindowController.m */; };
 		5460668B13991DB2007CD7EC /* CountryListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5460668A13991DB2007CD7EC /* CountryListItem.xib */; };
@@ -639,8 +638,6 @@
 		5426F162139649BB00C049CF /* zm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zm.png; sourceTree = "<group>"; };
 		5426F163139649BB00C049CF /* zw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zw.png; sourceTree = "<group>"; };
 		5426F25B139649C400C049CF /* country.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = country.plist; path = Flags/country.plist; sourceTree = SOURCE_ROOT; };
-		5433780613A059B600B53E4C /* NSMutableArray+IGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+IGUtils.h"; sourceTree = "<group>"; };
-		5433780713A059B600B53E4C /* NSMutableArray+IGUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+IGUtils.m"; sourceTree = "<group>"; };
 		543ADC76139F26050060C3F8 /* NSDateFormatter+IGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+IGUtils.h"; sourceTree = "<group>"; };
 		543ADC77139F26050060C3F8 /* NSDateFormatter+IGUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+IGUtils.m"; sourceTree = "<group>"; };
 		5460668713991658007CD7EC /* AppMonConfigWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMonConfigWindowController.h; path = Controllers/AppMonConfigWindowController.h; sourceTree = "<group>"; };
@@ -1350,8 +1347,6 @@
 				5495E480139E851E000A6A26 /* NSString+Parser.m */,
 				543ADC76139F26050060C3F8 /* NSDateFormatter+IGUtils.h */,
 				543ADC77139F26050060C3F8 /* NSDateFormatter+IGUtils.m */,
-				5433780613A059B600B53E4C /* NSMutableArray+IGUtils.h */,
-				5433780713A059B600B53E4C /* NSMutableArray+IGUtils.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1814,7 +1809,6 @@
 				543ADC78139F26050060C3F8 /* NSDateFormatter+IGUtils.m in Sources */,
 				54F3ABB3139F890C003734BC /* AppScroller.m in Sources */,
 				54CE3088139FA67400A59812 /* AppScrollView.m in Sources */,
-				5433780813A059B600B53E4C /* NSMutableArray+IGUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

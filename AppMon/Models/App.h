@@ -11,7 +11,7 @@
 
 @interface App : NSObject <NSCoding> {
 @private
-    NSString* _itemId;
+    NSNumber* _itemId;
     NSString* _title;
     NSString* _url;
     NSString* _iconUrl;
@@ -20,7 +20,7 @@
     NSInteger _unread;
 }
 
-@property (nonatomic, retain) NSString* itemId;
+@property (nonatomic, retain) NSNumber* itemId;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* url;
 @property (nonatomic, retain) NSString* iconUrl;

@@ -16,7 +16,6 @@
 #import "AppStoreApi.h"
 #import "Review.h"
 #import "Store.h"
-#import "NSMutableArray+IGUtils.h"
 
 #define kStoreFrontRegexp @"storeFrontId=([0-9]+)"
 #define kReviewCountRegexp @"Reviews \\(([0-9]+)\\)"
@@ -157,7 +156,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
             if (!error) {
                 dispatch_sync(search_queue, ^{
                     for (App* app in [[apps copy] autorelease]) {
-                        [results addObject:app];
+                        if (![[[results copy] autorelease] containsObject:app]) {
+                            [results addObject:app];           
+                        }
                     }
                     *total += subPage;
                 });
@@ -167,8 +168,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
             }
         });
     }
-
-    [results unique];
 
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     dispatch_release(group);

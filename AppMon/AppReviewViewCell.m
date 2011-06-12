@@ -45,10 +45,7 @@
 + (AppReviewViewCell *) itemWithSuperView:(JAListView*)listView review:(Review*)review {
     AppReviewViewCell* cell = [self item];
     [cell setReview:review];
-    
-    NSLog(@"cell retain count: %ld", [cell retainCount]);
 
-    
     CGFloat padding         = cell.frame.size.height - cell.lblTitle.frame.size.height - cell.lblExtra.frame.size.height - cell.lblMessage.frame.size.height;
     CGRect  msgFrame        = [cell.lblMessage frame];
 
