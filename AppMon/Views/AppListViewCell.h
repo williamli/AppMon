@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "JAListViewItem.h"
 #import "App.h"
+#import "Timeline.h"
 
 @interface AppListViewCell : JAListViewItem {
 @private
@@ -34,5 +35,6 @@
 +(AppListViewCell *) appListViewCell;
 
 -(void) setUnreadCount:(NSInteger) unread;
+-(void) setApp:(App*)newApp timeline:(Timeline*)theTimeline;
 
 @end

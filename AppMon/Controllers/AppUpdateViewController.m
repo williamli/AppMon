@@ -271,7 +271,7 @@
 }
 
 -(void) openAppStoreUrl:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.timeline.app.url]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/us/app/id%ld?mt=8", [self.timeline.app.itemId intValue]]]];
 }
 
 #pragma mark - Private

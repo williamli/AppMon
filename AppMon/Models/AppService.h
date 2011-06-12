@@ -29,6 +29,11 @@ extern NSString * const AppServiceNotificationStoreChanged;
 // user read the specific app
 extern NSString * const AppServiceNotificationReadApp;
 
+
+extern NSString * const AppServiceNotificationFetchNoUpdate;
+extern NSString * const AppServiceNotificationFetchFinished;
+extern NSString * const AppServiceNotificationFetchFailed;
+
 @protocol AppServiceDelegate
 
 // invoke when timeline is changed

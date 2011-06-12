@@ -7,11 +7,11 @@
 //
 
 #import "App.h"
-
+#import "RegexKitLite.h"
 
 @implementation App
 
-@synthesize itemId=_itemId, title=_title, url=_url, iconUrl=_iconUrl, price=_price, releaseDate=_releaseDate, unread=_unread;
+@synthesize itemId=_itemId, title=_title, iconUrl=_iconUrl, unread=_unread, universal=_universal;
 
 - (id)init
 {
@@ -28,8 +28,6 @@
     if (self) {        
         self.itemId = [plist objectForKey:@"item-id"];
         self.title = [plist objectForKey:@"title"];
-        self.url = [plist objectForKey:@"url"];
-        self.releaseDate = [plist objectForKey:@"release-date"];
         
         NSArray* artworkUrls = [plist objectForKey:@"artwork-urls"];
         for (NSDictionary* imageDict in artworkUrls) {
@@ -46,10 +44,31 @@
                 break;
             }
         }
-        
-        NSDictionary* offers = [plist objectForKey:@"store-offers"];
-        NSDictionary* stdq = [offers objectForKey:@"STDQ"];
-        self.price = [stdq objectForKey:@"price-display"];
+    }
+    return self;
+}
+
+-(id) initWithDiv:(NSDictionary*)div {
+    self = [super init];
+    if (self) {        
+        for (NSDictionary* attr in [div objectForKey:@"nodeAttributeArray"]) {
+            NSString* attrName = [attr objectForKey:@"attributeName"];
+            id object = [attr objectForKey:@"nodeContent"];
+            
+            if ([attrName isEqualToString:@"item-id"]) {
+                self.itemId = object;
+            } else if ([attrName isEqualToString:@"item-title"]) {
+                self.title = object;
+            } else if ([attrName isEqualToString:@"artist-name"]) {
+            } else if ([attrName isEqualToString:@"artwork-url"]) {
+                self.iconUrl = object;
+            } else if ([attrName isEqualToString:@"icon-is-prerendered"]) {
+            } else if ([attrName isEqualToString:@"class"]) {
+                if ([(NSString*)object isMatchedByRegex:@"fat-binary"]){
+                    self.universal = YES;
+                }
+            }
+        }
     }
     return self;
 }
@@ -57,21 +76,16 @@
 - (void)encodeWithCoder:(NSCoder *)coder {    
     [coder encodeObject:_itemId forKey:@"AppItemId"];
     [coder encodeObject:_title forKey:@"AppTitle"];
-    [coder encodeObject:_url forKey:@"AppUrl"];
     [coder encodeObject:_iconUrl forKey:@"AppIconUrl"];
-    [coder encodeObject:_price forKey:@"AppPrice"];
-    [coder encodeObject:_releaseDate forKey:@"AppReleaseDate"];
     [coder encodeInteger:_unread forKey:@"AppUnreadCount"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super init];
+    
     _itemId         = [[coder decodeObjectForKey:@"AppItemId"] retain];
     _title          = [[coder decodeObjectForKey:@"AppTitle"] retain];
-    _url            = [[coder decodeObjectForKey:@"AppUrl"] retain];
     _iconUrl        = [[coder decodeObjectForKey:@"AppIconUrl"] retain];
-    _price          = [[coder decodeObjectForKey:@"AppPrice"] retain];
-    _releaseDate    = [[coder decodeObjectForKey:@"AppReleaseDate"] retain];
     _unread         = [coder decodeIntegerForKey:@"AppUnreadCount"];
     return self;
 }
@@ -80,10 +94,7 @@
 {
     self.itemId = nil;
     self.title = nil;
-    self.url = nil;
     self.iconUrl = nil;
-    self.price = nil;
-    self.releaseDate = nil;
     [super dealloc];
 }
 

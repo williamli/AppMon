@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "NSDateFormatter+IGUtils.h"
+#import "Timeline.h"
 
 @interface AppListViewCell (Private)
 - (void)drawBackground;
@@ -71,7 +72,7 @@
 
 }
 
--(void) setApp:(App*)newApp {
+-(void) setApp:(App*)newApp timeline:(Timeline*)theTimeline {
     if (![_app isEqual:newApp] && newApp != nil) {
         [_app release];
         _app = [newApp retain];
@@ -81,13 +82,18 @@
         [self.imgThumbnail setImageWithURL:[NSURL URLWithString:self.app.iconUrl] 
                           placeholderImage:[NSImage imageNamed:@"app_default"]];
 
-        NSDateFormatter *dateFormatter = [NSDateFormatter sharedUserDateFormatter];    
-        [self.lblDate setStringValue:[dateFormatter stringFromDate:self.app.releaseDate]];
-        
+        if (theTimeline.lastReviewDate) {
+            NSDateFormatter *dateFormatter = [NSDateFormatter sharedUserDateFormatter];    
+            [self.lblDate setStringValue:[dateFormatter stringFromDate:theTimeline.lastReviewDate]];       
+        } else {
+            [self.lblDate setStringValue:@""];
+        }
+        NSLog(@"last review: %@", theTimeline.lastReviewDate);
+
         [self.lblCount sizeToFit];
     } else if (newApp == nil) {
         [_app release];
-        _app = [newApp retain];
+        _app = nil;
     }
     [self setNeedsDisplay:YES];
 }

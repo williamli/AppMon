@@ -27,7 +27,8 @@ NSString * const kAppStoreReviewUrl     = @"http://ax.itunes.apple.com/WebObject
 
 
 @interface AppStoreApi (Private)
--(ASIHTTPRequest*) request:(NSString*)urlStr store:(NSString*)store ;
+-(ASIHTTPRequest*) request:(NSString*)urlStr store:(NSString*)store;
+-(ASIFormDataRequest*) iTunesRequest:(NSString*)urlStr store:(NSString*)store;
 -(ASIFormDataRequest*) postRequest:(NSString*)urlStr store:(NSString*)store;
 -(NSArray*) storesFromNodes:(NSArray*)nodes;
 -(NSArray*) reviewsByStores:(NSArray*)stores url:(NSString*)url;
@@ -90,7 +91,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 
 -(NSArray*) searchByStore:(NSString*)store query:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error {
     NSMutableArray* searchResult = [NSMutableArray array];
-    ASIFormDataRequest* req = [self postRequest:kAppStoreSearchUrl store:store];
+    ASIFormDataRequest* req = [self iTunesRequest:kAppStoreSearchUrl store:store];
     [req setRequestMethod:@"POST"];
     [req setPostValue:[NSString stringWithFormat:@"%ld", page*kSearchResultPerPage] forKey:@"startIndex"];
     [req setPostValue:[NSString stringWithFormat:@"%ld", page*kSearchResultPerPage] forKey:@"displayIndex"];
@@ -98,31 +99,28 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     [req setPostValue:query forKey:@"term"];
     [req startSynchronous];
     
-    if ([req responseStatusCode] == 200) {
-        NSPropertyListFormat format;
-        NSString *errorDesc;
+    if ([req responseStatusCode] == 200) {        
+        NSArray* apps = PerformHTMLXPathQuery([req responseData], @"//div[@class='buy'] | //div[@class='buy fat-binary']");
+        NSArray* counts = PerformHTMLXPathQuery([req responseData], @"//div[@class='count']");
         
-        NSDictionary* dictionary = [NSPropertyListSerialization propertyListFromData:[req responseData]
-                                                                    mutabilityOption:NSPropertyListImmutable
-                                                                              format:&format
-                                                                    errorDescription:&errorDesc];
-        
-        if (errorDesc) {
-            if (error) {
-                *error = [NSError errorWithDomain:@"PlistSerializationError" 
-                                             code:1 
-                                         userInfo:[NSDictionary dictionaryWithObject:errorDesc 
-                                                                              forKey:@"Description"]];
-            }
+        if (!apps) {
+            *error = [NSError errorWithDomain:@"AppStoreSearchError" 
+                                         code:1 
+                                     userInfo:nil];
+
         } else {
-            NSArray* items = [dictionary objectForKey:@"items"];
-            for (NSDictionary* itemDict in items) {
-                if ([[itemDict objectForKey:@"type"] isEqualToString:@"link"]) {
-                    App* app = [[[App alloc] initWithPlist:itemDict] autorelease];
-                    [searchResult addObject:app];
-                    
-                } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {
-                    *total = [[itemDict objectForKey:@"total-items"] intValue];
+            for (NSDictionary* itemDict in apps) {
+                App* app = [[[App alloc] initWithDiv:itemDict] autorelease];
+                [searchResult addObject:app];                
+            }
+
+            for (NSDictionary* itemDict in counts) {
+                NSString* counter = [itemDict objectForKey:@"nodeContent"];
+                if (counter) {
+                    NSArray* match = [counter captureComponentsMatchedByRegex:@" of ([0-9]+)"];             
+                    if (match) {
+                        *total = [[match objectAtIndex:1] intValue];
+                    }
                 }
             }
         }
@@ -319,6 +317,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     [request addRequestHeader:@"X-Apple-Store-Front" 
                         value:[NSString stringWithFormat:@"%@-1,2", store]];
     [request setUserAgent:@"iTunes-iPhone/3.0"];
+    return request;
+}
+
+
+-(ASIFormDataRequest*) iTunesRequest:(NSString*)urlStr store:(NSString*)store {
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:urlStr]];
+    [request addRequestHeader:@"X-Apple-Store-Front" 
+                        value:[NSString stringWithFormat:@"%@-1,9", store]];
+    [request setUserAgent:@"iTunes-iPad/4.3.3"];
     return request;
 }
 

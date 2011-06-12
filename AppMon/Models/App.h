@@ -11,24 +11,21 @@
 
 @interface App : NSObject <NSCoding> {
 @private
-    NSNumber* _itemId;
+    NSString* _itemId;
     NSString* _title;
-    NSString* _url;
     NSString* _iconUrl;
-    NSString* _price;
-    NSDate* _releaseDate;
     NSInteger _unread;
+    BOOL _universal;
 }
 
-@property (nonatomic, retain) NSNumber* itemId;
+@property (nonatomic, retain) NSString* itemId;
 @property (nonatomic, retain) NSString* title;
-@property (nonatomic, retain) NSString* url;
 @property (nonatomic, retain) NSString* iconUrl;
-@property (nonatomic, retain) NSString* price;
-@property (nonatomic, retain) NSDate* releaseDate;
 @property (nonatomic, assign) NSInteger unread;
+@property (nonatomic, assign) BOOL universal;
 
 -(id) initWithPlist:(NSDictionary*)plist;
+-(id) initWithDiv:(NSDictionary*)plist;
 -(BOOL) isEqual:(id)object;
 
 @end

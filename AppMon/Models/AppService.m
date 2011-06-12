@@ -22,6 +22,10 @@ NSString * const AppServiceNotificationStoreChanged     = @"hk.ignition.mac.appm
 NSString * const AppServiceNotificationFollowedApp      = @"hk.ignition.mac.appmon.FollowedApp";
 NSString * const AppServiceNotificationUnfollowedApp    = @"hk.ignition.mac.appmon.UnfollowedApp";
 
+NSString * const AppServiceNotificationFetchNoUpdate    = @"hk.ignition.mac.appmon.fetchnoupdate";
+NSString * const AppServiceNotificationFetchFinished    = @"hk.ignition.mac.appmon.fetchfinished";
+NSString * const AppServiceNotificationFetchFailed      = @"hk.ignition.mac.appmon.fetchfailed";
+
 @interface AppService (Private)
 -(NSString*) saveFilePath;
 @end

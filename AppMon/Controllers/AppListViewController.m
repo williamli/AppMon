@@ -275,7 +275,7 @@
     App* app = [[self.appService followedApps] objectAtIndex:index];
     Timeline* timeline = [self.appService timelineWithApp:app];
     AppListViewCell* cell = [AppListViewCell appListViewCell];
-    [cell setApp:app];
+    [cell setApp:app timeline:timeline];
     [cell setUnreadCount:timeline.unread];
     [self.appViews setValue:cell forKey:app.itemId];
     return cell;
