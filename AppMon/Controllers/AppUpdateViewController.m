@@ -104,7 +104,7 @@
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(fetchTimelineNoUpdate:)
+                                             selector:@selector(fetchTimelineFinished:)
                                                  name:AppServiceNotificationFetchNoUpdate
                                                object:nil];
 }
@@ -138,11 +138,6 @@
 -(void) loadMoreAppReviews {
     if (self.timeline == nil) {
         NSLog(@"no apps selected");
-        return;
-    }
-    
-    if (self.timeline.loading) {
-        NSLog(@"currently loading, ignore load more");
         return;
     }
     
@@ -317,7 +312,6 @@
 -(AppReviewNotFoundItem*) notFoundItem {
     if (!_notFoundItem) {
         _notFoundItem = [AppReviewNotFoundItem item];
-        NSLog(@"not found item retain count: %ld", [_notFoundItem retainCount]);
     }
     return _notFoundItem;
 }
