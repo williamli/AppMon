@@ -300,7 +300,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
     
-    for (Store* store in stores) {
+    for (Store* store in [[stores copy] autorelease]) {
         dispatch_group_async(group, queue, ^{
             ReviewResponse* response = [self reviewsByStore:store.storefront url:url];
             dispatch_sync(review_queue, ^{
