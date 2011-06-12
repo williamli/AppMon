@@ -12,8 +12,10 @@
 
 @interface AppReviewNotFoundItem : JAListViewItem {
 @private
-    
+    NSTextField* lblMessage;
 }
+
+@property (nonatomic, retain) IBOutlet NSTextField* lblMessage;
 
 +(AppReviewNotFoundItem *) item;
 
