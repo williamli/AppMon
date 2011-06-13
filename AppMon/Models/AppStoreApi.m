@@ -317,6 +317,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     [request addRequestHeader:@"X-Apple-Store-Front" 
                         value:[NSString stringWithFormat:@"%@-1,2", store]];
     [request setUserAgent:@"iTunes-iPhone/3.0"];
+    [request setTimeOutSeconds:10];
+    [request setNumberOfTimesToRetryOnTimeout:1];
+    [request setPersistentConnectionTimeoutSeconds:120];
     return request;
 }
 
@@ -326,6 +329,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     [request addRequestHeader:@"X-Apple-Store-Front" 
                         value:[NSString stringWithFormat:@"%@-1,9", store]];
     [request setUserAgent:@"iTunes-iPad/4.3.3"];
+    [request setTimeOutSeconds:10];
+    [request setNumberOfTimesToRetryOnTimeout:1];
+    [request setPersistentConnectionTimeoutSeconds:120];
     return request;
 }
 
@@ -334,6 +340,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     [request addRequestHeader:@"X-Apple-Store-Front" 
                          value:[NSString stringWithFormat:@"%@-1,2", store]];
     [request setUserAgent:@"iTunes-iPhone/3.0"];
+    [request setTimeOutSeconds:10];
+    [request setNumberOfTimesToRetryOnTimeout:1];
+    [request setPersistentConnectionTimeoutSeconds:120];
     return request;
 }
 
