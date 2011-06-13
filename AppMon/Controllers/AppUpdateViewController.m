@@ -311,7 +311,7 @@
 
 -(AppReviewNotFoundItem*) notFoundItem {
     if (!_notFoundItem) {
-        _notFoundItem = [AppReviewNotFoundItem item];
+        _notFoundItem = [[AppReviewNotFoundItem item] retain];
     }
     return _notFoundItem;
 }
