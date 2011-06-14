@@ -291,7 +291,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     
     NSFileManager* manager = [NSFileManager defaultManager];
     if (![manager fileExistsAtPath:path]) {
-        NSError* error;
+        NSError* error = nil;
         [manager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
         if (error) {
             NSLog(@"ERROR: Cannot create config file path: %@, error=%@", path, error);
