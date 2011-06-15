@@ -12,6 +12,7 @@
 
 #import "ASIHTTPRequest.h"
 #import "ASIDownloadCache.h"
+#import "SDImageCache.h"
 
 @implementation AppMonAppDelegate
 
@@ -19,8 +20,14 @@
 @synthesize appStoreApi;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
-    
+    // setup cache
+    ASIDownloadCache* cache = [ASIDownloadCache sharedCache];
+    SDImageCache* imageCache = [SDImageCache sharedImageCache];
+    NSString* cachePath = [AppMonAppDelegate cachePath];
+    [cache setStoragePath:cachePath];
+    [imageCache setDiskCachePath:cachePath];
+    [ASIHTTPRequest setDefaultCache:cache];
+
     window.titleBarHeight = 45.0;
     [window.titleBarView addSubview:mainController.titleBar];
     
@@ -56,4 +63,23 @@
     return (AppMonAppDelegate*) [NSApplication sharedApplication].delegate;
 }
 
++(NSString*) cachePath {
+    NSBundle* bundle = [NSBundle mainBundle];
+    NSDictionary* info = [bundle infoDictionary];
+    NSString* bundleName = [info objectForKey:@"CFBundleName"];
+    
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, true);
+    NSString* path = [[paths objectAtIndex:0] stringByAppendingPathComponent:bundleName];
+    
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:path]) {
+        NSError* error = nil;
+        [manager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+        if (error) {
+            NSLog(@"ERROR: Cannot create config file path: %@, error=%@", path, error);
+            return nil;
+        }
+    }
+    return path;   
+}
 @end

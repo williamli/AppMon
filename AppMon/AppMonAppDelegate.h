@@ -30,6 +30,7 @@
 @property (retain) IBOutlet AppMonConfigWindowController* configController;
 
 +(AppMonAppDelegate*) instance;
++(NSString*) cachePath;
 
 -(IBAction) showConfigurationScreen:(id)sender;
 
