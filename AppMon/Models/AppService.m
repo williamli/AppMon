@@ -136,7 +136,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
     if (loadMore) {
         NSLog(@"fetch more timeline with app: %@", app.title);
     } else {
-        NSLog(@"fetch timeline with app: %@", app.title);        
+        NSLog(@"fetch timeline with app: %@ (%ld)", app.title, app.total);        
     }
     
     Timeline* timeline = [self timelineWithApp:app];
