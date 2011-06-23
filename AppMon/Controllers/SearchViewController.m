@@ -13,6 +13,8 @@
 #import "AppService.h"
 #import "AppMonConfig.h"
 
+#import "RegexKitLite.h"
+
 @interface SearchViewController (Private)
 -(void) searchDidFinished:(NSArray*)results;
 -(void) searchDidFailed:(NSError*)error;
@@ -71,23 +73,45 @@
 
 -(void) search:(NSString*)query {
     NSLog(@"search: %@", query);
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        NSInteger total;
+    
+    if ([query isMatchedByRegex:@"^[0-9]+$"]) {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{            
+            NSArray* stores = [[AppMonConfig sharedAppMonConfig] enabledStores];
+            App* searchResult = [self.api fetchAppByStores:stores appId:query];
 
-        NSArray* stores = [[AppMonConfig sharedAppMonConfig] enabledStores];
-        NSArray* searchResult = [self.api searchByStores:stores
-                                                   query:query 
-                                                    page:0 
-                                                   total:&total];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-            [self setLoading:NO];
-            [self searchDidFinished:searchResult];
-            [pool release];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+                [self setLoading:NO];
+                if (searchResult) {
+                    [self searchDidFinished:[NSArray arrayWithObject:searchResult]];                    
+                } else {
+                    [self searchDidFinished:[NSArray array]];
+                }
+                [pool release];
+            });
         });
-    });
+    } else {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            NSInteger total;
+            
+            NSArray* stores = [[AppMonConfig sharedAppMonConfig] enabledStores];
+            NSArray* searchResult = [self.api searchByStores:stores
+                                                       query:query 
+                                                        page:0 
+                                                       total:&total];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+                [self setLoading:NO];
+                [self searchDidFinished:searchResult];
+                [pool release];
+            });
+        });
+    }
+    
+
 }
 
 #pragma mark - Private

@@ -39,6 +39,13 @@ extern NSString * const kAppStoreReviewUrl;
 // Return: App, or nil if error
 -(App*) fetchAppByStore:(NSString*)store appId:(NSString*)appid error:(NSError**)error;
 
+// Find an App from multiple store and app id
+// Parameters: 
+//  store   - app store front id
+//  appid   - App Id
+// Return: App, or nil if error
+-(App*) fetchAppByStores:(NSArray*)stores appId:(NSString*)appid;
+
 // Search a specific query on App Store
 // Parameters: 
 //  store   - app store front id

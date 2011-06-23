@@ -89,6 +89,42 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     return app;
 } 
 
+-(App*) fetchAppByStores:(NSArray*)stores appId:(NSString*)appid {
+    NSMutableArray* results = [NSMutableArray array];
+    dispatch_queue_t search_queue = dispatch_queue_create("search.mutex", 0);
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+    
+    for (Store* store in [[stores copy] autorelease]) {
+        dispatch_group_async(group, queue, ^{
+            NSError* error = nil;
+            App* app = [self fetchAppByStore:[store storefront] 
+                                        appId:appid 
+                                        error:&error];
+            if (!error) {
+                dispatch_sync(search_queue, ^{
+                    if (![[[results copy] autorelease] containsObject:app]) {
+                        [results addObject:app];           
+                    }
+                });
+            } else {
+                NSLog(@"ERROR: search store failed: %@ %@", store, error);
+                
+            }
+        });
+    }
+    
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    dispatch_release(group);
+    dispatch_release(search_queue);
+    
+    if ([results count] > 0) {
+        return [results objectAtIndex:0];
+    } else {
+        return nil;
+    }
+}
+
 -(NSArray*) searchByStore:(NSString*)store query:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error {
     NSMutableArray* searchResult = [NSMutableArray array];
     ASIFormDataRequest* req = [self iTunesRequest:kAppStoreSearchUrl store:store];
