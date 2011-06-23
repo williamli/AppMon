@@ -14,6 +14,8 @@
 #import "ASIDownloadCache.h"
 #import "SDImageCache.h"
 
+NSString * const AppMonSearchEvent  = @"hk.ignition.mac.appmon.SearchEvent";
+
 @implementation AppMonAppDelegate
 
 @synthesize window, mainController, configController;
@@ -27,6 +29,9 @@
     [cache setStoragePath:cachePath];
     [imageCache setDiskCachePath:cachePath];
     [ASIHTTPRequest setDefaultCache:cache];
+    
+    // setup hotkey
+    [self setupHotkey];
 
     window.titleBarHeight = 45.0;
     [window.titleBarView addSubview:mainController.titleBar];
@@ -57,6 +62,24 @@
 -(IBAction) showConfigurationScreen:(id)sender {
     NSLog(@"show config: %@ %@", self.configController, self.configController.window);
     [self.configController.window makeKeyAndOrderFront:self];
+}
+
+-(void) setupHotkey {
+    [NSEvent addLocalMonitorForEventsMatchingMask: NSKeyDownMask handler:^(NSEvent *event) {
+        NSEvent *result = event;
+        
+        NSUInteger appleDown = ([event modifierFlags] & NSDeviceIndependentModifierFlagsMask) == NSCommandKeyMask;
+
+        // Apple + I
+        if (appleDown && [result keyCode] == 0x3) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppMonSearchEvent
+                                                                object:nil];
+        } else if (appleDown) {
+            NSLog(@"keycode: cmd+%d", [result keyCode]);
+        }
+
+        return result;
+    }];
 }
 
 +(AppMonAppDelegate*) instance {

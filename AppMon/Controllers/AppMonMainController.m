@@ -39,6 +39,13 @@
 
 -(void) awakeFromNib {
     [super awakeFromNib];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(selectSearch:) 
+                                                 name:AppMonSearchEvent
+                                               object:nil];
+    
+    
 }
 
 
@@ -55,6 +62,10 @@
         [self setSearchModeEnabled:YES];
         [self.searchController search:query];
     }
+}
+
+-(IBAction) selectSearch:(id)sender {
+    [_searchField becomeFirstResponder];
 }
 
 -(void) setSearchModeEnabled:(BOOL)searchViewEnabled {

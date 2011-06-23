@@ -14,6 +14,8 @@
 #import "AppService.h"
 #import "AppStoreApi.h"
 
+extern NSString * const AppMonSearchEvent;
+
 @interface AppMonAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate> {
 @private
     INAppStoreWindow *window;
@@ -33,5 +35,6 @@
 +(NSString*) cachePath;
 
 -(IBAction) showConfigurationScreen:(id)sender;
+-(void) setupHotkey;
 
 @end
