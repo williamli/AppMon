@@ -87,14 +87,19 @@
 }
 
 -(NSUInteger) total {
-    NSUInteger theTotal = 0;
-    if (self.reviewResponses) {
+    if (self.reviewResponses && [self.reviewResponses count] > 0) {
+        NSUInteger theTotal = 0;
         for (ReviewResponse* rev in [self.reviewResponses allValues]) {
             theTotal += rev.total;
         }
+        self.app.total = theTotal;
+
+        return theTotal;
+    } else {
+        return self.app.total;
     }
 
-    return theTotal;
+
 }
 
 -(ReviewResponse*) responseWithStore:(NSString*)theStore {

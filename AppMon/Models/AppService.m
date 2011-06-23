@@ -269,7 +269,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppService);
             App* app2 = id2;            
             return [app1.title compare:app2.title];
         }];
-        
+        NSLog(@" loaded: %@", _apps);
         return;
     }
 

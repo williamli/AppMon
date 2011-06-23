@@ -11,7 +11,7 @@
 
 @implementation App
 
-@synthesize itemId=_itemId, title=_title, iconUrl=_iconUrl, unread=_unread, universal=_universal;
+@synthesize itemId=_itemId, title=_title, iconUrl=_iconUrl, unread=_unread, total=_total, universal=_universal;
 
 - (id)init
 {
@@ -78,6 +78,7 @@
     [coder encodeObject:_title forKey:@"AppTitle"];
     [coder encodeObject:_iconUrl forKey:@"AppIconUrl"];
     [coder encodeInteger:_unread forKey:@"AppUnreadCount"];
+    [coder encodeInteger:_total forKey:@"AppTotalCount"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -87,6 +88,7 @@
     _title          = [[coder decodeObjectForKey:@"AppTitle"] retain];
     _iconUrl        = [[coder decodeObjectForKey:@"AppIconUrl"] retain];
     _unread         = [coder decodeIntegerForKey:@"AppUnreadCount"];
+    _total          = [coder decodeIntegerForKey:@"AppTotalCount"];
     return self;
 }
 
@@ -99,7 +101,7 @@
 }
 
 -(NSString*) description {
-    return [NSString stringWithFormat:@"<App:%@, title=%@>", self.itemId, self.title];
+    return [NSString stringWithFormat:@"<App:%@, title=%@, total=%d>", self.itemId, self.title, self.total];
 }
 
 -(BOOL) isEqual:(id)object {

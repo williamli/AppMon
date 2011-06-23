@@ -15,6 +15,7 @@
     NSString* _title;
     NSString* _iconUrl;
     NSInteger _unread;
+    NSInteger _total;
     BOOL _universal;
 }
 
@@ -22,6 +23,8 @@
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* iconUrl;
 @property (nonatomic, assign) NSInteger unread;
+@property (nonatomic, assign) NSInteger total;
+
 @property (nonatomic, assign) BOOL universal;
 
 -(id) initWithPlist:(NSDictionary*)plist;
