@@ -197,7 +197,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
     _storeFronts = [storeFronts retain];
     
     // build top country list
-    NSArray* topCountryNames = [NSArray arrayWithObjects:@"United States", @"United Kingdom", @"Canada", @"Deutschland",
+    NSArray* topCountryNames = [NSArray arrayWithObjects:@"United States", @"UK", @"Canada", @"Deutschland",
                          @"España", @"France", @"Australia", @"日本", nil];
     for (NSString* countryName in topCountryNames) {
         Store* store = [allCountries objectForKey:countryName];
@@ -221,7 +221,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppMonConfig);
         }
         
         // Add hongkong as default
-        if ([[store name] isEqualToString:@"Hong Kong"]) {
+        if ([[store name] isEqualToString:@"Hong Kong/香港"]) {
             NSString* key = [store key];
             if ([defaults objectForKey:key] == nil) {
                 [defaults setBool:YES forKey:key];

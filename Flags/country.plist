@@ -2,6 +2,34 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Algeria</key>
+	<dict>
+		<key>id</key>
+		<string>143563</string>
+		<key>image</key>
+		<string>dz</string>
+	</dict>
+	<key>Angola</key>
+	<dict>
+		<key>id</key>
+		<string>143564</string>
+		<key>image</key>
+		<string>ao</string>
+	</dict>
+	<key>Anguilla</key>
+	<dict>
+		<key>id</key>
+		<string>143538</string>
+		<key>image</key>
+		<string>ai</string>
+	</dict>
+	<key>Antigua and Barbuda</key>
+	<dict>
+		<key>id</key>
+		<string>143540</string>
+		<key>image</key>
+		<string>ag</string>
+	</dict>
 	<key>Argentina</key>
 	<dict>
 		<key>id</key>
@@ -23,12 +51,68 @@
 		<key>image</key>
 		<string>au</string>
 	</dict>
+	<key>Azerbaijan</key>
+	<dict>
+		<key>id</key>
+		<string>143568</string>
+		<key>image</key>
+		<string>az</string>
+	</dict>
+	<key>Bahamas</key>
+	<dict>
+		<key>id</key>
+		<string>143539</string>
+		<key>image</key>
+		<string>bs</string>
+	</dict>
+	<key>Bahrain</key>
+	<dict>
+		<key>id</key>
+		<string>143559</string>
+		<key>image</key>
+		<string>bh</string>
+	</dict>
+	<key>Barbados</key>
+	<dict>
+		<key>id</key>
+		<string>143541</string>
+		<key>image</key>
+		<string>bb</string>
+	</dict>
+	<key>Belarus</key>
+	<dict>
+		<key>id</key>
+		<string>143565</string>
+		<key>image</key>
+		<string>by</string>
+	</dict>
 	<key>België/Belgique</key>
 	<dict>
 		<key>id</key>
 		<string>143446</string>
 		<key>image</key>
 		<string>be</string>
+	</dict>
+	<key>Belize</key>
+	<dict>
+		<key>id</key>
+		<string>143555</string>
+		<key>image</key>
+		<string>bz</string>
+	</dict>
+	<key>Bermuda</key>
+	<dict>
+		<key>id</key>
+		<string>143542</string>
+		<key>image</key>
+		<string>bm</string>
+	</dict>
+	<key>Bolivia</key>
+	<dict>
+		<key>id</key>
+		<string>143556</string>
+		<key>image</key>
+		<string>bo</string>
 	</dict>
 	<key>Botswana</key>
 	<dict>
@@ -44,12 +128,19 @@
 		<key>image</key>
 		<string>br</string>
 	</dict>
-	<key>Bulgaria</key>
+	<key>British Virgin Islands</key>
 	<dict>
 		<key>id</key>
-		<string>143526</string>
+		<string>143543</string>
 		<key>image</key>
-		<string>bg</string>
+		<string>vg</string>
+	</dict>
+	<key>Brunei Darussalam</key>
+	<dict>
+		<key>id</key>
+		<string>143560</string>
+		<key>image</key>
+		<string>bn</string>
 	</dict>
 	<key>Canada</key>
 	<dict>
@@ -58,19 +149,19 @@
 		<key>image</key>
 		<string>ca</string>
 	</dict>
+	<key>Cayman Islands</key>
+	<dict>
+		<key>id</key>
+		<string>143544</string>
+		<key>image</key>
+		<string>ky</string>
+	</dict>
 	<key>Chile</key>
 	<dict>
 		<key>id</key>
 		<string>143483</string>
 		<key>image</key>
 		<string>cl</string>
-	</dict>
-	<key>China</key>
-	<dict>
-		<key>id</key>
-		<string>143465</string>
-		<key>image</key>
-		<string>cn</string>
 	</dict>
 	<key>Colombia</key>
 	<dict>
@@ -86,19 +177,12 @@
 		<key>image</key>
 		<string>cr</string>
 	</dict>
-	<key>Croatia</key>
+	<key>Cyprus</key>
 	<dict>
 		<key>id</key>
-		<string>143494</string>
+		<string>143557</string>
 		<key>image</key>
-		<string>hr</string>
-	</dict>
-	<key>Czech Republic</key>
-	<dict>
-		<key>id</key>
-		<string>143489</string>
-		<key>image</key>
-		<string>cz</string>
+		<string>cy</string>
 	</dict>
 	<key>Denmark</key>
 	<dict>
@@ -114,12 +198,12 @@
 		<key>image</key>
 		<string>de</string>
 	</dict>
-	<key>Dominican Republic</key>
+	<key>Dominica</key>
 	<dict>
 		<key>id</key>
-		<string>143508</string>
+		<string>143545</string>
 		<key>image</key>
-		<string>do</string>
+		<string>dm</string>
 	</dict>
 	<key>Ecuador</key>
 	<dict>
@@ -127,6 +211,13 @@
 		<string>143509</string>
 		<key>image</key>
 		<string>ec</string>
+	</dict>
+	<key>Eesti</key>
+	<dict>
+		<key>id</key>
+		<string>143518</string>
+		<key>image</key>
+		<string>ee</string>
 	</dict>
 	<key>Egypt</key>
 	<dict>
@@ -149,26 +240,19 @@
 		<key>image</key>
 		<string>es</string>
 	</dict>
-	<key>Estonia</key>
-	<dict>
-		<key>id</key>
-		<string>143518</string>
-		<key>image</key>
-		<string>ee</string>
-	</dict>
-	<key>Finland</key>
-	<dict>
-		<key>id</key>
-		<string>143447</string>
-		<key>image</key>
-		<string>fi</string>
-	</dict>
 	<key>France</key>
 	<dict>
 		<key>id</key>
 		<string>143442</string>
 		<key>image</key>
 		<string>fr</string>
+	</dict>
+	<key>Ghana</key>
+	<dict>
+		<key>id</key>
+		<string>143573</string>
+		<key>image</key>
+		<string>gh</string>
 	</dict>
 	<key>Greece</key>
 	<dict>
@@ -177,12 +261,26 @@
 		<key>image</key>
 		<string>gr</string>
 	</dict>
+	<key>Grenada</key>
+	<dict>
+		<key>id</key>
+		<string>143546</string>
+		<key>image</key>
+		<string>gd</string>
+	</dict>
 	<key>Guatemala</key>
 	<dict>
 		<key>id</key>
 		<string>143504</string>
 		<key>image</key>
 		<string>gt</string>
+	</dict>
+	<key>Guyana</key>
+	<dict>
+		<key>id</key>
+		<string>143553</string>
+		<key>image</key>
+		<string>gy</string>
 	</dict>
 	<key>Honduras</key>
 	<dict>
@@ -191,19 +289,26 @@
 		<key>image</key>
 		<string>hn</string>
 	</dict>
-	<key>Hong Kong</key>
+	<key>Hong Kong/香港</key>
 	<dict>
 		<key>id</key>
 		<string>143463</string>
 		<key>image</key>
 		<string>hk</string>
 	</dict>
-	<key>Hungary</key>
+	<key>Hrvatska</key>
 	<dict>
 		<key>id</key>
-		<string>143482</string>
+		<string>143494</string>
 		<key>image</key>
-		<string>hu</string>
+		<string>hr</string>
+	</dict>
+	<key>Iceland</key>
+	<dict>
+		<key>id</key>
+		<string>143558</string>
+		<key>image</key>
+		<string>is</string>
 	</dict>
 	<key>India</key>
 	<dict>
@@ -275,7 +380,7 @@
 		<key>image</key>
 		<string>kw</string>
 	</dict>
-	<key>Latvia</key>
+	<key>Latvija</key>
 	<dict>
 		<key>id</key>
 		<string>143519</string>
@@ -289,7 +394,7 @@
 		<key>image</key>
 		<string>lb</string>
 	</dict>
-	<key>Lithuania</key>
+	<key>Lietuva</key>
 	<dict>
 		<key>id</key>
 		<string>143520</string>
@@ -324,6 +429,13 @@
 		<key>image</key>
 		<string>mg</string>
 	</dict>
+	<key>Magyarország</key>
+	<dict>
+		<key>id</key>
+		<string>143482</string>
+		<key>image</key>
+		<string>hu</string>
+	</dict>
 	<key>Malaysia</key>
 	<dict>
 		<key>id</key>
@@ -338,12 +450,33 @@
 		<key>image</key>
 		<string>ml</string>
 	</dict>
+	<key>Malta</key>
+	<dict>
+		<key>id</key>
+		<string>143521</string>
+		<key>image</key>
+		<string>mt</string>
+	</dict>
 	<key>Mauritius</key>
 	<dict>
 		<key>id</key>
 		<string>143533</string>
 		<key>image</key>
 		<string>mu</string>
+	</dict>
+	<key>Moldova</key>
+	<dict>
+		<key>id</key>
+		<string>143523</string>
+		<key>image</key>
+		<string>md</string>
+	</dict>
+	<key>Montserrat</key>
+	<dict>
+		<key>id</key>
+		<string>143547</string>
+		<key>image</key>
+		<string>ms</string>
 	</dict>
 	<key>México</key>
 	<dict>
@@ -380,12 +513,26 @@
 		<key>image</key>
 		<string>ne</string>
 	</dict>
-	<key>Norway</key>
+	<key>Nigeria</key>
+	<dict>
+		<key>id</key>
+		<string>143561</string>
+		<key>image</key>
+		<string>ng</string>
+	</dict>
+	<key>Norge</key>
 	<dict>
 		<key>id</key>
 		<string>143457</string>
 		<key>image</key>
 		<string>no</string>
+	</dict>
+	<key>Oman</key>
+	<dict>
+		<key>id</key>
+		<string>143562</string>
+		<key>image</key>
+		<string>om</string>
 	</dict>
 	<key>Pakistan</key>
 	<dict>
@@ -422,7 +569,7 @@
 		<key>image</key>
 		<string>ph</string>
 	</dict>
-	<key>Poland</key>
+	<key>Polska</key>
 	<dict>
 		<key>id</key>
 		<string>143478</string>
@@ -443,19 +590,12 @@
 		<key>image</key>
 		<string>qa</string>
 	</dict>
-	<key>Republic of Malta</key>
+	<key>República Dominicana</key>
 	<dict>
 		<key>id</key>
-		<string>143521</string>
+		<string>143508</string>
 		<key>image</key>
-		<string>mt</string>
-	</dict>
-	<key>Republic of Moldova</key>
-	<dict>
-		<key>id</key>
-		<string>143523</string>
-		<key>image</key>
-		<string>md</string>
+		<string>do</string>
 	</dict>
 	<key>Romania</key>
 	<dict>
@@ -463,13 +603,6 @@
 		<string>143487</string>
 		<key>image</key>
 		<string>ro</string>
-	</dict>
-	<key>Russia</key>
-	<dict>
-		<key>id</key>
-		<string>143469</string>
-		<key>image</key>
-		<string>ru</string>
 	</dict>
 	<key>Saudi Arabia</key>
 	<dict>
@@ -484,13 +617,6 @@
 		<string>143459</string>
 		<key>image</key>
 		<string>ch</string>
-	</dict>
-	<key>Senegal</key>
-	<dict>
-		<key>id</key>
-		<string>143535</string>
-		<key>image</key>
-		<string>sn</string>
 	</dict>
 	<key>Singapore</key>
 	<dict>
@@ -527,19 +653,61 @@
 		<key>image</key>
 		<string>lk</string>
 	</dict>
-	<key>Sweden</key>
+	<key>St. Kitts &amp; Nevis</key>
+	<dict>
+		<key>id</key>
+		<string>143548</string>
+		<key>image</key>
+		<string>kn</string>
+	</dict>
+	<key>St. Lucia</key>
+	<dict>
+		<key>id</key>
+		<string>143549</string>
+		<key>image</key>
+		<string>lc</string>
+	</dict>
+	<key>St. Vincent &amp; The Grenadines</key>
+	<dict>
+		<key>id</key>
+		<string>143550</string>
+		<key>image</key>
+		<string>vc</string>
+	</dict>
+	<key>Suomi</key>
+	<dict>
+		<key>id</key>
+		<string>143447</string>
+		<key>image</key>
+		<string>fi</string>
+	</dict>
+	<key>Suriname</key>
+	<dict>
+		<key>id</key>
+		<string>143554</string>
+		<key>image</key>
+		<string>sr</string>
+	</dict>
+	<key>Sverige</key>
 	<dict>
 		<key>id</key>
 		<string>143456</string>
 		<key>image</key>
 		<string>se</string>
 	</dict>
-	<key>Taiwan</key>
+	<key>Sénégal</key>
 	<dict>
 		<key>id</key>
-		<string>143470</string>
+		<string>143535</string>
 		<key>image</key>
-		<string>tw</string>
+		<string>sn</string>
+	</dict>
+	<key>Tanzania</key>
+	<dict>
+		<key>id</key>
+		<string>143572</string>
+		<key>image</key>
+		<string>tz</string>
 	</dict>
 	<key>Thailand</key>
 	<dict>
@@ -548,19 +716,40 @@
 		<key>image</key>
 		<string>th</string>
 	</dict>
-	<key>Tunisia</key>
+	<key>Trinidad and Tobago</key>
+	<dict>
+		<key>id</key>
+		<string>143551</string>
+		<key>image</key>
+		<string>tt</string>
+	</dict>
+	<key>Tunisie</key>
 	<dict>
 		<key>id</key>
 		<string>143536</string>
 		<key>image</key>
 		<string>tn</string>
 	</dict>
-	<key>Turkey</key>
+	<key>Turks &amp; Caicos</key>
+	<dict>
+		<key>id</key>
+		<string>143552</string>
+		<key>image</key>
+		<string>tc</string>
+	</dict>
+	<key>Türkiye</key>
 	<dict>
 		<key>id</key>
 		<string>143480</string>
 		<key>image</key>
 		<string>tr</string>
+	</dict>
+	<key>UK</key>
+	<dict>
+		<key>id</key>
+		<string>143444</string>
+		<key>image</key>
+		<string>uk</string>
 	</dict>
 	<key>Uganda</key>
 	<dict>
@@ -576,13 +765,6 @@
 		<key>image</key>
 		<string>ae</string>
 	</dict>
-	<key>United Kingdom</key>
-	<dict>
-		<key>id</key>
-		<string>143444</string>
-		<key>image</key>
-		<string>gb</string>
-	</dict>
 	<key>United States</key>
 	<dict>
 		<key>id</key>
@@ -596,6 +778,13 @@
 		<string>143514</string>
 		<key>image</key>
 		<string>uy</string>
+	</dict>
+	<key>Uzbekistan</key>
+	<dict>
+		<key>id</key>
+		<string>143566</string>
+		<key>image</key>
+		<string>uz</string>
 	</dict>
 	<key>Venezuela</key>
 	<dict>
@@ -611,12 +800,54 @@
 		<key>image</key>
 		<string>vn</string>
 	</dict>
+	<key>Yemen</key>
+	<dict>
+		<key>id</key>
+		<string>143571</string>
+		<key>image</key>
+		<string>ye</string>
+	</dict>
 	<key>Österreich</key>
 	<dict>
 		<key>id</key>
 		<string>143445</string>
 		<key>image</key>
 		<string>at</string>
+	</dict>
+	<key>Česká republika</key>
+	<dict>
+		<key>id</key>
+		<string>143489</string>
+		<key>image</key>
+		<string>cz</string>
+	</dict>
+	<key>България</key>
+	<dict>
+		<key>id</key>
+		<string>143526</string>
+		<key>image</key>
+		<string>bg</string>
+	</dict>
+	<key>Россия</key>
+	<dict>
+		<key>id</key>
+		<string>143469</string>
+		<key>image</key>
+		<string>ru</string>
+	</dict>
+	<key>中国</key>
+	<dict>
+		<key>id</key>
+		<string>143465</string>
+		<key>image</key>
+		<string>cn</string>
+	</dict>
+	<key>台湾</key>
+	<dict>
+		<key>id</key>
+		<string>143470</string>
+		<key>image</key>
+		<string>tw</string>
 	</dict>
 	<key>日本</key>
 	<dict>
