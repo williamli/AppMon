@@ -65,7 +65,7 @@ task :country do |t|
   countries["British Virgin Islands"] = "vg"
   countries["Česká republika"] = "cz"
   countries["Lietuva"] = "lt"
-  countries["UK"] = "uk"
+  countries["UK"] = "gb"
   countries["Norge"] = "no"
   countries["Sénégal"] = "sn"
   countries["Türkiye"] = "tr"
