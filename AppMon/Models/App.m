@@ -105,11 +105,23 @@
 }
 
 -(BOOL) isEqual:(id)object {
+    if (object == self)
+        return YES;
+    if (!object || ![object isKindOfClass:[self class]])
+        return NO;
+
     if ([object respondsToSelector:@selector(itemId)] && self.itemId) {
         return [[self itemId] isEqual:[object itemId]];        
     } else {
         return NO;
     }
+}
+
+-(NSUInteger) hash {
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
+    result = prime * result + [[self itemId] hash];
+    return result;
 }
 
 @end

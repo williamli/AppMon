@@ -100,11 +100,15 @@
 }
 
 -(NSString*) description {
-    return [NSString stringWithFormat:@"<Review#%ld>", self.position];
+    return [NSString stringWithFormat:@"<Review#%ld %@,%@,%@>", self.position, self.store, self.username, self.date];
 }
 
-
 -(BOOL) isEqual:(id)object {
+    if (object == self)
+        return YES;
+    if (!object || ![object isKindOfClass:[self class]])
+        return NO;
+
     if ([object respondsToSelector:@selector(store)] && self.store &&
         [object respondsToSelector:@selector(username)] && self.username &&
         [object respondsToSelector:@selector(date)] && self.date) {
@@ -114,6 +118,15 @@
     } else {
         return NO;
     }
+}
+
+-(NSUInteger) hash {
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
+    result = prime * result + [[self store] hash];
+    result = prime * result + [[self username] hash];
+    result = prime * result + [[self date] hash];
+    return result;
 }
 
 - (NSComparisonResult)compareReview:(Review *)rev2 {

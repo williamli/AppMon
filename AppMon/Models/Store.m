@@ -53,4 +53,19 @@
     return _key;
 }
 
+-(BOOL) isEqual:(id)object {
+    if (object == self)
+        return YES;
+    if (!object || ![object isKindOfClass:[self class]])
+        return NO;
+    return [self.storefront isEqual:[object storefront]];
+}
+
+-(NSUInteger) hash {
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
+    result = prime * result + [[self storefront] hash];
+    return result;
+}
+
 @end
