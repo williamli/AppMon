@@ -34,10 +34,7 @@
 
     STAssertNotNil(app.title, @"title should not nil");
     STAssertNotNil(app.itemId, @"itemId should not nil");
-    STAssertNotNil(app.url, @"url should not nil");
     STAssertNotNil(app.iconUrl, @"iconUrl should not nil");
-    STAssertNotNil(app.price, @"price should not nil");
-    STAssertNotNil(app.releaseDate, @"releaseDate should not nil");    
 }
 
 
@@ -55,10 +52,7 @@
     STAssertNotNil(app, @"should not nil");
     STAssertNotNil(app.title, @"title should not nil");
     STAssertNotNil(app.itemId, @"itemId should not nil");
-    STAssertNotNil(app.url, @"url should not nil");
     STAssertNotNil(app.iconUrl, @"iconUrl should not nil");
-    STAssertNotNil(app.price, @"price should not nil");
-    STAssertNotNil(app.releaseDate, @"releaseDate should not nil");    
 }
 
 
@@ -77,10 +71,7 @@
     STAssertNotNil(app, @"should not nil");
     STAssertNotNil(app.title, @"title should not nil");
     STAssertNotNil(app.itemId, @"itemId should not nil");
-    STAssertNotNil(app.url, @"url should not nil");
-    STAssertNotNil(app.iconUrl, @"iconUrl should not nil");
-    STAssertNotNil(app.price, @"price should not nil");
-    STAssertNotNil(app.releaseDate, @"releaseDate should not nil");    
+    STAssertNotNil(app.iconUrl, @"iconUrl should not nil");    
 }
 
 
@@ -94,7 +85,7 @@
 }
 
 - (void)testReviews {
-    ReviewResponse* resp = [self.appStore reviewsByStore:@"143441" appId:@"343200656" page:0];
+    ReviewResponse* resp = [self.appStore reviewsByStore:@"143463" appId:@"343200656" page:0];
     
     STAssertNil(resp.error, @"should have no error: %@", resp.error);
     
@@ -116,7 +107,7 @@
     STAssertTrue(rev2.position > rev1.position, @"position 2 should be larger than position 1");
 
     // HKTV
-    resp = [self.appStore reviewsByStore:@"143441" appId:@"348883035" page:0];
+    resp = [self.appStore reviewsByStore:@"143463" appId:@"348883035" page:0];
     STAssertNil(resp.error, @"should have no error: %@", resp.error);
     STAssertTrue(resp.total > 0, @"should have total > 0");
     STAssertTrue(resp.total < 1000000, @"should have total < 1000000");
