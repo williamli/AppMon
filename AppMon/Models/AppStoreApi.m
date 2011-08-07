@@ -240,7 +240,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 
 -(ReviewResponse*) reviewsByStore:(NSString*)store 
                               url:(NSString*)url {
-
+    NSLog(@"review by store: %@, url: %@", store, url);
+    
     ReviewResponse* response = [[[ReviewResponse alloc] initWithStore:store] autorelease];
     NSMutableArray* reviews = [NSMutableArray array];
 
@@ -277,7 +278,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                 if ([[itemDict objectForKey:@"type"] isEqualToString:@"review"]) {
                     Review* review = [[[Review alloc] initWithPlist:itemDict store:store] autorelease];
                     [reviews addObject:review];
-                    
+
                 } else if ([[itemDict objectForKey:@"type"] isEqualToString:@"more"]) {
                     response.moreUrl = [itemDict objectForKey:@"url"];
                     
@@ -286,7 +287,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
                     
                 }
             }
-            
+
             response.reviews = reviews;
             return response;
         }       
@@ -328,19 +329,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 #pragma mark - Private
 
 -(NSArray*) reviewsByStores:(NSArray*)stores url:(NSString*)url {
+    NSLog(@"review by stores: %@, url: %@", stores, url);
     NSMutableArray* results = [NSMutableArray array];
     dispatch_queue_t review_queue = dispatch_queue_create("review.mutex", 0);
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
     
-    for (Store* store in [[stores copy] autorelease]) {
+    dispatch_apply([stores count], review_queue, ^(size_t store_index) {
         dispatch_group_async(group, queue, ^{
+            Store* store = [stores objectAtIndex:store_index];
             ReviewResponse* response = [self reviewsByStore:store.storefront url:url];
-            dispatch_sync(review_queue, ^{
+            dispatch_group_async(group, queue, ^{
                 [results addObject:response];
-            });            
+            });           
         });
-    }
+        
+    });
     
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     dispatch_release(group);
@@ -356,6 +360,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     [request setTimeOutSeconds:10];
     [request setNumberOfTimesToRetryOnTimeout:1];
     [request setPersistentConnectionTimeoutSeconds:120];
+    [request setCachePolicy:ASIDoNotReadFromCacheCachePolicy];
     return request;
 }
 
@@ -368,6 +373,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     [request setTimeOutSeconds:10];
     [request setNumberOfTimesToRetryOnTimeout:1];
     [request setPersistentConnectionTimeoutSeconds:120];
+    [request setCachePolicy:ASIDoNotReadFromCacheCachePolicy];
     return request;
 }
 
@@ -379,6 +385,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     [request setTimeOutSeconds:10];
     [request setNumberOfTimesToRetryOnTimeout:1];
     [request setPersistentConnectionTimeoutSeconds:120];
+    [request setCachePolicy:ASIDoNotReadFromCacheCachePolicy];
     return request;
 }
 
