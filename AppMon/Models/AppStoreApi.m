@@ -336,14 +336,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     dispatch_group_t group = dispatch_group_create();
     
     dispatch_apply([stores count], review_queue, ^(size_t store_index) {
+        Store* store = [stores objectAtIndex:store_index];
+        ReviewResponse* response = [self reviewsByStore:store.storefront url:url];
         dispatch_group_async(group, queue, ^{
-            Store* store = [stores objectAtIndex:store_index];
-            ReviewResponse* response = [self reviewsByStore:store.storefront url:url];
-            dispatch_group_async(group, queue, ^{
-                [results addObject:response];
-            });           
-        });
-        
+            [results addObject:response];
+        });           
     });
     
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
