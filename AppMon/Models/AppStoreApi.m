@@ -51,33 +51,50 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     [super dealloc];
 }
 
+// TODO: Fix fetch app by store
 -(App*) fetchAppByStore:(NSString*)store appId:(NSString*)appid error:(NSError**)error {
     App* app = nil;
-    ASIHTTPRequest* req = [self request:[NSString stringWithFormat:@"%@?id=%@", kAppStoreSoftwareUrl, appid] store:store];
+    ASIFormDataRequest* req = [self iTunesRequest:[NSString stringWithFormat:@"%@?id=%@", kAppStoreSoftwareUrl, appid] store:store];
     [req setRequestMethod:@"GET"];
     [req startSynchronous];
     
     if ([req responseStatusCode] == 200) {
-        NSPropertyListFormat format;
-        NSString *errorDesc;
+        NSArray* scripts = PerformHTMLXPathQuery([req responseData], @"//script[@id='protocol']");
+        NSString* script = nil;
+        for (NSDictionary* itemDict in scripts) {
+            NSArray* children = [itemDict objectForKey:@"nodeChildArray"];
+            if ([children count] > 0) {
+                script = [[children objectAtIndex:0] objectForKey:@"nodeContent"];
+            }
+        }
 
-        NSDictionary* dictionary = [NSPropertyListSerialization propertyListFromData:[req responseData]
-                                                                    mutabilityOption:NSPropertyListImmutable
-                                                                              format:&format
-                                                                    errorDescription:&errorDesc];
-
-        if (errorDesc) {
-            if (error != NULL){
-                *error = [NSError errorWithDomain:@"PlistSerializationError" 
-                                             code:1 
-                                         userInfo:[NSDictionary dictionaryWithObject:errorDesc 
-                                                                              forKey:@"Description"]];
+        if (script) {
+            NSPropertyListFormat format;
+            NSString *errorDesc;            
+            NSDictionary* dictionary = [NSPropertyListSerialization propertyListFromData:[script dataUsingEncoding:NSUTF8StringEncoding]
+                                                                        mutabilityOption:NSPropertyListImmutable
+                                                                                  format:&format
+                                                                        errorDescription:&errorDesc];
+            
+            if (errorDesc) {
+                if (error != NULL){
+                    *error = [NSError errorWithDomain:@"PlistSerializationError" 
+                                                 code:1 
+                                             userInfo:[NSDictionary dictionaryWithObject:errorDesc 
+                                                                                  forKey:@"Description"]];
+                }
+            } else {
+                NSDictionary* metadata = [dictionary objectForKey:@"item-metadata"];
+                app = [[[App alloc] initWithPlist:metadata] autorelease];
+                
             }
         } else {
-            NSDictionary* metadata = [dictionary objectForKey:@"item-metadata"];
-            app = [[[App alloc] initWithPlist:metadata] autorelease];
-
+            *error = [NSError errorWithDomain:@"AppStoreSearchError" 
+                                         code:1 
+                                     userInfo:nil];
+            
         }
+
 
     } else {
         if (error) {
@@ -127,38 +144,37 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 
 -(NSArray*) searchByStore:(NSString*)store query:(NSString*)query page:(NSInteger)page total:(NSInteger*)total error:(NSError**)error {
     NSMutableArray* searchResult = [NSMutableArray array];
-    ASIFormDataRequest* req = [self iTunesRequest:kAppStoreSearchUrl store:store];
+    ASIFormDataRequest* req = [self postRequest:kAppStoreSearchUrl store:store];
     [req setRequestMethod:@"POST"];
     [req setPostValue:[NSString stringWithFormat:@"%ld", page*kSearchResultPerPage] forKey:@"startIndex"];
     [req setPostValue:[NSString stringWithFormat:@"%ld", page*kSearchResultPerPage] forKey:@"displayIndex"];
     [req setPostValue:@"software" forKey:@"media"];
     [req setPostValue:query forKey:@"term"];
     [req startSynchronous];
-    
-    if ([req responseStatusCode] == 200) {        
-        NSArray* apps = PerformHTMLXPathQuery([req responseData], @"//div[@class='buy'] | //div[@class='buy fat-binary']");
-        NSArray* counts = PerformHTMLXPathQuery([req responseData], @"//div[@class='count']");
+
+    if ([req responseStatusCode] == 200) {
+        NSPropertyListFormat format;
+        NSString *errorDesc;
         
-        if (!apps) {
-            *error = [NSError errorWithDomain:@"AppStoreSearchError" 
-                                         code:1 
-                                     userInfo:nil];
-
+        NSDictionary* dictionary = [NSPropertyListSerialization propertyListFromData:[req responseData]
+                                                                    mutabilityOption:NSPropertyListImmutable
+                                                                              format:&format
+                                                                    errorDescription:&errorDesc];
+        
+        if (errorDesc) {
+            if (error != NULL){
+                *error = [NSError errorWithDomain:@"PlistSerializationError" 
+                                             code:1 
+                                         userInfo:[NSDictionary dictionaryWithObject:errorDesc 
+                                                                              forKey:@"Description"]];
+            }
         } else {
-            for (NSDictionary* itemDict in apps) {
-                App* app = [[[App alloc] initWithDiv:itemDict] autorelease];
-                [searchResult addObject:app];                
-            }
-
-            for (NSDictionary* itemDict in counts) {
-                NSString* counter = [itemDict objectForKey:@"nodeContent"];
-                if (counter) {
-                    NSArray* match = [counter captureComponentsMatchedByRegex:@" of ([0-9]+)"];             
-                    if (match) {
-                        *total = [[match objectAtIndex:1] intValue];
-                    }
-                }
-            }
+            NSArray* items = [dictionary objectForKey:@"items"];
+            
+            [items enumerateObjectsUsingBlock:^(id meta, NSUInteger idx, BOOL* stop) {
+                App* app = [[[App alloc] initWithPlist:meta] autorelease];
+                [searchResult addObject:app];
+            }];
         }
         
     } else {
@@ -167,7 +183,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
         }
         
     }
-    
     return searchResult;
 }
 
@@ -352,8 +367,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
     return results;
 }
 
--(ASIHTTPRequest*) request:(NSString*)urlStr store:(NSString*)store {    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlStr]];
+-(ASIFormDataRequest*) request:(NSString*)urlStr store:(NSString*)store {    
+    ASIFormDataRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlStr]];
     [request addRequestHeader:@"X-Apple-Store-Front" 
                         value:[NSString stringWithFormat:@"%@-1,2", store]];
     [request setUserAgent:@"iTunes-iPhone/3.0"];
@@ -367,9 +382,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppStoreApi);
 
 -(ASIFormDataRequest*) iTunesRequest:(NSString*)urlStr store:(NSString*)store {
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:urlStr]];
-    [request addRequestHeader:@"X-Apple-Store-Front" 
-                        value:[NSString stringWithFormat:@"%@-1,9", store]];
-    [request setUserAgent:@"iTunes-iPad/4.3.3"];
+    [request setUserAgent:@"iTunes/10.5.3"];
     [request setTimeOutSeconds:10];
     [request setNumberOfTimesToRetryOnTimeout:1];
     [request setPersistentConnectionTimeoutSeconds:120];
