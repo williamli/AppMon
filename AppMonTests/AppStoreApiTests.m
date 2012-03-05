@@ -29,7 +29,7 @@
     NSError* error = nil;
     App* app = [self.appStore fetchAppByStore:@"143441" appId:@"343200656" error:&error]; // 343200656 = Angry Bird
 
-    STAssertNil(error, @"should have no error");
+    STAssertNil(error, @"should have no error: %@", [error description]);
     STAssertNotNil(app, @"should not nil");
 
     STAssertNotNil(app.title, @"title should not nil");
@@ -43,9 +43,9 @@
     NSInteger count = 0;
     NSArray* apps = [self.appStore searchByStore:@"143441" query:@"Camera" page:0 total:&count error:&error];
 
-    STAssertNil(error, @"should have no error");
+    STAssertNil(error, @"should have no error, error=%@", [error description]);
     STAssertNotNil(apps, @"should not nil");
-    STAssertTrue([apps count] > 5, @"should have at least 5 result items");
+    STAssertTrue([apps count] > 5, @"should have at least 5 result items, now: %d", [apps count]);
     NSLog(@"result count: %ld, total result count: %ld", [apps count], count);
     
     App* app = [apps objectAtIndex:0];
